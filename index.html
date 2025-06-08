@@ -3,20 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Insight | Análisis de Datos Cinematográfico</title>
+    <title>Hansen Data Growth Hub | Análisis de Datos Cinematográfico</title>
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Montserrat:wght@900&display=swap" rel="stylesheet">
 
+    <!-- Librerías JS -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://unpkg.com/d3-sankey@0.12.3/dist/d3-sankey.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+    
     <style>
         :root {
-            --color-background: #0a0a0a;
+            --color-background: #030712; 
             --color-text: #f0f0f0;
-            --color-primary: #00f7ff;
+            --color-primary: #14b8a6; /* Teal vibrante */
+            --color-secondary: #d946ef; /* Magenta/Púrpura neón */
             --font-title: 'Montserrat', sans-serif;
             --font-body: 'Inter', sans-serif;
+            --menu-width: 40vw;
+            --menu-max-width: 500px;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -28,210 +38,122 @@
             overflow-x: hidden;
         }
 
-        h1, h2, h3 {
-            font-family: var(--font-title);
-            font-weight: 900;
-            text-transform: uppercase;
-            line-height: 1.1;
-            color: #fff;
-        }
-
-        /* ----- Contenedor Principal de la Animación ----- */
-        .sequence-container {
-            height: 300vh;
-            position: relative;
-        }
-        .sticky-element {
-            position: sticky;
+        /* ----- Header y Menú Lateral ----- */
+        .main-header {
+            position: fixed;
             top: 0;
-            height: 100vh;
-            width: 100%;
-            overflow: hidden;
-        }
-
-        /* ----- Capas de la Escena ----- */
-        .sequence-layer {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-        }
-
-        .background-image {
-            background-image: url('https://images.unsplash.com/photo-1591696205602-2f950c416cb6?q=80&w=2070&auto=format&fit=crop');
-            background-size: cover;
-            background-position: center;
-        }
-        
-        .knockout-text-layer {
-            background-color: var(--color-background);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .knockout-text-layer h1 {
-            font-size: 20vw;
-            line-height: 0.9;
-            text-align: center;
-            color: white;
-            mix-blend-mode: screen; 
-        }
-        
-        .final-scene {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            background-color: var(--color-background);
-            opacity: 0;
-        }
-        .final-scene .logo-small {
-            width: 150px;
-            margin-bottom: 2rem;
-        }
-        .final-scene h2 {
-            font-size: clamp(2rem, 6vw, 4rem);
-            color: #d3a7ff;
-        }
-        
-        /* ----- NUEVO: Indicador de Scroll ----- */
-        .scroll-down-indicator {
-            position: absolute;
-            bottom: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 28px;
-            height: 48px;
-            border: 2px solid white;
-            border-radius: 14px;
-            z-index: 10;
-        }
-
-        .scroll-down-indicator::before {
-            content: '';
-            position: absolute;
-            top: 8px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 4px;
-            height: 10px;
-            background: white;
-            border-radius: 2px;
-            animation: scroll-animation 2.2s infinite cubic-bezier(0.68, -0.55, 0.27, 1.55);
-        }
-
-        @keyframes scroll-animation {
-            0% {
-                transform: translate(-50%, 0);
-                opacity: 0;
-            }
-            40% {
-                opacity: 1;
-            }
-            80% {
-                transform: translate(-50%, 20px);
-                opacity: 0;
-            }
-            100% {
-                opacity: 0;
-            }
-        }
-
-
-        /* ----- Contenido de Texto Adicional ----- */
-        .outro-section {
-            padding: 20vh 10%;
-            text-align: center;
-            background-color: var(--color-background);
-            position: relative;
-            z-index: 5;
-        }
-        .outro-section h2 {
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            margin-bottom: 1rem;
-        }
-        .outro-section p {
-            font-family: 'Inter', sans-serif;
-            font-weight: 400;
-            font-size: 1.2rem;
-            max-width: 800px;
-            margin: 0 auto;
-            color: #b0b0b0;
-            line-height: 1.7;
-        }
-        
-        /* ----- Sección de Características con Gráficos ----- */
-        .features-section {
-            padding: 15vh 5%;
-            background-color: #050505;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            max-width: 1600px;
-            margin: 0 auto;
-        }
-
-        .feature-card {
-            position: relative;
-            overflow: hidden;
-            border-radius: 12px;
-            aspect-ratio: 4 / 5;
-            transform: translateY(50px);
-            opacity: 0;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-        }
-
-        .feature-card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
-        }
-
-        .feature-card:hover img {
-            transform: scale(1.05);
-        }
-
-        .feature-card h3 {
-            position: absolute;
-            bottom: 0;
             left: 0;
             width: 100%;
-            padding: 1.5rem;
-            font-size: clamp(1.5rem, 4vw, 2rem);
-            text-align: left;
-            color: white;
-            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%);
-            z-index: 2;
-            transition: color 0.3s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 5%;
+            z-index: 1000;
         }
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        .logo { font-size: 1.2rem; color: white; text-decoration: none; font-weight: 900; }
+        .menu-trigger, .linkedin-icon { mix-blend-mode: difference; }
+        .linkedin-icon { color: white; transition: color 0.3s ease, transform 0.3s ease; }
+        .linkedin-icon:hover { color: var(--color-primary); transform: scale(1.1); }
+        .linkedin-icon svg { width: 28px; height: 28px; }
+        .menu-trigger { background: none; border: none; cursor: pointer; z-index: 1002; padding: 10px; }
+        .hamburger-icon { width: 30px; height: 24px; display: flex; flex-direction: column; justify-content: space-between; }
+        .line { width: 100%; height: 3px; background-color: white; transition: all 0.3s ease-in-out; }
+        .menu-trigger.is-active .line-1 { transform: rotate(45deg) translate(7px, 7px); }
+        .menu-trigger.is-active .line-2 { opacity: 0; }
+        .menu-trigger.is-active .line-3 { transform: rotate(-45deg) translate(7px, -7px); }
+        
+        .page-wrapper { position: relative; width: 100%; overflow: hidden; }
+        .main-content { transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); }
+        .main-content.content-shifted { transform: translateX(calc(-1 * min(var(--menu-width), var(--menu-max-width)))); }
+        
+        .menu-overlay { position: fixed; top: 0; right: 0; width: min(var(--menu-width), var(--menu-max-width)); height: 100%; background-color: rgba(10, 10, 10, 0.85); backdrop-filter: blur(15px); z-index: 1001; display: flex; justify-content: center; align-items: center; transform: translateX(100%); visibility: hidden; transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), visibility 0.6s; }
+        .menu-overlay.is-open { transform: translateX(0); visibility: visible; }
+        .menu-close-btn { position: absolute; top: 1.5rem; right: 5%; background: none; border: none; cursor: pointer; color: white; padding: 10px; transition: transform 0.4s ease; }
+        .menu-close-btn:hover { transform: rotate(90deg); color: var(--color-primary); }
+        .menu-close-btn svg { width: 32px; height: 32px; }
+        .overlay-nav { list-style: none; text-align: left; padding-left: 5vw; width: 100%; }
+        .overlay-nav li { margin: 1.5rem 0; transform: translateX(20px); opacity: 0; transition: transform 0.4s ease, opacity 0.4s ease; }
+        .menu-overlay.is-open .overlay-nav li { transform: translateX(0); opacity: 1; }
+        .menu-overlay.is-open .overlay-nav li:nth-child(1) { transition-delay: 0.15s; }
+        .menu-overlay.is-open .overlay-nav li:nth-child(2) { transition-delay: 0.20s; }
+        .menu-overlay.is-open .overlay-nav li:nth-child(3) { transition-delay: 0.25s; }
+        .overlay-nav a { color: white; text-decoration: none; font-size: clamp(1.8rem, 5vw, 2.5rem); font-family: var(--font-title); font-weight: 700; text-transform: uppercase; transition: color 0.3s ease; }
+        .overlay-nav a:hover { color: var(--color-primary); }
 
-        .feature-card:hover h3 {
-            color: var(--color-primary);
-        }
+        /* ... Estilos de las secciones (Hero, Intro, Features, etc.) ... */
+        h1, h2, h3, h4, h5, h6 { font-family: var(--font-title); text-transform: uppercase; color: #fff; }
+        .knockout-text-layer h1 { font-size: 20vw; line-height: 0.9; text-align: center; mix-blend-mode: screen; }
+        .sequence-container { height: 300vh; position: relative; }
+        .sticky-element { position: sticky; top: 0; height: 100vh; width: 100%; overflow: hidden; }
+        .sequence-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+        .background-image { background-image: url('https://images.unsplash.com/photo-1591696205602-2f950c416cb6?q=80&w=2070&auto=format&fit=crop'); background-size: cover; background-position: center; }
+        .knockout-text-layer { background-color: var(--color-background); display: flex; flex-direction: column; justify-content: center; align-items: center; }
+        .final-scene { display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background-color: var(--color-background); opacity: 0; }
+        .final-scene .logo-small { width: 200px; margin-bottom: 2rem; }
+        .final-scene h2 { font-size: clamp(2rem, 6vw, 4rem); color: var(--color-secondary); margin-bottom: 3.5rem; }
+        .carousel-wrapper { position: relative; width: 80%; max-width: 800px; height: 400px; display: flex; justify-content: center; align-items: center; }
+        .carousel-track { position: relative; width: 300px; height: 300px; transform-style: preserve-3d; perspective: 1000px; }
+        .carousel-slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); transition: transform 0.5s ease-out, opacity 0.5s ease-out, filter 0.5s ease-out; cursor: pointer; }
+        .carousel-slide img { width: 100%; height: 100%; object-fit: cover; }
+        .carousel-nav { position: absolute; top: 50%; width: 100%; display: flex; justify-content: space-between; transform: translateY(-50%); z-index: 20; padding: 0 1rem; }
+        .carousel-nav button { background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); color: white; border-radius: 50%; width: 50px; height: 50px; cursor: pointer; transition: all 0.3s ease; backdrop-filter: blur(5px); }
+        .carousel-nav button:hover { background: var(--color-primary); color: var(--color-background); }
+        .scroll-down-indicator { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); width: 28px; height: 48px; border: 2px solid white; border-radius: 14px; z-index: 10; }
+        .scroll-down-indicator::before { content: ''; position: absolute; top: 8px; left: 50%; transform: translateX(-50%); width: 4px; height: 10px; background: white; border-radius: 2px; animation: scroll-animation 2.2s infinite cubic-bezier(0.68, -0.55, 0.27, 1.55); }
+        @keyframes scroll-animation { 0% { transform: translate(-50%, 0); opacity: 0; } 40% { opacity: 1; } 80% { transform: translate(-50%, 20px); opacity: 0; } 100% { opacity: 0; } }
+        .outro-section { padding: 20vh 10%; text-align: center; background-color: var(--color-background); position: relative; z-index: 5; }
+        .outro-section h2 { font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 1rem; }
+        .outro-section p { font-family: 'Inter', sans-serif; font-weight: 400; font-size: 1.2rem; max-width: 800px; margin: 0 auto; color: #b0b0b0; line-height: 1.7; }
+        .features-section { padding: 15vh 5%; background-color: #050505; }
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; max-width: 1800px; margin: 0 auto; }
+        .feature-card { position: relative; overflow: hidden; border-radius: 12px; aspect-ratio: 4 / 5; transform: translateY(50px); opacity: 0; box-shadow: 0 10px 30px rgba(0,0,0,0.4); }
+        .feature-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1); }
+        .feature-card:hover img { transform: scale(1.05); }
+        .feature-card h3 { position: absolute; bottom: 0; left: 0; width: 100%; padding: 1.5rem; font-size: clamp(1.2rem, 3vw, 1.8rem); text-align: left; color: white; background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%); z-index: 2; transition: color 0.3s ease; }
+        .feature-card:hover h3 { color: var(--color-primary); }
+
+        /* ----- ESTILOS PARA LA SECCIÓN FINAL (D3.JS) ----- */
+        .final-chart-section { padding: 10vh 2%; background-color: #0c0a18; font-family: var(--font-body); }
+        .final-chart-section .chart-container, .final-chart-section .main-content-wrapper { background-color: transparent; padding: 20px; border-radius: 10px; width: 95%; max-width: 1500px; box-sizing: border-box; margin: 0 auto 5rem auto; }
+        .final-chart-section svg { background-color: transparent; display: block; margin: auto; }
+        .sankey-link { fill: none; stroke: rgba(238, 238, 238, 0.4); stroke-opacity: 0.6; }
+        .sankey-link:hover { stroke-opacity: 1; }
+        .node-name-label { font-size: 15px; fill: #FFFFFF; font-weight: bold; }
+        .node-value-label { font-size: 13px; font-weight: bold; text-anchor: middle; pointer-events: none; fill: white; }
+        .chart-title-main { text-align: center; font-size: 2.5em; margin-bottom: 25px; color: #fff; text-transform: uppercase; font-family: var(--font-title); }
+        .legend-item text { font-size: 16px; font-weight: bold; fill: #FFFFFF; dominant-baseline: middle; }
     </style>
 </head>
 <body>
 
-<!-- SVG utilizado para la máscara, oculto a la vista -->
-<svg width="0" height="0" style="position:absolute;">
-  <defs>
-    <mask id="logo-mask-svg">
-      <rect width="100%" height="100%" fill="black" />
-      <text x="50%" y="45%" dy=".1em" text-anchor="middle" font-family="Montserrat, sans-serif" font-size="20vw" font-weight="900" fill="white">
-        DATA
-      </text>
-      <text x="50%" y="65%" dy=".1em" text-anchor="middle" font-family="Montserrat, sans-serif" font-size="20vw" font-weight="900" fill="white">
-        INSIGHT
-      </text>
-    </mask>
-  </defs>
-</svg>
+<header class="main-header">
+    <a href="#" class="logo">Hansen Data Growth Hub 🚀</a>
+    <div class="header-controls">
+        <a href="https://www.linkedin.com/in/hansen-guzm%C3%A1n-hern%C3%A1ndez-b4185592/" target="_blank" rel="noopener noreferrer" class="linkedin-icon" aria-label="LinkedIn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+        </a>
+        <button class="menu-trigger" aria-label="Abrir menú">
+            <div class="hamburger-icon">
+                <div class="line line-1"></div>
+                <div class="line line-2"></div>
+                <div class="line line-3"></div>
+            </div>
+        </button>
+    </div>
+</header>
+<div class="menu-overlay">
+    <!-- El menú está vacío pero funcional, listo para añadir enlaces -->
+    <ul class="overlay-nav">
+        <li><a href="#evolucion" class="menu-link">Evolución</a></li>
+        <li><a href="#caracteristicas" class="menu-link">Características</a></li>
+        <li><a href="#graficos" class="menu-link">Gráficos</a></li>
+    </ul>
+</div>
 
 <main class="main-content">
     <div class="sequence-container">
@@ -241,125 +163,207 @@
                  <h1>DATA<br>INSIGHT</h1>
             </div>
             <div class="sequence-layer final-scene">
-                <svg class="logo-small" viewBox="0 0 100 50" fill="white" xmlns="http://www.w3.org/2000/svg">
-                    <text x="0" y="20" font-family="Montserrat, sans-serif" font-size="20" font-weight="900">DATA</text>
-                    <text x="0" y="45" font-family="Montserrat, sans-serif" font-size="20" font-weight="900">INSIGHT</text>
+                <svg class="logo-small" viewBox="0 0 400 50" fill="white" xmlns="http://www.w3.org/2000/svg">
+                    <text x="50%" y="50%" dy=".3em" text-anchor="middle" font-family="Montserrat, sans-serif" font-size="40" font-weight="900">DATAINSIGHT</text>
                 </svg>
                 <h2>Descubre el Futuro</h2>
+                <div class="carousel-wrapper">
+                    <div class="carousel-track">
+                        <div class="carousel-slide"><img src="https://images.unsplash.com/photo-1629904853716-f0bc54EEa4a4?q=80&w=800&h=800&fit=crop" alt="Dashboard de datos en un portátil"></div>
+                        <div class="carousel-slide"><img src="https://images.unsplash.com/photo-1543286386-713bdd548da4?q=80&w=800&h=800&fit=crop" alt="Gráfico de barras en una pantalla"></div>
+                        <div class="carousel-slide"><img src="https://images.unsplash.com/photo-1599658880436-c61792e70672?q=80&w=800&h=800&fit=crop" alt="Visualización de datos abstracta"></div>
+                        <div class="carousel-slide"><img src="https://images.unsplash.com/photo-1604882355154-b5247344192b?q=80&w=800&h=800&fit=crop" alt="Gráficos financieros en múltiples monitores"></div>
+                        <div class="carousel-slide"><img src="https://images.unsplash.com/photo-1637498224536-df13b2a47e62?q=80&w=800&h=800&fit=crop" alt="Interfaz futurista de datos"></div>
+                    </div>
+                     <div class="carousel-nav">
+                        <button id="prev-btn">&lt;</button>
+                        <button id="next-btn">&gt;</button>
+                    </div>
+                </div>
             </div>
-            <!-- Indicador de Scroll (NUEVO) -->
             <div class="scroll-down-indicator"></div>
         </div>
     </div>
 
-    <section class="outro-section">
+    <section id="evolucion" class="outro-section">
         <h2>La Próxima Evolución del Análisis</h2>
         <p>Combinamos tecnología de vanguardia con intuición humana para ofrecerte una perspectiva que no solo informa, sino que transforma. Prepárate para el siguiente nivel.</p>
     </section>
     
-    <section class="features-section">
+    <section id="caracteristicas" class="features-section">
         <div class="features-grid">
             <div class="feature-card">
-                <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=2070&auto=format&fit=crop" alt="Persona analizando gráficos en un tablero transparente">
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&h=1000&fit=crop" alt="Gráficos y dashboards en una pantalla">
                 <h3>Análisis Predictivo</h3>
             </div>
             <div class="feature-card">
-                <img src="https://images.unsplash.com/photo-1611095790444-1dfa13d1d49a?q=80&w=2070&auto=format&fit=crop" alt="Manos interactuando con un dashboard en una tablet">
-                <h3>Visualización Interactiva</h3>
+                <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=800&h=1000&fit=crop" alt="Gráfico de velas para análisis financiero">
+                <h3>Visualización Financiera</h3>
             </div>
             <div class="feature-card">
-                <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=2070&auto=format&fit=crop" alt="Equipo en una reunión de estrategia frente a una pantalla con datos">
-                <h3>Estrategia de Datos</h3>
+                <img src="https://images.unsplash.com/photo-1591696205602-2f950c416cb6?q=80&w=800&h=1000&fit=crop" alt="Red abstracta de nodos y conexiones">
+                <h3>Modelado de Redes</h3>
+            </div>
+             <div class="feature-card">
+                <img src="https://images.unsplash.com/photo-1642427749670-f20e2e76f8c8?q=80&w=800&h=1000&fit=crop" alt="Dashboard de Business Intelligence con múltiples gráficos">
+                <h3>BI Dashboards</h3>
             </div>
             <div class="feature-card">
-                <img src="https://images.unsplash.com/photo-1579532537598-459ecdaf39cc?q=80&w=2074&auto=format&fit=crop" alt="Gráfico abstracto de líneas ascendentes">
-                <h3>Crecimiento Exponencial</h3>
+                <img src="https://images.unsplash.com/photo-1639322537228-f710d846310a?q=80&w=800&h=1000&fit=crop" alt="Representación de blockchain o estructura de datos">
+                <h3>Integridad de Datos</h3>
+            </div>
+            <div class="feature-card">
+                <img src="https://images.unsplash.com/photo-1587620962725-abab7fe55159?q=80&w=800&h=1000&fit=crop" alt="Código de programación en una pantalla">
+                <h3>Minería de Datos</h3>
             </div>
         </div>
     </section>
+
+    <!-- Sección del diagrama aluvial y línea de tiempo -->
+    <section id="graficos" class="final-chart-section">
+         <div class="chart-container">
+            <h2 class="chart-title-main">Actual Sales vs. Forecasted Sales</h2>
+            <svg id="alluvialChart"></svg>
+        </div>
+        <div class="main-content-wrapper">
+             <h2 class="chart-title-main" style="font-size: 2.5em; margin-bottom: 2rem;">Process Inventory</h2> 
+            <div class="timeline-container-custom">
+                <!-- Contenido del Timeline será generado por JS -->
+            </div>
+        </div>
+    </section>
+
 </main>
-
-    <!-- Librerías JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-    <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
-
+    
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            
             const lenis = new Lenis();
-            function raf(time) {
-                lenis.raf(time);
-                requestAnimationFrame(raf);
-            }
+            function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
             requestAnimationFrame(raf);
 
             gsap.registerPlugin(ScrollTrigger);
             lenis.on('scroll', ScrollTrigger.update);
             gsap.ticker.add((time) => { lenis.raf(time * 1000) });
             gsap.ticker.lagSmoothing(0);
-
-            // --- ANIMACIÓN DE SCROLL REVELADO ---
-            const sequenceTimeline = gsap.timeline({
-                scrollTrigger: {
-                    trigger: ".sequence-container",
-                    start: "top top",
-                    end: "bottom bottom",
-                    scrub: 1.5,
+            
+            // LÓGICA DEL MENÚ LATERAL
+            const menuTrigger = document.querySelector('.menu-trigger');
+            const menuOverlay = document.querySelector('.menu-overlay');
+            const menuLinks = document.querySelectorAll('.menu-link');
+            const mainContent = document.querySelector('.main-content');
+            
+            function toggleMenu() {
+                const isOpen = document.body.classList.toggle('menu-is-open');
+                if (isOpen) {
+                    lenis.stop();
+                } else {
+                    lenis.start();
                 }
-            });
+            }
             
-            ScrollTrigger.create({
-                trigger: ".sequence-container",
-                pin: ".sticky-element"
-            });
-
-            sequenceTimeline.to(".knockout-text-layer", {
-                scale: 25,
-                ease: "power1.in"
-            }, 0);
-            
-            sequenceTimeline.from(".background-image", {
-                scale: 1.2,
-                ease: "none"
-            }, 0);
-
-            sequenceTimeline.to(".knockout-text-layer", {
-                opacity: 0,
-                duration: 0.3,
-                ease: "power1.inOut"
-            }, ">-0.4"); 
-
-            sequenceTimeline.to(".final-scene", {
-                opacity: 1,
-                duration: 0.4,
-                ease: 'power2.out'
-            }, ">-0.1");
-
-            // NUEVO: Animación para desvanecer el indicador de scroll
-            sequenceTimeline.to(".scroll-down-indicator", {
-                opacity: 0,
-                duration: 0.1, // Desvanecimiento rápido
-                ease: 'power1.in'
-            }, 0); // Ocurre al mismo tiempo que el resto de la animación empieza
-            
-            // --- ANIMACIÓN DE LA SECCIÓN DE CARACTERÍSTICAS ---
-            gsap.utils.toArray('.feature-card').forEach((card) => {
-                gsap.fromTo(card,
-                    { y: 60, opacity: 0 },
-                    {
-                        y: 0,
-                        opacity: 1,
-                        duration: 0.8,
-                        ease: 'power2.out',
-                        scrollTrigger: {
-                            trigger: card,
-                            start: 'top 90%',
-                            toggleActions: 'play none none reverse'
-                        }
+            menuTrigger.addEventListener('click', toggleMenu);
+            menuLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    if (document.body.classList.contains('menu-is-open')) {
+                        toggleMenu();
                     }
-                );
+                    const targetId = link.getAttribute('href');
+                    lenis.scrollTo(targetId, { offset: -50 });
+                });
             });
+
+
+            // ANIMACIÓN DE SCROLL REVELADO
+            const sequenceTimeline = gsap.timeline({
+                scrollTrigger: { trigger: ".sequence-container", start: "top top", end: "bottom bottom", scrub: 1.5 }
+            });
+            ScrollTrigger.create({ trigger: ".sequence-container", pin: ".sticky-element" });
+            sequenceTimeline.to(".knockout-text-layer", { scale: 15, ease: "power1.in" }, 0);
+            sequenceTimeline.from(".background-image", { scale: 1.2, ease: "none" }, 0);
+            sequenceTimeline.to(".knockout-text-layer", { opacity: 0, duration: 0.3, ease: "power1.inOut" }, ">-0.4");
+            sequenceTimeline.to(".final-scene", { opacity: 1, duration: 0.4, ease: 'power2.out' }, ">-0.2");
+            sequenceTimeline.to(".scroll-down-indicator", { opacity: 0, duration: 0.1, ease: 'power1.in' }, 0); 
+            
+            // LÓGICA DEL CARRUSEL
+            const track = document.querySelector('.carousel-track');
+            if (track && track.children.length > 0) {
+                const slides = Array.from(track.children);
+                const nextButton = document.getElementById('next-btn');
+                const prevButton = document.getElementById('prev-btn');
+                let currentIndex = 0;
+                function updateCarousel() {
+                    slides.forEach((slide, index) => {
+                        let offset = index - currentIndex;
+                        let absOffset = Math.abs(offset);
+                        const transform = `translateX(${offset * 120}px) translateZ(${-absOffset * 150}px) rotateY(${offset * 20}deg)`;
+                        slide.style.transform = transform;
+                        slide.style.opacity = absOffset > 0 ? 0.3 : 1;
+                        slide.style.filter = absOffset > 0 ? 'blur(5px)' : 'none';
+                        slide.style.zIndex = slides.length - absOffset;
+                    });
+                }
+                nextButton.addEventListener('click', () => { currentIndex = (currentIndex + 1) % slides.length; updateCarousel(); });
+                prevButton.addEventListener('click', () => { currentIndex = (currentIndex - 1 + slides.length) % slides.length; updateCarousel(); });
+                updateCarousel(); 
+                sequenceTimeline.from(".carousel-wrapper", { y: 50, opacity: 0, duration: 0.6, ease: 'power2.out' }, ">-0.2");
+            }
+            
+            // ANIMACIÓN DE LA SECCIÓN DE CARACTERÍSTICAS
+            gsap.utils.toArray('.feature-card').forEach((card) => {
+                gsap.fromTo(card, { y: 60, opacity: 0 }, {
+                    y: 0, opacity: 1, duration: 0.8, ease: 'power2.out',
+                    scrollTrigger: { trigger: card, start: 'top 90%', toggleActions: 'play none none reverse' }
+                });
+            });
+
+             // --- SCRIPT DEL DIAGRAMA SANKEY ---
+            const sankeyContainer = document.querySelector('.chart-container');
+            if (sankeyContainer) {
+                const margin = {top: 30, right: 180, bottom: 100, left: 180};
+                const baseWidth = 1400; const baseHeight = 550;
+                const nodeWidthConfig = { wide: 65, narrow: 60 };
+                const svgElement = document.getElementById('alluvialChart');
+                const parentElement = svgElement.parentElement;
+                let svgTotalWidth = parentElement ? Math.min(parentElement.clientWidth, baseWidth) : baseWidth;
+                svgTotalWidth = Math.max(svgTotalWidth, margin.left + margin.right + 200);
+                const width = Math.max(50, svgTotalWidth - margin.left - margin.right);
+                const height = Math.max(50, baseHeight - margin.top - margin.bottom);
+                
+                const legendData = [ { name: "Actual Sales", color: "#14b8a6", columnId: 0 }, { name: "Quarterly Forecast", color: "#5eead4", columnId: 1 }, { name: "Forecasted Sales", color: "#d946ef", columnId: 2 } ];
+                const nodes = []; const links = []; const quarterNames = ["1Q", "2Q", "3Q", "4Q"];
+                nodes.push({ name: "Ventas Actuales", id: "VA", column: 0 });
+                const ventasActualesNodeIndex = 0;
+                const quarterNodeIndices = [];
+                quarterNames.forEach((quarterName) => {
+                    nodes.push({ name: quarterName, id: quarterName, column: 1 }); quarterNodeIndices.push(nodes.length - 1);
+                });
+                nodes.push({ name: "Total Pronosticado", id: "TVP", column: 2 });
+                const totalVentasPronosticadasNodeIndex = nodes.length - 1;
+                const ventasPorTrimestreBase = 634 / quarterNames.length;
+                quarterNodeIndices.forEach((quarterNodeIndex) => {
+                    const currentQuarterName = nodes[quarterNodeIndex].name;
+                    const valorTrimestreConIncremento = Math.round(ventasPorTrimestreBase + (Math.floor(Math.random() * 60) + 15));
+                    links.push({ source: ventasActualesNodeIndex, target: quarterNodeIndex, value: Math.round(ventasPorTrimestreBase), id: `link-va-${currentQuarterName}` });
+                    links.push({ source: quarterNodeIndex, target: totalVentasPronosticadasNodeIndex, value: valorTrimestreConIncremento, id: `link-${currentQuarterName}-tvp` });
+                });
+
+                const svg = d3.select("#alluvialChart").attr("width", svgTotalWidth).attr("height", baseHeight).append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+                const sankey = d3.sankey().nodeWidth(nodeWidthConfig.wide).nodePadding(30).nodeAlign(d3.sankeyJustify).extent([[1, 1], [width - 1, height - 1]]);
+                const {nodes: graphNodes, links: graphLinks} = sankey({ nodes: nodes.map(d => Object.assign({}, d)), links: links.map(d => Object.assign({}, d)) });
+                const linkGroup = svg.append("g").attr("class", "links-group");
+                linkGroup.selectAll(".sankey-link").data(graphLinks).enter().append("path").attr("class", "sankey-link").attr("d", d3.sankeyLinkHorizontal()).attr("stroke-width", d => Math.max(1.5, d.width));
+                
+                const node = svg.append("g").attr("class", "nodes").selectAll(".sankey-node").data(graphNodes).enter().append("g").attr("class", "sankey-node").attr("transform", d => `translate(${d.x0},${d.y0})`);
+                node.append("rect").attr("class", "node-rect-main").attr("height", d => Math.max(1, d.y1 - d.y0)).attr("width", d => d.column === 1 ? nodeWidthConfig.narrow : (d.x1 - d.x0)).attr("x", d => d.column === 1 ? ((d.x1 - d.x0) - nodeWidthConfig.narrow) / 2 : 0).attr("fill", d => (legendData.find(item => item.columnId === d.column) || {}).color || "#ccc" ).attr("stroke", d => d3.color((legendData.find(item => item.columnId === d.column) || {}).color || "#ccc").darker(0.5));
+                node.append("text").attr("class", "node-name-label").attr("x", d => (d.x0 < width / 2) ? (d.x1 - d.x0 + 8) : -8).attr("y", d => (d.y1 - d.y0) / 2).attr("dy", "0.35em").attr("text-anchor", d => (d.x0 < width / 2) ? "start" : "end").text(d => d.column === 1 ? d.name : "");
+                node.append("text").attr("class", "node-value-label").attr("x", d => { const w = d.x1 - d.x0; return (d.column === 1 ? ((w - nodeWidthConfig.narrow) / 2) : 0) + (d.column === 1 ? nodeWidthConfig.narrow : w) / 2; }).attr("y", d => (d.y1 - d.y0) / 2).attr("dy", "0.35em").text(d => `$${Math.max(d3.sum(d.sourceLinks, l => l.value), d3.sum(d.targetLinks, l => l.value)).toLocaleString('es-ES')} MM`);
+                
+                const legendGroup = svg.append("g").attr("class", "legend").attr("transform", `translate(${(width - (legendData.length * 200)) / 2 + 30 }, ${height + margin.bottom / 2 })`);
+                const legendItem = legendGroup.selectAll(".legend-item").data(legendData).enter().append("g").attr("class", "legend-item").attr("transform", (d, i) => `translate(${i * 210}, 0)`);
+                legendItem.append("rect").attr("x", 0).attr("y", -9).attr("width", 18).attr("height", 18).style("fill", d => d.color).attr("rx", 3).attr("ry", 3);
+                legendItem.append("text").attr("x", 24).attr("y", 0).text(d => d.name);
+            }
         });
     </script>
 </body>
