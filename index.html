@@ -79,6 +79,11 @@
             -webkit-text-fill-color: transparent;
             animation: gradient-flow 4s ease infinite;
         }
+        /* AÑADIDO: Estilo para la parte no negrita del logo */
+        .logo-regular {
+            font-weight: 400;
+        }
+
         @keyframes gradient-flow {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
@@ -207,6 +212,12 @@
                 --header-height: 70px;
             }
 
+            /* MODIFICADO: Ajustar la posición vertical del texto principal en móvil */
+            .knockout-text-layer {
+                justify-content: flex-start;
+                padding-top: 25vh;
+            }
+
             .logo {
                 font-size: 1.2rem; /* Reducir tamaño del logo */
             }
@@ -308,8 +319,8 @@
             </div>
         </div>
         <div class="header-section center">
-            <!-- Logo principal centrado -->
-            <a href="#" class="logo">Hansen - Data Growth Hub</a>
+            <!-- MODIFICADO: Logo actualizado -->
+            <a href="#" class="logo">Data Growth Hub <span class="logo-regular">- Hansen</span></a>
         </div>
         <div class="header-section right">
            <!-- Espaciador para asegurar que el logo se mantenga centrado -->
