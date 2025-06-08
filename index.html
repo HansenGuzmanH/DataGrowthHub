@@ -97,8 +97,8 @@
         .linkedin-icon svg { width: 32px; height: 32px; }
         
         .header-icon {
-            height: 95px; /* MODIFICADO */
-            width: 95px;  /* MODIFICADO */
+            height: 95px;
+            width: 95px;
             border-radius: 50%;
             object-fit: cover;
             transition: transform 0.3s ease;
@@ -152,12 +152,42 @@
         /* ----- Contenido Principal y Secciones ----- */
         main { padding-top: var(--header-height); }
         h1, h2, h3, h4, h5, h6 { font-family: var(--font-title); text-transform: uppercase; color: #fff; }
-        .knockout-text-layer h1 { font-size: 18vw; line-height: 0.9; text-align: center; mix-blend-mode: screen; }
+        
         .sequence-container { height: 300vh; position: relative; }
         .sticky-element { position: sticky; top: 0; height: 100vh; width: 100%; overflow: hidden; }
         .sequence-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
         .background-image { background-image: url('https://images.unsplash.com/photo-1591696205602-2f950c416cb6?q=80&w=2070&auto=format&fit=crop'); background-size: cover; background-position: center; }
         .knockout-text-layer { background-color: var(--color-background); display: flex; flex-direction: column; justify-content: center; align-items: center; }
+
+        .title-container {
+            mix-blend-mode: screen;
+            text-align: left;
+        }
+
+        .title-container .top-row {
+            display: flex;
+            align-items: center;
+        }
+        
+        .title-container h1 {
+            font-size: 15vw;
+            line-height: 0.9;
+        }
+
+        .growth-arrow {
+            width: 25vw;
+            height: 15vw;
+            margin-left: 2vw;
+            opacity: 0.75;
+        }
+        .growth-arrow path {
+            stroke: #FF2E63;
+            stroke-width: 12;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            fill: none;
+        }
+        
         .final-scene { display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background-color: var(--color-background); opacity: 0; }
         .final-scene h2 { font-size: clamp(2rem, 6vw, 4rem); color: #00ADB5; margin-bottom: 3.5rem; text-transform: uppercase; }
         .carousel-wrapper { position: relative; width: 80%; max-width: 800px; height: 400px; display: flex; justify-content: center; align-items: center; }
@@ -232,8 +262,12 @@
                 display: none;
             }
             
-            .knockout-text-layer h1 {
-                font-size: 24vw;
+            .title-container h1 {
+                font-size: 20vw;
+            }
+            .growth-arrow {
+                width: 25vw;
+                height: 20vw;
             }
 
             .outro-section {
@@ -322,11 +356,9 @@
             </div>
         </div>
         <div class="header-section center">
-            <!-- MODIFICADO: Texto del logo actualizado -->
             <a href="#" class="logo">Data Growth Hub</a>
         </div>
         <div class="header-section right">
-           <!-- MODIFICADO: Icono del usuario envuelto en un enlace -->
            <a href="#page-top" class="top-link" aria-label="Ir al inicio de la página">
                <img src="https://i.imgur.com/ENnbjaQ.jpeg" alt="Icono de Hansen" class="header-icon">
            </a>
@@ -362,7 +394,16 @@
                 <div class="sequence-layer background-image"></div>
                 <!-- Capa de texto que se recorta sobre el fondo -->
                 <div class="sequence-layer knockout-text-layer">
-                    <h1>DATA<br>GROWTH</h1>
+                    <!-- MODIFICADO: Estructura del texto principal -->
+                    <div class="title-container">
+                        <div class="top-row">
+                            <h1>DATA</h1>
+                            <svg class="growth-arrow" viewBox="0 0 120 100">
+                               <path d="M10 85 L 40 55 L 60 75 L 90 45 L 115 45 M105 35 L 115 45 L 105 55" />
+                            </svg>
+                        </div>
+                        <h1>GROWTH</h1>
+                    </div>
                 </div>
                 <!-- Escena final con el carrusel que aparece después de la animación -->
                 <div class="sequence-layer final-scene">
