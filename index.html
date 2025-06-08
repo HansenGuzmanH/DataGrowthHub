@@ -27,7 +27,7 @@
             --font-body: 'Inter', sans-serif;
             --menu-width: 50vw;
             --menu-max-width: 600px;
-            --header-height: 80px;
+            --header-height: 100px; 
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -79,9 +79,6 @@
             -webkit-text-fill-color: transparent;
             animation: gradient-flow 4s ease infinite;
         }
-        .logo-regular {
-            font-weight: 400;
-        }
 
         @keyframes gradient-flow {
             0% { background-position: 0% 50%; }
@@ -100,8 +97,8 @@
         .linkedin-icon svg { width: 32px; height: 32px; }
         
         .header-icon {
-            height: 50px;
-            width: 50px;
+            height: 95px; /* MODIFICADO */
+            width: 95px;  /* MODIFICADO */
             border-radius: 50%;
             object-fit: cover;
             transition: transform 0.3s ease;
@@ -302,7 +299,7 @@
 
     </style>
 </head>
-<body>
+<body id="page-top"> <!-- AÑADIDO: ID para el enlace superior -->
 
 <!-- Contenedor principal de la página -->
 <div class="page-wrapper">
@@ -325,11 +322,14 @@
             </div>
         </div>
         <div class="header-section center">
-            <a href="#" class="logo">Data Growth Hub <span class="logo-regular">- Hansen</span></a>
+            <!-- MODIFICADO: Texto del logo actualizado -->
+            <a href="#" class="logo">Data Growth Hub</a>
         </div>
         <div class="header-section right">
-           <!-- Icono del usuario añadido. La URL ha sido actualizada a un enlace directo de Imgur -->
-           <img src="https://i.imgur.com/ENnbjaQ.jpeg" alt="Icono de Hansen" class="header-icon">
+           <!-- MODIFICADO: Icono del usuario envuelto en un enlace -->
+           <a href="#page-top" class="top-link" aria-label="Ir al inicio de la página">
+               <img src="https://i.imgur.com/ENnbjaQ.jpeg" alt="Icono de Hansen" class="header-icon">
+           </a>
         </div>
     </header>
     
@@ -442,9 +442,16 @@
                 link.addEventListener('click', (e) => {
                     e.preventDefault();
                     if (menuOverlay.classList.contains('is-open')) { toggleMenu(); }
-                    setTimeout(() => { lenis.scrollTo(link.getAttribute('href'), { offset: -80 }); }, 600); 
+                    setTimeout(() => { lenis.scrollTo(link.getAttribute('href'), { offset: -100 }); }, 600); 
                 });
             });
+
+            // --- AÑADIDO: Lógica para el enlace del logo superior ---
+            document.querySelector('.top-link').addEventListener('click', (e) => {
+                e.preventDefault();
+                lenis.scrollTo(0, { duration: 1.5, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
+            });
+
 
             // --- ANIMACIÓN DE SCROLL PRINCIPAL CON GSAP ---
             const sequenceTimeline = gsap.timeline({ scrollTrigger: { trigger: ".sequence-container", start: "top top", end: "bottom bottom", scrub: 1.5 } });
