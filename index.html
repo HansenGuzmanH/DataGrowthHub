@@ -39,7 +39,7 @@
             overflow-x: hidden;
         }
 
-        /* ----- Header y Menú Lateral ----- */
+        /* ----- Header y Menú Lateral (ACTUALIZADO)----- */
         .main-header {
             position: fixed;
             top: 0;
@@ -318,7 +318,7 @@
             // ANIMACIÓN DE SCROLL
             const sequenceTimeline = gsap.timeline({ scrollTrigger: { trigger: ".sequence-container", start: "top top", end: "bottom bottom", scrub: 1.5 } });
             ScrollTrigger.create({ trigger: ".sequence-container", pin: ".sticky-element" });
-            sequenceTimeline.to(".knockout-text-layer", { scale: 15, ease: "power1.in" }, 0);
+            sequenceTimeline.to(".knockout-text-layer", { scale: 15, ease: "none" }, 0);
             sequenceTimeline.from(".background-image", { scale: 1.2, ease: "none" }, 0);
             sequenceTimeline.to(".knockout-text-layer", { opacity: 0, duration: 0.3, ease: "power1.inOut" }, ">-0.4");
             sequenceTimeline.to(".final-scene", { opacity: 1, duration: 0.4, ease: 'power2.out' }, ">-0.2");
