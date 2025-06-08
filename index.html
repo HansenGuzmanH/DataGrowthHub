@@ -79,7 +79,6 @@
             -webkit-text-fill-color: transparent;
             animation: gradient-flow 4s ease infinite;
         }
-        /* AÑADIDO: Estilo para la parte no negrita del logo */
         .logo-regular {
             font-weight: 400;
         }
@@ -122,13 +121,15 @@
         .menu-close-btn { position: absolute; top: 1.5rem; right: 5%; background: none; border: none; cursor: pointer; color: white; padding: 10px; transition: transform 0.4s ease; }
         .menu-close-btn:hover { transform: rotate(90deg); color: var(--color-primary); }
         .menu-close-btn svg { width: 32px; height: 32px; }
-        .overlay-nav { list-style: none; text-align: left; padding-left: 5vw; width: 100%; flex-grow: 1; display: flex; flex-direction: column; justify-content: center;}
+        /* MODIFICADO: Padding izquierdo ajustado */
+        .overlay-nav { list-style: none; text-align: left; padding-left: 10%; width: 100%; flex-grow: 1; display: flex; flex-direction: column; justify-content: center;}
         .overlay-nav li { margin: 1.5rem 0; transform: translateX(-20px); opacity: 0; transition: transform 0.4s ease, opacity 0.4s ease; }
         .menu-overlay.is-open .overlay-nav li { transform: translateX(0); opacity: 1; }
         .menu-overlay.is-open .overlay-nav li:nth-child(1) { transition-delay: 0.15s; }
         .menu-overlay.is-open .overlay-nav li:nth-child(2) { transition-delay: 0.20s; }
         .menu-overlay.is-open .overlay-nav li:nth-child(3) { transition-delay: 0.25s; }
-        .overlay-nav a { color: white; text-decoration: none; font-size: clamp(1.8rem, 5vw, 2.5rem); font-family: var(--font-title); font-weight: 700; text-transform: uppercase; transition: color 0.3s ease; }
+        /* AÑADIDO: overflow-wrap para evitar desbordamiento de texto */
+        .overlay-nav a { color: white; text-decoration: none; font-size: clamp(1.8rem, 5vw, 2.5rem); font-family: var(--font-title); font-weight: 700; text-transform: uppercase; transition: color 0.3s ease; overflow-wrap: break-word; }
         .overlay-nav a:hover { color: var(--color-primary); }
         
         .menu-footer-icon {
@@ -212,26 +213,25 @@
                 --header-height: 70px;
             }
 
-            /* MODIFICADO: Ajustar la posición vertical del texto principal en móvil */
             .knockout-text-layer {
                 justify-content: flex-start;
                 padding-top: 25vh;
             }
 
             .logo {
-                font-size: 1.2rem; /* Reducir tamaño del logo */
+                font-size: 1.2rem;
             }
 
             .header-controls .linkedin-icon {
-                display: none; /* Ocultar ícono de LinkedIn en el header en móvil */
+                display: none;
             }
             
             .knockout-text-layer h1 {
-                font-size: 24vw; /* Ajustar tamaño para que se lea mejor */
+                font-size: 24vw;
             }
 
             .outro-section {
-                padding: 10vh 5%; /* Reducir padding */
+                padding: 10vh 5%;
             }
             .outro-section h2 {
                 font-size: clamp(2rem, 8vw, 2.5rem);
@@ -249,17 +249,16 @@
             }
 
             .chart-title-main {
-                font-size: 1.8em; /* Reducir tamaño del título del gráfico */
+                font-size: 1.8em;
                 margin-bottom: 15px;
             }
 
-            /* Ajustar carrusel para móvil */
             .carousel-wrapper {
                 width: 90%;
-                height: 300px; /* Menos altura */
+                height: 300px;
             }
             .carousel-track {
-                width: 250px; /* Ligeramente más pequeño */
+                width: 250px;
                 height: 250px;
             }
             .carousel-nav button {
@@ -267,29 +266,28 @@
                 height: 40px;
             }
 
-            /* Ajustar leyenda del gráfico Sankey */
             .legend-item text {
                 font-size: 12px;
             }
             
-            /* Hacer la línea de tiempo horizontalmente desplazable */
             .main-content-wrapper {
                 padding-bottom: 20px;
             }
             .timeline-container-custom {
                grid-template-columns: repeat(10, minmax(60px, auto));
-               width: fit-content; /* Asegura que el contenedor se ajuste al contenido */
+               width: fit-content;
                padding: 30px 15px;
             }
         }
 
         @media (max-width: 480px) {
+            /* MODIFICADO: Ajustar tamaño de fuente del menú para evitar desbordamiento */
             .overlay-nav a {
-                font-size: clamp(1.5rem, 10vw, 2rem); /* Letras del menú aún más grandes en pantallas pequeñas */
+                font-size: clamp(1.5rem, 8vw, 2.2rem);
             }
 
             :root {
-              --menu-width: 80vw; /* El menú ocupa más pantalla */
+              --menu-width: 80vw;
               --menu-max-width: 320px;
             }
         }
@@ -319,7 +317,6 @@
             </div>
         </div>
         <div class="header-section center">
-            <!-- MODIFICADO: Logo actualizado -->
             <a href="#" class="logo">Data Growth Hub <span class="logo-regular">- Hansen</span></a>
         </div>
         <div class="header-section right">
@@ -561,6 +558,17 @@
                 drawSankeyChart();
                 window.addEventListener('resize', drawSankeyChart);
             }
+            
+            // AÑADIDO: Lógica para cerrar el menú al hacer clic fuera
+            document.addEventListener('click', (event) => {
+                const isMenuOpen = menuOverlay.classList.contains('is-open');
+                const isClickInsideMenu = menuOverlay.contains(event.target);
+                const isClickOnTrigger = menuTrigger.contains(event.target);
+
+                if (isMenuOpen && !isClickInsideMenu && !isClickOnTrigger) {
+                    toggleMenu();
+                }
+            });
         });
     </script>
 </body>
