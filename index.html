@@ -99,6 +99,17 @@
         .linkedin-icon:hover { color: var(--color-primary); transform: scale(1.1); }
         .linkedin-icon svg { width: 32px; height: 32px; }
         
+        .header-icon {
+            height: 50px;
+            width: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        .header-icon:hover {
+            transform: scale(1.1);
+        }
+
         .menu-trigger { background: none; border: none; cursor: pointer; z-index: 1002; padding: 10px; }
         .hamburger-icon { width: 34px; height: 28px; display: flex; flex-direction: column; justify-content: space-between; }
         .line { width: 100%; height: 3px; background-color: white; transition: all 0.3s ease-in-out; }
@@ -121,14 +132,12 @@
         .menu-close-btn { position: absolute; top: 1.5rem; right: 5%; background: none; border: none; cursor: pointer; color: white; padding: 10px; transition: transform 0.4s ease; }
         .menu-close-btn:hover { transform: rotate(90deg); color: var(--color-primary); }
         .menu-close-btn svg { width: 32px; height: 32px; }
-        /* MODIFICADO: Padding izquierdo ajustado */
         .overlay-nav { list-style: none; text-align: left; padding-left: 10%; width: 100%; flex-grow: 1; display: flex; flex-direction: column; justify-content: center;}
         .overlay-nav li { margin: 1.5rem 0; transform: translateX(-20px); opacity: 0; transition: transform 0.4s ease, opacity 0.4s ease; }
         .menu-overlay.is-open .overlay-nav li { transform: translateX(0); opacity: 1; }
         .menu-overlay.is-open .overlay-nav li:nth-child(1) { transition-delay: 0.15s; }
         .menu-overlay.is-open .overlay-nav li:nth-child(2) { transition-delay: 0.20s; }
         .menu-overlay.is-open .overlay-nav li:nth-child(3) { transition-delay: 0.25s; }
-        /* AÑADIDO: overflow-wrap para evitar desbordamiento de texto */
         .overlay-nav a { color: white; text-decoration: none; font-size: clamp(1.8rem, 5vw, 2.5rem); font-family: var(--font-title); font-weight: 700; text-transform: uppercase; transition: color 0.3s ease; overflow-wrap: break-word; }
         .overlay-nav a:hover { color: var(--color-primary); }
         
@@ -207,7 +216,7 @@
         .timeline-number-custom { width: 3rem; height: 3rem; background-color: #1a2035; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 1rem; color: #f0f0f0; margin-bottom: 0.5rem; font-family: var(--font-body); }
         .timeline-category-custom { font-family: var(--font-body); color: white; }
 
-        /* AÑADIDO: Estilos para Responsividad en Móviles */
+        /* Estilos para Responsividad en Móviles */
         @media (max-width: 768px) {
             :root {
                 --header-height: 70px;
@@ -222,7 +231,7 @@
                 font-size: 1.2rem;
             }
 
-            .header-controls .linkedin-icon {
+            .header-controls .linkedin-icon, .header-icon {
                 display: none;
             }
             
@@ -281,7 +290,6 @@
         }
 
         @media (max-width: 480px) {
-            /* MODIFICADO: Ajustar tamaño de fuente del menú para evitar desbordamiento */
             .overlay-nav a {
                 font-size: clamp(1.5rem, 8vw, 2.2rem);
             }
@@ -320,7 +328,8 @@
             <a href="#" class="logo">Data Growth Hub <span class="logo-regular">- Hansen</span></a>
         </div>
         <div class="header-section right">
-           <!-- Espaciador para asegurar que el logo se mantenga centrado -->
+           <!-- Icono del usuario añadido. La URL ha sido actualizada a un enlace directo de Imgur -->
+           <img src="https://i.imgur.com/ENnbjaQ.jpeg" alt="Icono de Hansen" class="header-icon">
         </div>
     </header>
     
@@ -559,7 +568,7 @@
                 window.addEventListener('resize', drawSankeyChart);
             }
             
-            // AÑADIDO: Lógica para cerrar el menú al hacer clic fuera
+            // Lógica para cerrar el menú al hacer clic fuera
             document.addEventListener('click', (event) => {
                 const isMenuOpen = menuOverlay.classList.contains('is-open');
                 const isClickInsideMenu = menuOverlay.contains(event.target);
