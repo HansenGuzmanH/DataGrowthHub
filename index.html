@@ -16,7 +16,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
-
+    
     <style>
         :root {
             --color-background: #030712; 
@@ -27,6 +27,7 @@
             --font-body: 'Inter', sans-serif;
             --menu-width: 40vw;
             --menu-max-width: 500px;
+            --header-height: 80px; /* Altura de la nueva barra */
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -38,25 +39,45 @@
             overflow-x: hidden;
         }
 
-        /* ----- Header y Menú Lateral ----- */
+        /* ----- Header y Menú Lateral (ACTUALIZADO)----- */
         .main-header {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
+            height: var(--header-height);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.5rem 5%;
+            padding: 0 2.5%;
+            background-color: #222831; /* Nuevo color de la barra */
             z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        .logo-container {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .logo { 
+            font-size: 1.8rem; /* Letra más grande */
+            color: #FFFFFF; 
+            text-decoration: none; 
+            font-weight: 900; /* Con negrita */
+            font-family: var(--font-title);
+            white-space: nowrap;
         }
         .header-controls {
             display: flex;
             align-items: center;
-            gap: 1.5rem;
+            gap: 1rem;
+            position: relative;
+            z-index: 1001; /* Asegura que estén sobre la barra */
         }
-        .logo { font-size: 1.2rem; color: white; text-decoration: none; font-weight: 700; }
-        .menu-trigger, .linkedin-icon { mix-blend-mode: difference; }
+         .header-spacer {
+            width: 150px; /* Espacio para que el logo no se monte en los controles */
+        }
         .linkedin-icon { color: white; transition: color 0.3s ease, transform 0.3s ease; }
         .linkedin-icon:hover { color: var(--color-primary); transform: scale(1.1); }
         .linkedin-icon svg { width: 28px; height: 28px; }
@@ -68,11 +89,17 @@
         .menu-trigger.is-active .line-2 { opacity: 0; }
         .menu-trigger.is-active .line-3 { transform: rotate(-45deg) translate(7px, -7px); }
         
-        .page-wrapper { position: relative; width: 100%; overflow: hidden; }
-        .main-content { transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); }
-        .main-content.content-shifted { transform: translateX(calc(-1 * min(var(--menu-width), var(--menu-max-width)))); }
-        
-        .menu-overlay { position: fixed; top: 0; right: 0; width: min(var(--menu-width), var(--menu-max-width)); height: 100%; background-color: rgba(10, 10, 10, 0.85); backdrop-filter: blur(15px); z-index: 1001; display: flex; justify-content: center; align-items: center; transform: translateX(100%); visibility: hidden; transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), visibility 0.6s; }
+        .menu-overlay { 
+            position: fixed; top: 0; right: 0; 
+            width: min(var(--menu-width), var(--menu-max-width)); 
+            height: 100%; 
+            background-color: rgba(57, 62, 70, 0.95); /* Color #393E46 con opacidad */
+            backdrop-filter: blur(15px); 
+            z-index: 1001; 
+            display: flex; justify-content: center; align-items: center; 
+            transform: translateX(100%); visibility: hidden; 
+            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), visibility 0.6s; 
+        }
         .menu-overlay.is-open { transform: translateX(0); visibility: visible; }
         .menu-close-btn { position: absolute; top: 1.5rem; right: 5%; background: none; border: none; cursor: pointer; color: white; padding: 10px; transition: transform 0.4s ease; }
         .menu-close-btn:hover { transform: rotate(90deg); color: var(--color-primary); }
@@ -86,8 +113,9 @@
         .overlay-nav a { color: white; text-decoration: none; font-size: clamp(1.8rem, 5vw, 2.5rem); font-family: var(--font-title); font-weight: 700; text-transform: uppercase; transition: color 0.3s ease; }
         .overlay-nav a:hover { color: var(--color-primary); }
 
-        /* ----- Animación de Inicio ----- */
-        .knockout-text-layer h1 { font-family: var(--font-title); font-size: 20vw; line-height: 0.9; text-align: center; text-transform: uppercase; color: white; mix-blend-mode: screen; }
+        /* ----- El resto de estilos se mantiene igual ----- */
+        h1, h2, h3, h4, h5, h6 { font-family: var(--font-title); text-transform: uppercase; color: #fff; }
+        .knockout-text-layer h1 { font-size: 20vw; line-height: 0.9; text-align: center; mix-blend-mode: screen; }
         .sequence-container { height: 300vh; position: relative; }
         .sticky-element { position: sticky; top: 0; height: 100vh; width: 100%; overflow: hidden; }
         .sequence-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
@@ -95,7 +123,7 @@
         .knockout-text-layer { background-color: var(--color-background); display: flex; flex-direction: column; justify-content: center; align-items: center; }
         .final-scene { display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background-color: var(--color-background); opacity: 0; }
         .final-scene .logo-small { width: 250px; margin-bottom: 2rem; }
-        .final-scene h2 { font-family: var(--font-title); font-size: clamp(2rem, 6vw, 4rem); color: var(--color-secondary); margin-bottom: 3.5rem; text-transform: uppercase; }
+        .final-scene h2 { font-size: clamp(2rem, 6vw, 4rem); color: var(--color-secondary); margin-bottom: 3.5rem; text-transform: uppercase; }
         .carousel-wrapper { position: relative; width: 80%; max-width: 800px; height: 400px; display: flex; justify-content: center; align-items: center; }
         .carousel-track { position: relative; width: 300px; height: 300px; transform-style: preserve-3d; perspective: 1000px; }
         .carousel-slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); transition: transform 0.5s ease-out, opacity 0.5s ease-out, filter 0.5s ease-out; cursor: pointer; }
@@ -116,27 +144,19 @@
         .feature-card:hover img { transform: scale(1.05); }
         .feature-card h3 { position: absolute; bottom: 0; left: 0; width: 100%; padding: 1.5rem; font-size: clamp(1.2rem, 3vw, 1.8rem); text-align: left; color: white; background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%); z-index: 2; transition: color 0.3s ease; }
         .feature-card:hover h3 { color: var(--color-primary); }
-
-        /* ----- ESTILOS PARA LA SECCIÓN FINAL (D3.JS) ----- */
         .final-chart-section { padding: 10vh 2%; background-color: #0c0a18; font-family: var(--font-body); }
         .final-chart-section h1, .final-chart-section h2 { font-family: var(--font-title); }
         .final-chart-section .chart-container, .final-chart-section .main-content-wrapper { background-color: transparent; padding: 20px; border-radius: 10px; width: 95%; max-width: 1500px; box-sizing: border-box; margin: 0 auto 5rem auto; }
         .final-chart-section svg { background-color: transparent; display: block; margin: auto; }
         .sankey-link { fill: none; stroke: rgba(238, 238, 238, 0.4); stroke-opacity: 0.6; }
         .sankey-link:hover { stroke-opacity: 1; }
-        .animated-border-line { fill: none; stroke-width: 2.5px; stroke-linecap: round; }
         .sankey-node rect.node-rect-main { stroke-width: 0.5px; shape-rendering: crispEdges; rx: 4; ry: 4; }
-        .liquid-fill-path { opacity: 1.0; }
         .node-name-label { font-size: 15px; fill: #FFFFFF; font-weight: bold; }
         .node-value-label { font-size: 13px; font-weight: bold; text-anchor: middle; pointer-events: none; fill: white; }
         .chart-title-main { text-align: center; font-size: 2.5em; margin-bottom: 25px; color: #fff; text-transform: uppercase; }
         .legend-item text { font-size: 16px; font-weight: bold; fill: #FFFFFF; dominant-baseline: middle; }
         .main-content-wrapper { width: 100%; max-width: 100%; margin: 0 auto; overflow-x: auto; position: relative; }
-        .timeline-container-custom {
-            display: grid; grid-template-columns: repeat(10, minmax(65px, auto));
-            column-gap: 18px; position: relative; padding: 50px 0;
-            margin: 0 auto; justify-content: center;
-        }
+        .timeline-container-custom { display: grid; grid-template-columns: repeat(10, minmax(65px, auto)); column-gap: 18px; position: relative; padding: 50px 0; margin: 0 auto; justify-content: center; }
         .timeline-stage-item { display: flex; flex-direction: column; align-items: center; }
         .timeline-number-custom { width: 3rem; height: 3rem; background-color: #1a2035; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 1rem; color: #f0f0f0; margin-bottom: 0.5rem; font-family: var(--font-body); }
         .timeline-category-custom { font-family: var(--font-body); color: white; }
@@ -146,7 +166,10 @@
 
 <div class="page-wrapper">
     <header class="main-header">
-        <a href="#" class="logo">Hansen - Data Growth Hub 🚀</a>
+        <div class="header-spacer"></div> <!-- Espacio a la izquierda -->
+        <div class="logo-container">
+            <a href="#" class="logo">Hansen - Data Growth Hub</a>
+        </div>
         <div class="header-controls">
             <a href="https://www.linkedin.com/in/hansen-guzm%C3%A1n-hern%C3%A1ndez-b4185592/" target="_blank" rel="noopener noreferrer" class="linkedin-icon" aria-label="LinkedIn">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
@@ -271,7 +294,7 @@
             gsap.ticker.add((time) => { lenis.raf(time * 1000) });
             gsap.ticker.lagSmoothing(0);
 
-            // --- LÓGICA DEL MENÚ LATERAL (CORREGIDA) ---
+            // --- LÓGICA DEL MENÚ LATERAL ---
             const menuTrigger = document.querySelector('.menu-trigger');
             const menuOverlay = document.querySelector('.menu-overlay');
             const menuCloseBtn = document.querySelector('.menu-close-btn');
@@ -286,22 +309,22 @@
                 }
             }
             
-            menuTrigger.addEventListener('click', toggleMenu);
-            if(menuCloseBtn) menuCloseBtn.addEventListener('click', toggleMenu);
+            if (menuTrigger) menuTrigger.addEventListener('click', toggleMenu);
+            if (menuCloseBtn) menuCloseBtn.addEventListener('click', toggleMenu);
             
             document.querySelectorAll('.menu-link').forEach(link => {
                 link.addEventListener('click', (e) => {
                     e.preventDefault();
-                    const targetId = link.getAttribute('href');
                     if (menuOverlay.classList.contains('is-open')) {
                         toggleMenu();
                     }
-                    // Dar tiempo a la animación de cierre del menú
                     setTimeout(() => {
+                        const targetId = link.getAttribute('href');
                         lenis.scrollTo(targetId, { offset: -80 });
                     }, 600); 
                 });
             });
+
 
             // --- ANIMACIÓN DE SCROLL REVELADO ---
             const sequenceTimeline = gsap.timeline({
