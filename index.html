@@ -25,8 +25,8 @@
             --color-secondary: #d946ef; /* Magenta/Púrpura neón */
             --font-title: 'Montserrat', sans-serif;
             --font-body: 'Inter', sans-serif;
-            --menu-width: 50vw; /* MODIFICADO: Aumentado de 40vw */
-            --menu-max-width: 600px; /* MODIFICADO: Aumentado de 500px */
+            --menu-width: 50vw;
+            --menu-max-width: 600px;
             --header-height: 80px;
         }
 
@@ -39,7 +39,7 @@
             overflow-x: hidden;
         }
 
-        /* ----- Header y Menú Lateral (ACTUALIZADO)----- */
+        /* ----- Header y Menú Lateral ----- */
         .main-header {
             position: fixed;
             top: 0;
@@ -126,21 +126,18 @@
         .overlay-nav a { color: white; text-decoration: none; font-size: clamp(1.8rem, 5vw, 2.5rem); font-family: var(--font-title); font-weight: 700; text-transform: uppercase; transition: color 0.3s ease; }
         .overlay-nav a:hover { color: var(--color-primary); }
         
-        /* MODIFICADO: Centrar el icono de LinkedIn en el footer del menú */
         .menu-footer-icon {
             padding: 2rem 0;
             align-self: center;
             text-align: center;
             width: 100%;
         }
-        /* AÑADIDO: Aumentar el tamaño del icono de LinkedIn SÓLO en el menú */
         .menu-footer-icon .linkedin-icon svg {
             width: 48px;
             height: 48px;
         }
 
-
-        /* ----- El resto de estilos se mantiene igual ----- */
+        /* ----- Contenido Principal y Secciones ----- */
         main { padding-top: var(--header-height); }
         h1, h2, h3, h4, h5, h6 { font-family: var(--font-title); text-transform: uppercase; color: #fff; }
         .knockout-text-layer h1 { font-size: 18vw; line-height: 0.9; text-align: center; mix-blend-mode: screen; }
@@ -162,7 +159,7 @@
         .global-scroll-indicator {
             position: fixed;
             bottom: 30px;
-            left: 50%; /* Centrado horizontalmente */
+            left: 50%;
             transform: translateX(-50%);
             width: 28px; height: 48px;
             border: 2px solid white;
@@ -203,6 +200,89 @@
         .timeline-stage-item { display: flex; flex-direction: column; align-items: center; }
         .timeline-number-custom { width: 3rem; height: 3rem; background-color: #1a2035; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 1rem; color: #f0f0f0; margin-bottom: 0.5rem; font-family: var(--font-body); }
         .timeline-category-custom { font-family: var(--font-body); color: white; }
+
+        /* AÑADIDO: Estilos para Responsividad en Móviles */
+        @media (max-width: 768px) {
+            :root {
+                --header-height: 70px;
+            }
+
+            .logo {
+                font-size: 1.2rem; /* Reducir tamaño del logo */
+            }
+
+            .header-controls .linkedin-icon {
+                display: none; /* Ocultar ícono de LinkedIn en el header en móvil */
+            }
+            
+            .knockout-text-layer h1 {
+                font-size: 24vw; /* Ajustar tamaño para que se lea mejor */
+            }
+
+            .outro-section {
+                padding: 10vh 5%; /* Reducir padding */
+            }
+            .outro-section h2 {
+                font-size: clamp(2rem, 8vw, 2.5rem);
+            }
+            .outro-section p {
+                font-size: 1rem;
+            }
+            
+            .features-section {
+                padding: 10vh 5%;
+            }
+
+            .final-chart-section {
+                padding: 8vh 2%;
+            }
+
+            .chart-title-main {
+                font-size: 1.8em; /* Reducir tamaño del título del gráfico */
+                margin-bottom: 15px;
+            }
+
+            /* Ajustar carrusel para móvil */
+            .carousel-wrapper {
+                width: 90%;
+                height: 300px; /* Menos altura */
+            }
+            .carousel-track {
+                width: 250px; /* Ligeramente más pequeño */
+                height: 250px;
+            }
+            .carousel-nav button {
+                width: 40px;
+                height: 40px;
+            }
+
+            /* Ajustar leyenda del gráfico Sankey */
+            .legend-item text {
+                font-size: 12px;
+            }
+            
+            /* Hacer la línea de tiempo horizontalmente desplazable */
+            .main-content-wrapper {
+                padding-bottom: 20px;
+            }
+            .timeline-container-custom {
+               grid-template-columns: repeat(10, minmax(60px, auto));
+               width: fit-content; /* Asegura que el contenedor se ajuste al contenido */
+               padding: 30px 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .overlay-nav a {
+                font-size: clamp(1.5rem, 10vw, 2rem); /* Letras del menú aún más grandes en pantallas pequeñas */
+            }
+
+            :root {
+              --menu-width: 80vw; /* El menú ocupa más pantalla */
+              --menu-max-width: 320px;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -337,17 +417,14 @@
                 const isActive = document.body.classList.toggle('menu-is-open');
                 menuOverlay.classList.toggle('is-open');
                 menuTrigger.classList.toggle('is-active');
-                // Detiene el scroll suave cuando el menú está abierto para evitar conflictos
                 if (isActive) { lenis.stop(); } else { lenis.start(); }
             }
             if (menuTrigger) menuTrigger.addEventListener('click', toggleMenu);
             if (menuCloseBtn) menuCloseBtn.addEventListener('click', toggleMenu);
-            // Cierra el menú al hacer clic en un enlace y se desplaza a la sección
             document.querySelectorAll('.menu-link').forEach(link => {
                 link.addEventListener('click', (e) => {
                     e.preventDefault();
                     if (menuOverlay.classList.contains('is-open')) { toggleMenu(); }
-                    // Espera a que la animación de cierre del menú termine antes de hacer scroll
                     setTimeout(() => { lenis.scrollTo(link.getAttribute('href'), { offset: -80 }); }, 600); 
                 });
             });
@@ -355,10 +432,10 @@
             // --- ANIMACIÓN DE SCROLL PRINCIPAL CON GSAP ---
             const sequenceTimeline = gsap.timeline({ scrollTrigger: { trigger: ".sequence-container", start: "top top", end: "bottom bottom", scrub: 1.5 } });
             ScrollTrigger.create({ trigger: ".sequence-container", pin: ".sticky-element" });
-            sequenceTimeline.to(".knockout-text-layer", { scale: 15, ease: "none" }, 0); // El texto escala
-            sequenceTimeline.from(".background-image", { scale: 1.2, ease: "none" }, 0); // El fondo hace un ligero zoom out
-            sequenceTimeline.to(".knockout-text-layer", { opacity: 0, duration: 0.3, ease: "power1.inOut" }, ">-0.4"); // El texto desaparece
-            sequenceTimeline.to(".final-scene", { opacity: 1, duration: 0.4, ease: 'power2.out' }, ">-0.2"); // Aparece la escena final con el carrusel
+            sequenceTimeline.to(".knockout-text-layer", { scale: 15, ease: "none" }, 0);
+            sequenceTimeline.from(".background-image", { scale: 1.2, ease: "none" }, 0);
+            sequenceTimeline.to(".knockout-text-layer", { opacity: 0, duration: 0.3, ease: "power1.inOut" }, ">-0.4");
+            sequenceTimeline.to(".final-scene", { opacity: 1, duration: 0.4, ease: 'power2.out' }, ">-0.2");
             
             // --- LÓGICA DEL CARRUSEL 3D ---
             const track = document.querySelector('.carousel-track');
@@ -371,7 +448,6 @@
                     slides.forEach((slide, index) => {
                         let offset = index - currentIndex;
                         let absOffset = Math.abs(offset);
-                        // Aplica transformaciones 3D para posicionar las diapositivas en un semicírculo
                         slide.style.transform = `translateX(${offset * 120}px) translateZ(${-absOffset * 150}px) rotateY(${offset * 20}deg)`;
                         slide.style.opacity = absOffset > 0 ? 0.3 : 1;
                         slide.style.filter = absOffset > 0 ? 'blur(5px)' : 'none';
@@ -380,8 +456,7 @@
                 }
                 nextButton.addEventListener('click', () => { currentIndex = (currentIndex + 1) % slides.length; updateCarousel(); });
                 prevButton.addEventListener('click', () => { currentIndex = (currentIndex - 1 + slides.length) % slides.length; updateCarousel(); });
-                updateCarousel(); // Posiciona el carrusel inicialmente
-                // Anima la aparición del carrusel junto con la escena final
+                updateCarousel(); 
                 sequenceTimeline.from(".carousel-wrapper", { y: 50, opacity: 0, duration: 0.6, ease: 'power2.out' }, ">-0.2");
             }
             
@@ -393,66 +468,87 @@
             // --- LÓGICA DEL INDICADOR DE SCROLL GLOBAL ---
             const scrollIndicator = document.querySelector('.global-scroll-indicator');
             if (scrollIndicator) {
-                    // Oculta el indicador cuando el usuario llega al final de la página
                     lenis.on('scroll', ({ scroll, limit }) => {
                         const atBottom = scroll >= limit - 50;
                         scrollIndicator.classList.toggle('hidden', atBottom);
                     });
             }
             
-            // --- SCRIPT DEL DIAGRAMA SANKEY CON D3.JS ---
+            // --- SCRIPT DEL DIAGRAMA SANKEY RESPONSIVO CON D3.JS ---
             const sankeyContainer = document.querySelector('.chart-container');
             if (sankeyContainer) {
-                const margin = {top: 30, right: 180, bottom: 100, left: 180};
-                const baseWidth = 1400, baseHeight = 550;
-                const nodeWidthConfig = { wide: 65, narrow: 60 };
-                const svgElement = document.getElementById('alluvialChart');
-                const parentElement = svgElement.parentElement;
-                let svgTotalWidth = parentElement ? Math.min(parentElement.clientWidth, baseWidth) : baseWidth;
-                svgTotalWidth = Math.max(svgTotalWidth, margin.left + margin.right + 200);
-                const width = Math.max(50, svgTotalWidth - margin.left - margin.right);
-                const height = Math.max(50, baseHeight - margin.top - margin.bottom);
-                
-                // Define los datos para la leyenda y la estructura del gráfico
-                const legendData = [ { name: "Actual Sales", color: "#14b8a6", columnId: 0 }, { name: "Quarterly Forecast", color: "#5eead4", columnId: 1 }, { name: "Forecasted Sales", color: "#d946ef", columnId: 2 } ];
-                const nodes = []; const links = []; const quarterNames = ["1Q", "2Q", "3Q", "4Q"];
-                nodes.push({ name: "Ventas Actuales", id: "VA", column: 0 });
-                const ventasActualesNodeIndex = 0;
-                const quarterNodeIndices = [];
-                quarterNames.forEach((quarterName) => {
-                    nodes.push({ name: quarterName, id: quarterName, column: 1 }); quarterNodeIndices.push(nodes.length - 1);
-                });
-                nodes.push({ name: "Total Pronosticado", id: "TVP", column: 2 });
-                const totalVentasPronosticadasNodeIndex = nodes.length - 1;
-                const ventasPorTrimestreBase = 634 / quarterNames.length;
-                // Genera los enlaces (links) entre los nodos con valores aleatorios para demostración
-                quarterNodeIndices.forEach((quarterNodeIndex) => {
-                    const currentQuarterName = nodes[quarterNodeIndex].name;
-                    const valorTrimestreConIncremento = Math.round(ventasPorTrimestreBase + (Math.floor(Math.random() * 60) + 15));
-                    links.push({ source: ventasActualesNodeIndex, target: quarterNodeIndex, value: Math.round(ventasPorTrimestreBase), id: `link-va-${currentQuarterName}` });
-                    links.push({ source: quarterNodeIndex, target: totalVentasPronosticadasNodeIndex, value: valorTrimestreConIncremento, id: `link-${currentQuarterName}-tvp` });
-                });
+                const svgElement = d3.select("#alluvialChart");
 
-                // Crea el SVG y el generador de Sankey
-                const svg = d3.select("#alluvialChart").attr("width", svgTotalWidth).attr("height", baseHeight).append("g").attr("transform", `translate(${margin.left},${margin.top})`);
-                const sankey = d3.sankey().nodeWidth(nodeWidthConfig.wide).nodePadding(30).nodeAlign(d3.sankeyJustify).extent([[1, 1], [width - 1, height - 1]]);
-                const {nodes: graphNodes, links: graphLinks} = sankey({ nodes: nodes.map(d => Object.assign({}, d)), links: links.map(d => Object.assign({}, d)) });
-                
-                // Dibuja los enlaces
-                const linkGroup = svg.append("g").attr("class", "links-group");
-                linkGroup.selectAll(".sankey-link").data(graphLinks).enter().append("path").attr("class", "sankey-link").attr("d", d3.sankeyLinkHorizontal()).attr("stroke-width", d => Math.max(1.5, d.width));
-                
-                // Dibuja los nodos
-                const node = svg.append("g").attr("class", "nodes").selectAll(".sankey-node").data(graphNodes).enter().append("g").attr("class", "sankey-node").attr("transform", d => `translate(${d.x0},${d.y0})`);
-                node.append("rect").attr("class", "node-rect-main").attr("height", d => Math.max(1, d.y1 - d.y0)).attr("width", d => d.column === 1 ? nodeWidthConfig.narrow : (d.x1 - d.x0)).attr("x", d => d.column === 1 ? ((d.x1 - d.x0) - nodeWidthConfig.narrow) / 2 : 0).attr("fill", d => (legendData.find(item => item.columnId === d.column) || {}).color || "#ccc" ).attr("stroke", d => d3.color((legendData.find(item => item.columnId === d.column) || {}).color || "#ccc").darker(0.5));
-                node.append("text").attr("class", "node-name-label").attr("x", d => (d.x0 < width / 2) ? (d.x1 - d.x0 + 8) : -8).attr("y", d => (d.y1 - d.y0) / 2).attr("dy", "0.35em").attr("text-anchor", d => (d.x0 < width / 2) ? "start" : "end").text(d => d.column === 1 ? d.name : "");
-                node.append("text").attr("class", "node-value-label").attr("x", d => { const w = d.x1 - d.x0; return (d.column === 1 ? ((w - nodeWidthConfig.narrow) / 2) : 0) + (d.column === 1 ? nodeWidthConfig.narrow : w) / 2; }).attr("y", d => (d.y1 - d.y0) / 2).attr("dy", "0.35em").text(d => `$${Math.max(d3.sum(d.sourceLinks, l => l.value), d3.sum(d.targetLinks, l => l.value)).toLocaleString('es-ES')} MM`);
-                
-                // Dibuja la leyenda del gráfico
-                const legendGroup = svg.append("g").attr("class", "legend").attr("transform", `translate(${(width - (legendData.length * 200)) / 2 + 30 }, ${height + margin.bottom / 2 })`);
-                const legendItem = legendGroup.selectAll(".legend-item").data(legendData).enter().append("g").attr("class", "legend-item").attr("transform", (d, i) => `translate(${i * 210}, 0)`);
-                legendItem.append("rect").attr("x", 0).attr("y", -9).attr("width", 18).attr("height", 18).style("fill", d => d.color).attr("rx", 3).attr("ry", 3);
-                legendItem.append("text").attr("x", 24).attr("y", 0).text(d => d.name);
+                function drawSankeyChart() {
+                    svgElement.selectAll("*").remove(); // Limpiar SVG anterior
+
+                    const legendData = [ { name: "Actual Sales", color: "#14b8a6", columnId: 0 }, { name: "Quarterly Forecast", color: "#5eead4", columnId: 1 }, { name: "Forecasted Sales", color: "#d946ef", columnId: 2 } ];
+                    const nodes = []; const links = []; const quarterNames = ["1Q", "2Q", "3Q", "4Q"];
+                    nodes.push({ name: "Ventas Actuales", id: "VA", column: 0 });
+                    const ventasActualesNodeIndex = 0;
+                    const quarterNodeIndices = [];
+                    quarterNames.forEach((quarterName) => {
+                        nodes.push({ name: quarterName, id: quarterName, column: 1 }); quarterNodeIndices.push(nodes.length - 1);
+                    });
+                    nodes.push({ name: "Total Pronosticado", id: "TVP", column: 2 });
+                    const totalVentasPronosticadasNodeIndex = nodes.length - 1;
+                    const ventasPorTrimestreBase = 634 / quarterNames.length;
+                    quarterNodeIndices.forEach((quarterNodeIndex) => {
+                        const currentQuarterName = nodes[quarterNodeIndex].name;
+                        const valorTrimestreConIncremento = Math.round(ventasPorTrimestreBase + (Math.floor(Math.random() * 60) + 15));
+                        links.push({ source: ventasActualesNodeIndex, target: quarterNodeIndex, value: Math.round(ventasPorTrimestreBase), id: `link-va-${currentQuarterName}` });
+                        links.push({ source: quarterNodeIndex, target: totalVentasPronosticadasNodeIndex, value: valorTrimestreConIncremento, id: `link-${currentQuarterName}-tvp` });
+                    });
+
+                    const isMobile = window.innerWidth <= 768;
+                    const parentElement = svgElement.node().parentElement;
+                    const baseWidth = parentElement.clientWidth;
+                    
+                    const margin = {
+                        top: 30, right: isMobile ? 20 : 180,
+                        bottom: isMobile ? 120 : 100,
+                        left: isMobile ? 20 : 180
+                    };
+
+                    const baseHeight = isMobile ? 450 : 550;
+                    const width = Math.max(50, baseWidth - margin.left - margin.right);
+                    const height = Math.max(50, baseHeight - margin.top - margin.bottom);
+                    
+                    svgElement.attr("width", baseWidth).attr("height", baseHeight);
+                    const svg = svgElement.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+                    
+                    const nodeWidthConfig = { wide: isMobile ? 30 : 65, narrow: isMobile ? 30 : 60 };
+                    const sankey = d3.sankey().nodeWidth(nodeWidthConfig.wide).nodePadding(isMobile ? 15 : 30).nodeAlign(d3.sankeyJustify).extent([[1, 1], [width - 1, height - 1]]);
+                    const {nodes: graphNodes, links: graphLinks} = sankey({ nodes: nodes.map(d => Object.assign({}, d)), links: links.map(d => Object.assign({}, d)) });
+
+                    const linkGroup = svg.append("g").attr("class", "links-group");
+                    linkGroup.selectAll(".sankey-link").data(graphLinks).enter().append("path").attr("class", "sankey-link").attr("d", d3.sankeyLinkHorizontal()).attr("stroke-width", d => Math.max(1.5, d.width));
+                    
+                    const node = svg.append("g").attr("class", "nodes").selectAll(".sankey-node").data(graphNodes).enter().append("g").attr("class", "sankey-node").attr("transform", d => `translate(${d.x0},${d.y0})`);
+                    node.append("rect").attr("class", "node-rect-main").attr("height", d => Math.max(1, d.y1 - d.y0)).attr("width", d => d.x1 - d.x0).attr("fill", d => (legendData.find(item => item.columnId === d.column) || {}).color || "#ccc" ).attr("stroke", d => d3.color((legendData.find(item => item.columnId === d.column) || {}).color || "#ccc").darker(0.5));
+
+                    if (!isMobile) {
+                        node.append("text").attr("class", "node-name-label").attr("x", d => (d.x0 < width / 2) ? (d.x1 - d.x0 + 8) : -8).attr("y", d => (d.y1 - d.y0) / 2).attr("dy", "0.35em").attr("text-anchor", d => (d.x0 < width / 2) ? "start" : "end").text(d => d.column === 1 ? d.name : "");
+                    }
+
+                    node.append("text").attr("class", "node-value-label").style("font-size", isMobile ? "10px" : "13px").attr("x", d => (d.x1 - d.x0) / 2).attr("y", d => (d.y1 - d.y0) / 2).attr("dy", "0.35em").text(d => `$${Math.max(d3.sum(d.sourceLinks, l => l.value), d3.sum(d.targetLinks, l => l.value)).toLocaleString('es-ES')} MM`);
+
+                    const legendGroup = svg.append("g").attr("class", "legend");
+                    if (isMobile) {
+                        legendGroup.attr("transform", `translate(0, ${height + 40})`);
+                        const legendItem = legendGroup.selectAll(".legend-item").data(legendData).enter().append("g").attr("class", "legend-item").attr("transform", (d, i) => `translate(0, ${i * 25})`);
+                        legendItem.append("rect").attr("x", 0).attr("y", -9).attr("width", 18).attr("height", 18).style("fill", d => d.color).attr("rx", 3).attr("ry", 3);
+                        legendItem.append("text").attr("x", 24).attr("y", 0).text(d => d.name);
+                    } else {
+                        legendGroup.attr("transform", `translate(${(width - (legendData.length * 200)) / 2 + 30 }, ${height + margin.bottom / 2 })`);
+                        const legendItem = legendGroup.selectAll(".legend-item").data(legendData).enter().append("g").attr("class", "legend-item").attr("transform", (d, i) => `translate(${i * 210}, 0)`);
+                        legendItem.append("rect").attr("x", 0).attr("y", -9).attr("width", 18).attr("height", 18).style("fill", d => d.color).attr("rx", 3).attr("ry", 3);
+                        legendItem.append("text").attr("x", 24).attr("y", 0).text(d => d.name);
+                    }
+                }
+
+                drawSankeyChart();
+                window.addEventListener('resize', drawSankeyChart);
             }
         });
     </script>
