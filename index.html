@@ -27,9 +27,9 @@
             --font-body: 'Inter', sans-serif;
             --menu-width: 50vw;
             --menu-max-width: 600px;
-            --header-height: 70px; /* Ligeramente más bajo para el nuevo estilo */
+            --header-height: 70px; 
             --corner-radius: 15px;
-            --color-border: rgba(255, 255, 255, 0.1); /* Añadido para el efecto de cristal */
+            --color-border: rgba(255, 255, 255, 0.1); 
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -58,15 +58,15 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 2.5%;
+            padding: 0 20px;
             z-index: 1000;
             transition: top 0.3s ease, background-color 0.3s ease; 
         }
         
-        .header-section { flex: 1; display: flex; align-items: center; }
-        .header-section.left { justify-content: flex-start; }
-        .header-section.center { justify-content: center; }
-        .header-section.right { justify-content: flex-end; }
+        .header-section { display: flex; align-items: center; }
+        .header-section.left { flex: 1 0 0; justify-content: flex-start; }
+        .header-section.center { flex: 2 0 0; justify-content: center; }
+        .header-section.right { flex: 1 0 0; justify-content: flex-end; }
         
         .logo { 
             font-size: 1.6rem; 
@@ -432,13 +432,15 @@
         /* ----- Estilos para Responsividad ----- */
         @media (max-width: 768px) {
             :root { --header-height: 60px; }
+            .main-header { padding: 0 10px; }
+            .header-section.center { order: -1; flex: 1 1 100%; text-align: center; }
+            .logo { font-size: 1.4rem; }
             .ml-content-wrapper { flex-direction: column; gap: 2rem; }
             .knockout-text-layer { padding-top: calc(8vh + 30px); }
-            .logo { font-size: 1.2rem; }
             .header-controls { gap: 0.5rem; }
             .linkedin-icon { display: flex; }
             .linkedin-icon svg { width: 28px; height: 28px; }
-            .header-icon { height: 40px; width: auto; }
+            .header-icon { display: none; }
             .hamburger-icon { width: 28px; height: 22px; }
             .title-container h1 { font-size: 20vw; }
             .growth-arrow { width: 25vw; height: 20vw; }
@@ -722,359 +724,179 @@
     <script>
         // --- Configuración del Gráfico SANKEY INSERTADO ---
         (() => {
-            const margin = {top: 30, right: 180, bottom: 100, left: 180};
-            const baseWidth = 1400; 
-            const baseHeight = 550;
+            const svgElement = document.getElementById('alluvialChart_insertado');
+            if (!svgElement) return;
 
-            const nodeWidthConfig = { 
-                wide: 65, 
-                narrow: 60 
+            const drawChart = () => {
+                // Limpiar SVG anterior
+                d3.select(svgElement).selectAll("*").remove();
+
+                const isMobile = window.innerWidth <= 768;
+                
+                const margin = {
+                    top: 30, 
+                    right: isMobile ? 10 : 180, 
+                    bottom: isMobile ? 80 : 100, 
+                    left: isMobile ? 10 : 180
+                };
+                
+                const parentElement = svgElement.parentElement;
+                const baseWidth = parentElement.clientWidth;
+                const baseHeight = isMobile ? 400 : 550;
+
+                const width = baseWidth - margin.left - margin.right;
+                const height = baseHeight - margin.top - margin.bottom;
+
+                const nodeWidthConfig = { 
+                    wide: isMobile ? 20 : 65, 
+                    narrow: isMobile ? 20 : 60 
+                };
+
+                function formatCurrency(value) {
+                    if (isNaN(value)) return "";
+                    return `$${value.toLocaleString('es-ES')} MM`;
+                }
+
+                const legendData = [
+                    { name: "Actual Sales", color: "#00ADB5", columnId: 0, internalId: "VA" },
+                    { name: "Quarterly Forecast", color: "#126E82", columnId: 1, internalId: "PT" },
+                    { name: "Forecasted Sales", color: "#76b900", columnId: 2, internalId: "TVP" }
+                ];
+
+                const nodes = [];
+                const links = [];
+                const quarterNames = ["1Q", "2Q", "3Q", "4Q"]; 
+                const initialVentasActualesValue = 634; 
+
+                nodes.push({ name: "Ventas Actuales", id: "VA", column: 0 });
+                const ventasActualesNodeIndex = 0;
+
+                const quarterNodeIndices = [];
+                quarterNames.forEach((quarterName) => {
+                    nodes.push({ name: quarterName, id: quarterName, column: 1 });
+                    quarterNodeIndices.push(nodes.length - 1);
+                });
+
+                nodes.push({ name: "Total Pronosticado", id: "TVP", column: 2 });
+                const totalVentasPronosticadasNodeIndex = nodes.length - 1;
+
+                const ventasPorTrimestreBase = initialVentasActualesValue / quarterNames.length;
+
+                quarterNodeIndices.forEach((quarterNodeIndex) => {
+                    const currentQuarterName = nodes[quarterNodeIndex].name;
+                    const incrementoTrimestral = Math.floor(Math.random() * 60) + 15; 
+                    const valorTrimestreConIncremento = Math.round(ventasPorTrimestreBase + incrementoTrimestral);
+
+                    links.push({ source: ventasActualesNodeIndex, target: quarterNodeIndex, value: Math.round(ventasPorTrimestreBase), id: `link-va-${currentQuarterName}` });
+                    links.push({ source: quarterNodeIndex, target: totalVentasPronosticadasNodeIndex, value: valorTrimestreConIncremento, id: `link-${currentQuarterName}-tvp` });
+                });
+
+                const svg = d3.select(svgElement)
+                    .attr("width", baseWidth)
+                    .attr("height", baseHeight)
+                    .append("g")
+                    .attr("transform", `translate(${margin.left},${margin.top})`);
+
+                const sankey = d3.sankey()
+                    .nodeWidth(nodeWidthConfig.wide) 
+                    .nodePadding(isMobile ? 10 : 30)
+                    .nodeAlign(d3.sankeyJustify)
+                    .extent([[1, 1], [width - 1, height - 1]]);
+
+                const {nodes: graphNodes, links: graphLinks} = sankey({
+                    nodes: nodes.map(d => Object.assign({}, d)),
+                    links: links.map(d => Object.assign({}, d))
+                });
+
+                const linkGroup = svg.append("g").attr("class", "links-group");
+
+                const linkPaths = linkGroup.selectAll(".sankey-link").data(graphLinks).enter()
+                    .append("path")
+                    .attr("class", "sankey-link")
+                    .attr("d", d3.sankeyLinkHorizontal())
+                    .attr("stroke-width", d => Math.max(1.5, d.width));
+                
+                let maxInitialAnimationTime = 0;
+                linkPaths.each(function(d, i) { 
+                    const path = d3.select(this);
+                    const length = path.node().getTotalLength();
+                    const delay = i * 80;
+                    const duration = 1200;
+                    maxInitialAnimationTime = Math.max(maxInitialAnimationTime, delay + duration);
+
+                    path.attr("stroke-dasharray", length + " " + length)
+                        .attr("stroke-dashoffset", length)
+                        .transition().duration(duration).ease(d3.easeSinInOut)
+                        .attr("stroke-dashoffset", 0).delay(delay);
+                });
+
+                const node = svg.append("g").attr("class", "nodes").selectAll(".sankey-node").data(graphNodes).enter()
+                    .append("g")
+                    .attr("class", "sankey-node")
+                    .attr("transform", d => `translate(${d.x0},${d.y0})`);
+
+                node.append("rect")
+                    .attr("class", "node-rect-main")
+                    .attr("height", d => Math.max(1, d.y1 - d.y0))
+                    .attr("width", d => d.column === 1 ? nodeWidthConfig.narrow : (d.x1 - d.x0))
+                    .attr("x", d => d.column === 1 ? ((d.x1 - d.x0) - nodeWidthConfig.narrow) / 2 : 0)
+                    .attr("fill", d => (legendData.find(item => item.columnId === d.column) || {}).color || "#ccc")
+                    .attr("stroke", d => d3.color((legendData.find(item => item.columnId === d.column) || {}).color || "#ccc").darker(0.5));
+
+                if (!isMobile) {
+                    node.append("text")
+                        .attr("class", "node-name-label")
+                        .attr("x", d => (d.x0 < width / 2) ? (d.x1 - d.x0 + 8) : -8) 
+                        .attr("y", d => (d.y1 - d.y0) / 2)
+                        .attr("dy", "0.35em")
+                        .attr("text-anchor", d => (d.x0 < width / 2) ? "start" : "end")
+                        .text(d => d.column === 1 ? d.name : "");
+                }
+
+                node.append("text")
+                    .attr("class", "node-value-label")
+                    .style("font-size", isMobile ? "9px" : "13px")
+                    .attr("x", d => (d.column === 1 ? nodeWidthConfig.narrow : (d.x1 - d.x0)) / 2 + (d.column === 1 ? ((d.x1 - d.x0) - nodeWidthConfig.narrow) / 2 : 0))
+                    .attr("y", d => (d.y1 - d.y0) / 2)
+                    .attr("dy", "0.35em")
+                    .text(d => {
+                        const value = Math.max(d3.sum(d.sourceLinks, l => l.value), d3.sum(d.targetLinks, l => l.value));
+                        return value > 0 ? (isMobile ? `$${value}` : formatCurrency(value)) : "";
+                    })
+                    .style("opacity", d => (d.y1 - d.y0) > (isMobile ? 10 : 15) ? 1 : 0);
+
+                const legendGroup = svg.append("g")
+                    .attr("class", "legend")
+                    .attr("transform", `translate(0, ${height + 40})`);
+
+                const legendItem = legendGroup.selectAll(".legend-item").data(legendData).enter()
+                    .append("g").attr("class", "legend-item")
+                    .attr("transform", (d, i) => isMobile ? `translate(${i * (width / legendData.length)}, 0)` : `translate(${i * 210}, 0)`);
+                
+                if (isMobile) {
+                     legendGroup.attr("transform", `translate(${(width - legendData.length * 110) / 2}, ${height + margin.bottom / 1.5 })`);
+                     legendItem.attr("transform", (d, i) => `translate(${i * 110}, 0)`);
+                } else {
+                     legendGroup.attr("transform", `translate(${(width - legendData.length * 200) / 2 + 30 }, ${height + margin.bottom / 2 })`);
+                     legendItem.attr("transform", (d, i) => `translate(${i * 210}, 0)`);
+                }
+
+                legendItem.append("rect")
+                    .attr("x", 0).attr("y", -9).attr("width", 18).attr("height", 18)
+                    .style("fill", d => d.color).attr("rx", 3).attr("ry", 3);
+
+                legendItem.append("text")
+                    .attr("x", 24).attr("y", 0).text(d => d.name)
+                    .style("font-size", isMobile ? "11px" : "16px");
+
             };
 
-            const svgElement = document.getElementById('alluvialChart_insertado');
-            if (!svgElement) return; // No ejecutar si el elemento no existe
-
-            const parentElement = svgElement.parentElement;
-
-            let svgTotalWidth;
-            if (parentElement && parentElement.clientWidth > 0) {
-                svgTotalWidth = Math.min(parentElement.clientWidth, baseWidth);
-            } else {
-                svgTotalWidth = baseWidth;
-            }
-            svgTotalWidth = Math.max(svgTotalWidth, margin.left + margin.right + 200); 
-
-            const width = Math.max(50, svgTotalWidth - margin.left - margin.right);
-            const height = Math.max(50, baseHeight - margin.top - margin.bottom);
-
-            function formatCurrency(value) {
-                if (isNaN(value)) return "";
-                return `$${value.toLocaleString('es-ES')} MM`;
-            }
-
-            const legendData = [
-                { name: "Actual Sales", color: "#00ADB5", columnId: 0, internalId: "VA" },
-                { name: "Quarterly Forecast", color: "#126E82", columnId: 1, internalId: "PT" },
-                { name: "Forecasted Sales", color: "#76b900", columnId: 2, internalId: "TVP" }
-            ];
-
-            const nodes = [];
-            const links = [];
-            const quarterNames = ["1Q", "2Q", "3Q", "4Q"]; 
-            const initialVentasActualesValue = 634; 
-
-            nodes.push({ name: "Ventas Actuales", id: "VA", column: 0 });
-            const ventasActualesNodeIndex = 0;
-
-            const quarterNodeIndices = [];
-            quarterNames.forEach((quarterName, i) => {
-                nodes.push({ name: quarterName, id: quarterName, column: 1 });
-                quarterNodeIndices.push(nodes.length - 1);
+            drawChart();
+            window.addEventListener('resize', () => {
+                let resizeTimer;
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(drawChart, 250);
             });
-
-            nodes.push({ name: "Total Pronosticado", id: "TVP", column: 2 });
-            const totalVentasPronosticadasNodeIndex = nodes.length - 1;
-
-            const ventasPorTrimestreBase = initialVentasActualesValue / quarterNames.length;
-
-            quarterNodeIndices.forEach((quarterNodeIndex, i) => {
-                const currentQuarterName = nodes[quarterNodeIndex].name;
-                const incrementoTrimestral = Math.floor(Math.random() * 60) + 15; 
-                const valorTrimestreConIncremento = Math.round(ventasPorTrimestreBase + incrementoTrimestral);
-
-                links.push({
-                    source: ventasActualesNodeIndex,
-                    target: quarterNodeIndex,
-                    value: Math.round(ventasPorTrimestreBase), 
-                    id: `link-va-${currentQuarterName.toLowerCase().replace(/\s+/g, '-')}`
-                });
-
-                links.push({
-                    source: quarterNodeIndex,
-                    target: totalVentasPronosticadasNodeIndex,
-                    value: valorTrimestreConIncremento, 
-                    id: `link-${currentQuarterName.toLowerCase().replace(/\s+/g, '-')}-tvp`
-                });
-            });
-
-            const svg = d3.select("#alluvialChart_insertado")
-                .attr("width", svgTotalWidth)
-                .attr("height", baseHeight)
-                .append("g")
-                .attr("transform", `translate(${margin.left},${margin.top})`);
-
-            const sankey = d3.sankey()
-                .nodeWidth(nodeWidthConfig.wide) 
-                .nodePadding(30)
-                .nodeAlign(d3.sankeyJustify)
-                .extent([[1, 1], [width - 1, height - 1]]);
-
-            const {nodes: graphNodes, links: graphLinks} = sankey({
-                nodes: nodes.map(d => Object.assign({}, d)),
-                links: links.map(d => Object.assign({}, d))
-            });
-
-            const linkGroup = svg.append("g")
-                .attr("class", "links-group");
-
-            const linkPaths = linkGroup.selectAll(".sankey-link")
-                .data(graphLinks)
-                .enter()
-                .append("path")
-                .attr("class", "sankey-link")
-                .attr("d", d3.sankeyLinkHorizontal())
-                .attr("stroke-width", d => Math.max(1.5, d.width))
-                .attr("id", d => d.id);
-
-            let maxInitialAnimationTime = 0;
-            linkPaths.each(function(d, i) { 
-                const path = d3.select(this);
-                const length = path.node().getTotalLength();
-                const delay = i * 80;
-                const duration = 1200;
-                maxInitialAnimationTime = Math.max(maxInitialAnimationTime, delay + duration);
-
-                path.attr("stroke-dasharray", length + " " + length)
-                    .attr("stroke-dashoffset", length)
-                    .transition().duration(duration).ease(d3.easeSinInOut)
-                    .attr("stroke-dashoffset", 0).delay(delay);
-            });
-
-            const node = svg.append("g")
-                .attr("class", "nodes")
-                .selectAll(".sankey-node")
-                .data(graphNodes)
-                .enter()
-                .append("g")
-                .attr("class", "sankey-node")
-                .attr("transform", d => `translate(${d.x0},${d.y0})`);
-
-            node.append("rect")
-                .attr("class", "node-rect-main")
-                .attr("height", d => Math.max(1, d.y1 - d.y0))
-                .attr("width", d => d.column === 1 ? nodeWidthConfig.narrow : (d.x1 - d.x0))
-                .attr("x", d => d.column === 1 ? ((d.x1 - d.x0) - nodeWidthConfig.narrow) / 2 : 0)
-                .attr("fill", d => {
-                    if (d.column === 2) return "rgba(230, 230, 230, 0.05)"; 
-                    const legendEntry = legendData.find(item => item.columnId === d.column);
-                    return legendEntry ? legendEntry.color : "#ccc";
-                })
-                .attr("stroke", d => {
-                    const legendEntry = legendData.find(item => item.columnId === d.column);
-                    return legendEntry ? d3.color(legendEntry.color).darker(0.5) : "#999";
-                });
-
-            node.filter(d => d.column === 2)
-                .each(function(dNodeData) { 
-                    const nodeGroup = d3.select(this); 
-                    const nodeFullHeight = Math.max(1, dNodeData.y1 - dNodeData.y0);
-                    const nodeFullWidth = dNodeData.x1 - dNodeData.x0; 
-                    const categoryColor = legendData.find(item => item.columnId === 2).color; 
-                    
-                    const targetFillRatio = 0.92; 
-                    const targetFillLevelHeight = nodeFullHeight * targetFillRatio; 
-                    const targetTopSurfaceBaseY = nodeFullHeight - targetFillLevelHeight; 
-
-                    const clipId = `clip-liquid-${dNodeData.id.replace(/\s+/g, '-')}`;
-                    nodeGroup.append("clipPath")
-                        .attr("id", clipId)
-                        .append("rect")
-                        .attr("x", 0) 
-                        .attr("y", 0) 
-                        .attr("width", nodeFullWidth)
-                        .attr("height", nodeFullHeight)
-                        .attr("rx", 3) 
-                        .attr("ry", 3);
-
-                    const liquidPath = nodeGroup.append("path")
-                        .attr("class", "liquid-fill-path")
-                        .attr("fill", categoryColor) 
-                        .attr("clip-path", `url(#${clipId})`);
-
-                    let wavePhase1 = Math.random() * 2 * Math.PI; 
-                    let wavePhase2 = Math.random() * 2 * Math.PI; 
-
-                    const waveAmplitude1 = Math.max(1.5, nodeFullHeight * 0.020); 
-                    const waveLength1 = nodeFullWidth / 0.7; 
-                    const waveSpeed1 = 0.010; 
-
-                    const waveAmplitude2 = Math.max(0.8, nodeFullHeight * 0.010); 
-                    const waveLength2 = nodeFullWidth / 1.3; 
-                    const waveSpeed2 = 0.018; 
-
-                    const bobbingAmplitude = Math.max(0.5, nodeFullHeight * 0.004); 
-                    const bobbingSpeed = 0.006; 
-                    let bobbingPhase = Math.random() * 2 * Math.PI;
-                    
-                    let currentFillHeight = 0; 
-                    let animationStartTime = null;
-                    const fillDuration = 3000; 
-
-                    function generateWavePath(currentSurfaceY, hPhase1, hPhase2, vPhase) {
-                        let path = `M 0 ${nodeFullHeight}`; 
-                        path += ` L ${nodeFullWidth} ${nodeFullHeight}`; 
-                        
-                        const surfaceYWithBobbing = currentSurfaceY + Math.sin(vPhase) * bobbingAmplitude;
-                        path += ` L ${nodeFullWidth} ${surfaceYWithBobbing}`; 
-
-                        for (let x = nodeFullWidth; x >= 0; x -= 3) { 
-                            const y1 = Math.sin((x / waveLength1) * 2 * Math.PI + hPhase1) * waveAmplitude1;
-                            const y2 = Math.sin((x / waveLength2) * 2 * Math.PI + hPhase2) * waveAmplitude2;
-                            const y = surfaceYWithBobbing + y1 + y2; 
-                            path += ` L ${x} ${y}`;
-                        }
-                        path += ` L 0 ${surfaceYWithBobbing}`; 
-                        path += " Z"; 
-                        return path;
-                    }
-
-                    function animateLiquidSurface(timestamp) {
-                        if (!animationStartTime) animationStartTime = timestamp;
-                        const elapsedTime = timestamp - animationStartTime;
-
-                        if (currentFillHeight < targetFillLevelHeight) {
-                            const progress = Math.min(1, elapsedTime / fillDuration);
-                            currentFillHeight = progress * targetFillLevelHeight;
-                        } else {
-                            currentFillHeight = targetFillLevelHeight; 
-                        }
-                        
-                        const currentTopSurfaceY = nodeFullHeight - currentFillHeight;
-
-                        wavePhase1 += waveSpeed1;
-                        wavePhase2 += waveSpeed2;
-                        bobbingPhase += bobbingSpeed;
-                        liquidPath.attr("d", generateWavePath(currentTopSurfaceY, wavePhase1, wavePhase2, bobbingPhase)); 
-                        
-                        requestAnimationFrame(animateLiquidSurface);
-                    }
-                    setTimeout(() => requestAnimationFrame(animateLiquidSurface), maxInitialAnimationTime + 700 + (Math.random() * 500)); 
-                });
-            
-            node.append("text")
-                .attr("class", "node-name-label")
-                .attr("x", d => (d.x0 < width / 2) ? (d.x1 - d.x0 + 8) : -8) 
-                .attr("y", d => (d.y1 - d.y0) / 2)
-                .attr("dy", "0.35em")
-                .attr("text-anchor", d => (d.x0 < width / 2) ? "start" : "end")
-                .text(d => d.column === 1 ? d.name : "")
-                .style("opacity", 0)
-                .transition().duration(600).delay(1200 + (graphLinks.length * 30))
-                .style("opacity", 1);
-
-            node.append("text")
-                .attr("class", "node-value-label")
-                .attr("x", d => { 
-                    const allocatedWidth = d.x1 - d.x0; 
-                    const visualWidth = d.column === 1 ? nodeWidthConfig.narrow : allocatedWidth;
-                    const rectXOffset = d.column === 1 ? (allocatedWidth - visualWidth) / 2 : 0;
-                    return rectXOffset + visualWidth / 2;
-                })
-                .attr("y", d => (d.y1 - d.y0) / 2)
-                .attr("dy", "0.35em")
-                .attr("fill", "#FFFFFF") 
-                .text(d => {
-                    const value = Math.max(d3.sum(d.sourceLinks, l => l.value), d3.sum(d.targetLinks, l => l.value));
-                    return value > 0 ? formatCurrency(value) : "";
-                })
-                .style("opacity", 0)
-                .transition().duration(600).delay(1500 + (graphLinks.length * 30))
-                .style("opacity", d => (d.y1 - d.y0) > 15 ? 1 : 0);
-
-            svg.append("g") 
-                .attr("class", "link-labels")
-                .selectAll(".link-label")
-                .data(graphLinks.filter(d => d.value > 0))
-                .enter()
-                .append("text")
-                .attr("class", "link-label")
-                .attr("x", d => d.source.x1 + (d.target.x0 - d.source.x1) / 2)
-                .attr("y", d => (d.y0 + d.y1) / 2)
-                .attr("dy", "0.35em")
-                .text(d => formatCurrency(d.value))
-                .style("opacity", 0)
-                .transition().duration(600).delay(1800 + (graphLinks.length * 30))
-                .style("opacity", d => d.width > 10 ? 0.7 : 0);
-
-            const legendGroup = svg.append("g")
-                .attr("class", "legend")
-                .attr("transform", `translate(${(width - (legendData.length * 200)) / 2 + 30 }, ${height + margin.bottom / 2 })`);
-
-            const legendItem = legendGroup.selectAll(".legend-item")
-                .data(legendData)
-                .enter()
-                .append("g")
-                .attr("class", "legend-item")
-                .attr("transform", (d, i) => `translate(${i * 210}, 0)`);
-
-            legendItem.append("rect")
-                .attr("x", 0).attr("y", -9).attr("width", 18).attr("height", 18)
-                .style("fill", d => d.color).attr("rx", 3).attr("ry", 3);
-
-            legendItem.append("text")
-                .attr("x", 24).attr("y", 0).text(d => d.name)
-                .style("opacity", 0)
-                .transition().duration(600).delay(800)
-                .style("opacity", 1);
-
-            function startSecondaryAnimations() {
-                const linksForOpacityWave = svg.selectAll(".sankey-link");
-                function flowOpacityRepeat(selection) {
-                    selection
-                        .transition("flow_opacity_dim") 
-                        .duration(1500) 
-                        .ease(d3.easeSinInOut)
-                        .attr("stroke-opacity", 0.35) 
-                        .transition("flow_opacity_brighten") 
-                        .duration(1500) 
-                        .ease(d3.easeSinInOut)
-                        .attr("stroke-opacity", 0.9) 
-                        .on("end", function() { d3.select(this).call(flowOpacityRepeat); }); 
-                }
-                linksForOpacityWave.call(flowOpacityRepeat);
-
-                linkGroup.selectAll(".sankey-link") 
-                    .each(function(linkData, i) {
-                        const originalPathElement = this;
-                        const originalPathD = d3.select(originalPathElement).attr("d");
-                        
-                        const targetNodeColumn = linkData.target.column;
-                        const legendEntry = legendData.find(item => item.columnId === targetNodeColumn);
-                        const lineColor = legendEntry ? legendEntry.color : "#888";
-
-                        const animatedLineStrokeWidth = 2.5;
-                        const mainLinkStrokeWidth = Math.max(1.5, linkData.width); 
-                        const verticalOffset = mainLinkStrokeWidth / 2 - animatedLineStrokeWidth / 2;
-
-                        const animatedLineGroup = linkGroup.append("g")
-                                .attr("transform", `translate(0, ${-verticalOffset})`);
-
-                        const animatedLine = animatedLineGroup.append("path")
-                            .datum(linkData) 
-                            .attr("class", "animated-border-line")
-                            .attr("d", originalPathD) 
-                            .attr("stroke", lineColor)
-                            .style("pointer-events", "none");
-
-                        const pathLength = animatedLine.node().getTotalLength();
-                        const dashLength = 30; 
-                        const gapLength = pathLength; 
-
-                        animatedLine.attr("stroke-dasharray", `${dashLength} ${gapLength}`);
-
-                        function repeatBorderAnimation() {
-                            animatedLine
-                                .attr("stroke-dashoffset", dashLength + gapLength) 
-                                .transition()
-                                .duration(2600) 
-                                .ease(d3.easeLinear)
-                                .attr("stroke-dashoffset", 0) 
-                                .on("end", repeatBorderAnimation);
-                        }
-                        setTimeout(repeatBorderAnimation, i * 200); 
-                    });
-            }
-            setTimeout(startSecondaryAnimations, maxInitialAnimationTime + 300);
         })();
     </script>
     
