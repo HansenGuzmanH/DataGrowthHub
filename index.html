@@ -113,10 +113,10 @@
         .linkedin-icon svg { width: 32px; height: 32px; }
         
         .header-icon {
-            height: 55px; /* Ajustado para el nuevo header */
-            width: 55px; /* Ajustado para el nuevo header */
-            border-radius: 50%;
-            object-fit: cover;
+            height: 45px;
+            width: auto;
+            border-radius: 0;
+            object-fit: contain;
             transition: transform 0.3s ease;
         }
         .header-icon:hover {
@@ -286,6 +286,58 @@
             stroke-linecap: round;
             stroke-linejoin: round;
             fill: none;
+        }
+
+        .subtitle-wrapper {
+            margin-top: 3vh;
+            text-align: center;
+            width: 90%;
+            max-width: 600px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .subtitle-text {
+            font-family: var(--font-body);
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            line-height: 1.7;
+            text-transform: none;
+            font-weight: 400;
+        }
+
+        .subtitle-text a {
+            color: var(--color-primary);
+            font-weight: bold;
+            text-decoration: none;
+            background-image: linear-gradient(var(--color-primary), var(--color-primary));
+            background-size: 0% 2px;
+            background-repeat: no-repeat;
+            background-position: left bottom;
+            transition: background-size 0.3s ease;
+        }
+
+        .subtitle-text a:hover {
+            background-size: 100% 2px;
+        }
+
+        .scroll-down-arrow {
+            width: 24px;
+            height: 24px;
+            color: white;
+            display: inline-block;
+            vertical-align: middle;
+            margin-left: 5px;
+            animation: bounce-arrow 2.5s infinite cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        }
+
+        @keyframes bounce-arrow {
+            0%, 100% {
+                transform: translateY(0);
+                opacity: 0.8;
+            }
+            50% {
+                transform: translateY(8px);
+                opacity: 1;
+            }
         }
         
         .machine-learning-section {
@@ -520,8 +572,8 @@
                 height: 28px;
             }
             .header-icon {
-                width: 50px; /* Ajustado para el nuevo header */
-                height: 50px; /* Ajustado para el nuevo header */
+                height: 40px;
+                width: auto;
             }
             .hamburger-icon {
                 width: 28px;
@@ -550,7 +602,10 @@
             .overlay-nav a { font-size: clamp(1.5rem, 8vw, 2.2rem); }
             :root { --menu-width: 80vw; --menu-max-width: 320px; }
             .gallery-main-image { height: 250px; }
-            .header-icon { width: 45px; height: 45px; }
+            .header-icon { 
+                height: 35px;
+                width: auto;
+            }
             .linkedin-icon svg { width: 24px; height: 24px; }
         }
 
@@ -583,7 +638,7 @@
         </div>
         <div class="header-section right">
            <a href="#page-top" class="top-link" aria-label="Ir al inicio de la página">
-               <img src="https://i.imgur.com/ENnbjaQ.jpeg" alt="Icono de Hansen" class="header-icon" onerror="this.onerror=null;this.src='https://placehold.co/95x95/222831/eeeeee?text=Icono';">
+               <img src="https://i.imgur.com/I9NzDmR.png" alt="Icono de Hansen" class="header-icon" onerror="this.onerror=null;this.src='https://placehold.co/120x45/222831/eeeeee?text=Logo';">
            </a>
         </div>
     </header>
@@ -626,6 +681,12 @@
                             </svg>
                         </div>
                         <h1>GROWTH</h1>
+                    </div>
+                    <div class="subtitle-wrapper">
+                        <p class="subtitle-text">
+                            Desliza para conocer mas sobre el análisis de datos y un poco de mi trabajo o visita mi perfil de Linkedin haciendo 
+                            <a href="https://www.linkedin.com/in/hansen-guzm%C3%A1n-hern%C3%A1ndez-b4185592/" target="_blank" rel="noopener noreferrer">clic aquí<svg class="scroll-down-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M11,4H13V16L18.5,10.5L19.92,11.92L12,19.84L4.08,11.92L5.5,10.5L11,16V4Z"></path></svg></a>
+                        </p>
                     </div>
                 </div>
             </div>
