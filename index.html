@@ -152,7 +152,6 @@
         .menu-overlay.is-open .overlay-nav li:nth-child(2) { transition-delay: 0.20s; }
         .menu-overlay.is-open .overlay-nav li:nth-child(3) { transition-delay: 0.25s; }
         .menu-overlay.is-open .overlay-nav li:nth-child(4) { transition-delay: 0.30s; }
-        .menu-overlay.is-open .overlay-nav li:nth-child(5) { transition-delay: 0.35s; }
         .overlay-nav a {
             color: white;
             text-decoration: none;
@@ -187,7 +186,7 @@
         }
         
         .sequence-container { 
-            height: 200vh; /* Altura reducida para eliminar el espacio muerto */
+            height: 200vh;
             position: relative;
         }
         .sticky-element { 
@@ -272,7 +271,7 @@
             padding: 5vh 5%;
             background-color: var(--color-background);
             position: relative;
-            z-index: 2; /* Para que se ponga encima de la animación terminada */
+            z-index: 2;
         }
 
         .machine-learning-section h2 {
@@ -323,13 +322,29 @@
             margin-bottom: 0.75em;
         }
         
-        /* ***** INICIO CAMBIOS: Nueva galería y texto BI ***** */
+        /* ***** INICIO CAMBIOS: Nueva galería, texto BI y estilos asociados ***** */
         .gallery-container {
             max-width: 1200px;
-            margin: 4rem auto;
+            margin: 0 auto; /* Eliminado margen superior */
             padding: 0 2rem;
         }
 
+        .gallery-header {
+            max-width: 900px;
+            margin: 0 auto 2rem auto; /* Ajustado margen */
+            padding: 0 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 3rem;
+        }
+        .gallery-header p {
+            font-family: var(--font-body);
+            font-size: 1.1rem;
+            color: #b0b0b0;
+            line-height: 1.7;
+            text-transform: none; /* Asegura que no sea mayúscula */
+        }
+        
         .gallery-main-image {
             width: 100%;
             height: 600px;
@@ -387,16 +402,16 @@
             margin: 4rem auto 4rem auto;
             color: #e0e0e0;
             line-height: 1.8;
-            padding: 0 2rem; /* Añadido padding horizontal */
+            padding: 0 2rem;
         }
        
         .bi-text-container p {
             font-family: var(--font-body);
             font-weight: 400;
-            font-size: 1.15rem; /* Ligeramente más grande */
+            font-size: 1.15rem;
             color: #e0e0e0;
-            line-height: 1.9; /* Mayor interlineado */
-            margin-bottom: 1.5rem; /* Mayor separación */
+            line-height: 1.9;
+            margin-bottom: 1.5rem;
             text-transform: none;
         }
         .bi-text-container p strong {
@@ -422,7 +437,6 @@
         
         .outro-section { padding: 15vh 5%; text-align: center; background-color: var(--color-background); position: relative; z-index: 5; }
         .outro-section h2 { font-size: clamp(2.5rem, 8vw, 6rem); margin-bottom: 3rem; }
-        .outro-section p { font-family: 'Inter', sans-serif; font-weight: 400; font-size: 1.2rem; max-width: 800px; margin: 0 auto; color: #b0b0b0; line-height: 1.7; }
         
         .features-section { padding: 15vh 5%; background-color: #1a1f26; }
         .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; max-width: 1800px; margin: 0 auto; }
@@ -468,7 +482,6 @@
             .main-content-wrapper { padding-bottom: 20px; }
             .timeline-container-custom { grid-template-columns: repeat(10, minmax(60px, auto)); width: fit-content; padding: 30px 15px; }
             
-            /* ***** CAMBIOS RESPONSIVE: Galería y texto BI ***** */
             .gallery-main-image { height: 400px; }
             .gallery-thumbnails { grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); }
             .bi-text-container { padding: 0 1rem; }
@@ -521,14 +534,14 @@
         <button class="menu-close-btn" aria-label="Cerrar menú">
             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
         </button>
-        <!-- Navegación principal del menú -->
+        <!-- ***** INICIO CAMBIOS: Menú lateral actualizado ***** -->
         <ul class="overlay-nav">
             <li><a href="#page-top" class="menu-link">Inicio</a></li>
             <li><a href="#machine-learning" class="menu-link">Machine Learning</a></li>
-            <li><a href="#evolucion" class="menu-link">Evolución</a></li>
-            <li><a href="#caracteristicas" class="menu-link">Características</a></li>
-            <li><a href="#graficos" class="menu-link">Gráficos</a></li>
+            <li><a href="#evolucion" class="menu-link">Business intelligence</a></li>
+            <li><a href="#galeria-bi" class="menu-link">GRÁFICOS</a></li>
         </ul>
+        <!-- ***** FIN CAMBIOS ***** -->
         <!-- Icono de LinkedIn en el pie del menú -->
         <div class="menu-footer-icon">
             <a href="https://www.linkedin.com/in/hansen-guzm%C3%A1n-hern%C3%A1ndez-b4185592/" target="_blank" rel="noopener noreferrer" class="linkedin-icon" aria-label="LinkedIn">
@@ -591,7 +604,10 @@
                 <p>Por ejemplo, un equipo puede ver en un reporte qué campaña de marketing atrajo más clientes y decidir duplicar la inversión en ella al instante, en lugar de solo suponerlo.</p>
             </div>
 
-            <div class="gallery-container">
+            <div id="galeria-bi" class="gallery-container">
+                <div class="gallery-header">
+                    <p>Estas imágenes son una pequeña muestra de mi trabajo en Business Intelligence (BI), son datos de muestra pero muestran un poco de mi visión analítica y creativa.</p>
+                </div>
                 <div class="gallery-main-image">
                     <img id="main-gallery-image" src="https://i.imgur.com/of09hLT.png" alt="Dashboard de datos principal">
                 </div>
@@ -607,7 +623,6 @@
                 </div>
             </div>
             
-            <p>Estas imágenes son una pequeña muestra de mi trabajo en Business Intelligence (BI), son datos de muestra pero muestran un poco de mi visión creativa.</p>
         </section>
         <!-- ***** FIN CAMBIOS ***** -->
         
@@ -703,21 +718,23 @@
             const mainImage = document.getElementById('main-gallery-image');
             const thumbnails = document.querySelectorAll('.gallery-thumbnail');
             
-            thumbnails.forEach(thumb => {
-                thumb.addEventListener('click', function() {
-                    // Actualizar thumbnail activo
-                    document.querySelector('.gallery-thumbnail.active').classList.remove('active');
-                    this.classList.add('active');
-                    
-                    // Cambiar imagen principal
-                    const newSrc = this.querySelector('img').src;
-                    mainImage.style.opacity = 0;
-                    setTimeout(() => {
-                        mainImage.src = newSrc;
-                        mainImage.style.opacity = 1;
-                    }, 300); // Coincide con la transición de opacidad
+            if(mainImage && thumbnails.length > 0) {
+                thumbnails.forEach(thumb => {
+                    thumb.addEventListener('click', function() {
+                        // Actualizar thumbnail activo
+                        document.querySelector('.gallery-thumbnail.active').classList.remove('active');
+                        this.classList.add('active');
+                        
+                        // Cambiar imagen principal
+                        const newSrc = this.querySelector('img').src;
+                        mainImage.style.opacity = 0;
+                        setTimeout(() => {
+                            mainImage.src = newSrc;
+                            mainImage.style.opacity = 1;
+                        }, 300); // Coincide con la transición de opacidad
+                    });
                 });
-            });
+            }
 
             // --- ANIMACIÓN DE APARICIÓN DE LAS TARJETAS DE CARACTERÍSTICAS ---
             gsap.utils.toArray('.feature-card').forEach((card) => {
