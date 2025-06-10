@@ -207,7 +207,6 @@
         }
         
         .sequence-container { 
-            /* Se elimina la altura fija para que el pin de GSAP la controle */
             position: relative;
         }
         .sticky-element { 
@@ -489,22 +488,6 @@
             color: var(--color-secondary);
         }
         
-        .global-scroll-indicator {
-            position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 28px; height: 48px;
-            border: 2px solid white;
-            border-radius: 14px;
-            z-index: 998;
-            opacity: 1;
-            transition: opacity 0.4s ease;
-        }
-        .global-scroll-indicator.hidden { opacity: 0; pointer-events: none; }
-        .global-scroll-indicator::before { content: ''; position: absolute; top: 8px; left: 50%; transform: translateX(-50%); width: 4px; height: 10px; background: white; border-radius: 2px; animation: scroll-animation 2.2s infinite cubic-bezier(0.68, -0.55, 0.27, 1.55); }
-        @keyframes scroll-animation { 0% { transform: translate(-50%, 0); opacity: 0; } 40% { opacity: 1; } 80% { transform: translate(-50%, 20px); opacity: 0; } 100% { opacity: 0; } }
-        
         .outro-section { 
             padding: 8vh 5%;
             text-align: center; 
@@ -741,8 +724,6 @@
             </div>
         </section>
     </main>
-    <!-- Indicador de scroll global -->
-    <div class="global-scroll-indicator"></div>
     
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -792,12 +773,15 @@
             });
 
 
-            // --- ANIMACIÓN DE SCROLL PRINCIPAL CON GSAP ---
+            // --- ANIMACIÓN DE SCROLL PRINCIPAL CON GSAP (AJUSTE PARA MÓVIL) ---
+            const isMobile = window.innerWidth <= 768;
+            const pinDuration = isMobile ? "+=60%" : "+=150%"; // Duración más corta en móvil
+
             const sequenceTimeline = gsap.timeline({ 
                 scrollTrigger: { 
                     trigger: ".sequence-container", 
                     start: "top top", 
-                    end: "+=150%", 
+                    end: pinDuration, 
                     scrub: 1.5,
                     pin: ".sticky-element"
                 } 
@@ -837,7 +821,7 @@
                 
                 const startSlideshow = () => {
                     clearInterval(galleryInterval);
-                    galleryInterval = setInterval(nextSlide, 4000); // CAMBIO: Tiempo reducido a 4 segundos
+                    galleryInterval = setInterval(nextSlide, 4000); 
                 };
 
                 thumbnails.forEach((thumb, index) => {
@@ -848,19 +832,6 @@
                 });
                 
                 startSlideshow(); // Start on page load
-            }
-
-
-            // --- ANIMACIÓN DE APARICIÓN DE LAS TARJETAS ---
-            // (Esta sección fue eliminada según las últimas instrucciones)
-
-            // --- LÓGICA DEL INDICADOR DE SCROLL GLOBAL ---
-            const scrollIndicator = document.querySelector('.global-scroll-indicator');
-            if (scrollIndicator) {
-                lenis.on('scroll', ({ scroll, limit }) => {
-                    const atBottom = scroll >= limit - 50;
-                    scrollIndicator.classList.toggle('hidden', atBottom);
-                });
             }
             
             // --- SCRIPT DEL DIAGRAMA SANKEY RESPONSIVO CON D3.JS ---
@@ -889,25 +860,25 @@
                         links.push({ source: quarterNodeIndex, target: totalVentasPronosticadasNodeIndex, value: valorTrimestreConIncremento, id: `link-${currentQuarterName}-tvp` });
                     });
 
-                    const isMobile = window.innerWidth <= 768;
+                    const isMobileSankey = window.innerWidth <= 768;
                     const parentElement = svgElement.node().parentElement;
                     const baseWidth = parentElement.clientWidth;
                     
                     const margin = {
-                        top: 30, right: isMobile ? 20 : 180,
-                        bottom: isMobile ? 120 : 100,
-                        left: isMobile ? 20 : 180
+                        top: 30, right: isMobileSankey ? 20 : 180,
+                        bottom: isMobileSankey ? 120 : 100,
+                        left: isMobileSankey ? 20 : 180
                     };
 
-                    const baseHeight = isMobile ? 450 : 550;
+                    const baseHeight = isMobileSankey ? 450 : 550;
                     const width = Math.max(50, baseWidth - margin.left - margin.right);
                     const height = Math.max(50, baseHeight - margin.top - margin.bottom);
                     
                     svgElement.attr("width", baseWidth).attr("height", baseHeight);
                     const svg = svgElement.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
                     
-                    const nodeWidthConfig = { wide: isMobile ? 30 : 65, narrow: isMobile ? 30 : 60 };
-                    const sankey = d3.sankey().nodeWidth(nodeWidthConfig.wide).nodePadding(isMobile ? 15 : 30).nodeAlign(d3.sankeyJustify).extent([[1, 1], [width - 1, height - 1]]);
+                    const nodeWidthConfig = { wide: isMobileSankey ? 30 : 65, narrow: isMobileSankey ? 30 : 60 };
+                    const sankey = d3.sankey().nodeWidth(nodeWidthConfig.wide).nodePadding(isMobileSankey ? 15 : 30).nodeAlign(d3.sankeyJustify).extent([[1, 1], [width - 1, height - 1]]);
                     const {nodes: graphNodes, links: graphLinks} = sankey({ nodes: nodes.map(d => Object.assign({}, d)), links: links.map(d => Object.assign({}, d)) });
 
                     const linkGroup = svg.append("g").attr("class", "links-group");
@@ -916,14 +887,14 @@
                     const node = svg.append("g").attr("class", "nodes").selectAll(".sankey-node").data(graphNodes).enter().append("g").attr("transform", d => `translate(${d.x0},${d.y0})`);
                     node.append("rect").attr("class", "node-rect-main").attr("height", d => Math.max(1, d.y1 - d.y0)).attr("width", d => d.x1 - d.x0).attr("fill", d => (legendData.find(item => item.columnId === d.column) || {}).color || "#ccc" ).attr("stroke", d => d3.color((legendData.find(item => item.columnId === d.column) || {}).color || "#ccc").darker(0.5));
 
-                    if (!isMobile) {
+                    if (!isMobileSankey) {
                         node.append("text").attr("class", "node-name-label").attr("x", d => (d.x0 < width / 2) ? (d.x1 - d.x0 + 8) : -8).attr("y", d => (d.y1 - d.y0) / 2).attr("dy", "0.35em").attr("text-anchor", d => (d.x0 < width / 2) ? "start" : "end").text(d => d.column === 1 ? d.name : "");
                     }
 
-                    node.append("text").attr("class", "node-value-label").style("font-size", isMobile ? "10px" : "13px").attr("x", d => (d.x1 - d.x0) / 2).attr("y", d => (d.y1 - d.y0) / 2).attr("dy", "0.35em").text(d => `$${Math.max(d3.sum(d.sourceLinks, l => l.value), d3.sum(d.targetLinks, l => l.value)).toLocaleString('es-ES')} MM`);
+                    node.append("text").attr("class", "node-value-label").style("font-size", isMobileSankey ? "10px" : "13px").attr("x", d => (d.x1 - d.x0) / 2).attr("y", d => (d.y1 - d.y0) / 2).attr("dy", "0.35em").text(d => `$${Math.max(d3.sum(d.sourceLinks, l => l.value), d3.sum(d.targetLinks, l => l.value)).toLocaleString('es-ES')} MM`);
 
                     const legendGroup = svg.append("g").attr("class", "legend");
-                    if (isMobile) {
+                    if (isMobileSankey) {
                         legendGroup.attr("transform", `translate(0, ${height + 40})`);
                         const legendItem = legendGroup.selectAll(".legend-item").data(legendData).enter().append("g").attr("class", "legend-item").attr("transform", (d, i) => `translate(0, ${i * 25})`);
                         legendItem.append("rect").attr("x", 0).attr("y", -9).attr("width", 18).attr("height", 18).style("fill", d => d.color).attr("rx", 3).attr("ry", 3);
