@@ -775,7 +775,7 @@
                     scrollTrigger: {
                         trigger: ".sequence-container",
                         start: "top top",
-                        end: "+=150%", // Duración más larga para escritorio
+                        end: "+=150%",
                         scrub: 1.5,
                         pin: ".sticky-element",
                     }
@@ -783,12 +783,6 @@
                 tl_desktop.to(".knockout-text-layer", { scale: 15, ease: "none" }, 0)
                   .from(".background-image", { scale: 1.2, ease: "none" }, 0)
                   .to(".knockout-text-layer", { opacity: 0, ease: "power1.in" }, ">-0.4");
-            });
-
-            mm.add("(max-width: 768px)", () => {
-                // --- Configuración para Móvil (Sin animación de Pin/Scrub) ---
-                // No se crea ninguna animación de ScrollTrigger aquí para evitar el problema del espacio.
-                // La sección se comportará como un bloque estático de 100vh.
             });
             
             // --- LÓGICA DE LA NUEVA GALERÍA CON AUTOPLAY ---
