@@ -198,7 +198,8 @@
 
         /* ----- Contenido Principal y Secciones ----- */
         main { 
-            /* El padding-top es manejado por el scroll trigger ahora */
+            position: relative;
+            z-index: 1;
         }
         h1, h2, h3, h4, h5, h6 { 
             font-family: var(--font-title); 
@@ -208,14 +209,12 @@
         
         .sequence-container { 
             position: relative;
+            /* Se elimina la altura fija para que GSAP la controle */
         }
         .sticky-element { 
-            position: sticky; 
-            top: 0; 
             height: 100vh; 
             width: 100%; 
             overflow: hidden; 
-            background-color: var(--color-background);
         }
         .sequence-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
         
@@ -586,13 +585,10 @@
 </head>
 <body id="page-top">
 
-<!-- Contenedor principal de la página -->
 <div class="page-wrapper">
-    <!-- Encabezado principal, fijo en la parte superior -->
     <header class="main-header">
         <div class="header-section left">
             <div class="header-controls">
-                <!-- Botón para abrir el menú lateral (hamburguesa) -->
                 <button class="menu-trigger" aria-label="Abrir menú">
                     <div class="hamburger-icon">
                         <div class="line line-1"></div>
@@ -600,7 +596,6 @@
                         <div class="line line-3"></div>
                     </div>
                 </button>
-                <!-- Icono de LinkedIn en el encabezado -->
                 <a href="https://www.linkedin.com/in/hansen-guzm%C3%A1n-hern%C3%A1ndez-b4185592/" target="_blank" rel="noopener noreferrer" class="linkedin-icon" aria-label="LinkedIn">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
                 </a>
@@ -615,21 +610,17 @@
            </a>
         </div>
     </header>
-    
-    <!-- Menú lateral desplegable -->
+
     <div class="menu-overlay">
-        <!-- Botón para cerrar el menú -->
         <button class="menu-close-btn" aria-label="Cerrar menú">
             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
         </button>
-        <!-- Menú lateral actualizado -->
         <ul class="overlay-nav">
             <li><a href="#page-top" class="menu-link">Inicio</a></li>
             <li><a href="#machine-learning" class="menu-link">Machine Learning</a></li>
             <li><a href="#evolucion" class="menu-link">Business intelligence</a></li>
             <li><a href="#galeria-bi" class="menu-link">GRÁFICOS</a></li>
         </ul>
-        <!-- Icono de LinkedIn en el pie del menú -->
         <div class="menu-footer-icon">
             <a href="https://www.linkedin.com/in/hansen-guzm%C3%A1n-hern%C3%A1ndez-b4185592/" target="_blank" rel="noopener noreferrer" class="linkedin-icon" aria-label="LinkedIn">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
@@ -637,14 +628,10 @@
         </div>
     </div>
 
-    <!-- Contenido principal de la página -->
     <main class="main-content">
-        <!-- Contenedor para la animación de scroll principal -->
         <div class="sequence-container">
             <div class="sticky-element">
-                <!-- Capa de fondo con imagen -->
                 <div class="sequence-layer background-image"></div>
-                <!-- Capa de texto que se recorta sobre el fondo -->
                 <div class="sequence-layer knockout-text-layer">
                     <div class="title-container">
                         <div class="top-row">
@@ -686,7 +673,6 @@
             </div>
         </section>
 
-        <!-- Sección de Business Intelligence rediseñada -->
         <section id="evolucion" class="outro-section">
             <h2 class="animated-gradient-text">Business intelligence (BI)</h2>
             
@@ -716,7 +702,6 @@
             
         </section>
         
-        <!-- Sección de características eliminada y reemplazada por la sección Sankey -->
         <section id="graficos" class="final-chart-section">
             <div class="chart-container">
                 <h2 class="chart-title-main">Actual Sales vs. Forecasted Sales</h2>
@@ -727,18 +712,20 @@
     
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Inicializa Lenis para un scroll suave
             const lenis = new Lenis();
-            function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+            function raf(time) {
+                lenis.raf(time);
+                requestAnimationFrame(raf);
+            }
             requestAnimationFrame(raf);
 
-            // Integra GSAP con Lenis
             gsap.registerPlugin(ScrollTrigger);
             lenis.on('scroll', ScrollTrigger.update);
-            gsap.ticker.add((time) => { lenis.raf(time * 1000) });
+            gsap.ticker.add((time) => {
+                lenis.raf(time * 1000);
+            });
             gsap.ticker.lagSmoothing(0);
 
-            // --- LÓGICA DEL MENÚ LATERAL ---
             const menuTrigger = document.querySelector('.menu-trigger');
             const menuOverlay = document.querySelector('.menu-overlay');
             const menuCloseBtn = document.querySelector('.menu-close-btn');
@@ -746,15 +733,21 @@
                 const isActive = document.body.classList.toggle('menu-is-open');
                 menuOverlay.classList.toggle('is-open');
                 menuTrigger.classList.toggle('is-active');
-                if (isActive) { lenis.stop(); } else { lenis.start(); }
+                if (isActive) {
+                    lenis.stop();
+                } else {
+                    lenis.start();
+                }
             }
             if (menuTrigger) menuTrigger.addEventListener('click', toggleMenu);
             if (menuCloseBtn) menuCloseBtn.addEventListener('click', toggleMenu);
+            
             document.querySelectorAll('.menu-link').forEach(link => {
                 link.addEventListener('click', (e) => {
                     e.preventDefault();
-                    if (menuOverlay.classList.contains('is-open')) { toggleMenu(); }
-                    
+                    if (menuOverlay.classList.contains('is-open')) {
+                        toggleMenu();
+                    }
                     setTimeout(() => { 
                         const targetId = link.getAttribute('href');
                         if (targetId === '#page-top') {
@@ -766,30 +759,43 @@
                 });
             });
 
-            // --- LÓGICA DEL ENLACE DEL ICONO SUPERIOR ---
             document.querySelector('.top-link').addEventListener('click', (e) => {
                 e.preventDefault();
                 lenis.scrollTo(0, { duration: 1.5, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
             });
 
-
-            // --- ANIMACIÓN DE SCROLL PRINCIPAL CON GSAP (AJUSTE PARA MÓVIL) ---
-            const isMobile = window.innerWidth <= 768;
-            const pinDuration = isMobile ? "+=60%" : "+=150%"; // Duración más corta en móvil
-
-            const sequenceTimeline = gsap.timeline({ 
-                scrollTrigger: { 
-                    trigger: ".sequence-container", 
-                    start: "top top", 
-                    end: pinDuration, 
-                    scrub: 1.5,
-                    pin: ".sticky-element"
-                } 
+            // --- ANIMACIÓN DE SCROLL PRINCIPAL CON GSAP (Lógica Responsiva) ---
+            gsap.matchMedia().add("(min-width: 769px)", () => {
+                // --- Configuración para Escritorio ---
+                const tl_desktop = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: ".sequence-container",
+                        start: "top top",
+                        end: "+=150%", // Duración más larga para escritorio
+                        scrub: 1.5,
+                        pin: ".sticky-element",
+                    }
+                });
+                tl_desktop.to(".knockout-text-layer", { scale: 15, ease: "none" }, 0)
+                  .from(".background-image", { scale: 1.2, ease: "none" }, 0)
+                  .to(".knockout-text-layer", { opacity: 0, ease: "power1.in" }, ">-0.4");
             });
 
-            sequenceTimeline.to(".knockout-text-layer", { scale: 15, ease: "none" }, 0);
-            sequenceTimeline.from(".background-image", { scale: 1.2, ease: "none" }, 0);
-            sequenceTimeline.to(".knockout-text-layer", { opacity: 0 }, ">-0.5");
+            gsap.matchMedia().add("(max-width: 768px)", () => {
+                // --- Configuración para Móvil ---
+                const tl_mobile = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: ".sequence-container",
+                        start: "top top",
+                        end: "+=50%", // Duración mucho más corta para móvil
+                        scrub: 1.5,
+                        pin: ".sticky-element",
+                    }
+                });
+                tl_mobile.to(".knockout-text-layer", { scale: 10, ease: "none" }, 0) // Escala reducida para móvil
+                  .from(".background-image", { scale: 1.2, ease: "none" }, 0)
+                  .to(".knockout-text-layer", { opacity: 0, ease: "power1.in" }, ">-0.4");
+            });
             
             // --- LÓGICA DE LA NUEVA GALERÍA CON AUTOPLAY ---
             const mainImage = document.getElementById('main-gallery-image');
@@ -800,9 +806,7 @@
             if (mainImage && thumbnails.length > 0) {
                 const showSlide = (index) => {
                     if (index >= thumbnails.length || index < 0) return;
-                    
                     currentIndex = index;
-                    
                     thumbnails.forEach(t => t.classList.remove('active'));
                     thumbnails[currentIndex].classList.add('active');
 
@@ -827,11 +831,11 @@
                 thumbnails.forEach((thumb, index) => {
                     thumb.addEventListener('click', function() {
                         showSlide(index);
-                        startSlideshow(); // Reset interval on manual click
+                        startSlideshow(); 
                     });
                 });
                 
-                startSlideshow(); // Start on page load
+                startSlideshow();
             }
             
             // --- SCRIPT DEL DIAGRAMA SANKEY RESPONSIVO CON D3.JS ---
@@ -840,7 +844,7 @@
                 const svgElement = d3.select("#alluvialChart");
 
                 function drawSankeyChart() {
-                    svgElement.selectAll("*").remove(); // Limpiar SVG anterior
+                    svgElement.selectAll("*").remove(); 
 
                     const legendData = [ { name: "Actual Sales", color: "#14b8a6", columnId: 0 }, { name: "Quarterly Forecast", color: "#5eead4", columnId: 1 }, { name: "Forecasted Sales", color: "#d946ef", columnId: 2 } ];
                     const nodes = []; const links = []; const quarterNames = ["1Q", "2Q", "3Q", "4Q"];
@@ -908,7 +912,6 @@
                 }
 
                 drawSankeyChart();
-                // Redibujar el gráfico si cambia el tamaño de la ventana
                 let resizeTimer;
                 window.addEventListener('resize', () => {
                     clearTimeout(resizeTimer);
@@ -916,14 +919,13 @@
                 });
             }
             
-            // Lógica para cerrar el menú al hacer clic fuera
             document.addEventListener('click', (event) => {
-                const isMenuOpen = menuOverlay.classList.contains('is-open');
-                const isClickInsideMenu = menuOverlay.contains(event.target);
-                const isClickOnTrigger = menuTrigger.contains(event.target);
-
-                if (isMenuOpen && !isClickInsideMenu && !isClickOnTrigger) {
-                    toggleMenu();
+                if (menuOverlay.classList.contains('is-open')) {
+                    const isClickInsideMenu = menuOverlay.contains(event.target);
+                    const isClickOnTrigger = menuTrigger.contains(event.target);
+                    if (!isClickInsideMenu && !isClickOnTrigger) {
+                        toggleMenu();
+                    }
                 }
             });
         });
