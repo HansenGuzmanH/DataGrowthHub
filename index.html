@@ -491,9 +491,9 @@
                 height: 100vh; 
             }
             .machine-learning-section {
-                padding-top: 8vh;
+                padding-top: 0; /* Espacio eliminado */
             }
-            /* ***** FIN CAMBIOS ***** */
+             /* ***** FIN CAMBIOS ***** */
             
             .ml-content-wrapper { flex-direction: column; gap: 2rem; }
             .knockout-text-layer { padding-top: 8vh; }
@@ -853,7 +853,7 @@
                     const linkGroup = svg.append("g").attr("class", "links-group");
                     linkGroup.selectAll(".sankey-link").data(graphLinks).enter().append("path").attr("class", "sankey-link").attr("d", d3.sankeyLinkHorizontal()).attr("stroke-width", d => Math.max(1.5, d.width));
                     
-                    const node = svg.append("g").attr("class", "nodes").selectAll(".sankey-node").data(graphNodes).enter().append("g").attr("class", "sankey-node").attr("transform", d => `translate(${d.x0},${d.y0})`);
+                    const node = svg.append("g").attr("class", "nodes").selectAll(".sankey-node").data(graphNodes).enter().append("g").attr("transform", d => `translate(${d.x0},${d.y0})`);
                     node.append("rect").attr("class", "node-rect-main").attr("height", d => Math.max(1, d.y1 - d.y0)).attr("width", d => d.x1 - d.x0).attr("fill", d => (legendData.find(item => item.columnId === d.column) || {}).color || "#ccc" ).attr("stroke", d => d3.color((legendData.find(item => item.columnId === d.column) || {}).color || "#ccc").darker(0.5));
 
                     if (!isMobile) {
