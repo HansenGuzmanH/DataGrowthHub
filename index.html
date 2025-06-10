@@ -198,7 +198,7 @@
 
         /* ----- Contenido Principal y Secciones ----- */
         main { 
-            /* Se elimina el padding top del header, ya que el sequence-container lo manejará */
+            /* El padding-top es manejado por el scroll trigger ahora */
         }
         h1, h2, h3, h4, h5, h6 { 
             font-family: var(--font-title); 
@@ -207,7 +207,7 @@
         }
         
         .sequence-container { 
-            height: 200vh;
+            /* Se elimina la altura fija para que el pin de GSAP la controle */
             position: relative;
         }
         .sticky-element { 
@@ -320,12 +320,11 @@
         }
 
         .scroll-down-arrow {
-            width: 24px;
-            height: 24px;
+            width: 35px;
+            height: 35px;
             color: white;
-            display: inline-block;
-            vertical-align: middle;
-            margin-left: 5px;
+            display: block;
+            margin: 20px auto 0;
             animation: bounce-arrow 2.5s infinite cubic-bezier(0.68, -0.55, 0.27, 1.55);
         }
 
@@ -547,31 +546,6 @@
             :root {
                 --header-height: 60px;
             }
-
-            /*
-            * =================================================================
-            * SOLUCIÓN AL ESPACIO EXCESIVO EN MÓVIL
-            * =================================================================
-            */
-
-            /*
-            * 1. Reducimos la altura del contenedor de la animación a 100vh.
-            * Esto elimina el "scroll muerto" en dispositivos móviles.
-            */
-            .sequence-container {
-                height: 100vh; 
-            }
-
-            /*
-            * 2. Ajustamos el padding de la siguiente sección para una transición suave.
-            * Eliminamos el gran espacio superior y dejamos uno más pequeño.
-            */
-            .machine-learning-section {
-                padding-top: 2rem;
-                padding-bottom: 2rem;
-            }
-            
-            /* === FIN DE LA SOLUCIÓN === */
             
             .ml-content-wrapper { flex-direction: column; gap: 2rem; }
             .knockout-text-layer { padding-top: calc(8vh + 30px); } /* Ajuste para header flotante */
@@ -701,8 +675,9 @@
                     <div class="subtitle-wrapper">
                         <p class="subtitle-text">
                             Desliza para conocer mas sobre el análisis de datos y un poco de mi trabajo o visita mi perfil de Linkedin haciendo 
-                            <a href="https://www.linkedin.com/in/hansen-guzm%C3%A1n-hern%C3%A1ndez-b4185592/" target="_blank" rel="noopener noreferrer">clic aquí<svg class="scroll-down-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M11,4H13V16L18.5,10.5L19.92,11.92L12,19.84L4.08,11.92L5.5,10.5L11,16V4Z"></path></svg></a>
+                            <a href="https://www.linkedin.com/in/hansen-guzm%C3%A1n-hern%C3%A1ndez-b4185592/" target="_blank" rel="noopener noreferrer">clic aquí</a>.
                         </p>
+                        <svg class="scroll-down-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M11,4H13V16L18.5,10.5L19.92,11.92L12,19.84L4.08,11.92L5.5,10.5L11,16V4Z"></path></svg>
                     </div>
                 </div>
             </div>
@@ -822,14 +797,12 @@
                 scrollTrigger: { 
                     trigger: ".sequence-container", 
                     start: "top top", 
-                    end: "bottom bottom", 
-                    scrub: 1.5 
+                    end: "+=150%", 
+                    scrub: 1.5,
+                    pin: ".sticky-element"
                 } 
             });
-            ScrollTrigger.create({ 
-                trigger: ".sequence-container", 
-                pin: ".sticky-element" 
-            });
+
             sequenceTimeline.to(".knockout-text-layer", { scale: 15, ease: "none" }, 0);
             sequenceTimeline.from(".background-image", { scale: 1.2, ease: "none" }, 0);
             sequenceTimeline.to(".knockout-text-layer", { opacity: 0 }, ">-0.5");
