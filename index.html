@@ -326,6 +326,7 @@
             display: block;
             margin: 20px auto 0;
             animation: bounce-arrow 2.5s infinite cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            cursor: pointer;
         }
 
         @keyframes bounce-arrow {
@@ -340,12 +341,21 @@
         }
         
         .machine-learning-section {
-            padding: 5vh 5%;
+            padding: 15vh 5%;
             background-color: var(--color-background);
             position: relative;
             z-index: 2;
         }
+        
+        .outro-section { 
+            padding: 15vh 5%;
+            text-align: center; 
+            background-color: var(--color-background); 
+            position: relative; 
+            z-index: 2; 
+        }
 
+        .outro-section h2,
         .machine-learning-section h2 {
             text-align: center;
             font-size: clamp(3rem, 8vw, 6rem); 
@@ -424,6 +434,7 @@
             border-radius: 15px;
             overflow: hidden;
             box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+            cursor: pointer;
         }
 
         .gallery-main-image img {
@@ -469,11 +480,11 @@
         .bi-text-container {
             font-family: var(--font-body);
             text-align: left;
-            max-width: 800px;
-            margin: 4rem auto 4rem auto;
+            max-width: 1000px;
+            margin: 0 auto 2rem auto; /* Reducido el margen inferior */
             color: #e0e0e0;
             line-height: 1.8;
-            padding: 0 4rem;
+            padding: 0 2rem;
         }
         
         .bi-text-container p {
@@ -487,18 +498,6 @@
         }
         .bi-text-container p strong {
             color: var(--color-secondary);
-        }
-        
-        .outro-section { 
-            padding: 8vh 5%;
-            text-align: center; 
-            background-color: var(--color-background); 
-            position: relative; 
-            z-index: 5; 
-        }
-        .outro-section h2 { 
-            font-size: clamp(2.5rem, 8vw, 6rem); 
-            margin-bottom: 3rem; 
         }
         
         .features-section { padding: 15vh 5%; background-color: #1a1f26; }
@@ -524,6 +523,47 @@
         .timeline-stage-item { display: flex; flex-direction: column; align-items: center; }
         .timeline-number-custom { width: 3rem; height: 3rem; background-color: #1a2035; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 1rem; color: #f0f0f0; margin-bottom: 0.5rem; font-family: var(--font-body); }
         .timeline-category-custom { font-family: var(--font-body); color: white; }
+
+        /* Estilos para el Lightbox de la Galería */
+        .image-modal-overlay {
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            display: none; /* Oculto por defecto */
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s;
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 85vh;
+            object-fit: contain;
+        }
+
+        .modal-close-btn {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        .modal-close-btn:hover {
+            color: #bbb;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
 
         /* Estilos para Responsividad en Móviles */
         @media (max-width: 768px) {
@@ -556,8 +596,8 @@
 
             .title-container h1 { font-size: 20vw; }
             .growth-arrow { width: 25vw; height: 20vw; }
-            .outro-section { padding: 5vh 5%; }
-            .outro-section h2 { font-size: clamp(2rem, 10vw, 3.5rem); }
+            .outro-section, .machine-learning-section { padding: 10vh 5%; }
+            .outro-section h2, .machine-learning-section h2 { font-size: clamp(2rem, 10vw, 3.5rem); }
 
             .features-section { padding: 10vh 5%; }
             .final-chart-section { padding: 8vh 2%; }
@@ -619,8 +659,8 @@
         </button>
         <ul class="overlay-nav">
             <li><a href="#page-top" class="menu-link">Inicio</a></li>
-            <li><a href="#machine-learning" class="menu-link">Machine Learning</a></li>
             <li><a href="#evolucion" class="menu-link">Business intelligence</a></li>
+            <li><a href="#machine-learning" class="menu-link">Machine Learning</a></li>
             <li><a href="#galeria-bi" class="menu-link">GRÁFICOS</a></li>
         </ul>
         <div class="menu-footer-icon">
@@ -646,34 +686,15 @@
                     </div>
                     <div class="subtitle-wrapper">
                         <p class="subtitle-text">
-                            Desliza para conocer mas sobre el análisis de datos y un poco de mi trabajo o visita mi perfil de Linkedin haciendo 
-                            <a href="https://www.linkedin.com/in/hansen-guzm%C3%A1n-hern%C3%A1ndez-b4185592/" target="_blank" rel="noopener noreferrer">clic aquí</a>.
+                           Desliza para conocer mas sobre el análisis de datos y un poco de mi trabajo
                         </p>
-                        <svg class="scroll-down-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M11,4H13V16L18.5,10.5L19.92,11.92L12,19.84L4.08,11.92L5.5,10.5L11,16V4Z"></path></svg>
+                        <a href="#evolucion" class="scroll-down-link" aria-label="Deslizar a Business Intelligence">
+                           <svg class="scroll-down-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M11,4H13V16L18.5,10.5L19.92,11.92L12,19.84L4.08,11.92L5.5,10.5L11,16V4Z"></path></svg>
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
-
-        <section id="machine-learning" class="machine-learning-section">
-            <h2 class="animated-gradient-text">Machine Learning</h2>
-             <div class="ml-content-wrapper">
-                <div class="ml-image">
-                    <img src="https://i.imgur.com/E2LaKrp.png" alt="Ilustración de Machine Learning con nodos y conexiones cerebrales." onerror="this.onerror=null;this.src='https://placehold.co/450x450/222831/eeeeee?text=Imagen+ML';">
-                </div>
-                <div class="ml-text">
-                    <p>El&nbsp;<strong>Machine Learning</strong>&nbsp;convierte los datos históricos y los resultados pasados de tu empresa en una guía para el futuro.</p>
-                    <p>Lo hace en dos pasos:</p>
-                    <ol>
-                        <li>Aprende las reglas ocultas de cómo funciona realmente tu negocio.</li>
-                        <li>Usa esas reglas para predecir lo que pasará y ayudarte a tomar mejores decisiones hoy.</li>
-                    </ol>
-                    <p><strong>Ejemplo:</strong><br>
-                    Precios dinámicos en una tienda online.<br>
-                    El sistema analiza el historial de ventas y&nbsp;<strong>aprende</strong>&nbsp;que un producto se vende más caro y rápido los viernes por la noche. El próximo viernes, el sistema automáticamente&nbsp;<strong>actúa</strong>&nbsp;y sube el precio, maximizando la ganancia de forma inteligente.</p>
-                </div>
-            </div>
-        </section>
 
         <section id="evolucion" class="outro-section">
             <h2 class="animated-gradient-text">Business intelligence (BI)</h2>
@@ -702,6 +723,35 @@
                 </div>
             </div>
             
+             <div class="subtitle-wrapper" style="margin: 5rem auto -5rem auto;">
+                <p class="subtitle-text" style="max-width: 500px; margin: 0 auto;">
+                    Conoce mas herramientas que ayudan a tu negocio a crecer con el análisis de datos
+                </p>
+                <a href="#machine-learning" class="scroll-down-link-2" aria-label="Deslizar a Machine Learning">
+                   <svg class="scroll-down-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M11,4H13V16L18.5,10.5L19.92,11.92L12,19.84L4.08,11.92L5.5,10.5L11,16V4Z"></path></svg>
+                </a>
+            </div>
+
+        </section>
+
+        <section id="machine-learning" class="machine-learning-section">
+            <h2 class="animated-gradient-text">Machine Learning</h2>
+             <div class="ml-content-wrapper">
+                <div class="ml-image">
+                    <img src="https://i.imgur.com/E2LaKrp.png" alt="Ilustración de Machine Learning con nodos y conexiones cerebrales." onerror="this.onerror=null;this.src='https://placehold.co/450x450/222831/eeeeee?text=Imagen+ML';">
+                </div>
+                <div class="ml-text">
+                    <p>El&nbsp;<strong>Machine Learning</strong>&nbsp;convierte los datos históricos y los resultados pasados de tu empresa en una guía para el futuro.</p>
+                    <p>Lo hace en dos pasos:</p>
+                    <ol>
+                        <li>Aprende las reglas ocultas de cómo funciona realmente tu negocio.</li>
+                        <li>Usa esas reglas para predecir lo que pasará y ayudarte a tomar mejores decisiones hoy.</li>
+                    </ol>
+                    <p><strong>Ejemplo:</strong><br>
+                    Precios dinámicos en una tienda online.<br>
+                    El sistema analiza el historial de ventas y&nbsp;<strong>aprende</strong>&nbsp;que un producto se vende más caro y rápido los viernes por la noche. El próximo viernes, el sistema automáticamente&nbsp;<strong>actúa</strong>&nbsp;y sube el precio, maximizando la ganancia de forma inteligente.</p>
+                </div>
+            </div>
         </section>
         
         <section id="graficos" class="final-chart-section">
@@ -711,6 +761,11 @@
             </div>
         </section>
     </main>
+
+    <div id="image-modal" class="image-modal-overlay">
+        <span class="modal-close-btn">&times;</span>
+        <img class="modal-content" id="modal-image" alt="Imagen ampliada de la galería">
+    </div>
     
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -785,9 +840,30 @@
                   .to(".knockout-text-layer", { opacity: 0, ease: "power1.in" }, ">-0.4");
             });
             
-            // --- LÓGICA DE LA NUEVA GALERÍA CON AUTOPLAY ---
+            // Lógica del enlace de la flecha para que funcione en todos los dispositivos
+            const scrollDownLink = document.querySelector('.scroll-down-link');
+            if(scrollDownLink) {
+                scrollDownLink.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    lenis.scrollTo('#evolucion', { offset: -20 });
+                });
+            }
+
+            const scrollDownLink2 = document.querySelector('.scroll-down-link-2');
+            if(scrollDownLink2) {
+                scrollDownLink2.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    lenis.scrollTo('#machine-learning', { offset: -20 });
+                });
+            }
+            
+            // --- LÓGICA DE LA GALERÍA ---
+            const mainImageContainer = document.querySelector('.gallery-main-image');
             const mainImage = document.getElementById('main-gallery-image');
             const thumbnails = document.querySelectorAll('.gallery-thumbnail');
+            const imageModal = document.getElementById('image-modal');
+            const modalImage = document.getElementById('modal-image');
+            const modalCloseBtn = document.querySelector('.modal-close-btn');
             let currentIndex = 0;
             let galleryInterval;
 
@@ -824,6 +900,28 @@
                 });
                 
                 startSlideshow();
+
+                // Lógica del Lightbox/Modal
+                if (imageModal && modalImage && modalCloseBtn) {
+                    const openModal = () => {
+                        modalImage.src = mainImage.src;
+                        imageModal.style.display = 'flex';
+                        lenis.stop();
+                    };
+
+                    const closeModal = () => {
+                        imageModal.style.display = 'none';
+                        lenis.start();
+                    };
+
+                    mainImageContainer.addEventListener('click', openModal);
+                    modalCloseBtn.addEventListener('click', closeModal);
+                    imageModal.addEventListener('click', (e) => {
+                        if (e.target === imageModal) {
+                            closeModal();
+                        }
+                    });
+                }
             }
             
             // --- SCRIPT DEL DIAGRAMA SANKEY RESPONSIVO CON D3.JS ---
