@@ -474,6 +474,16 @@
             :root {
                 --header-height: 60px;
             }
+
+            /* ***** INICIO CAMBIOS: Ajuste de espaciado en móvil ***** */
+            .sequence-container {
+                height: 150vh; /* Reducir la altura del contenedor de la animación en móvil */
+            }
+            .machine-learning-section {
+                padding-top: 5vh; /* Reduce el espacio sobre Machine Learning en móvil */
+            }
+            /* ***** FIN CAMBIOS ***** */
+
             .ml-content-wrapper { flex-direction: column; gap: 2rem; }
             .knockout-text-layer { padding-top: 8vh; }
             .logo { font-size: 1.2rem; }
@@ -490,10 +500,6 @@
             .growth-arrow { width: 25vw; height: 20vw; }
             .outro-section { padding: 5vh 5%; }
             .outro-section h2 { font-size: clamp(2rem, 10vw, 3.5rem); }
-            
-            .machine-learning-section {
-                padding: 2rem 5%; /* Reduce el espacio sobre Machine Learning en móvil */
-            }
 
             .features-section { padding: 10vh 5%; }
             .final-chart-section { padding: 8vh 2%; }
