@@ -43,36 +43,27 @@
 
         /* ----- Header y Menú Lateral (ACTUALIZADO) ----- */
         .main-header {
-            /* Efecto Flotante y Centrado */
             position: fixed;
             top: 15px;
             left: 50%;
             transform: translateX(-50%);
             width: 95%;
-            max-width: 1800px; /* Límite para pantallas muy grandes */
+            max-width: 1800px; 
             border-radius: var(--corner-radius);
-            
-            /* Efecto de Cristal o "Glassmorphism" */
             background-color: rgba(26, 29, 35, 0.6);
             backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px); /* Compatibilidad con Safari */
+            -webkit-backdrop-filter: blur(10px); 
             border: 1px solid var(--color-border);
-            
-            /* Estilos funcionales conservados */
             height: var(--header-height);
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 0 2.5%;
             z-index: 1000;
-            transition: top 0.3s ease, background-color 0.3s ease; /* Transición suave */
+            transition: top 0.3s ease, background-color 0.3s ease; 
         }
         
-        .header-section {
-            flex: 1;
-            display: flex;
-            align-items: center;
-        }
+        .header-section { flex: 1; display: flex; align-items: center; }
         .header-section.left { justify-content: flex-start; }
         .header-section.center { justify-content: center; }
         .header-section.right { justify-content: flex-end; }
@@ -95,19 +86,13 @@
             animation: gradient-flow 4s ease infinite;
         }
 
-
         @keyframes gradient-flow {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
 
-        .header-controls {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-        
+        .header-controls { display: flex; align-items: center; gap: 1rem; }
         .linkedin-icon { color: white; transition: color 0.3s ease, transform 0.3s ease; }
         .linkedin-icon:hover { color: var(--color-primary); transform: scale(1.1); }
         .linkedin-icon svg { width: 32px; height: 32px; }
@@ -119,21 +104,10 @@
             object-fit: contain;
             transition: transform 0.3s ease;
         }
-        .header-icon:hover {
-            transform: scale(1.1);
-        }
+        .header-icon:hover { transform: scale(1.1); }
 
-        .menu-trigger { 
-            background: none; 
-            border: none; 
-            cursor: pointer; 
-            z-index: 1002; 
-            padding: 10px;
-            transition: transform 0.3s ease;
-        }
-        .menu-trigger:hover {
-            transform: scale(1.1);
-        }
+        .menu-trigger { background: none; border: none; cursor: pointer; z-index: 1002; padding: 10px; transition: transform 0.3s ease; }
+        .menu-trigger:hover { transform: scale(1.1); }
 
         .hamburger-icon { width: 34px; height: 28px; display: flex; flex-direction: column; justify-content: space-between; }
         .line { width: 100%; height: 3px; background-color: white; transition: all 0.3s ease-in-out; }
@@ -157,14 +131,8 @@
         .menu-close-btn:hover { transform: rotate(90deg); color: var(--color-primary); }
         .menu-close-btn svg { width: 32px; height: 32px; }
         .overlay-nav {
-            list-style: none;
-            text-align: left;
-            padding-left: 10%;
-            width: 100%;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start; 
+            list-style: none; text-align: left; padding-left: 10%; width: 100%; flex-grow: 1;
+            display: flex; flex-direction: column; justify-content: flex-start; 
             padding-top: 20vh;
         }
         .overlay-nav li { margin: 1.2rem 0; transform: translateX(-20px); opacity: 0; transition: transform 0.4s ease, opacity 0.4s ease; }
@@ -174,73 +142,36 @@
         .menu-overlay.is-open .overlay-nav li:nth-child(3) { transition-delay: 0.25s; }
         .menu-overlay.is-open .overlay-nav li:nth-child(4) { transition-delay: 0.30s; }
         .overlay-nav a {
-            color: white;
-            text-decoration: none;
-            font-size: clamp(1.4rem, 3.5vw, 1.8rem);
-            font-family: var(--font-title);
-            font-weight: 700;
-            text-transform: uppercase;
-            transition: color 0.3s ease;
-            overflow-wrap: break-word;
+            color: white; text-decoration: none; font-size: clamp(1.4rem, 3.5vw, 1.8rem);
+            font-family: var(--font-title); font-weight: 700; text-transform: uppercase;
+            transition: color 0.3s ease; overflow-wrap: break-word;
         }
         .overlay-nav a:hover { color: var(--color-primary); }
         
-        .menu-footer-icon {
-            padding: 2rem 0;
-            align-self: center;
-            text-align: center;
-            width: 100%;
-        }
-        .menu-footer-icon .linkedin-icon svg {
-            width: 48px;
-            height: 48px;
-        }
+        .menu-footer-icon { padding: 2rem 0; align-self: center; text-align: center; width: 100%; }
+        .menu-footer-icon .linkedin-icon svg { width: 48px; height: 48px; }
 
         /* ----- Contenido Principal y Secciones ----- */
-        main { 
-            position: relative;
-            z-index: 1;
-        }
+        main { position: relative; z-index: 1; }
         h1, h2, h3, h4, h5, h6 { 
             font-family: var(--font-title); 
             text-transform: uppercase; 
             color: var(--color-text);
         }
         
-        .sequence-container { 
-            position: relative;
-            height: 100vh;
-        }
-
-        .sticky-element { 
-            height: 100%; 
-            width: 100%; 
-            overflow: hidden; 
-        }
-
+        .sequence-container { position: relative; height: 100vh; }
+        .sticky-element { height: 100%; width: 100%; overflow: hidden; }
         .sequence-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
         
         .background-image { 
             background: radial-gradient(ellipse at center, #393E46, #222831);
-            position: relative;
-            overflow: hidden; 
+            position: relative; overflow: hidden; 
         }
         
         .background-image::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: linear-gradient(
-                110deg, 
-                transparent 40%, 
-                rgba(255, 255, 255, 0.15) 50%, 
-                transparent 60%
-            );
-            background-size: 200% 100%;
-            background-repeat: no-repeat;
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: linear-gradient(110deg, transparent 40%, rgba(255, 255, 255, 0.15) 50%, transparent 60%);
+            background-size: 200% 100%; background-repeat: no-repeat;
             animation: shine-effect 5s infinite linear;
         }
 
@@ -250,255 +181,81 @@
         }
         
         .knockout-text-layer { 
-            background-color: black; 
-            mix-blend-mode: screen; 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: flex-start;
+            background-color: black; mix-blend-mode: screen; 
+            display: flex; flex-direction: column; justify-content: flex-start;
             align-items: center; 
-            padding-top: calc(var(--header-height) + 30px); /* Ajuste para el header flotante */
+            padding-top: calc(var(--header-height) + 30px);
         }
 
-        .title-container {
-            text-align: left;
-        }
-
-        .title-container .top-row {
-            display: flex;
-            align-items: flex-end;
-        }
-        
-        .title-container h1 {
-            font-size: 15vw;
-            line-height: 0.9;
-            color: white; 
-        }
-
-        .growth-arrow {
-            width: 30vw;
-            height: 20vw;
-            margin-left: 2vw;
-            opacity: 0.75;
-        }
-        .growth-arrow path {
-            stroke: #FF2E63;
-            stroke-width: 12;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-            fill: none;
-        }
-
-        .subtitle-wrapper {
-            margin-top: 3vh;
-            text-align: center;
-            width: 90%;
-            max-width: 600px;
-            color: rgba(255, 255, 255, 0.9);
-        }
-        
+        .title-container { text-align: left; }
+        .title-container .top-row { display: flex; align-items: flex-end; }
+        .title-container h1 { font-size: 15vw; line-height: 0.9; color: white; }
+        .growth-arrow { width: 30vw; height: 20vw; margin-left: 2vw; opacity: 0.75; }
+        .growth-arrow path { stroke: #FF2E63; stroke-width: 12; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+        .subtitle-wrapper { margin-top: 3vh; text-align: center; width: 90%; max-width: 600px; color: rgba(255, 255, 255, 0.9); }
         .subtitle-text {
-            font-family: var(--font-body);
-            font-size: clamp(1rem, 2.5vw, 1.2rem);
-            line-height: 1.7;
-            text-transform: none;
-            font-weight: 400;
+            font-family: var(--font-body); font-size: clamp(1rem, 2.5vw, 1.2rem);
+            line-height: 1.7; text-transform: none; font-weight: 400;
         }
-
         .subtitle-text a {
-            color: var(--color-primary);
-            font-weight: bold;
-            text-decoration: none;
+            color: var(--color-primary); font-weight: bold; text-decoration: none;
             background-image: linear-gradient(var(--color-primary), var(--color-primary));
-            background-size: 0% 2px;
-            background-repeat: no-repeat;
-            background-position: left bottom;
+            background-size: 0% 2px; background-repeat: no-repeat; background-position: left bottom;
             transition: background-size 0.3s ease;
         }
-
-        .subtitle-text a:hover {
-            background-size: 100% 2px;
-        }
+        .subtitle-text a:hover { background-size: 100% 2px; }
 
         .scroll-down-arrow {
-            width: 35px;
-            height: 35px;
-            color: white;
-            display: block;
-            margin: 20px auto 0;
-            animation: bounce-arrow 2.5s infinite cubic-bezier(0.68, -0.55, 0.27, 1.55);
-            cursor: pointer;
+            width: 35px; height: 35px; color: white; display: block; margin: 20px auto 0;
+            animation: bounce-arrow 2.5s infinite cubic-bezier(0.68, -0.55, 0.27, 1.55); cursor: pointer;
         }
 
         @keyframes bounce-arrow {
-            0%, 100% {
-                transform: translateY(0);
-                opacity: 0.8;
-            }
-            50% {
-                transform: translateY(8px);
-                opacity: 1;
-            }
+            0%, 100% { transform: translateY(0); opacity: 0.8; }
+            50% { transform: translateY(8px); opacity: 1; }
         }
         
-        .machine-learning-section {
-            padding: 15vh 5%;
-            background-color: var(--color-background);
-            position: relative;
-            z-index: 2;
+        .machine-learning-section { padding: 5vh 5% 15vh 5%; background-color: var(--color-background); position: relative; z-index: 2; }
+        .outro-section { padding: 15vh 5%; text-align: center; background-color: var(--color-background); position: relative; z-index: 2; }
+        .outro-section h2, .machine-learning-section h2 {
+            text-align: center; font-size: clamp(3rem, 8vw, 6rem); margin-bottom: 5rem; 
         }
+        .ml-content-wrapper { display: flex; align-items: center; justify-content: center; gap: 3rem; width: 90%; max-width: 1200px; margin: 0 auto; }
+        .ml-image { flex: 0.8; max-width: 450px; }
+        .ml-image img { width: 100%; height: auto; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .ml-text { flex: 2; text-align: left; font-family: var(--font-body); font-size: clamp(1.1rem, 1.5vw, 1.3rem); line-height: 1.8; color: #e0e0e0; }
+        .ml-text p { margin-bottom: 1em; }
+        .ml-text strong { color: var(--color-primary); font-weight: 700; }
+        .ml-text ol { padding-left: 25px; margin-bottom: 1em; }
+        .ml-text ol li { margin-bottom: 0.75em; }
         
-        .outro-section { 
-            padding: 15vh 5%;
-            text-align: center; 
-            background-color: var(--color-background); 
-            position: relative; 
-            z-index: 2; 
-        }
-
-        .outro-section h2,
-        .machine-learning-section h2 {
-            text-align: center;
-            font-size: clamp(3rem, 8vw, 6rem); 
-            margin-bottom: 5rem; 
-        }
-
-        .ml-content-wrapper {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 3rem;
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .ml-image {
-            flex: 0.8;
-            max-width: 450px;
-        }
-        .ml-image img {
-            width: 100%;
-            height: auto;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-        .ml-text {
-            flex: 2;
-            text-align: left;
-            font-family: var(--font-body);
-            font-size: clamp(1.1rem, 1.5vw, 1.3rem);
-            line-height: 1.8;
-            color: #e0e0e0;
-        }
-        .ml-text p {
-            margin-bottom: 1em;
-        }
-        .ml-text strong {
-            color: var(--color-primary);
-            font-weight: 700;
-        }
-        .ml-text ol {
-            padding-left: 25px;
-            margin-bottom: 1em;
-        }
-        .ml-text ol li {
-            margin-bottom: 0.75em;
-        }
-        
-        .gallery-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        .gallery-header {
-            max-width: 900px;
-            margin: 0 auto 2rem auto;
-            padding: 0 2rem;
-            text-align: center;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            padding-top: 3rem;
-        }
-        .gallery-header p {
-            font-family: var(--font-body);
-            font-size: 1.1rem;
-            color: #b0b0b0;
-            line-height: 1.7;
-            text-transform: none;
-        }
+        .gallery-container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+        .gallery-header { max-width: 900px; margin: 0 auto 2rem auto; padding: 0 2rem; text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 3rem; }
+        .gallery-header p { font-family: var(--font-body); font-size: 1.1rem; color: #b0b0b0; line-height: 1.7; text-transform: none; }
         
         .gallery-main-image {
-            width: 100%;
-            height: 600px;
-            margin-bottom: 1rem;
-            background-color: #2a3038;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
-            cursor: pointer;
+            width: 100%; height: 600px; margin-bottom: 1rem; background-color: #2a3038;
+            border-radius: 15px; overflow: hidden; box-shadow: 0 15px 40px rgba(0,0,0,0.6); cursor: pointer;
         }
-
-        .gallery-main-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            transition: opacity 0.4s ease-in-out;
-        }
-
-        .gallery-thumbnails {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-            gap: 1rem;
-        }
-
+        .gallery-main-image img { width: 100%; height: 100%; object-fit: contain; transition: opacity 0.4s ease-in-out; }
+        .gallery-thumbnails { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 1rem; }
         .gallery-thumbnail {
-            width: 100%;
-            aspect-ratio: 16 / 10;
-            border-radius: 8px;
-            cursor: pointer;
-            overflow: hidden;
-            border: 3px solid transparent;
-            transition: border-color 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
-            opacity: 0.6;
+            width: 100%; aspect-ratio: 16 / 10; border-radius: 8px; cursor: pointer; overflow: hidden;
+            border: 3px solid transparent; transition: border-color 0.3s ease, transform 0.3s ease, opacity 0.3s ease; opacity: 0.6;
         }
-        
-        .gallery-thumbnail:hover {
-            transform: scale(1.05);
-            opacity: 1;
-        }
-
-        .gallery-thumbnail.active {
-            border-color: var(--color-primary);
-            opacity: 1;
-        }
-
-        .gallery-thumbnail img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+        .gallery-thumbnail:hover { transform: scale(1.05); opacity: 1; }
+        .gallery-thumbnail.active { border-color: var(--color-primary); opacity: 1; }
+        .gallery-thumbnail img { width: 100%; height: 100%; object-fit: cover; }
         
         .bi-text-container {
-            font-family: var(--font-body);
-            text-align: left;
-            max-width: 1000px;
-            margin: 0 auto 2rem auto; /* Reducido el margen inferior */
-            color: #e0e0e0;
-            line-height: 1.8;
-            padding: 0 2rem;
+            font-family: var(--font-body); text-align: left; max-width: 1000px; margin: 0 auto 2rem auto; 
+            color: #e0e0e0; line-height: 1.8; padding: 0 2rem;
         }
-        
         .bi-text-container p {
-            font-family: var(--font-body);
-            font-weight: 400;
-            font-size: 1.15rem;
-            color: #e0e0e0;
-            line-height: 1.9;
-            margin-bottom: 1.5rem;
-            text-transform: none;
+            font-family: var(--font-body); font-weight: 400; font-size: 1.15rem; color: #e0e0e0;
+            line-height: 1.9; margin-bottom: 1.5rem; text-transform: none;
         }
-        .bi-text-container p strong {
-            color: var(--color-secondary);
-        }
+        .bi-text-container p strong { color: var(--color-secondary); }
         
         .features-section { padding: 15vh 5%; background-color: #1a1f26; }
         .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; max-width: 1800px; margin: 0 auto; }
@@ -508,119 +265,229 @@
         .feature-card h3 { position: absolute; bottom: 0; left: 0; width: 100%; padding: 1.5rem; font-size: clamp(1.2rem, 3vw, 1.8rem); text-align: left; color: white; background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%); z-index: 2; transition: color 0.3s ease; }
         .feature-card:hover h3 { color: var(--color-primary); }
 
-        .final-chart-section { padding: 10vh 2%; background-color: #12161a; font-family: var(--font-body); }
-        .final-chart-section .chart-container, .final-chart-section .main-content-wrapper { background-color: transparent; padding: 20px; border-radius: 10px; width: 95%; max-width: 1500px; box-sizing: border-box; margin: 0 auto 5rem auto; }
-        .final-chart-section svg { background-color: transparent; display: block; margin: auto; }
-        .sankey-link { fill: none; stroke: rgba(238, 238, 238, 0.4); stroke-opacity: 0.6; }
-        .sankey-link:hover { stroke-opacity: 1; }
-        .sankey-node rect.node-rect-main { stroke-width: 0.5px; shape-rendering: crispEdges; rx: 4; ry: 4; }
-        .node-name-label { font-size: 15px; fill: #FFFFFF; font-weight: bold; }
-        .node-value-label { font-size: 13px; font-weight: bold; text-anchor: middle; pointer-events: none; fill: white; }
-        .chart-title-main { text-align: center; font-size: 2.5em; margin-bottom: 25px; }
-        .legend-item text { font-size: 16px; font-weight: bold; fill: #FFFFFF; dominant-baseline: middle; }
-        .main-content-wrapper { width: 100%; max-width: 100%; margin: 0 auto; overflow-x: auto; position: relative; }
-        .timeline-container-custom { display: grid; grid-template-columns: repeat(10, minmax(65px, auto)); column-gap: 18px; position: relative; padding: 50px 0; margin: 0 auto; justify-content: center; }
-        .timeline-stage-item { display: flex; flex-direction: column; align-items: center; }
-        .timeline-number-custom { width: 3rem; height: 3rem; background-color: #1a2035; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 1rem; color: #f0f0f0; margin-bottom: 0.5rem; font-family: var(--font-body); }
-        .timeline-category-custom { font-family: var(--font-body); color: white; }
-
         /* Estilos para el Lightbox de la Galería */
         .image-modal-overlay {
-            position: fixed;
-            z-index: 2000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.9);
-            display: none; /* Oculto por defecto */
-            justify-content: center;
-            align-items: center;
+            position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.9); display: none; justify-content: center; align-items: center;
             animation: fadeIn 0.3s;
         }
+        .modal-content { max-width: 90%; max-height: 85vh; object-fit: contain; }
+        .modal-close-btn { position: absolute; top: 20px; right: 35px; color: #f1f1f1; font-size: 40px; font-weight: bold; cursor: pointer; transition: color 0.3s; }
+        .modal-close-btn:hover { color: #bbb; }
 
-        .modal-content {
-            max-width: 90%;
-            max-height: 85vh;
-            object-fit: contain;
-        }
-
-        .modal-close-btn {
-            position: absolute;
-            top: 20px;
-            right: 35px;
-            color: #f1f1f1;
-            font-size: 40px;
-            font-weight: bold;
+        /* Estilos para los botones de navegación del modal */
+        .modal-prev, .modal-next {
             cursor: pointer;
-            transition: color 0.3s;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            padding: 16px;
+            margin-top: -50px; /* Centra verticalmente */
+            color: white;
+            font-weight: bold;
+            font-size: 28px;
+            transition: 0.3s ease;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+            -webkit-user-select: none;
         }
-        .modal-close-btn:hover {
-            color: #bbb;
-        }
+        .modal-prev { left: 0; border-radius: 3px 0 0 3px; }
+        .modal-next { right: 0; border-radius: 3px 0 0 3px; }
+        .modal-prev:hover, .modal-next:hover { background-color: rgba(255,255,255,0.2); }
+
 
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
         }
 
+        /* ----- ESTILOS INSERTADOS DEL PRIMER HTML ----- */
+        .chart-container {
+            background-color: transparent;
+            padding: 20px;
+            border-radius: 10px;
+            width: 95%; 
+            max-width: 1500px; 
+            box-sizing: border-box;
+            margin: 4rem auto; /* Margen añadido para separar del carrusel */
+        }
+        #alluvialChart_insertado, #alluvialChart {
+            background-color: transparent;
+            display: block;
+            margin: auto;
+        }
+        .sankey-link {
+            fill: none;
+            stroke: #EEEEEE; 
+            stroke-opacity: 0.8; 
+        }
+        .sankey-link:hover { stroke-opacity: 1; }
+        .animated-border-line { fill: none; stroke-width: 2.5px; stroke-linecap: round; }
+        .sankey-node rect.node-rect-main { stroke-width: 0.5px; shape-rendering: crispEdges; rx: 4; ry: 4; }
+        .liquid-fill-path { opacity: 1.0; }
+        .node-name-label {
+            font-size: 15px; 
+            fill: #f0f0f0; /* Cambiado a color de texto principal */
+            font-weight: bold; 
+            stroke-linecap: butt;
+            stroke-linejoin: miter;
+        }
+        .node-value-label { font-size: 13px; font-weight: bold; text-anchor: middle; pointer-events: none; fill: #FFFFFF; }
+        .link-label { font-size: 12px; fill: #ccc; text-anchor: middle; pointer-events: none; }
+        .chart-title-main { text-align: center; font-size: clamp(1.8rem, 5vw, 2.5em); margin-bottom: 25px; color: var(--color-text); }
+        .legend-item text { font-size: 16px; font-weight: bold; fill: #FFFFFF; dominant-baseline: middle; }
 
-        /* Estilos para Responsividad en Móviles */
+        /* Estilos para el segundo componente (Timeline) */
+        .process-inventory-h1 { /* Clase específica para evitar conflicto con h1 general */
+            font-size: clamp(1.8rem, 5vw, 2.5em);
+            line-height: 1.6rem;
+            font-weight: 700;
+            color: var(--color-text);
+            margin-bottom: 1rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+        .main-content-wrapper {
+            width: 100%; max-width: 100%; margin-left: auto; margin-right: auto;
+            overflow-x: auto; position: relative;
+        }
+        .timeline-container-custom {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(65px, auto));
+            column-gap: 18px; grid-row-gap: 120px; position: relative;
+            padding-top: 160px; padding-bottom: 220px; margin: 0 auto;
+            justify-content: center;
+        }
+        #runner-emoji {
+            position: absolute; left: 0; top: 0; font-size: 1.8rem; z-index: 6;
+            transition: left 0.3s ease-out, top 0.3s ease-out; pointer-events: none;
+        }
+        .timeline-stage-item { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; padding: 5px 0; position: relative; }
+        .timeline-stage-item[data-index="0"] { grid-column: 1; grid-row: 1; }
+        .timeline-stage-item[data-index="1"] { grid-column: 2; grid-row: 1; }
+        .timeline-stage-item[data-index="2"] { grid-column: 3; grid-row: 1; }
+        .timeline-stage-item[data-index="3"] { grid-column: 4; grid-row: 1; }
+        .timeline-stage-item[data-index="4"] { grid-column: 5; grid-row: 1; }
+        .timeline-stage-item[data-index="5"] { grid-column: 5; grid-row: 2; } 
+        .timeline-stage-item[data-index="6"] { grid-column: 4; grid-row: 2; }
+        .timeline-stage-item[data-index="7"] { grid-column: 3; grid-row: 2; }
+        .timeline-stage-item[data-index="8"] { grid-column: 2; grid-row: 2; }
+        .timeline-stage-item[data-index="9"] { grid-column: 1; grid-row: 2; } 
+        .timeline-visual-elements { display: flex; align-items: center; width: 50px; position: relative; }
+        .line-segment { height: 2px; background-color: #76b900; flex-grow: 1; }
+        .timeline-stage-item[data-index="0"] .line-before,
+        .timeline-stage-item[data-index="4"] .line-after, 
+        .timeline-stage-item[data-index="5"] .line-before, 
+        .timeline-stage-item[data-index="9"] .line-after { visibility: hidden; }
+        #connector-svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; overflow: visible; }
+        .dotted-line { fill: none; stroke: #76b900; stroke-width: 2; stroke-dasharray: 5,5; }
+        #bracket-connector-path { fill: none; stroke: #76b900; stroke-width: 2; stroke-dasharray: 5,5; }
+        #animated-tracer { stroke: #4d7c00; stroke-width: 4; fill: none; stroke-linecap: round; }
+        .timeline-number-custom {
+            width: 3.2rem; height: 3.2rem;
+            background-image: linear-gradient(to bottom right, #1a2035, #101528);
+            border-radius: 9999px; display: flex; justify-content: center; align-items: center;
+            font-size: 1rem; font-weight: 600; color: #f0f0f0; flex-shrink: 0;
+            margin: 0; box-shadow: 0 1px 3px -1px rgba(0,0,0,0.1), 0 2px 3px 0 rgba(0,0,0,0.05);
+            position: relative; z-index: 1; transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            cursor: pointer;
+        }
+        .timeline-number-custom:hover { transform: scale(1.1); box-shadow: 0 4px 8px -2px rgba(118,185,0,0.4), 0 3px 6px -2px rgba(118,185,0,0.3); }
+        .timeline-category-custom {
+            font-size: 0.8rem; color: #ffffff; font-weight: 600; line-height: 1.2;
+            margin-top: 0.4rem; text-align: center; width: auto; min-width: 40px;
+            white-space: nowrap; overflow: visible; 
+        }
+        .timeline-stage-item.active .timeline-number-custom {
+            background-image: linear-gradient(to bottom right, #8ae000, #76b900);
+            box-shadow: 0 3px 6px -1px rgba(118,185,0,0.4), 0 1px 4px -2px rgba(118,185,0,0.3);
+        }
+        .timeline-stage-item.active .timeline-number-custom:hover { transform: scale(1.15); }
+        .timeline-stage-item.active .timeline-category-custom { color: #76b900; font-weight: 700; }
+        .stats-popup {
+            position: absolute; background-color: #ffffff; border: 1px solid #e0e0e0;
+            border-radius: 8px; box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+            padding: 10px 15px; z-index: 10; display: none; flex-direction: column;
+            align-items: stretch; opacity: 0;
+            transition: opacity 0.3s ease-in-out, top 0.3s ease-in-out, left 0.3s ease-in-out;
+            min-width: 140px; font-size: 0.75rem; color: #333;
+        }
+        .stats-title { font-weight: bold; font-size: 0.85rem; margin-bottom: 8px; color: #1a2035; text-align: center; border-bottom: 1px solid #f0f0f0; padding-bottom: 6px; } 
+        .stats-line { display: flex; justify-content: space-between; margin-bottom: 5px; align-items: center; }
+        .stats-line:last-child { margin-bottom: 0; }
+        .stats-line span:first-child { color: #555; font-weight: 500; }
+        .stats-value .sign { font-weight: bold; font-size: 1.1em; margin-right: 2px; color: #dc3545; }
+        .stats-value .sign.positive { color: #28a745; }
+        .stats-value .number { font-weight: 500; }
+        .arrow-indicator { display: inline-block; width: 0; height: 0; margin-left: 6px; vertical-align: middle; position: relative; top: -1px; }
+        .arrow-indicator.up { border-left: 5px solid transparent; border-right: 5px solid transparent; border-bottom: 8px solid #28a745; }
+        .arrow-indicator.down { border-left: 5px solid transparent; border-right: 5px solid transparent; border-top: 8px solid #dc3545; }
+        .navigation-controls-wrapper { position: absolute; top: 260px; left: 50%; transform: translateX(-50%); width: auto; margin-top: 0; z-index: 7; }
+        .navigation-controls { display: flex; justify-content: center; align-items: center; gap: 1rem; color: #FFFFFF; }
+        .nav-control-group { display: flex; flex-direction: column; align-items: center; cursor: pointer; padding: 0.3rem; }
+        .nav-control-group:hover .nav-text, .nav-control-group:hover .nav-arrows { color: #e0e0e0; }
+        .nav-text { font-size: 0.9rem; font-weight: 600; transition: color 0.2s ease-in-out; margin-top: 0.1rem; }
+        .nav-arrows { font-size: 1.3rem; font-weight: 600; line-height: 1; transition: color 0.2s ease-in-out; }
+        
+        /* ----- Estilos para Responsividad ----- */
         @media (max-width: 768px) {
-            :root {
-                --header-height: 60px;
-            }
-            
+            :root { --header-height: 60px; }
             .ml-content-wrapper { flex-direction: column; gap: 2rem; }
-            .knockout-text-layer { padding-top: calc(8vh + 30px); } /* Ajuste para header flotante */
+            .knockout-text-layer { padding-top: calc(8vh + 30px); }
             .logo { font-size: 1.2rem; }
-            
-            .header-controls {
-                gap: 0.5rem;
-            }
-            .linkedin-icon {
-                display: flex;
-            }
-            .linkedin-icon svg {
-                width: 28px;
-                height: 28px;
-            }
-            .header-icon {
-                height: 40px;
-                width: auto;
-            }
-            .hamburger-icon {
-                width: 28px;
-                height: 22px;
-            }
-
+            .header-controls { gap: 0.5rem; }
+            .linkedin-icon { display: flex; }
+            .linkedin-icon svg { width: 28px; height: 28px; }
+            .header-icon { height: 40px; width: auto; }
+            .hamburger-icon { width: 28px; height: 22px; }
             .title-container h1 { font-size: 20vw; }
             .growth-arrow { width: 25vw; height: 20vw; }
             .outro-section, .machine-learning-section { padding: 10vh 5%; }
             .outro-section h2, .machine-learning-section h2 { font-size: clamp(2rem, 10vw, 3.5rem); }
-
             .features-section { padding: 10vh 5%; }
-            .final-chart-section { padding: 8vh 2%; }
             .chart-title-main { font-size: 1.8em; margin-bottom: 15px; }
             .legend-item text { font-size: 12px; }
             .main-content-wrapper { padding-bottom: 20px; }
-            .timeline-container-custom { grid-template-columns: repeat(10, minmax(60px, auto)); width: fit-content; padding: 30px 15px; }
-            
             .gallery-main-image { height: 400px; }
             .gallery-thumbnails { grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); }
             .bi-text-container { padding: 0 1.5rem; }
             .bi-text-container p { font-size: 1rem; }
+
+            /* Media queries para los gráficos insertados */
+            .timeline-container-custom {
+                padding-top: 120px; padding-bottom: 140px;
+                grid-template-columns: repeat(5, minmax(50px, auto)); 
+                column-gap: 12px; grid-row-gap: 100px; 
+            }
+            .navigation-controls-wrapper { top: 200px; }
+            #runner-emoji { font-size: 1.5rem; }
+            .timeline-visual-elements { width: 35px; } 
+            .timeline-number-custom { width: 2.6rem; height: 2.6rem; font-size: 0.9rem;} 
+            .timeline-category-custom { font-size: 0.7rem; min-width: 30px; margin-top: 0.2rem; } 
+            .stats-popup { font-size: 0.7rem; min-width: 120px; padding: 6px 10px; }
+            .stats-title { font-size: 0.75rem; }
+            .nav-text { font-size: 0.8rem; }
+            .nav-arrows { font-size: 1.1rem; }
         }
 
         @media (max-width: 480px) {
             .overlay-nav a { font-size: clamp(1.5rem, 8vw, 2.2rem); }
             :root { --menu-width: 80vw; --menu-max-width: 320px; }
             .gallery-main-image { height: 250px; }
-            .header-icon { 
-                height: 35px;
-                width: auto;
-            }
+            .header-icon { height: 35px; width: auto; }
             .linkedin-icon svg { width: 24px; height: 24px; }
+            
+            /* Media queries para los gráficos insertados */
+            .timeline-visual-elements { width: 25px; } 
+            .timeline-number-custom { width: 2.4rem; height: 2.4rem; font-size: 0.8rem;} 
+            .timeline-category-custom { font-size: 0.65rem; min-width: 25px; } 
+            .timeline-container-custom {
+                grid-template-columns: repeat(5, minmax(40px, auto)); 
+                column-gap: 8px; padding-top: 110px; padding-bottom: 120px;
+            }
+            .navigation-controls-wrapper { top: 185px; }
+            .nav-text { font-size: 0.75rem; }
+            .nav-arrows { font-size: 1rem; }
         }
 
     </style>
@@ -686,7 +553,7 @@
                     </div>
                     <div class="subtitle-wrapper">
                         <p class="subtitle-text">
-                           Desliza para conocer mas sobre el análisis de datos y un poco de mi trabajo
+                          Desliza para conocer mas sobre el análisis de datos y un poco de mi trabajo
                         </p>
                         <a href="#evolucion" class="scroll-down-link" aria-label="Deslizar a Business Intelligence">
                            <svg class="scroll-down-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M11,4H13V16L18.5,10.5L19.92,11.92L12,19.84L4.08,11.92L5.5,10.5L11,16V4Z"></path></svg>
@@ -722,51 +589,884 @@
                     <div class="gallery-thumbnail"><img src="https://i.imgur.com/O9sepwB.png" alt="Dashboard de datos 8" onerror="this.onerror=null;this.src='https://placehold.co/120x80/222831/eeeeee?text=Img+8';"></div>
                 </div>
             </div>
-            
-             <div class="subtitle-wrapper" style="margin: 5rem auto -5rem auto;">
-                <p class="subtitle-text" style="max-width: 500px; margin: 0 auto;">
-                    Conoce mas herramientas que ayudan a tu negocio a crecer con el análisis de datos
-                </p>
-                <a href="#machine-learning" class="scroll-down-link-2" aria-label="Deslizar a Machine Learning">
-                   <svg class="scroll-down-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M11,4H13V16L18.5,10.5L19.92,11.92L12,19.84L4.08,11.92L5.5,10.5L11,16V4Z"></path></svg>
-                </a>
-            </div>
 
+            <!-- ===== INICIO DEL CONTENIDO INSERTADO ===== -->
+            <div class="chart-container">
+                <h1 class="chart-title-main">Actual Sales vs. Forecasted Sales</h1>
+                <svg id="alluvialChart_insertado"></svg>
+            </div>
+        
+            <h1 class="process-inventory-h1">Procces Inventory</h1> 
+            <div class="main-content-wrapper">
+                <div class="timeline-container-custom">
+                    <div id="runner-emoji">🚀</div>
+                    <div id="stats-popup" class="stats-popup">
+                        <div class="stats-title">Stats YTD y MTD</div>
+                        <div class="stats-line"><span>YTD:</span><span class="stats-value" id="ytd-value"></span></div>
+                        <div class="stats-line"><span>MTD:</span><span class="stats-value" id="mtd-value"></span></div>
+                    </div>
+                    <svg id="connector-svg"> 
+                        <path id="dotted-line-row1" class="dotted-line" d=""></path>
+                        <path id="dotted-line-row2" class="dotted-line" d=""></path>
+                        <path id="bracket-connector-path" d=""></path> 
+                        <path id="animation-guide-path" style="display:none;"></path> 
+                        <path id="animated-tracer" style="display:none;"></path> 
+                    </svg>
+        
+                    <div class="timeline-stage-item active" data-index="0">
+                        <div class="timeline-visual-elements">
+                            <div class="line-segment line-before"></div><div class="timeline-number-custom">101</div><div class="line-segment line-after"></div>
+                        </div><div class="timeline-category-custom">Opened</div>
+                    </div>
+                    <div class="timeline-stage-item" data-index="1">
+                        <div class="timeline-visual-elements">
+                            <div class="line-segment line-before"></div><div class="timeline-number-custom">250</div><div class="line-segment line-after"></div>
+                        </div><div class="timeline-category-custom">Stage #1</div>
+                    </div>
+                    <div class="timeline-stage-item" data-index="2">
+                        <div class="timeline-visual-elements">
+                            <div class="line-segment line-before"></div><div class="timeline-number-custom">3</div><div class="line-segment line-after"></div>
+                        </div><div class="timeline-category-custom">Stage #2</div>
+                    </div>
+                    <div class="timeline-stage-item" data-index="3">
+                        <div class="timeline-visual-elements">
+                            <div class="line-segment line-before"></div><div class="timeline-number-custom">42</div><div class="line-segment line-after"></div>
+                        </div><div class="timeline-category-custom">Stage #3</div>
+                    </div>
+                    <div class="timeline-stage-item" data-index="4">
+                        <div class="timeline-visual-elements">
+                            <div class="line-segment line-before"></div><div class="timeline-number-custom">555</div><div class="line-segment line-after"></div>
+                        </div><div class="timeline-category-custom">Stage #4</div>
+                    </div>
+                    <div class="timeline-stage-item" data-index="5">
+                        <div class="timeline-visual-elements">
+                            <div class="line-segment line-before"></div><div class="timeline-number-custom">68</div><div class="line-segment line-after"></div>
+                        </div><div class="timeline-category-custom">Stage #5</div>
+                    </div>
+                    <div class="timeline-stage-item" data-index="6">
+                        <div class="timeline-visual-elements">
+                            <div class="line-segment line-before"></div><div class="timeline-number-custom">700</div><div class="line-segment line-after"></div>
+                        </div><div class="timeline-category-custom">Stage #6</div>
+                    </div>
+                    <div class="timeline-stage-item" data-index="7">
+                        <div class="timeline-visual-elements">
+                            <div class="line-segment line-before"></div><div class="timeline-number-custom">81</div><div class="line-segment line-after"></div>
+                        </div><div class="timeline-category-custom">Stage #7</div>
+                    </div>
+                    <div class="timeline-stage-item" data-index="8">
+                        <div class="timeline-visual-elements">
+                            <div class="line-segment line-before"></div><div class="timeline-number-custom">909</div><div class="line-segment line-after"></div>
+                        </div><div class="timeline-category-custom">Stage #8</div>
+                    </div>
+                    <div class="timeline-stage-item" data-index="9">
+                        <div class="timeline-visual-elements">
+                            <div class="line-segment line-before"></div><div class="timeline-number-custom">10</div><div class="line-segment line-after"></div>
+                        </div><div class="timeline-category-custom">Closed</div>
+                    </div>
+                    
+                    <div class="navigation-controls-wrapper">
+                        <div class="navigation-controls">
+                            <div class="nav-control-group" onclick="prevStep()">
+                                <span class="nav-arrows">&lt;&lt;</span>
+                                <span class="nav-text">Back</span>
+                            </div>
+                            <div class="nav-control-group" onclick="nextStep()">
+                                <span class="nav-arrows">&gt;&gt;</span>
+                                <span class="nav-text">Forward</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ===== FIN DEL CONTENIDO INSERTADO ===== -->
+            
+             <div class="subtitle-wrapper" style="margin: 3rem auto 0 auto;">
+                 <p class="subtitle-text" style="max-width: 500px; margin: 0 auto;">
+                     Conoce mas herramientas que ayudan a tu negocio a crecer con el análisis de datos
+                 </p>
+                 <a href="#machine-learning" class="scroll-down-link-2" aria-label="Deslizar a Machine Learning">
+                    <svg class="scroll-down-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M11,4H13V16L18.5,10.5L19.92,11.92L12,19.84L4.08,11.92L5.5,10.5L11,16V4Z"></path></svg>
+                 </a>
+             </div>
         </section>
 
         <section id="machine-learning" class="machine-learning-section">
             <h2 class="animated-gradient-text">Machine Learning</h2>
              <div class="ml-content-wrapper">
-                <div class="ml-image">
-                    <img src="https://i.imgur.com/E2LaKrp.png" alt="Ilustración de Machine Learning con nodos y conexiones cerebrales." onerror="this.onerror=null;this.src='https://placehold.co/450x450/222831/eeeeee?text=Imagen+ML';">
-                </div>
-                <div class="ml-text">
-                    <p>El&nbsp;<strong>Machine Learning</strong>&nbsp;convierte los datos históricos y los resultados pasados de tu empresa en una guía para el futuro.</p>
-                    <p>Lo hace en dos pasos:</p>
-                    <ol>
-                        <li>Aprende las reglas ocultas de cómo funciona realmente tu negocio.</li>
-                        <li>Usa esas reglas para predecir lo que pasará y ayudarte a tomar mejores decisiones hoy.</li>
-                    </ol>
-                    <p><strong>Ejemplo:</strong><br>
-                    Precios dinámicos en una tienda online.<br>
-                    El sistema analiza el historial de ventas y&nbsp;<strong>aprende</strong>&nbsp;que un producto se vende más caro y rápido los viernes por la noche. El próximo viernes, el sistema automáticamente&nbsp;<strong>actúa</strong>&nbsp;y sube el precio, maximizando la ganancia de forma inteligente.</p>
-                </div>
-            </div>
-        </section>
-        
-        <section id="graficos" class="final-chart-section">
-            <div class="chart-container">
-                <h2 class="chart-title-main">Actual Sales vs. Forecasted Sales</h2>
-                <svg id="alluvialChart"></svg>
-            </div>
+                 <div class="ml-image">
+                     <img src="https://i.imgur.com/E2LaKrp.png" alt="Ilustración de Machine Learning con nodos y conexiones cerebrales." onerror="this.onerror=null;this.src='https://placehold.co/450x450/222831/eeeeee?text=Imagen+ML';">
+                 </div>
+                 <div class="ml-text">
+                     <p>El&nbsp;<strong>Machine Learning</strong>&nbsp;convierte los datos históricos y los resultados pasados de tu empresa en una guía para el futuro.</p>
+                     <p>Lo hace en dos pasos:</p>
+                     <ol>
+                         <li>Aprende las reglas ocultas de cómo funciona realmente tu negocio.</li>
+                         <li>Usa esas reglas para predecir lo que pasará y ayudarte a tomar mejores decisiones hoy.</li>
+                     </ol>
+                     <p><strong>Ejemplo:</strong><br>
+                      Precios dinámicos en una tienda online.<br>
+                      El sistema analiza el historial de ventas y&nbsp;<strong>aprende</strong>&nbsp;que un producto se vende más caro y rápido los viernes por la noche. El próximo viernes, el sistema automáticamente&nbsp;<strong>actúa</strong>&nbsp;y sube el precio, maximizando la ganancia de forma inteligente.</p>
+                 </div>
+             </div>
         </section>
     </main>
 
     <div id="image-modal" class="image-modal-overlay">
         <span class="modal-close-btn">&times;</span>
+        <a class="modal-prev">&#10094;</a>
+        <a class="modal-next">&#10095;</a>
         <img class="modal-content" id="modal-image" alt="Imagen ampliada de la galería">
     </div>
     
+    <!-- SCRIPT DEL GRÁFICO INSERTADO -->
+    <script>
+        // --- Configuración del Gráfico SANKEY INSERTADO ---
+        (() => {
+            const margin = {top: 30, right: 180, bottom: 100, left: 180};
+            const baseWidth = 1400; 
+            const baseHeight = 550;
+
+            const nodeWidthConfig = { 
+                wide: 65, 
+                narrow: 60 
+            };
+
+            const svgElement = document.getElementById('alluvialChart_insertado');
+            if (!svgElement) return; // No ejecutar si el elemento no existe
+
+            const parentElement = svgElement.parentElement;
+
+            let svgTotalWidth;
+            if (parentElement && parentElement.clientWidth > 0) {
+                svgTotalWidth = Math.min(parentElement.clientWidth, baseWidth);
+            } else {
+                svgTotalWidth = baseWidth;
+            }
+            svgTotalWidth = Math.max(svgTotalWidth, margin.left + margin.right + 200); 
+
+            const width = Math.max(50, svgTotalWidth - margin.left - margin.right);
+            const height = Math.max(50, baseHeight - margin.top - margin.bottom);
+
+            function formatCurrency(value) {
+                if (isNaN(value)) return "";
+                return `$${value.toLocaleString('es-ES')} MM`;
+            }
+
+            const legendData = [
+                { name: "Actual Sales", color: "#00ADB5", columnId: 0, internalId: "VA" },
+                { name: "Quarterly Forecast", color: "#126E82", columnId: 1, internalId: "PT" },
+                { name: "Forecasted Sales", color: "#76b900", columnId: 2, internalId: "TVP" }
+            ];
+
+            const nodes = [];
+            const links = [];
+            const quarterNames = ["1Q", "2Q", "3Q", "4Q"]; 
+            const initialVentasActualesValue = 634; 
+
+            nodes.push({ name: "Ventas Actuales", id: "VA", column: 0 });
+            const ventasActualesNodeIndex = 0;
+
+            const quarterNodeIndices = [];
+            quarterNames.forEach((quarterName, i) => {
+                nodes.push({ name: quarterName, id: quarterName, column: 1 });
+                quarterNodeIndices.push(nodes.length - 1);
+            });
+
+            nodes.push({ name: "Total Pronosticado", id: "TVP", column: 2 });
+            const totalVentasPronosticadasNodeIndex = nodes.length - 1;
+
+            const ventasPorTrimestreBase = initialVentasActualesValue / quarterNames.length;
+
+            quarterNodeIndices.forEach((quarterNodeIndex, i) => {
+                const currentQuarterName = nodes[quarterNodeIndex].name;
+                const incrementoTrimestral = Math.floor(Math.random() * 60) + 15; 
+                const valorTrimestreConIncremento = Math.round(ventasPorTrimestreBase + incrementoTrimestral);
+
+                links.push({
+                    source: ventasActualesNodeIndex,
+                    target: quarterNodeIndex,
+                    value: Math.round(ventasPorTrimestreBase), 
+                    id: `link-va-${currentQuarterName.toLowerCase().replace(/\s+/g, '-')}`
+                });
+
+                links.push({
+                    source: quarterNodeIndex,
+                    target: totalVentasPronosticadasNodeIndex,
+                    value: valorTrimestreConIncremento, 
+                    id: `link-${currentQuarterName.toLowerCase().replace(/\s+/g, '-')}-tvp`
+                });
+            });
+
+            const svg = d3.select("#alluvialChart_insertado")
+                .attr("width", svgTotalWidth)
+                .attr("height", baseHeight)
+                .append("g")
+                .attr("transform", `translate(${margin.left},${margin.top})`);
+
+            const sankey = d3.sankey()
+                .nodeWidth(nodeWidthConfig.wide) 
+                .nodePadding(30)
+                .nodeAlign(d3.sankeyJustify)
+                .extent([[1, 1], [width - 1, height - 1]]);
+
+            const {nodes: graphNodes, links: graphLinks} = sankey({
+                nodes: nodes.map(d => Object.assign({}, d)),
+                links: links.map(d => Object.assign({}, d))
+            });
+
+            const linkGroup = svg.append("g")
+                .attr("class", "links-group");
+
+            const linkPaths = linkGroup.selectAll(".sankey-link")
+                .data(graphLinks)
+                .enter()
+                .append("path")
+                .attr("class", "sankey-link")
+                .attr("d", d3.sankeyLinkHorizontal())
+                .attr("stroke-width", d => Math.max(1.5, d.width))
+                .attr("id", d => d.id);
+
+            let maxInitialAnimationTime = 0;
+            linkPaths.each(function(d, i) { 
+                const path = d3.select(this);
+                const length = path.node().getTotalLength();
+                const delay = i * 80;
+                const duration = 1200;
+                maxInitialAnimationTime = Math.max(maxInitialAnimationTime, delay + duration);
+
+                path.attr("stroke-dasharray", length + " " + length)
+                    .attr("stroke-dashoffset", length)
+                    .transition().duration(duration).ease(d3.easeSinInOut)
+                    .attr("stroke-dashoffset", 0).delay(delay);
+            });
+
+            const node = svg.append("g")
+                .attr("class", "nodes")
+                .selectAll(".sankey-node")
+                .data(graphNodes)
+                .enter()
+                .append("g")
+                .attr("class", "sankey-node")
+                .attr("transform", d => `translate(${d.x0},${d.y0})`);
+
+            node.append("rect")
+                .attr("class", "node-rect-main")
+                .attr("height", d => Math.max(1, d.y1 - d.y0))
+                .attr("width", d => d.column === 1 ? nodeWidthConfig.narrow : (d.x1 - d.x0))
+                .attr("x", d => d.column === 1 ? ((d.x1 - d.x0) - nodeWidthConfig.narrow) / 2 : 0)
+                .attr("fill", d => {
+                    if (d.column === 2) return "rgba(230, 230, 230, 0.05)"; 
+                    const legendEntry = legendData.find(item => item.columnId === d.column);
+                    return legendEntry ? legendEntry.color : "#ccc";
+                })
+                .attr("stroke", d => {
+                    const legendEntry = legendData.find(item => item.columnId === d.column);
+                    return legendEntry ? d3.color(legendEntry.color).darker(0.5) : "#999";
+                });
+
+            node.filter(d => d.column === 2)
+                .each(function(dNodeData) { 
+                    const nodeGroup = d3.select(this); 
+                    const nodeFullHeight = Math.max(1, dNodeData.y1 - dNodeData.y0);
+                    const nodeFullWidth = dNodeData.x1 - dNodeData.x0; 
+                    const categoryColor = legendData.find(item => item.columnId === 2).color; 
+                    
+                    const targetFillRatio = 0.92; 
+                    const targetFillLevelHeight = nodeFullHeight * targetFillRatio; 
+                    const targetTopSurfaceBaseY = nodeFullHeight - targetFillLevelHeight; 
+
+                    const clipId = `clip-liquid-${dNodeData.id.replace(/\s+/g, '-')}`;
+                    nodeGroup.append("clipPath")
+                        .attr("id", clipId)
+                        .append("rect")
+                        .attr("x", 0) 
+                        .attr("y", 0) 
+                        .attr("width", nodeFullWidth)
+                        .attr("height", nodeFullHeight)
+                        .attr("rx", 3) 
+                        .attr("ry", 3);
+
+                    const liquidPath = nodeGroup.append("path")
+                        .attr("class", "liquid-fill-path")
+                        .attr("fill", categoryColor) 
+                        .attr("clip-path", `url(#${clipId})`);
+
+                    let wavePhase1 = Math.random() * 2 * Math.PI; 
+                    let wavePhase2 = Math.random() * 2 * Math.PI; 
+
+                    const waveAmplitude1 = Math.max(1.5, nodeFullHeight * 0.020); 
+                    const waveLength1 = nodeFullWidth / 0.7; 
+                    const waveSpeed1 = 0.010; 
+
+                    const waveAmplitude2 = Math.max(0.8, nodeFullHeight * 0.010); 
+                    const waveLength2 = nodeFullWidth / 1.3; 
+                    const waveSpeed2 = 0.018; 
+
+                    const bobbingAmplitude = Math.max(0.5, nodeFullHeight * 0.004); 
+                    const bobbingSpeed = 0.006; 
+                    let bobbingPhase = Math.random() * 2 * Math.PI;
+                    
+                    let currentFillHeight = 0; 
+                    let animationStartTime = null;
+                    const fillDuration = 3000; 
+
+                    function generateWavePath(currentSurfaceY, hPhase1, hPhase2, vPhase) {
+                        let path = `M 0 ${nodeFullHeight}`; 
+                        path += ` L ${nodeFullWidth} ${nodeFullHeight}`; 
+                        
+                        const surfaceYWithBobbing = currentSurfaceY + Math.sin(vPhase) * bobbingAmplitude;
+                        path += ` L ${nodeFullWidth} ${surfaceYWithBobbing}`; 
+
+                        for (let x = nodeFullWidth; x >= 0; x -= 3) { 
+                            const y1 = Math.sin((x / waveLength1) * 2 * Math.PI + hPhase1) * waveAmplitude1;
+                            const y2 = Math.sin((x / waveLength2) * 2 * Math.PI + hPhase2) * waveAmplitude2;
+                            const y = surfaceYWithBobbing + y1 + y2; 
+                            path += ` L ${x} ${y}`;
+                        }
+                        path += ` L 0 ${surfaceYWithBobbing}`; 
+                        path += " Z"; 
+                        return path;
+                    }
+
+                    function animateLiquidSurface(timestamp) {
+                        if (!animationStartTime) animationStartTime = timestamp;
+                        const elapsedTime = timestamp - animationStartTime;
+
+                        if (currentFillHeight < targetFillLevelHeight) {
+                            const progress = Math.min(1, elapsedTime / fillDuration);
+                            currentFillHeight = progress * targetFillLevelHeight;
+                        } else {
+                            currentFillHeight = targetFillLevelHeight; 
+                        }
+                        
+                        const currentTopSurfaceY = nodeFullHeight - currentFillHeight;
+
+                        wavePhase1 += waveSpeed1;
+                        wavePhase2 += waveSpeed2;
+                        bobbingPhase += bobbingSpeed;
+                        liquidPath.attr("d", generateWavePath(currentTopSurfaceY, wavePhase1, wavePhase2, bobbingPhase)); 
+                        
+                        requestAnimationFrame(animateLiquidSurface);
+                    }
+                    setTimeout(() => requestAnimationFrame(animateLiquidSurface), maxInitialAnimationTime + 700 + (Math.random() * 500)); 
+                });
+            
+            node.append("text")
+                .attr("class", "node-name-label")
+                .attr("x", d => (d.x0 < width / 2) ? (d.x1 - d.x0 + 8) : -8) 
+                .attr("y", d => (d.y1 - d.y0) / 2)
+                .attr("dy", "0.35em")
+                .attr("text-anchor", d => (d.x0 < width / 2) ? "start" : "end")
+                .text(d => d.column === 1 ? d.name : "")
+                .style("opacity", 0)
+                .transition().duration(600).delay(1200 + (graphLinks.length * 30))
+                .style("opacity", 1);
+
+            node.append("text")
+                .attr("class", "node-value-label")
+                .attr("x", d => { 
+                    const allocatedWidth = d.x1 - d.x0; 
+                    const visualWidth = d.column === 1 ? nodeWidthConfig.narrow : allocatedWidth;
+                    const rectXOffset = d.column === 1 ? (allocatedWidth - visualWidth) / 2 : 0;
+                    return rectXOffset + visualWidth / 2;
+                })
+                .attr("y", d => (d.y1 - d.y0) / 2)
+                .attr("dy", "0.35em")
+                .attr("fill", "#FFFFFF") 
+                .text(d => {
+                    const value = Math.max(d3.sum(d.sourceLinks, l => l.value), d3.sum(d.targetLinks, l => l.value));
+                    return value > 0 ? formatCurrency(value) : "";
+                })
+                .style("opacity", 0)
+                .transition().duration(600).delay(1500 + (graphLinks.length * 30))
+                .style("opacity", d => (d.y1 - d.y0) > 15 ? 1 : 0);
+
+            svg.append("g") 
+                .attr("class", "link-labels")
+                .selectAll(".link-label")
+                .data(graphLinks.filter(d => d.value > 0))
+                .enter()
+                .append("text")
+                .attr("class", "link-label")
+                .attr("x", d => d.source.x1 + (d.target.x0 - d.source.x1) / 2)
+                .attr("y", d => (d.y0 + d.y1) / 2)
+                .attr("dy", "0.35em")
+                .text(d => formatCurrency(d.value))
+                .style("opacity", 0)
+                .transition().duration(600).delay(1800 + (graphLinks.length * 30))
+                .style("opacity", d => d.width > 10 ? 0.7 : 0);
+
+            const legendGroup = svg.append("g")
+                .attr("class", "legend")
+                .attr("transform", `translate(${(width - (legendData.length * 200)) / 2 + 30 }, ${height + margin.bottom / 2 })`);
+
+            const legendItem = legendGroup.selectAll(".legend-item")
+                .data(legendData)
+                .enter()
+                .append("g")
+                .attr("class", "legend-item")
+                .attr("transform", (d, i) => `translate(${i * 210}, 0)`);
+
+            legendItem.append("rect")
+                .attr("x", 0).attr("y", -9).attr("width", 18).attr("height", 18)
+                .style("fill", d => d.color).attr("rx", 3).attr("ry", 3);
+
+            legendItem.append("text")
+                .attr("x", 24).attr("y", 0).text(d => d.name)
+                .style("opacity", 0)
+                .transition().duration(600).delay(800)
+                .style("opacity", 1);
+
+            function startSecondaryAnimations() {
+                const linksForOpacityWave = svg.selectAll(".sankey-link");
+                function flowOpacityRepeat(selection) {
+                    selection
+                        .transition("flow_opacity_dim") 
+                        .duration(1500) 
+                        .ease(d3.easeSinInOut)
+                        .attr("stroke-opacity", 0.35) 
+                        .transition("flow_opacity_brighten") 
+                        .duration(1500) 
+                        .ease(d3.easeSinInOut)
+                        .attr("stroke-opacity", 0.9) 
+                        .on("end", function() { d3.select(this).call(flowOpacityRepeat); }); 
+                }
+                linksForOpacityWave.call(flowOpacityRepeat);
+
+                linkGroup.selectAll(".sankey-link") 
+                    .each(function(linkData, i) {
+                        const originalPathElement = this;
+                        const originalPathD = d3.select(originalPathElement).attr("d");
+                        
+                        const targetNodeColumn = linkData.target.column;
+                        const legendEntry = legendData.find(item => item.columnId === targetNodeColumn);
+                        const lineColor = legendEntry ? legendEntry.color : "#888";
+
+                        const animatedLineStrokeWidth = 2.5;
+                        const mainLinkStrokeWidth = Math.max(1.5, linkData.width); 
+                        const verticalOffset = mainLinkStrokeWidth / 2 - animatedLineStrokeWidth / 2;
+
+                        const animatedLineGroup = linkGroup.append("g")
+                                .attr("transform", `translate(0, ${-verticalOffset})`);
+
+                        const animatedLine = animatedLineGroup.append("path")
+                            .datum(linkData) 
+                            .attr("class", "animated-border-line")
+                            .attr("d", originalPathD) 
+                            .attr("stroke", lineColor)
+                            .style("pointer-events", "none");
+
+                        const pathLength = animatedLine.node().getTotalLength();
+                        const dashLength = 30; 
+                        const gapLength = pathLength; 
+
+                        animatedLine.attr("stroke-dasharray", `${dashLength} ${gapLength}`);
+
+                        function repeatBorderAnimation() {
+                            animatedLine
+                                .attr("stroke-dashoffset", dashLength + gapLength) 
+                                .transition()
+                                .duration(2600) 
+                                .ease(d3.easeLinear)
+                                .attr("stroke-dashoffset", 0) 
+                                .on("end", repeatBorderAnimation);
+                        }
+                        setTimeout(repeatBorderAnimation, i * 200); 
+                    });
+            }
+            setTimeout(startSecondaryAnimations, maxInitialAnimationTime + 300);
+        })();
+    </script>
+    
+    <!-- SCRIPT DEL TIMELINE INSERTADO -->
+    <script>
+    (() => {
+        let currentStep = 0;
+        const timelineItems = document.querySelectorAll('.timeline-stage-item');
+        const runnerEmoji = document.getElementById('runner-emoji');
+        const timelineContainer = document.querySelector('.timeline-container-custom');
+        const statsPopup = document.getElementById('stats-popup');
+        const bracketConnectorPathEl = document.getElementById('bracket-connector-path'); 
+        const dottedLineRow1PathEl = document.getElementById('dotted-line-row1'); 
+        const dottedLineRow2PathEl = document.getElementById('dotted-line-row2'); 
+        const animationGuidePathEl = document.getElementById('animation-guide-path');
+        const animatedTracerEl = document.getElementById('animated-tracer');
+        const connectorSvg = document.getElementById('connector-svg'); 
+        let scrollTimeoutId = null;
+        let popupTimeoutId = null;
+        let currentStats = { ytd: null, mtd: null }; 
+
+        if (timelineItems.length === 0) return; // No ejecutar si los elementos no existen
+
+        const animationState = {
+            tracer: { progress: 0, direction: 1, pathLength: 0, speed: 1, element: animatedTracerEl, guidePathElement: animationGuidePathEl, segmentLength: 15 }
+        };
+        let animationFrameId = null;
+
+
+        function generateStatData() {
+            const value = Math.floor(Math.random() * 99) + 1;
+            const isPositive = Math.random() < 0.7;
+            return { value, isPositive };
+        }
+
+        function formatStat(statData) {
+            if (!statData) return ''; 
+            const signChar = statData.isPositive ? '+' : '-';
+            const arrowClass = statData.isPositive ? 'up' : 'down';
+            const signClass = statData.isPositive ? 'positive' : '';
+            return `<span class="sign ${signClass}">${signChar}</span> <span class="number">${statData.value}%</span> <span class="arrow-indicator ${arrowClass}"></span>`;
+        }
+        
+        function updateDottedLines() {
+            if (!dottedLineRow1PathEl || !dottedLineRow2PathEl || timelineItems.length < 5) { 
+                if(dottedLineRow1PathEl) dottedLineRow1PathEl.setAttribute('d', '');
+                if(dottedLineRow2PathEl) dottedLineRow2PathEl.setAttribute('d', '');
+                return ""; 
+            }
+
+            const containerRect = timelineContainer.getBoundingClientRect();
+            let d1 = "", d2 = "";
+
+            const circle0 = timelineItems[0].querySelector('.timeline-number-custom');
+            const circle4 = timelineItems[4].querySelector('.timeline-number-custom');
+            if (circle0 && circle4) {
+                const circle0Rect = circle0.getBoundingClientRect();
+                const circle4Rect = circle4.getBoundingClientRect();
+
+                const r1StartX = (circle0Rect.left - containerRect.left + timelineContainer.scrollLeft) + (circle0Rect.width / 2);
+                const r1StartY = (circle0Rect.top - containerRect.top + timelineContainer.scrollTop) + (circle0Rect.height / 2);
+                const r1EndX = (circle4Rect.left - containerRect.left + timelineContainer.scrollLeft) + (circle4Rect.width / 2);
+                d1 = `M ${r1StartX} ${r1StartY} L ${r1EndX} ${r1StartY}`;
+                dottedLineRow1PathEl.setAttribute('d', d1);
+            } else {
+                dottedLineRow1PathEl.setAttribute('d', '');
+            }
+
+            if (timelineItems.length >= 10) {
+                const circle9 = timelineItems[9].querySelector('.timeline-number-custom'); 
+                const circle5 = timelineItems[5].querySelector('.timeline-number-custom'); 
+                 if (circle9 && circle5) {
+                    const circle9Rect = circle9.getBoundingClientRect();
+                    const circle5Rect = circle5.getBoundingClientRect();
+
+                    const r2StartX = (circle9Rect.left - containerRect.left + timelineContainer.scrollLeft) + (circle9Rect.width / 2);
+                    const r2StartY = (circle9Rect.top - containerRect.top + timelineContainer.scrollTop) + (circle9Rect.height / 2);
+                    const r2EndX = (circle5Rect.left - containerRect.left + timelineContainer.scrollLeft) + (circle5Rect.width / 2);
+                    d2 = `M ${r2StartX} ${r2StartY} L ${r2EndX} ${r2StartY}`;
+                    dottedLineRow2PathEl.setAttribute('d', d2);
+                 } else {
+                      dottedLineRow2PathEl.setAttribute('d', '');
+                 }
+            } else {
+                 dottedLineRow2PathEl.setAttribute('d', '');
+            }
+            return {d1, d2}; 
+        }
+
+        function updateBracketConnectorPath() { 
+            if (!bracketConnectorPathEl || !connectorSvg || timelineItems.length < 6) {
+                if(bracketConnectorPathEl) bracketConnectorPathEl.setAttribute('d', '');
+                return ""; 
+            }
+            
+            const item4 = timelineItems[4]; 
+            const item5 = timelineItems[5]; 
+            if (!item4 || !item5) {
+                 if(bracketConnectorPathEl) bracketConnectorPathEl.setAttribute('d', '');
+                return "";
+            }
+
+            const circle4 = item4.querySelector('.timeline-number-custom');
+            const circle5 = item5.querySelector('.timeline-number-custom');
+            if (!circle4 || !circle5) {
+                if(bracketConnectorPathEl) bracketConnectorPathEl.setAttribute('d', '');
+                return "";
+            }
+
+            const containerRect = timelineContainer.getBoundingClientRect();
+            const circle4Rect = circle4.getBoundingClientRect();
+            const circle5Rect = circle5.getBoundingClientRect();
+            
+            const barExtension = 20; 
+
+            const p0x = (circle4Rect.left - containerRect.left + timelineContainer.scrollLeft) + (circle4Rect.width / 2);
+            const p0y = (circle4Rect.top - containerRect.top + timelineContainer.scrollTop) + (circle4Rect.height / 2);
+
+            const p3x = (circle5Rect.left - containerRect.left + timelineContainer.scrollLeft) + (circle5Rect.width / 2);
+            const p3y = (circle5Rect.top - containerRect.top + timelineContainer.scrollTop) + (circle5Rect.height / 2);
+            
+            const bracketSpineX = Math.max(p0x, p3x) + (circle4Rect.width / 2) + barExtension;
+
+            const pathD = `M ${p0x} ${p0y} L ${bracketSpineX} ${p0y} L ${bracketSpineX} ${p3y} L ${p3x} ${p3y}`;
+            bracketConnectorPathEl.setAttribute('d', pathD);
+            return pathD; 
+        }
+
+        function updateAnimationGuidePath() {
+            const paths = updateDottedLines();
+            const bracketPath = updateBracketConnectorPath();
+
+            let combinedD = "";
+            if (paths.d1) combinedD += paths.d1;
+            
+            if (bracketPath) {
+                const bracketPoints = bracketPath.split(/[ML]/).filter(s => s.trim() !== '').map(pair => pair.trim().split(' '));
+                if (bracketPoints.length === 4) {
+                    if (combinedD) { 
+                        combinedD += ` L ${bracketPoints[1][0]} ${bracketPoints[1][1]}`;
+                        combinedD += ` L ${bracketPoints[2][0]} ${bracketPoints[2][1]}`;
+                        combinedD += ` L ${bracketPoints[3][0]} ${bracketPoints[3][1]}`;
+                    } else {
+                        combinedD = bracketPath;
+                    }
+                }
+            }
+
+            if (paths.d2) { 
+                const d2_parts = paths.d2.split(' ');
+                const d2_for_animation = `M ${d2_parts[4]} ${d2_parts[5]} L ${d2_parts[1]} ${d2_parts[2]}`;
+                if (combinedD) combinedD += " " + d2_for_animation.substring(1);
+                else combinedD += d2_for_animation;
+            }
+            
+            if (animationGuidePathEl) {
+                animationGuidePathEl.setAttribute('d', combinedD);
+                if (combinedD) {
+                    animationState.tracer.pathLength = animationGuidePathEl.getTotalLength();
+                } else {
+                    animationState.tracer.pathLength = 0;
+                }
+                animationState.tracer.progress = 0; 
+                animationState.tracer.direction = 1;
+            }
+        }
+
+        function animateTracerLoop() {
+            const state = animationState.tracer;
+            if (state.pathLength > 0 && state.element && state.guidePathElement && state.guidePathElement.getAttribute('d')) {
+                state.progress += state.speed * state.direction;
+
+                if (state.progress >= state.pathLength) {
+                    state.progress = state.pathLength;
+                    state.direction = -1;
+                } else if (state.progress <= 0) {
+                    state.progress = 0;
+                    state.direction = 1;
+                }
+                
+                try {
+                    const currentPos = state.guidePathElement.getPointAtLength(state.progress);
+                    let nextProgress = state.progress + (state.segmentLength * state.direction);
+                    if (nextProgress > state.pathLength) nextProgress = state.pathLength;
+                    if (nextProgress < 0) nextProgress = 0;
+                    
+                    const nextPos = state.guidePathElement.getPointAtLength(nextProgress);
+                    
+                    state.element.setAttribute('d', `M ${currentPos.x} ${currentPos.y} L ${nextPos.x} ${nextPos.y}`);
+                    state.element.style.display = 'block';
+
+                } catch(e) {
+                    state.element.style.display = 'none';
+                }
+            } else if (state.element) {
+                state.element.style.display = 'none';
+            }
+            animationFrameId = requestAnimationFrame(animateTracerLoop);
+        }
+
+
+        function positionEmoji() { 
+            const activeItem = timelineItems[currentStep];
+            if (!activeItem) return;
+
+            const activeCircle = activeItem.querySelector('.timeline-number-custom');
+            const categoryText = activeItem.querySelector('.timeline-category-custom');
+            if (!activeCircle || !categoryText || !runnerEmoji || !timelineContainer || !statsPopup) return;
+            
+            const isMobileView = window.innerWidth <= 767;
+            const isBottomRow = currentStep >= 5;
+            runnerEmoji.offsetHeight; 
+
+            const activeCircleRect = activeCircle.getBoundingClientRect();
+            const timelineContainerRect = timelineContainer.getBoundingClientRect();
+            const categoryTextRect = categoryText.getBoundingClientRect(); 
+
+            const circleCenterX = (activeCircleRect.left - timelineContainerRect.left + timelineContainer.scrollLeft) + (activeCircleRect.width / 2);
+            
+            let emojiTargetX, emojiTargetY;
+            let popupTopValue, popupLeftValue;
+
+            if (isMobileView) {
+                emojiTargetX = 10; 
+                if (isBottomRow) {
+                    const textBottomY = (categoryTextRect.bottom - timelineContainerRect.top + timelineContainer.scrollTop);
+                    emojiTargetY = textBottomY + 10; 
+                } else { 
+                    const circleTopYRel = (activeCircleRect.top - timelineContainerRect.top + timelineContainer.scrollTop);
+                     emojiTargetY = circleTopYRel + (activeCircleRect.height / 2) - (runnerEmoji.offsetHeight / 2) - 5; 
+                }
+            } else { 
+                emojiTargetX = circleCenterX - (runnerEmoji.offsetWidth / 2); 
+                if (isBottomRow) {
+                    const textBottomY = (categoryTextRect.bottom - timelineContainerRect.top + timelineContainer.scrollTop);
+                    emojiTargetY = textBottomY + 10; 
+                } else { 
+                    const circleTopYRel = (activeCircleRect.top - timelineContainerRect.top + timelineContainer.scrollTop);
+                    emojiTargetY = circleTopYRel - runnerEmoji.offsetHeight - 5; 
+                }
+            }
+            runnerEmoji.style.left = emojiTargetX + 'px';
+            runnerEmoji.style.top = emojiTargetY + 'px';
+
+            statsPopup.style.display = 'flex'; 
+            const popupWidth = statsPopup.offsetWidth;
+            popupLeftValue = circleCenterX - (popupWidth / 2); 
+
+            if (isBottomRow) {
+                popupTopValue = emojiTargetY + runnerEmoji.offsetHeight + 5; 
+            } else { 
+                popupTopValue = 5; 
+            }
+
+            const containerScrollLeft = timelineContainer.scrollLeft;
+            const containerClientWidth = timelineContainer.clientWidth;
+
+            if (popupLeftValue < containerScrollLeft) {
+                 popupLeftValue = containerScrollLeft + 5; 
+            }
+            if (popupLeftValue + popupWidth > containerScrollLeft + containerClientWidth) {
+                 popupLeftValue = containerScrollLeft + containerClientWidth - popupWidth - 5; 
+            }
+            if (popupLeftValue < containerScrollLeft && containerClientWidth < popupWidth) {
+                popupLeftValue = containerScrollLeft + 5;
+            }
+
+            statsPopup.style.left = popupLeftValue + 'px';
+            statsPopup.style.top = popupTopValue + 'px';
+        }
+
+        function updateActiveState() {
+            let activeItem = null;
+            timelineItems.forEach((item, index) => {
+                if (index === currentStep) {
+                    item.classList.add('active');
+                    activeItem = item;
+                } else {
+                    item.classList.remove('active');
+                }
+            });
+
+            if (activeItem) {
+                currentStats.ytd = generateStatData();
+                currentStats.mtd = generateStatData();
+                document.getElementById('ytd-value').innerHTML = formatStat(currentStats.ytd);
+                document.getElementById('mtd-value').innerHTML = formatStat(currentStats.mtd);
+                
+                statsPopup.style.visibility = 'visible'; 
+                statsPopup.style.opacity = '1'; 
+
+                clearTimeout(popupTimeoutId); 
+                popupTimeoutId = setTimeout(() => { 
+                    statsPopup.style.opacity = '0';
+                    setTimeout(() => {
+                        if (statsPopup.style.opacity === '0') { 
+                             statsPopup.style.display = 'none';
+                             statsPopup.style.visibility = 'hidden';
+                        }
+                    }, 300); 
+                }, 10000);
+
+
+                const itemRect = activeItem.getBoundingClientRect();
+                const isItemHorizontallyVisibleInContainer = 
+                    (itemRect.left >= timelineContainer.getBoundingClientRect().left && 
+                     itemRect.right <= timelineContainer.getBoundingClientRect().right) ||
+                    (itemRect.left <= timelineContainer.getBoundingClientRect().left && 
+                     itemRect.right >= timelineContainer.getBoundingClientRect().right);
+
+                if (!isItemHorizontallyVisibleInContainer && timelineContainer.scrollWidth > timelineContainer.clientWidth) {
+                     activeItem.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                }
+                
+                requestAnimationFrame(() => { 
+                    requestAnimationFrame(() => { 
+                         positionEmoji();
+                         updateDottedLines(); 
+                         updateBracketConnectorPath(); 
+                         updateAnimationGuidePath(); 
+                    });
+                });
+            } else {
+                 updateDottedLines(); 
+                 updateBracketConnectorPath(); 
+                 updateAnimationGuidePath();
+                 statsPopup.style.opacity = '0'; 
+                 statsPopup.style.visibility = 'hidden';
+            }
+        }
+
+        window.nextStep = function() {
+            currentStep = (currentStep + 1) % timelineItems.length;
+            updateActiveState();
+        }
+
+        window.prevStep = function() {
+            currentStep--;
+            if (currentStep < 0) currentStep = timelineItems.length - 1;
+            updateActiveState();
+        }
+
+        timelineItems.forEach((item, index) => {
+            const circle = item.querySelector('.timeline-number-custom');
+            if(circle) {
+                circle.addEventListener('click', () => {
+                    currentStep = index; 
+                    updateActiveState();
+                });
+            }
+        });
+        
+        const scrollableElement = document.querySelector('.main-content-wrapper');
+        function handleScroll() { 
+            clearTimeout(scrollTimeoutId);
+            scrollTimeoutId = setTimeout(() => {
+                if (timelineItems.length > 0) {
+                     requestAnimationFrame(() => { 
+                         positionEmoji(); 
+                         updateDottedLines(); 
+                         updateBracketConnectorPath(); 
+                         updateAnimationGuidePath();
+                    });
+                }
+            }, 100); 
+        }
+        
+        if(scrollableElement) scrollableElement.addEventListener('scroll', handleScroll);
+        window.addEventListener('scroll', handleScroll); 
+
+        if (timelineItems.length > 0) {
+            if (runnerEmoji && (runnerEmoji.innerHTML.trim() === '' || runnerEmoji.innerHTML.trim() === '🏃')) {
+                runnerEmoji.innerHTML = '🚀'; 
+            }
+            setTimeout(() => {
+                requestAnimationFrame(updateActiveState);
+                if (!animationFrameId) { 
+                    animateTracerLoop();
+                }
+            }, 100);
+        }
+
+        window.addEventListener('resize', () => {
+            if (timelineItems.length > 0) {
+                requestAnimationFrame(updateActiveState);
+            }
+        });
+    })();
+    </script>
+
+
+    <!-- SCRIPT PRINCIPAL DE LA PÁGINA (HTML 2) -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const lenis = new Lenis();
@@ -821,11 +1521,9 @@
                 lenis.scrollTo(0, { duration: 1.5, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
             });
 
-            // --- ANIMACIÓN DE SCROLL PRINCIPAL CON GSAP (Lógica Responsiva) ---
             const mm = gsap.matchMedia();
 
             mm.add("(min-width: 769px)", () => {
-                // --- Configuración para Escritorio ---
                 const tl_desktop = gsap.timeline({
                     scrollTrigger: {
                         trigger: ".sequence-container",
@@ -840,7 +1538,6 @@
                   .to(".knockout-text-layer", { opacity: 0, ease: "power1.in" }, ">-0.4");
             });
             
-            // Lógica del enlace de la flecha para que funcione en todos los dispositivos
             const scrollDownLink = document.querySelector('.scroll-down-link');
             if(scrollDownLink) {
                 scrollDownLink.addEventListener('click', (e) => {
@@ -857,13 +1554,15 @@
                 });
             }
             
-            // --- LÓGICA DE LA GALERÍA ---
+            // --- LÓGICA DE LA GALERÍA CON NAVEGACIÓN EN MODAL ---
             const mainImageContainer = document.querySelector('.gallery-main-image');
             const mainImage = document.getElementById('main-gallery-image');
             const thumbnails = document.querySelectorAll('.gallery-thumbnail');
             const imageModal = document.getElementById('image-modal');
             const modalImage = document.getElementById('modal-image');
             const modalCloseBtn = document.querySelector('.modal-close-btn');
+            const modalPrevBtn = document.querySelector('.modal-prev');
+            const modalNextBtn = document.querySelector('.modal-next');
             let currentIndex = 0;
             let galleryInterval;
 
@@ -902,9 +1601,9 @@
                 startSlideshow();
 
                 // Lógica del Lightbox/Modal
-                if (imageModal && modalImage && modalCloseBtn) {
+                if (imageModal && modalImage && modalCloseBtn && modalPrevBtn && modalNextBtn) {
                     const openModal = () => {
-                        modalImage.src = mainImage.src;
+                        modalImage.src = mainImage.src; // Abre la imagen que está actualmente en el carrusel
                         imageModal.style.display = 'flex';
                         lenis.stop();
                     };
@@ -914,95 +1613,50 @@
                         lenis.start();
                     };
 
+                    // Función para cambiar de imagen dentro del modal
+                    const changeModalImage = (direction) => {
+                        currentIndex += direction;
+                        // Permite que la galería sea cíclica
+                        if (currentIndex >= thumbnails.length) {
+                            currentIndex = 0;
+                        } else if (currentIndex < 0) {
+                            currentIndex = thumbnails.length - 1;
+                        }
+                        // Actualiza la imagen del modal y la del carrusel principal
+                        const newSrc = thumbnails[currentIndex].querySelector('img').src;
+                        modalImage.src = newSrc;
+                        mainImage.src = newSrc; // Actualiza también la imagen principal
+                        thumbnails.forEach(t => t.classList.remove('active'));
+                        thumbnails[currentIndex].classList.add('active');
+                    };
+
                     mainImageContainer.addEventListener('click', openModal);
                     modalCloseBtn.addEventListener('click', closeModal);
+                    
+                    // Cierra el modal si se hace clic fuera de la imagen
                     imageModal.addEventListener('click', (e) => {
                         if (e.target === imageModal) {
                             closeModal();
                         }
                     });
-                }
-            }
-            
-            // --- SCRIPT DEL DIAGRAMA SANKEY RESPONSIVO CON D3.JS ---
-            const sankeyContainer = document.querySelector('.chart-container');
-            if (sankeyContainer) {
-                const svgElement = d3.select("#alluvialChart");
 
-                function drawSankeyChart() {
-                    svgElement.selectAll("*").remove(); 
+                    // Event listeners para los botones de navegación del modal
+                    modalPrevBtn.addEventListener('click', () => changeModalImage(-1));
+                    modalNextBtn.addEventListener('click', () => changeModalImage(1));
 
-                    const legendData = [ { name: "Actual Sales", color: "#14b8a6", columnId: 0 }, { name: "Quarterly Forecast", color: "#5eead4", columnId: 1 }, { name: "Forecasted Sales", color: "#d946ef", columnId: 2 } ];
-                    const nodes = []; const links = []; const quarterNames = ["1Q", "2Q", "3Q", "4Q"];
-                    nodes.push({ name: "Ventas Actuales", id: "VA", column: 0 });
-                    const ventasActualesNodeIndex = 0;
-                    const quarterNodeIndices = [];
-                    quarterNames.forEach((quarterName) => {
-                        nodes.push({ name: quarterName, id: quarterName, column: 1 }); quarterNodeIndices.push(nodes.length - 1);
+                    // Event listener para la navegación con teclado
+                    document.addEventListener('keydown', (e) => {
+                        if (imageModal.style.display === 'flex') {
+                            if (e.key === 'ArrowLeft') {
+                                changeModalImage(-1);
+                            } else if (e.key === 'ArrowRight') {
+                                changeModalImage(1);
+                            } else if (e.key === 'Escape') {
+                                closeModal();
+                            }
+                        }
                     });
-                    nodes.push({ name: "Total Pronosticado", id: "TVP", column: 2 });
-                    const totalVentasPronosticadasNodeIndex = nodes.length - 1;
-                    const ventasPorTrimestreBase = 634 / quarterNames.length;
-                    quarterNodeIndices.forEach((quarterNodeIndex) => {
-                        const currentQuarterName = nodes[quarterNodeIndex].name;
-                        const valorTrimestreConIncremento = Math.round(ventasPorTrimestreBase + (Math.floor(Math.random() * 60) + 15));
-                        links.push({ source: ventasActualesNodeIndex, target: quarterNodeIndex, value: Math.round(ventasPorTrimestreBase), id: `link-va-${currentQuarterName}` });
-                        links.push({ source: quarterNodeIndex, target: totalVentasPronosticadasNodeIndex, value: valorTrimestreConIncremento, id: `link-${currentQuarterName}-tvp` });
-                    });
-
-                    const isMobileSankey = window.innerWidth <= 768;
-                    const parentElement = svgElement.node().parentElement;
-                    const baseWidth = parentElement.clientWidth;
-                    
-                    const margin = {
-                        top: 30, right: isMobileSankey ? 20 : 180,
-                        bottom: isMobileSankey ? 120 : 100,
-                        left: isMobileSankey ? 20 : 180
-                    };
-
-                    const baseHeight = isMobileSankey ? 450 : 550;
-                    const width = Math.max(50, baseWidth - margin.left - margin.right);
-                    const height = Math.max(50, baseHeight - margin.top - margin.bottom);
-                    
-                    svgElement.attr("width", baseWidth).attr("height", baseHeight);
-                    const svg = svgElement.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
-                    
-                    const nodeWidthConfig = { wide: isMobileSankey ? 30 : 65, narrow: isMobileSankey ? 30 : 60 };
-                    const sankey = d3.sankey().nodeWidth(nodeWidthConfig.wide).nodePadding(isMobileSankey ? 15 : 30).nodeAlign(d3.sankeyJustify).extent([[1, 1], [width - 1, height - 1]]);
-                    const {nodes: graphNodes, links: graphLinks} = sankey({ nodes: nodes.map(d => Object.assign({}, d)), links: links.map(d => Object.assign({}, d)) });
-
-                    const linkGroup = svg.append("g").attr("class", "links-group");
-                    linkGroup.selectAll(".sankey-link").data(graphLinks).enter().append("path").attr("class", "sankey-link").attr("d", d3.sankeyLinkHorizontal()).attr("stroke-width", d => Math.max(1.5, d.width));
-                    
-                    const node = svg.append("g").attr("class", "nodes").selectAll(".sankey-node").data(graphNodes).enter().append("g").attr("transform", d => `translate(${d.x0},${d.y0})`);
-                    node.append("rect").attr("class", "node-rect-main").attr("height", d => Math.max(1, d.y1 - d.y0)).attr("width", d => d.x1 - d.x0).attr("fill", d => (legendData.find(item => item.columnId === d.column) || {}).color || "#ccc" ).attr("stroke", d => d3.color((legendData.find(item => item.columnId === d.column) || {}).color || "#ccc").darker(0.5));
-
-                    if (!isMobileSankey) {
-                        node.append("text").attr("class", "node-name-label").attr("x", d => (d.x0 < width / 2) ? (d.x1 - d.x0 + 8) : -8).attr("y", d => (d.y1 - d.y0) / 2).attr("dy", "0.35em").attr("text-anchor", d => (d.x0 < width / 2) ? "start" : "end").text(d => d.column === 1 ? d.name : "");
-                    }
-
-                    node.append("text").attr("class", "node-value-label").style("font-size", isMobileSankey ? "10px" : "13px").attr("x", d => (d.x1 - d.x0) / 2).attr("y", d => (d.y1 - d.y0) / 2).attr("dy", "0.35em").text(d => `$${Math.max(d3.sum(d.sourceLinks, l => l.value), d3.sum(d.targetLinks, l => l.value)).toLocaleString('es-ES')} MM`);
-
-                    const legendGroup = svg.append("g").attr("class", "legend");
-                    if (isMobileSankey) {
-                        legendGroup.attr("transform", `translate(0, ${height + 40})`);
-                        const legendItem = legendGroup.selectAll(".legend-item").data(legendData).enter().append("g").attr("class", "legend-item").attr("transform", (d, i) => `translate(0, ${i * 25})`);
-                        legendItem.append("rect").attr("x", 0).attr("y", -9).attr("width", 18).attr("height", 18).style("fill", d => d.color).attr("rx", 3).attr("ry", 3);
-                        legendItem.append("text").attr("x", 24).attr("y", 0).text(d => d.name);
-                    } else {
-                        legendGroup.attr("transform", `translate(${(width - (legendData.length * 200)) / 2 + 30 }, ${height + margin.bottom / 2 })`);
-                        const legendItem = legendGroup.selectAll(".legend-item").data(legendData).enter().append("g").attr("class", "legend-item").attr("transform", (d, i) => `translate(${i * 210}, 0)`);
-                        legendItem.append("rect").attr("x", 0).attr("y", -9).attr("width", 18).attr("height", 18).style("fill", d => d.color).attr("rx", 3).attr("ry", 3);
-                        legendItem.append("text").attr("x", 24).attr("y", 0).text(d => d.name);
-                    }
                 }
-
-                drawSankeyChart();
-                let resizeTimer;
-                window.addEventListener('resize', () => {
-                    clearTimeout(resizeTimer);
-                    resizeTimer = setTimeout(drawSankeyChart, 250);
-                });
             }
             
             document.addEventListener('click', (event) => {
