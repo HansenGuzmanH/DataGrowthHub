@@ -113,7 +113,19 @@
             transform: scale(1.1);
         }
 
-        .menu-trigger { background: none; border: none; cursor: pointer; z-index: 1002; padding: 10px; }
+        .menu-trigger { 
+            background: none; 
+            border: none; 
+            cursor: pointer; 
+            z-index: 1002; 
+            padding: 10px;
+            transition: transform 0.3s ease; /* ***** INICIO CAMBIOS: Animación del Menú ***** */
+        }
+        .menu-trigger:hover {
+            transform: scale(1.1);
+        }
+        /* ***** FIN CAMBIOS ***** */
+
         .hamburger-icon { width: 34px; height: 28px; display: flex; flex-direction: column; justify-content: space-between; }
         .line { width: 100%; height: 3px; background-color: white; transition: all 0.3s ease-in-out; }
         .menu-trigger.is-active .line-1 { transform: rotate(45deg) translate(8px, 8px); }
@@ -397,11 +409,11 @@
         .bi-text-container {
             font-family: var(--font-body);
             text-align: left;
-            max-width: 800px; /* Reducido para más margen */
+            max-width: 800px;
             margin: 4rem auto 4rem auto;
             color: #e0e0e0;
             line-height: 1.8;
-            padding: 0 4rem; /* Aumentado para más margen */
+            padding: 0 4rem;
         }
        
         .bi-text-container p {
@@ -434,7 +446,7 @@
         @keyframes scroll-animation { 0% { transform: translate(-50%, 0); opacity: 0; } 40% { opacity: 1; } 80% { transform: translate(-50%, 20px); opacity: 0; } 100% { opacity: 0; } }
         
         .outro-section { 
-            padding: 8vh 5%; /* Reducido para subir la sección */
+            padding: 8vh 5%;
             text-align: center; 
             background-color: var(--color-background); 
             position: relative; 
@@ -477,10 +489,10 @@
 
             /* ***** INICIO CAMBIOS: Ajuste de espaciado en móvil ***** */
             .sequence-container {
-                height: 150vh; /* Reducir la altura del contenedor de la animación en móvil */
+                height: 100vh; /* Reducido para eliminar espacio extra */
             }
             .machine-learning-section {
-                padding-top: 5vh; /* Reduce el espacio sobre Machine Learning en móvil */
+                padding-top: 8vh;
             }
             /* ***** FIN CAMBIOS ***** */
 
@@ -488,13 +500,26 @@
             .knockout-text-layer { padding-top: 8vh; }
             .logo { font-size: 1.2rem; }
             
-            .header-controls .linkedin-icon {
-                display: none;
+            /* ***** INICIO CAMBIOS: Iconos de Header en móvil ***** */
+            .header-controls {
+                gap: 0.5rem;
+            }
+            .linkedin-icon {
+                display: flex;
+            }
+            .linkedin-icon svg {
+                width: 28px;
+                height: 28px;
             }
             .header-icon {
                 width: 60px;
                 height: 60px;
             }
+            .hamburger-icon {
+                width: 28px;
+                height: 22px;
+            }
+            /* ***** FIN CAMBIOS ***** */
 
             .title-container h1 { font-size: 20vw; }
             .growth-arrow { width: 25vw; height: 20vw; }
@@ -519,6 +544,7 @@
             :root { --menu-width: 80vw; --menu-max-width: 320px; }
             .gallery-main-image { height: 250px; }
             .header-icon { width: 50px; height: 50px; }
+            .linkedin-icon svg { width: 24px; height: 24px; }
         }
 
     </style>
