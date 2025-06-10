@@ -269,7 +269,7 @@
         }
         
         .machine-learning-section {
-            padding: 5vh 5%; /* CAMBIO: Reducido de 15vh a 5vh para subir la sección */
+            padding: 5vh 5%;
             background-color: var(--color-background);
             position: relative;
             z-index: 2; /* Para que se ponga encima de la animación terminada */
@@ -291,7 +291,7 @@
             margin: 0 auto;
         }
         .ml-image {
-            flex: 0.8; /* CAMBIO: Reducido para acercar la imagen a la izquierda */
+            flex: 0.8;
             max-width: 450px;
         }
         .ml-image img {
@@ -301,7 +301,7 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
         .ml-text {
-            flex: 2; /* CAMBIO: Aumentado para dar más espacio al texto */
+            flex: 2;
             text-align: left;
             font-family: var(--font-body);
             font-size: clamp(1.1rem, 1.5vw, 1.3rem);
@@ -315,7 +315,6 @@
             color: var(--color-primary);
             font-weight: 700;
         }
-        /* CAMBIO: Estilos para la nueva lista ordenada */
         .ml-text ol {
             padding-left: 25px;
             margin-bottom: 1em;
@@ -324,13 +323,97 @@
             margin-bottom: 0.75em;
         }
         
-        .carousel-wrapper { position: relative; width: 80%; max-width: 800px; height: 400px; display: flex; justify-content: center; align-items: center; margin-bottom: 2rem;}
-        .carousel-track { position: relative; width: 300px; height: 300px; transform-style: preserve-3d; perspective: 1000px; }
-        .carousel-slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); transition: transform 0.5s ease-out, opacity 0.5s ease-out, filter 0.5s ease-out; cursor: pointer; }
-        .carousel-slide img { width: 100%; height: 100%; object-fit: cover; }
-        .carousel-nav { position: absolute; top: 50%; width: 100%; display: flex; justify-content: space-between; transform: translateY(-50%); z-index: 20; padding: 0 1rem; }
-        .carousel-nav button { background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); color: white; border-radius: 50%; width: 50px; height: 50px; cursor: pointer; transition: all 0.3s ease; backdrop-filter: blur(5px); }
-        .carousel-nav button:hover { background: var(--color-primary); color: var(--color-background); }
+        /* ***** INICIO CAMBIOS: Estilos del carrusel mejorado y texto BI ***** */
+        .carousel-wrapper { 
+            position: relative; 
+            width: 90%; 
+            max-width: 1000px; 
+            height: 550px;
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            margin: 0 auto 3rem auto;
+        }
+        .carousel-track { 
+            position: relative; 
+            width: 450px;
+            height: 450px;
+            transform-style: preserve-3d; 
+            perspective: 1200px;
+        }
+        .carousel-slide { 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            overflow: hidden; 
+            border-radius: 20px; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5); 
+            transition: transform 0.5s ease-out, opacity 0.5s ease-out, filter 0.5s ease-out; 
+            cursor: pointer; 
+        }
+        .carousel-slide img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: contain; 
+            background: #2a3038;
+            border-radius: 15px;
+        }
+        .carousel-nav { 
+            position: absolute; 
+            top: 50%; 
+            width: 100%; 
+            display: flex; 
+            justify-content: space-between; 
+            transform: translateY(-50%); 
+            z-index: 20; 
+            padding: 0 1rem; 
+        }
+        .carousel-nav button { 
+            background: rgba(255, 255, 255, 0.1); 
+            border: 1px solid rgba(255, 255, 255, 0.2); 
+            color: white; border-radius: 50%; 
+            width: 50px; 
+            height: 50px; 
+            cursor: pointer; 
+            transition: all 0.3s ease; 
+            backdrop-filter: blur(5px); 
+        }
+        .carousel-nav button:hover { 
+            background: var(--color-primary); 
+            color: var(--color-background); 
+        }
+        
+        .bi-text-container {
+            font-family: var(--font-body);
+            text-align: left;
+            max-width: 900px;
+            margin: 4rem auto 4rem auto;
+            color: #e0e0e0;
+            line-height: 1.8;
+        }
+        .bi-text-container h4 {
+            font-family: var(--font-title);
+            text-transform: uppercase;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--color-primary);
+            text-align: center;
+        }
+        .bi-text-container p {
+            font-family: var(--font-body);
+            font-weight: 400;
+            font-size: 1.1rem;
+            color: #e0e0e0;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            text-transform: none;
+        }
+        .bi-text-container p strong {
+            color: var(--color-secondary);
+        }
+        /* ***** FIN CAMBIOS ***** */
         
         .global-scroll-indicator {
             position: fixed;
@@ -348,7 +431,7 @@
         .global-scroll-indicator::before { content: ''; position: absolute; top: 8px; left: 50%; transform: translateX(-50%); width: 4px; height: 10px; background: white; border-radius: 2px; animation: scroll-animation 2.2s infinite cubic-bezier(0.68, -0.55, 0.27, 1.55); }
         @keyframes scroll-animation { 0% { transform: translate(-50%, 0); opacity: 0; } 40% { opacity: 1; } 80% { transform: translate(-50%, 20px); opacity: 0; } 100% { opacity: 0; } }
         
-        .outro-section { padding: 15vh 10%; text-align: center; background-color: var(--color-background); position: relative; z-index: 5; }
+        .outro-section { padding: 15vh 5%; text-align: center; background-color: var(--color-background); position: relative; z-index: 5; }
         .outro-section h2 { font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 3rem; }
         .outro-section p { font-family: 'Inter', sans-serif; font-weight: 400; font-size: 1.2rem; max-width: 800px; margin: 0 auto; color: #b0b0b0; line-height: 1.7; }
         
@@ -413,9 +496,6 @@
             .outro-section h2 {
                 font-size: clamp(2rem, 8vw, 2.5rem);
             }
-            .outro-section p {
-                font-size: 1rem;
-            }
             
             .features-section {
                 padding: 10vh 5%;
@@ -432,11 +512,13 @@
 
             .carousel-wrapper {
                 width: 90%;
-                height: 300px;
+                height: auto; /* Adjusted for responsive height */
+                max-width: 500px;
             }
-            .carousel-track {
-                width: 250px;
-                height: 250px;
+             .carousel-track {
+                width: 80%;
+                padding-top: 80%; /* Maintain aspect ratio */
+                height: 0;
             }
             .carousel-nav button {
                 width: 40px;
@@ -552,7 +634,6 @@
                 <div class="ml-image">
                     <img src="https://i.imgur.com/E2LaKrp.png" alt="Ilustración de Machine Learning con nodos y conexiones cerebrales." onerror="this.onerror=null;this.src='https://placehold.co/450x450/222831/eeeeee?text=Imagen+ML';">
                 </div>
-                <!-- ***** CAMBIO: INICIO DEL BLOQUE DE TEXTO MODIFICADO ***** -->
                 <div class="ml-text">
                     <p>El&nbsp;<strong>Machine Learning</strong>&nbsp;convierte los datos históricos y los resultados pasados de tu empresa en una guía para el futuro.</p>
                     <p>Lo hace en dos pasos:</p>
@@ -564,28 +645,42 @@
                     Precios dinámicos en una tienda online.<br>
                     El sistema analiza el historial de ventas y&nbsp;<strong>aprende</strong>&nbsp;que un producto se vende más caro y rápido los viernes por la noche. El próximo viernes, el sistema automáticamente&nbsp;<strong>actúa</strong>&nbsp;y sube el precio, maximizando la ganancia de forma inteligente.</p>
                 </div>
-                <!-- ***** CAMBIO: FIN DEL BLOQUE DE TEXTO MODIFICADO ***** -->
             </div>
         </section>
 
-        <!-- Sección de introducción -->
+        <!-- ***** INICIO CAMBIOS: Sección de Business Intelligence actualizada ***** -->
         <section id="evolucion" class="outro-section">
-            <h2>La Próxima Evolución del Análisis</h2>
+            <h2 class="animated-gradient-text">Business intelligence (BI)</h2>
+            
+            <div class="bi-text-container">
+                <h4>¿Qué es Business Intelligence (BI)?</h4>
+                <p>Piensa en el Business Intelligence como el tablero de control de un coche. Este tablero no hace que el coche avance, pero te da toda la información crucial que necesitas para conducirlo bien: la velocidad, el nivel de gasolina, la temperatura del motor, etc.</p>
+                <p>De la misma forma, el BI es el proceso de tomar todos los datos brutos de una empresa (ventas, finanzas, marketing, operaciones) y transformarlos en información clara y útil, generalmente presentada en forma de gráficos y reportes fáciles de entender.</p>
+                <p>El objetivo principal del BI es responder a la pregunta: <strong>"¿Qué ha pasado y por qué?".</strong></p>
+                <p>Permite tomar decisiones basadas en hechos y no en intuiciones, ayudando a ver rápidamente qué funciona y qué no dentro del negocio.</p>
+                <p>Por ejemplo, un equipo puede ver en un reporte qué campaña de marketing atrajo más clientes y decidir duplicar la inversión en ella al instante, en lugar de solo suponerlo.</p>
+            </div>
+
             <div class="carousel-wrapper">
                 <div class="carousel-track">
-                    <div class="carousel-slide"><img src="https://i.imgur.com/rD4y3QZ.jpeg" alt="Dashboard de datos 1" onerror="this.onerror=null;this.src='https://placehold.co/300x300/222831/eeeeee?text=Imagen+1';"></div>
-                    <div class="carousel-slide"><img src="https://i.imgur.com/8i2D2h4.png" alt="Dashboard de datos 2" onerror="this.onerror=null;this.src='https://placehold.co/300x300/222831/eeeeee?text=Imagen+2';"></div>
-                    <div class="carousel-slide"><img src="https://i.imgur.com/yF9P3bV.png" alt="Dashboard de datos 3" onerror="this.onerror=null;this.src='https://placehold.co/300x300/222831/eeeeee?text=Imagen+3';"></div>
-                    <div class="carousel-slide"><img src="https://i.imgur.com/6Xz1bY1.jpeg" alt="Dashboard de datos 4" onerror="this.onerror=null;this.src='https://placehold.co/300x300/222831/eeeeee?text=Imagen+4';"></div>
-                    <div class="carousel-slide"><img src="https://i.imgur.com/x4u6VAd.png" alt="Dashboard de datos 5" onerror="this.onerror=null;this.src='https://placehold.co/300x300/222831/eeeeee?text=Imagen+5';"></div>
+                    <div class="carousel-slide"><img src="https://i.imgur.com/of09hLT.png" alt="Dashboard de datos 1" onerror="this.onerror=null;this.src='https://placehold.co/450x450/222831/eeeeee?text=Imagen+1';"></div>
+                    <div class="carousel-slide"><img src="https://i.imgur.com/DAtDSY9.png" alt="Dashboard de datos 2" onerror="this.onerror=null;this.src='https://placehold.co/450x450/222831/eeeeee?text=Imagen+2';"></div>
+                    <div class="carousel-slide"><img src="https://i.imgur.com/rfbwGZf.png" alt="Dashboard de datos 3" onerror="this.onerror=null;this.src='https://placehold.co/450x450/222831/eeeeee?text=Imagen+3';"></div>
+                    <div class="carousel-slide"><img src="https://i.imgur.com/o9wEf6l.png" alt="Dashboard de datos 4" onerror="this.onerror=null;this.src='https://placehold.co/450x450/222831/eeeeee?text=Imagen+4';"></div>
+                    <div class="carousel-slide"><img src="https://i.imgur.com/Mm7fy4D.png" alt="Dashboard de datos 5" onerror="this.onerror=null;this.src='https://placehold.co/450x450/222831/eeeeee?text=Imagen+5';"></div>
+                    <div class="carousel-slide"><img src="https://i.imgur.com/JmVH4fo.png" alt="Dashboard de datos 6" onerror="this.onerror=null;this.src='https://placehold.co/450x450/222831/eeeeee?text=Imagen+6';"></div>
+                    <div class="carousel-slide"><img src="https://i.imgur.com/PfbRypg.png" alt="Dashboard de datos 7" onerror="this.onerror=null;this.src='https://placehold.co/450x450/222831/eeeeee?text=Imagen+7';"></div>
+                    <div class="carousel-slide"><img src="https://i.imgur.com/O9sepwB.png" alt="Dashboard de datos 8" onerror="this.onerror=null;this.src='https://placehold.co/450x450/222831/eeeeee?text=Imagen+8';"></div>
                 </div>
                 <div class="carousel-nav">
                     <button id="prev-btn">&lt;</button>
                     <button id="next-btn">&gt;</button>
                 </div>
             </div>
-            <p>Combinamos tecnología de vanguardia con intuición humana para ofrecerte una perspectiva que no solo informa, sino que transforma. Prepárate para el siguiente nivel.</p>
+            
+            <p>Estas imágenes son una pequeña muestra de mi trabajo en Business Intelligence (BI), son datos de muestra pero muestran un poco de mi visión creativa.</p>
         </section>
+        <!-- ***** FIN CAMBIOS ***** -->
         
         <!-- Sección de características con tarjetas animadas -->
         <section id="caracteristicas" class="features-section">
@@ -686,9 +781,10 @@
                     slides.forEach((slide, index) => {
                         let offset = index - currentIndex;
                         let absOffset = Math.abs(offset);
-                        slide.style.transform = `translateX(${offset * 120}px) translateZ(${-absOffset * 150}px) rotateY(${offset * 20}deg)`;
-                        slide.style.opacity = absOffset > 0 ? 0.3 : 1;
-                        slide.style.filter = absOffset > 0 ? 'blur(5px)' : 'none';
+                        // ***** CAMBIO: Valores de transform ajustados para el nuevo carrusel *****
+                        slide.style.transform = `translateX(${offset * 110}px) translateZ(${-absOffset * 140}px) rotateY(${offset * 15}deg)`;
+                        slide.style.opacity = absOffset > 1 ? 0.2 : 1;
+                        slide.style.filter = absOffset > 0 ? 'blur(3px)' : 'none';
                         slide.style.zIndex = slides.length - absOffset;
                     });
                 }
