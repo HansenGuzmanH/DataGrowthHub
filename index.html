@@ -397,11 +397,11 @@
         .bi-text-container {
             font-family: var(--font-body);
             text-align: left;
-            max-width: 900px;
+            max-width: 800px; /* Reducido para más margen */
             margin: 4rem auto 4rem auto;
             color: #e0e0e0;
             line-height: 1.8;
-            padding: 0 2rem;
+            padding: 0 4rem; /* Aumentado para más margen */
         }
        
         .bi-text-container p {
@@ -433,8 +433,17 @@
         .global-scroll-indicator::before { content: ''; position: absolute; top: 8px; left: 50%; transform: translateX(-50%); width: 4px; height: 10px; background: white; border-radius: 2px; animation: scroll-animation 2.2s infinite cubic-bezier(0.68, -0.55, 0.27, 1.55); }
         @keyframes scroll-animation { 0% { transform: translate(-50%, 0); opacity: 0; } 40% { opacity: 1; } 80% { transform: translate(-50%, 20px); opacity: 0; } 100% { opacity: 0; } }
         
-        .outro-section { padding: 15vh 5%; text-align: center; background-color: var(--color-background); position: relative; z-index: 5; }
-        .outro-section h2 { font-size: clamp(2.5rem, 8vw, 6rem); margin-bottom: 3rem; }
+        .outro-section { 
+            padding: 8vh 5%; /* Reducido para subir la sección */
+            text-align: center; 
+            background-color: var(--color-background); 
+            position: relative; 
+            z-index: 5; 
+        }
+        .outro-section h2 { 
+            font-size: clamp(2.5rem, 8vw, 6rem); 
+            margin-bottom: 3rem; 
+        }
         
         .features-section { padding: 15vh 5%; background-color: #1a1f26; }
         .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; max-width: 1800px; margin: 0 auto; }
@@ -469,7 +478,6 @@
             .knockout-text-layer { padding-top: 8vh; }
             .logo { font-size: 1.2rem; }
             
-            /* ***** INICIO CAMBIOS: Mostrar icono en móvil ***** */
             .header-controls .linkedin-icon {
                 display: none;
             }
@@ -477,12 +485,16 @@
                 width: 60px;
                 height: 60px;
             }
-            /* ***** FIN CAMBIOS ***** */
 
             .title-container h1 { font-size: 20vw; }
             .growth-arrow { width: 25vw; height: 20vw; }
-            .outro-section { padding: 10vh 5%; }
+            .outro-section { padding: 5vh 5%; }
             .outro-section h2 { font-size: clamp(2rem, 10vw, 3.5rem); }
+            
+            .machine-learning-section {
+                padding: 2rem 5%; /* Reduce el espacio sobre Machine Learning en móvil */
+            }
+
             .features-section { padding: 10vh 5%; }
             .final-chart-section { padding: 8vh 2%; }
             .chart-title-main { font-size: 1.8em; margin-bottom: 15px; }
@@ -492,7 +504,7 @@
             
             .gallery-main-image { height: 400px; }
             .gallery-thumbnails { grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); }
-            .bi-text-container { padding: 0 1rem; }
+            .bi-text-container { padding: 0 1.5rem; }
             .bi-text-container p { font-size: 1rem; }
         }
 
@@ -739,7 +751,7 @@
                 
                 const startSlideshow = () => {
                     clearInterval(galleryInterval);
-                    galleryInterval = setInterval(nextSlide, 7000);
+                    galleryInterval = setInterval(nextSlide, 4000); // CAMBIO: Tiempo reducido a 4 segundos
                 };
 
                 thumbnails.forEach((thumb, index) => {
