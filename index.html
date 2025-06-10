@@ -548,14 +548,30 @@
                 --header-height: 60px;
             }
 
-            /* ***** INICIO CAMBIOS: Ajuste de espaciado en móvil ***** */
+            /*
+            * =================================================================
+            * SOLUCIÓN AL ESPACIO EXCESIVO EN MÓVIL
+            * =================================================================
+            */
+
+            /*
+            * 1. Reducimos la altura del contenedor de la animación a 100vh.
+            * Esto elimina el "scroll muerto" en dispositivos móviles.
+            */
             .sequence-container {
                 height: 100vh; 
             }
+
+            /*
+            * 2. Ajustamos el padding de la siguiente sección para una transición suave.
+            * Eliminamos el gran espacio superior y dejamos uno más pequeño.
+            */
             .machine-learning-section {
-                padding-top: 0; /* Espacio eliminado */
+                padding-top: 2rem;
+                padding-bottom: 2rem;
             }
-             /* ***** FIN CAMBIOS ***** */
+            
+            /* === FIN DE LA SOLUCIÓN === */
             
             .ml-content-wrapper { flex-direction: column; gap: 2rem; }
             .knockout-text-layer { padding-top: calc(8vh + 30px); } /* Ajuste para header flotante */
