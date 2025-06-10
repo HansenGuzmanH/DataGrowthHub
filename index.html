@@ -269,7 +269,7 @@
         }
         
         .machine-learning-section {
-            padding: 15vh 5%;
+            padding: 5vh 5%; /* CAMBIO: Reducido de 15vh a 5vh para subir la sección */
             background-color: var(--color-background);
             position: relative;
             z-index: 2; /* Para que se ponga encima de la animación terminada */
@@ -291,7 +291,7 @@
             margin: 0 auto;
         }
         .ml-image {
-            flex: 1;
+            flex: 0.8; /* CAMBIO: Reducido para acercar la imagen a la izquierda */
             max-width: 450px;
         }
         .ml-image img {
@@ -301,7 +301,7 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
         .ml-text {
-            flex: 1.5;
+            flex: 2; /* CAMBIO: Aumentado para dar más espacio al texto */
             text-align: left;
             font-family: var(--font-body);
             font-size: clamp(1.1rem, 1.5vw, 1.3rem);
@@ -314,6 +314,14 @@
         .ml-text strong {
             color: var(--color-primary);
             font-weight: 700;
+        }
+        /* CAMBIO: Estilos para la nueva lista ordenada */
+        .ml-text ol {
+            padding-left: 25px;
+            margin-bottom: 1em;
+        }
+        .ml-text ol li {
+            margin-bottom: 0.75em;
         }
         
         .carousel-wrapper { position: relative; width: 80%; max-width: 800px; height: 400px; display: flex; justify-content: center; align-items: center; margin-bottom: 2rem;}
@@ -544,13 +552,19 @@
                 <div class="ml-image">
                     <img src="https://i.imgur.com/E2LaKrp.png" alt="Ilustración de Machine Learning con nodos y conexiones cerebrales." onerror="this.onerror=null;this.src='https://placehold.co/450x450/222831/eeeeee?text=Imagen+ML';">
                 </div>
+                <!-- ***** CAMBIO: INICIO DEL BLOQUE DE TEXTO MODIFICADO ***** -->
                 <div class="ml-text">
-                    <p>El <strong>Machine Learning</strong> convierte los datos históricos y los resultados pasados de tu empresa en una guía para el futuro. Lo hace en dos pasos:</p>
-                    <p>1. Aprende las reglas ocultas de cómo funciona realmente tu negocio.<br>
-                       2. Usa esas reglas para predecir lo que pasará y ayudarte a tomar mejores decisiones hoy.</p>
-                    <p><strong>Ejemplo: Precios dinámicos en una tienda online.</strong><br>
-                    El sistema analiza el historial de ventas y <strong>aprende</strong> que un producto se vende más caro y rápido los viernes por la noche. El próximo viernes, el sistema automáticamente <strong>actúa</strong> y sube el precio, maximizando la ganancia de forma inteligente.</p>
+                    <p>El&nbsp;<strong>Machine Learning</strong>&nbsp;convierte los datos históricos y los resultados pasados de tu empresa en una guía para el futuro.</p>
+                    <p>Lo hace en dos pasos:</p>
+                    <ol>
+                        <li>Aprende las reglas ocultas de cómo funciona realmente tu negocio.</li>
+                        <li>Usa esas reglas para predecir lo que pasará y ayudarte a tomar mejores decisiones hoy.</li>
+                    </ol>
+                    <p><strong>Ejemplo:</strong><br>
+                    Precios dinámicos en una tienda online.<br>
+                    El sistema analiza el historial de ventas y&nbsp;<strong>aprende</strong>&nbsp;que un producto se vende más caro y rápido los viernes por la noche. El próximo viernes, el sistema automáticamente&nbsp;<strong>actúa</strong>&nbsp;y sube el precio, maximizando la ganancia de forma inteligente.</p>
                 </div>
+                <!-- ***** CAMBIO: FIN DEL BLOQUE DE TEXTO MODIFICADO ***** -->
             </div>
         </section>
 
