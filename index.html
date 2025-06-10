@@ -119,12 +119,11 @@
             cursor: pointer; 
             z-index: 1002; 
             padding: 10px;
-            transition: transform 0.3s ease; /* ***** INICIO CAMBIOS: Animación del Menú ***** */
+            transition: transform 0.3s ease;
         }
         .menu-trigger:hover {
             transform: scale(1.1);
         }
-        /* ***** FIN CAMBIOS ***** */
 
         .hamburger-icon { width: 34px; height: 28px; display: flex; flex-direction: column; justify-content: space-between; }
         .line { width: 100%; height: 3px; background-color: white; transition: all 0.3s ease-in-out; }
@@ -487,20 +486,17 @@
                 --header-height: 60px;
             }
 
-            /* ***** INICIO CAMBIOS: Ajuste de espaciado en móvil ***** */
             .sequence-container {
-                height: 100vh; /* Reducido para eliminar espacio extra */
+                height: 120vh; 
             }
             .machine-learning-section {
-                padding-top: 8vh;
+                padding-top: 5vh;
             }
-            /* ***** FIN CAMBIOS ***** */
-
+            
             .ml-content-wrapper { flex-direction: column; gap: 2rem; }
             .knockout-text-layer { padding-top: 8vh; }
             .logo { font-size: 1.2rem; }
             
-            /* ***** INICIO CAMBIOS: Iconos de Header en móvil ***** */
             .header-controls {
                 gap: 0.5rem;
             }
@@ -519,7 +515,6 @@
                 width: 28px;
                 height: 22px;
             }
-            /* ***** FIN CAMBIOS ***** */
 
             .title-container h1 { font-size: 20vw; }
             .growth-arrow { width: 25vw; height: 20vw; }
