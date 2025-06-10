@@ -209,13 +209,15 @@
         
         .sequence-container { 
             position: relative;
-            /* Se elimina la altura fija para que GSAP la controle */
+            height: 100vh;
         }
+
         .sticky-element { 
-            height: 100vh; 
+            height: 100%; 
             width: 100%; 
             overflow: hidden; 
         }
+
         .sequence-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
         
         .background-image { 
@@ -765,7 +767,9 @@
             });
 
             // --- ANIMACIÓN DE SCROLL PRINCIPAL CON GSAP (Lógica Responsiva) ---
-            gsap.matchMedia().add("(min-width: 769px)", () => {
+            const mm = gsap.matchMedia();
+
+            mm.add("(min-width: 769px)", () => {
                 // --- Configuración para Escritorio ---
                 const tl_desktop = gsap.timeline({
                     scrollTrigger: {
@@ -781,20 +785,10 @@
                   .to(".knockout-text-layer", { opacity: 0, ease: "power1.in" }, ">-0.4");
             });
 
-            gsap.matchMedia().add("(max-width: 768px)", () => {
-                // --- Configuración para Móvil ---
-                const tl_mobile = gsap.timeline({
-                    scrollTrigger: {
-                        trigger: ".sequence-container",
-                        start: "top top",
-                        end: "+=50%", // Duración mucho más corta para móvil
-                        scrub: 1.5,
-                        pin: ".sticky-element",
-                    }
-                });
-                tl_mobile.to(".knockout-text-layer", { scale: 10, ease: "none" }, 0) // Escala reducida para móvil
-                  .from(".background-image", { scale: 1.2, ease: "none" }, 0)
-                  .to(".knockout-text-layer", { opacity: 0, ease: "power1.in" }, ">-0.4");
+            mm.add("(max-width: 768px)", () => {
+                // --- Configuración para Móvil (Sin animación de Pin/Scrub) ---
+                // No se crea ninguna animación de ScrollTrigger aquí para evitar el problema del espacio.
+                // La sección se comportará como un bloque estático de 100vh.
             });
             
             // --- LÓGICA DE LA NUEVA GALERÍA CON AUTOPLAY ---
