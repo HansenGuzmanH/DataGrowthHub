@@ -27,7 +27,8 @@
             --font-body: 'Inter', sans-serif;
             --menu-width: 50vw;
             --menu-max-width: 600px;
-            --header-height: 80px; 
+            --header-height: 80px;
+            --corner-radius: 15px;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -53,9 +54,10 @@
             background-color: var(--color-background); 
             z-index: 1000;
             box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-            border-bottom-left-radius: 15px;
-            border-bottom-right-radius: 15px;
+            border-bottom-left-radius: var(--corner-radius);
+            border-bottom-right-radius: var(--corner-radius);
         }
+        
         .header-section {
             flex: 1;
             display: flex;
@@ -71,6 +73,9 @@
             font-weight: 900; 
             font-family: var(--font-title);
             white-space: nowrap;
+        }
+        
+        .animated-gradient-text {
             background: linear-gradient(90deg, #EEEEEE, #00ADB5, #EEEEEE);
             background-size: 200% auto;
             color: #fff;
@@ -79,6 +84,7 @@
             -webkit-text-fill-color: transparent;
             animation: gradient-flow 4s ease infinite;
         }
+
 
         @keyframes gradient-flow {
             0% { background-position: 0% 50%; }
@@ -129,13 +135,34 @@
         .menu-close-btn { position: absolute; top: 1.5rem; right: 5%; background: none; border: none; cursor: pointer; color: white; padding: 10px; transition: transform 0.4s ease; }
         .menu-close-btn:hover { transform: rotate(90deg); color: var(--color-primary); }
         .menu-close-btn svg { width: 32px; height: 32px; }
-        .overlay-nav { list-style: none; text-align: left; padding-left: 10%; width: 100%; flex-grow: 1; display: flex; flex-direction: column; justify-content: center;}
-        .overlay-nav li { margin: 1.5rem 0; transform: translateX(-20px); opacity: 0; transition: transform 0.4s ease, opacity 0.4s ease; }
+        .overlay-nav {
+            list-style: none;
+            text-align: left;
+            padding-left: 10%;
+            width: 100%;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start; 
+            padding-top: 20vh;
+        }
+        .overlay-nav li { margin: 1.2rem 0; transform: translateX(-20px); opacity: 0; transition: transform 0.4s ease, opacity 0.4s ease; }
         .menu-overlay.is-open .overlay-nav li { transform: translateX(0); opacity: 1; }
         .menu-overlay.is-open .overlay-nav li:nth-child(1) { transition-delay: 0.15s; }
         .menu-overlay.is-open .overlay-nav li:nth-child(2) { transition-delay: 0.20s; }
         .menu-overlay.is-open .overlay-nav li:nth-child(3) { transition-delay: 0.25s; }
-        .overlay-nav a { color: white; text-decoration: none; font-size: clamp(1.8rem, 5vw, 2.5rem); font-family: var(--font-title); font-weight: 700; text-transform: uppercase; transition: color 0.3s ease; overflow-wrap: break-word; }
+        .menu-overlay.is-open .overlay-nav li:nth-child(4) { transition-delay: 0.30s; }
+        .menu-overlay.is-open .overlay-nav li:nth-child(5) { transition-delay: 0.35s; }
+        .overlay-nav a {
+            color: white;
+            text-decoration: none;
+            font-size: clamp(1.4rem, 3.5vw, 1.8rem);
+            font-family: var(--font-title);
+            font-weight: 700;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+            overflow-wrap: break-word;
+        }
         .overlay-nav a:hover { color: var(--color-primary); }
         
         .menu-footer-icon {
@@ -151,8 +178,7 @@
 
         /* ----- Contenido Principal y Secciones ----- */
         main { 
-            padding-top: var(--header-height); 
-            background-color: var(--color-background);
+            /* Se elimina el padding top del header, ya que el sequence-container lo manejará */
         }
         h1, h2, h3, h4, h5, h6 { 
             font-family: var(--font-title); 
@@ -160,12 +186,22 @@
             color: var(--color-text);
         }
         
-        .sequence-container { height: 300vh; position: relative; }
-        .sticky-element { position: sticky; top: 0; height: 100vh; width: 100%; overflow: hidden; }
+        .sequence-container { 
+            height: 200vh; /* Altura reducida para eliminar el espacio muerto */
+            position: relative;
+        }
+        .sticky-element { 
+            position: sticky; 
+            top: 0; 
+            height: 100vh; 
+            width: 100%; 
+            overflow: hidden; 
+            background-color: var(--color-background);
+        }
         .sequence-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
         
         .background-image { 
-            background: radial-gradient(ellipse at top, #393E46, #222831);
+            background: radial-gradient(ellipse at center, #393E46, #222831);
             position: relative;
             overflow: hidden; 
         }
@@ -200,7 +236,7 @@
             flex-direction: column; 
             justify-content: flex-start;
             align-items: center; 
-            padding-top: 4vh;
+            padding-top: var(--header-height);
         }
 
         .title-container {
@@ -225,16 +261,62 @@
             opacity: 0.75;
         }
         .growth-arrow path {
-            stroke: #FF2E63; /* Color de la flecha modificado */
+            stroke: #FF2E63;
             stroke-width: 12;
             stroke-linecap: round;
             stroke-linejoin: round;
             fill: none;
         }
         
-        .final-scene { display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background-color: var(--color-background); opacity: 0; }
-        .final-scene h2 { font-size: clamp(2rem, 6vw, 4rem); color: #00ADB5; margin-bottom: 3.5rem; }
-        .carousel-wrapper { position: relative; width: 80%; max-width: 800px; height: 400px; display: flex; justify-content: center; align-items: center; }
+        .machine-learning-section {
+            padding: 15vh 5%;
+            background-color: var(--color-background);
+            position: relative;
+            z-index: 2; /* Para que se ponga encima de la animación terminada */
+        }
+
+        .machine-learning-section h2 {
+            text-align: center;
+            font-size: clamp(3rem, 8vw, 6rem); 
+            margin-bottom: 5rem; 
+        }
+
+        .ml-content-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 3rem;
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .ml-image {
+            flex: 1;
+            max-width: 450px;
+        }
+        .ml-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .ml-text {
+            flex: 1.5;
+            text-align: left;
+            font-family: var(--font-body);
+            font-size: clamp(1.1rem, 1.5vw, 1.3rem);
+            line-height: 1.8;
+            color: #e0e0e0;
+        }
+        .ml-text p {
+            margin-bottom: 1em;
+        }
+        .ml-text strong {
+            color: var(--color-primary);
+            font-weight: 700;
+        }
+        
+        .carousel-wrapper { position: relative; width: 80%; max-width: 800px; height: 400px; display: flex; justify-content: center; align-items: center; margin-bottom: 2rem;}
         .carousel-track { position: relative; width: 300px; height: 300px; transform-style: preserve-3d; perspective: 1000px; }
         .carousel-slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); transition: transform 0.5s ease-out, opacity 0.5s ease-out, filter 0.5s ease-out; cursor: pointer; }
         .carousel-slide img { width: 100%; height: 100%; object-fit: cover; }
@@ -258,8 +340,8 @@
         .global-scroll-indicator::before { content: ''; position: absolute; top: 8px; left: 50%; transform: translateX(-50%); width: 4px; height: 10px; background: white; border-radius: 2px; animation: scroll-animation 2.2s infinite cubic-bezier(0.68, -0.55, 0.27, 1.55); }
         @keyframes scroll-animation { 0% { transform: translate(-50%, 0); opacity: 0; } 40% { opacity: 1; } 80% { transform: translate(-50%, 20px); opacity: 0; } 100% { opacity: 0; } }
         
-        .outro-section { padding: 20vh 10%; text-align: center; background-color: var(--color-background); position: relative; z-index: 5; }
-        .outro-section h2 { font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 1rem; }
+        .outro-section { padding: 15vh 10%; text-align: center; background-color: var(--color-background); position: relative; z-index: 5; }
+        .outro-section h2 { font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 3rem; }
         .outro-section p { font-family: 'Inter', sans-serif; font-weight: 400; font-size: 1.2rem; max-width: 800px; margin: 0 auto; color: #b0b0b0; line-height: 1.7; }
         
         .features-section { padding: 15vh 5%; background-color: #1a1f26; }
@@ -290,6 +372,11 @@
         @media (max-width: 768px) {
             :root {
                 --header-height: 60px;
+            }
+
+            .ml-content-wrapper {
+                flex-direction: column;
+                gap: 2rem;
             }
 
             .knockout-text-layer {
@@ -398,7 +485,7 @@
             </div>
         </div>
         <div class="header-section center">
-            <a href="#" class="logo">Data Growth Hub</a>
+            <a href="#page-top" class="logo animated-gradient-text">Data Growth Hub</a>
         </div>
         <div class="header-section right">
            <a href="#page-top" class="top-link" aria-label="Ir al inicio de la página">
@@ -415,6 +502,8 @@
         </button>
         <!-- Navegación principal del menú -->
         <ul class="overlay-nav">
+            <li><a href="#page-top" class="menu-link">Inicio</a></li>
+            <li><a href="#machine-learning" class="menu-link">Machine Learning</a></li>
             <li><a href="#evolucion" class="menu-link">Evolución</a></li>
             <li><a href="#caracteristicas" class="menu-link">Características</a></li>
             <li><a href="#graficos" class="menu-link">Gráficos</a></li>
@@ -446,29 +535,41 @@
                         <h1>GROWTH</h1>
                     </div>
                 </div>
-                <!-- Escena final con el carrusel que aparece después de la animación -->
-                <div class="sequence-layer final-scene">
-                    <h2 style="margin-bottom: 1.5rem;">Descubre el Futuro</h2>
-                    <div class="carousel-wrapper">
-                        <div class="carousel-track">
-                            <div class="carousel-slide"><img src="https://i.imgur.com/rD4y3QZ.jpeg" alt="Dashboard de datos 1" onerror="this.onerror=null;this.src='https://placehold.co/300x300/222831/eeeeee?text=Imagen+1';"></div>
-                            <div class="carousel-slide"><img src="https://i.imgur.com/8i2D2h4.png" alt="Dashboard de datos 2" onerror="this.onerror=null;this.src='https://placehold.co/300x300/222831/eeeeee?text=Imagen+2';"></div>
-                            <div class="carousel-slide"><img src="https://i.imgur.com/yF9P3bV.png" alt="Dashboard de datos 3" onerror="this.onerror=null;this.src='https://placehold.co/300x300/222831/eeeeee?text=Imagen+3';"></div>
-                            <div class="carousel-slide"><img src="https://i.imgur.com/6Xz1bY1.jpeg" alt="Dashboard de datos 4" onerror="this.onerror=null;this.src='https://placehold.co/300x300/222831/eeeeee?text=Imagen+4';"></div>
-                            <div class="carousel-slide"><img src="https://i.imgur.com/x4u6VAd.png" alt="Dashboard de datos 5" onerror="this.onerror=null;this.src='https://placehold.co/300x300/222831/eeeeee?text=Imagen+5';"></div>
-                        </div>
-                        <div class="carousel-nav">
-                            <button id="prev-btn">&lt;</button>
-                            <button id="next-btn">&gt;</button>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
+
+        <section id="machine-learning" class="machine-learning-section">
+            <h2 class="animated-gradient-text">Machine Learning</h2>
+             <div class="ml-content-wrapper">
+                <div class="ml-image">
+                    <img src="https://i.imgur.com/E2LaKrp.png" alt="Ilustración de Machine Learning con nodos y conexiones cerebrales." onerror="this.onerror=null;this.src='https://placehold.co/450x450/222831/eeeeee?text=Imagen+ML';">
+                </div>
+                <div class="ml-text">
+                    <p>El <strong>Machine Learning</strong> convierte los datos históricos y los resultados pasados de tu empresa en una guía para el futuro. Lo hace en dos pasos:</p>
+                    <p>1. Aprende las reglas ocultas de cómo funciona realmente tu negocio.<br>
+                       2. Usa esas reglas para predecir lo que pasará y ayudarte a tomar mejores decisiones hoy.</p>
+                    <p><strong>Ejemplo: Precios dinámicos en una tienda online.</strong><br>
+                    El sistema analiza el historial de ventas y <strong>aprende</strong> que un producto se vende más caro y rápido los viernes por la noche. El próximo viernes, el sistema automáticamente <strong>actúa</strong> y sube el precio, maximizando la ganancia de forma inteligente.</p>
+                </div>
+            </div>
+        </section>
 
         <!-- Sección de introducción -->
         <section id="evolucion" class="outro-section">
             <h2>La Próxima Evolución del Análisis</h2>
+            <div class="carousel-wrapper">
+                <div class="carousel-track">
+                    <div class="carousel-slide"><img src="https://i.imgur.com/rD4y3QZ.jpeg" alt="Dashboard de datos 1" onerror="this.onerror=null;this.src='https://placehold.co/300x300/222831/eeeeee?text=Imagen+1';"></div>
+                    <div class="carousel-slide"><img src="https://i.imgur.com/8i2D2h4.png" alt="Dashboard de datos 2" onerror="this.onerror=null;this.src='https://placehold.co/300x300/222831/eeeeee?text=Imagen+2';"></div>
+                    <div class="carousel-slide"><img src="https://i.imgur.com/yF9P3bV.png" alt="Dashboard de datos 3" onerror="this.onerror=null;this.src='https://placehold.co/300x300/222831/eeeeee?text=Imagen+3';"></div>
+                    <div class="carousel-slide"><img src="https://i.imgur.com/6Xz1bY1.jpeg" alt="Dashboard de datos 4" onerror="this.onerror=null;this.src='https://placehold.co/300x300/222831/eeeeee?text=Imagen+4';"></div>
+                    <div class="carousel-slide"><img src="https://i.imgur.com/x4u6VAd.png" alt="Dashboard de datos 5" onerror="this.onerror=null;this.src='https://placehold.co/300x300/222831/eeeeee?text=Imagen+5';"></div>
+                </div>
+                <div class="carousel-nav">
+                    <button id="prev-btn">&lt;</button>
+                    <button id="next-btn">&gt;</button>
+                </div>
+            </div>
             <p>Combinamos tecnología de vanguardia con intuición humana para ofrecerte una perspectiva que no solo informa, sino que transforma. Prepárate para el siguiente nivel.</p>
         </section>
         
@@ -524,10 +625,14 @@
                 link.addEventListener('click', (e) => {
                     e.preventDefault();
                     if (menuOverlay.classList.contains('is-open')) { toggleMenu(); }
-                    // Pequeño retraso para que el menú se cierre antes de desplazarse
+                    
                     setTimeout(() => { 
                         const targetId = link.getAttribute('href');
-                        lenis.scrollTo(targetId, { offset: -80 }); // Ajustar el offset si es necesario
+                        if (targetId === '#page-top') {
+                            lenis.scrollTo(0, { duration: 1.5 });
+                        } else {
+                            lenis.scrollTo(targetId, { offset: -80 });
+                        }
                     }, 600); 
                 });
             });
@@ -554,8 +659,7 @@
             });
             sequenceTimeline.to(".knockout-text-layer", { scale: 15, ease: "none" }, 0);
             sequenceTimeline.from(".background-image", { scale: 1.2, ease: "none" }, 0);
-            sequenceTimeline.to(".knockout-text-layer", { opacity: 0, duration: 0.3, ease: "power1.inOut" }, ">-0.4");
-            sequenceTimeline.to(".final-scene", { opacity: 1, duration: 0.4, ease: 'power2.out' }, ">-0.2");
+            sequenceTimeline.to(".knockout-text-layer", { opacity: 0 }, ">-0.5");
             
             // --- LÓGICA DEL CARRUSEL 3D ---
             const track = document.querySelector('.carousel-track');
@@ -577,7 +681,6 @@
                 nextButton.addEventListener('click', () => { currentIndex = (currentIndex + 1) % slides.length; updateCarousel(); });
                 prevButton.addEventListener('click', () => { currentIndex = (currentIndex - 1 + slides.length) % slides.length; updateCarousel(); });
                 updateCarousel(); 
-                sequenceTimeline.from(".carousel-wrapper", { y: 50, opacity: 0, duration: 0.6, ease: 'power2.out' }, ">-0.2");
             }
             
             // --- ANIMACIÓN DE APARICIÓN DE LAS TARJETAS DE CARACTERÍSTICAS ---
