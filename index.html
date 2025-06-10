@@ -323,66 +323,61 @@
             margin-bottom: 0.75em;
         }
         
-        /* ***** INICIO CAMBIOS: Estilos del carrusel mejorado y texto BI ***** */
-        .carousel-wrapper { 
-            position: relative; 
-            width: 90%; 
-            max-width: 1000px; 
-            height: 550px;
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            margin: 0 auto 3rem auto;
+        /* ***** INICIO CAMBIOS: Nueva galería y texto BI ***** */
+        .gallery-container {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem;
         }
-        .carousel-track { 
-            position: relative; 
-            width: 450px;
-            height: 450px;
-            transform-style: preserve-3d; 
-            perspective: 1200px;
-        }
-        .carousel-slide { 
-            position: absolute; 
-            top: 0; 
-            left: 0; 
-            width: 100%; 
-            height: 100%; 
-            overflow: hidden; 
-            border-radius: 20px; 
-            box-shadow: 0 10px 25px rgba(0,0,0,0.5); 
-            transition: transform 0.5s ease-out, opacity 0.5s ease-out, filter 0.5s ease-out; 
-            cursor: pointer; 
-        }
-        .carousel-slide img { 
-            width: 100%; 
-            height: 100%; 
-            object-fit: contain; 
-            background: #2a3038;
+
+        .gallery-main-image {
+            width: 100%;
+            height: 600px;
+            margin-bottom: 1rem;
+            background-color: #2a3038;
             border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
         }
-        .carousel-nav { 
-            position: absolute; 
-            top: 50%; 
-            width: 100%; 
-            display: flex; 
-            justify-content: space-between; 
-            transform: translateY(-50%); 
-            z-index: 20; 
-            padding: 0 1rem; 
+
+        .gallery-main-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: opacity 0.4s ease-in-out;
         }
-        .carousel-nav button { 
-            background: rgba(255, 255, 255, 0.1); 
-            border: 1px solid rgba(255, 255, 255, 0.2); 
-            color: white; border-radius: 50%; 
-            width: 50px; 
-            height: 50px; 
-            cursor: pointer; 
-            transition: all 0.3s ease; 
-            backdrop-filter: blur(5px); 
+
+        .gallery-thumbnails {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 1rem;
         }
-        .carousel-nav button:hover { 
-            background: var(--color-primary); 
-            color: var(--color-background); 
+
+        .gallery-thumbnail {
+            width: 100%;
+            aspect-ratio: 16 / 10;
+            border-radius: 8px;
+            cursor: pointer;
+            overflow: hidden;
+            border: 3px solid transparent;
+            transition: border-color 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
+            opacity: 0.6;
+        }
+        
+        .gallery-thumbnail:hover {
+            transform: scale(1.05);
+            opacity: 1;
+        }
+
+        .gallery-thumbnail.active {
+            border-color: var(--color-primary);
+            opacity: 1;
+        }
+
+        .gallery-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
         
         .bi-text-container {
@@ -392,22 +387,16 @@
             margin: 4rem auto 4rem auto;
             color: #e0e0e0;
             line-height: 1.8;
+            padding: 0 2rem; /* Añadido padding horizontal */
         }
-        .bi-text-container h4 {
-            font-family: var(--font-title);
-            text-transform: uppercase;
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            color: var(--color-primary);
-            text-align: center;
-        }
+       
         .bi-text-container p {
             font-family: var(--font-body);
             font-weight: 400;
-            font-size: 1.1rem;
+            font-size: 1.15rem; /* Ligeramente más grande */
             color: #e0e0e0;
-            line-height: 1.8;
-            margin-bottom: 1rem;
+            line-height: 1.9; /* Mayor interlineado */
+            margin-bottom: 1.5rem; /* Mayor separación */
             text-transform: none;
         }
         .bi-text-container p strong {
@@ -432,7 +421,7 @@
         @keyframes scroll-animation { 0% { transform: translate(-50%, 0); opacity: 0; } 40% { opacity: 1; } 80% { transform: translate(-50%, 20px); opacity: 0; } 100% { opacity: 0; } }
         
         .outro-section { padding: 15vh 5%; text-align: center; background-color: var(--color-background); position: relative; z-index: 5; }
-        .outro-section h2 { font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 3rem; }
+        .outro-section h2 { font-size: clamp(2.5rem, 8vw, 6rem); margin-bottom: 3rem; }
         .outro-section p { font-family: 'Inter', sans-serif; font-weight: 400; font-size: 1.2rem; max-width: 800px; margin: 0 auto; color: #b0b0b0; line-height: 1.7; }
         
         .features-section { padding: 15vh 5%; background-color: #1a1f26; }
@@ -464,90 +453,32 @@
             :root {
                 --header-height: 60px;
             }
-
-            .ml-content-wrapper {
-                flex-direction: column;
-                gap: 2rem;
-            }
-
-            .knockout-text-layer {
-                padding-top: 8vh;
-            }
-
-            .logo {
-                font-size: 1.2rem;
-            }
-
-            .header-controls .linkedin-icon, .header-icon {
-                display: none;
-            }
+            .ml-content-wrapper { flex-direction: column; gap: 2rem; }
+            .knockout-text-layer { padding-top: 8vh; }
+            .logo { font-size: 1.2rem; }
+            .header-controls .linkedin-icon, .header-icon { display: none; }
+            .title-container h1 { font-size: 20vw; }
+            .growth-arrow { width: 25vw; height: 20vw; }
+            .outro-section { padding: 10vh 5%; }
+            .outro-section h2 { font-size: clamp(2rem, 10vw, 3.5rem); }
+            .features-section { padding: 10vh 5%; }
+            .final-chart-section { padding: 8vh 2%; }
+            .chart-title-main { font-size: 1.8em; margin-bottom: 15px; }
+            .legend-item text { font-size: 12px; }
+            .main-content-wrapper { padding-bottom: 20px; }
+            .timeline-container-custom { grid-template-columns: repeat(10, minmax(60px, auto)); width: fit-content; padding: 30px 15px; }
             
-            .title-container h1 {
-                font-size: 20vw;
-            }
-            .growth-arrow {
-                width: 25vw;
-                height: 20vw;
-            }
-
-            .outro-section {
-                padding: 10vh 5%;
-            }
-            .outro-section h2 {
-                font-size: clamp(2rem, 8vw, 2.5rem);
-            }
-            
-            .features-section {
-                padding: 10vh 5%;
-            }
-
-            .final-chart-section {
-                padding: 8vh 2%;
-            }
-
-            .chart-title-main {
-                font-size: 1.8em;
-                margin-bottom: 15px;
-            }
-
-            .carousel-wrapper {
-                width: 90%;
-                height: auto; /* Adjusted for responsive height */
-                max-width: 500px;
-            }
-             .carousel-track {
-                width: 80%;
-                padding-top: 80%; /* Maintain aspect ratio */
-                height: 0;
-            }
-            .carousel-nav button {
-                width: 40px;
-                height: 40px;
-            }
-
-            .legend-item text {
-                font-size: 12px;
-            }
-            
-            .main-content-wrapper {
-                padding-bottom: 20px;
-            }
-            .timeline-container-custom {
-               grid-template-columns: repeat(10, minmax(60px, auto));
-               width: fit-content;
-               padding: 30px 15px;
-            }
+            /* ***** CAMBIOS RESPONSIVE: Galería y texto BI ***** */
+            .gallery-main-image { height: 400px; }
+            .gallery-thumbnails { grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); }
+            .bi-text-container { padding: 0 1rem; }
+            .bi-text-container p { font-size: 1rem; }
         }
 
         @media (max-width: 480px) {
-            .overlay-nav a {
-                font-size: clamp(1.5rem, 8vw, 2.2rem);
-            }
-
-            :root {
-              --menu-width: 80vw;
-              --menu-max-width: 320px;
-            }
+            .overlay-nav a { font-size: clamp(1.5rem, 8vw, 2.2rem); }
+            :root { --menu-width: 80vw; --menu-max-width: 320px; }
+            .gallery-main-image { height: 250px; }
         }
 
     </style>
@@ -648,33 +579,31 @@
             </div>
         </section>
 
-        <!-- ***** INICIO CAMBIOS: Sección de Business Intelligence actualizada ***** -->
+        <!-- ***** INICIO CAMBIOS: Sección de Business Intelligence rediseñada ***** -->
         <section id="evolucion" class="outro-section">
             <h2 class="animated-gradient-text">Business intelligence (BI)</h2>
             
             <div class="bi-text-container">
-                <h4>¿Qué es Business Intelligence (BI)?</h4>
-                <p>Piensa en el Business Intelligence como el tablero de control de un coche. Este tablero no hace que el coche avance, pero te da toda la información crucial que necesitas para conducirlo bien: la velocidad, el nivel de gasolina, la temperatura del motor, etc.</p>
-                <p>De la misma forma, el BI es el proceso de tomar todos los datos brutos de una empresa (ventas, finanzas, marketing, operaciones) y transformarlos en información clara y útil, generalmente presentada en forma de gráficos y reportes fáciles de entender.</p>
+                <p>Piensa en el Business Intelligence como el tablero de control de un coche. Este tablero no hace que el coche avance, pero te da toda la información crucial que necesitas para conducirlo bien.</p>
+                <p>BI es el proceso de tomar todos los datos brutos de una empresa (ventas, finanzas, marketing, operaciones) y transformarlos en información clara y útil, generalmente presentada en forma de gráficos y reportes fáciles de entender.</p>
                 <p>El objetivo principal del BI es responder a la pregunta: <strong>"¿Qué ha pasado y por qué?".</strong></p>
                 <p>Permite tomar decisiones basadas en hechos y no en intuiciones, ayudando a ver rápidamente qué funciona y qué no dentro del negocio.</p>
                 <p>Por ejemplo, un equipo puede ver en un reporte qué campaña de marketing atrajo más clientes y decidir duplicar la inversión en ella al instante, en lugar de solo suponerlo.</p>
             </div>
 
-            <div class="carousel-wrapper">
-                <div class="carousel-track">
-                    <div class="carousel-slide"><img src="https://i.imgur.com/of09hLT.png" alt="Dashboard de datos 1" onerror="this.onerror=null;this.src='https://placehold.co/450x450/222831/eeeeee?text=Imagen+1';"></div>
-                    <div class="carousel-slide"><img src="https://i.imgur.com/DAtDSY9.png" alt="Dashboard de datos 2" onerror="this.onerror=null;this.src='https://placehold.co/450x450/222831/eeeeee?text=Imagen+2';"></div>
-                    <div class="carousel-slide"><img src="https://i.imgur.com/rfbwGZf.png" alt="Dashboard de datos 3" onerror="this.onerror=null;this.src='https://placehold.co/450x450/222831/eeeeee?text=Imagen+3';"></div>
-                    <div class="carousel-slide"><img src="https://i.imgur.com/o9wEf6l.png" alt="Dashboard de datos 4" onerror="this.onerror=null;this.src='https://placehold.co/450x450/222831/eeeeee?text=Imagen+4';"></div>
-                    <div class="carousel-slide"><img src="https://i.imgur.com/Mm7fy4D.png" alt="Dashboard de datos 5" onerror="this.onerror=null;this.src='https://placehold.co/450x450/222831/eeeeee?text=Imagen+5';"></div>
-                    <div class="carousel-slide"><img src="https://i.imgur.com/JmVH4fo.png" alt="Dashboard de datos 6" onerror="this.onerror=null;this.src='https://placehold.co/450x450/222831/eeeeee?text=Imagen+6';"></div>
-                    <div class="carousel-slide"><img src="https://i.imgur.com/PfbRypg.png" alt="Dashboard de datos 7" onerror="this.onerror=null;this.src='https://placehold.co/450x450/222831/eeeeee?text=Imagen+7';"></div>
-                    <div class="carousel-slide"><img src="https://i.imgur.com/O9sepwB.png" alt="Dashboard de datos 8" onerror="this.onerror=null;this.src='https://placehold.co/450x450/222831/eeeeee?text=Imagen+8';"></div>
+            <div class="gallery-container">
+                <div class="gallery-main-image">
+                    <img id="main-gallery-image" src="https://i.imgur.com/of09hLT.png" alt="Dashboard de datos principal">
                 </div>
-                <div class="carousel-nav">
-                    <button id="prev-btn">&lt;</button>
-                    <button id="next-btn">&gt;</button>
+                <div class="gallery-thumbnails">
+                    <div class="gallery-thumbnail active"><img src="https://i.imgur.com/of09hLT.png" alt="Dashboard de datos 1" onerror="this.onerror=null;this.src='https://placehold.co/120x80/222831/eeeeee?text=Img+1';"></div>
+                    <div class="gallery-thumbnail"><img src="https://i.imgur.com/DAtDSY9.png" alt="Dashboard de datos 2" onerror="this.onerror=null;this.src='https://placehold.co/120x80/222831/eeeeee?text=Img+2';"></div>
+                    <div class="gallery-thumbnail"><img src="https://i.imgur.com/rfbwGZf.png" alt="Dashboard de datos 3" onerror="this.onerror=null;this.src='https://placehold.co/120x80/222831/eeeeee?text=Img+3';"></div>
+                    <div class="gallery-thumbnail"><img src="https://i.imgur.com/o9wEf6l.png" alt="Dashboard de datos 4" onerror="this.onerror=null;this.src='https://placehold.co/120x80/222831/eeeeee?text=Img+4';"></div>
+                    <div class="gallery-thumbnail"><img src="https://i.imgur.com/Mm7fy4D.png" alt="Dashboard de datos 5" onerror="this.onerror=null;this.src='https://placehold.co/120x80/222831/eeeeee?text=Img+5';"></div>
+                    <div class="gallery-thumbnail"><img src="https://i.imgur.com/JmVH4fo.png" alt="Dashboard de datos 6" onerror="this.onerror=null;this.src='https://placehold.co/120x80/222831/eeeeee?text=Img+6';"></div>
+                    <div class="gallery-thumbnail"><img src="https://i.imgur.com/PfbRypg.png" alt="Dashboard de datos 7" onerror="this.onerror=null;this.src='https://placehold.co/120x80/222831/eeeeee?text=Img+7';"></div>
+                    <div class="gallery-thumbnail"><img src="https://i.imgur.com/O9sepwB.png" alt="Dashboard de datos 8" onerror="this.onerror=null;this.src='https://placehold.co/120x80/222831/eeeeee?text=Img+8';"></div>
                 </div>
             </div>
             
@@ -770,29 +699,26 @@
             sequenceTimeline.from(".background-image", { scale: 1.2, ease: "none" }, 0);
             sequenceTimeline.to(".knockout-text-layer", { opacity: 0 }, ">-0.5");
             
-            // --- LÓGICA DEL CARRUSEL 3D ---
-            const track = document.querySelector('.carousel-track');
-            if (track && track.children.length > 0) {
-                const slides = Array.from(track.children);
-                const nextButton = document.getElementById('next-btn');
-                const prevButton = document.getElementById('prev-btn');
-                let currentIndex = 0;
-                function updateCarousel() {
-                    slides.forEach((slide, index) => {
-                        let offset = index - currentIndex;
-                        let absOffset = Math.abs(offset);
-                        // ***** CAMBIO: Valores de transform ajustados para el nuevo carrusel *****
-                        slide.style.transform = `translateX(${offset * 110}px) translateZ(${-absOffset * 140}px) rotateY(${offset * 15}deg)`;
-                        slide.style.opacity = absOffset > 1 ? 0.2 : 1;
-                        slide.style.filter = absOffset > 0 ? 'blur(3px)' : 'none';
-                        slide.style.zIndex = slides.length - absOffset;
-                    });
-                }
-                nextButton.addEventListener('click', () => { currentIndex = (currentIndex + 1) % slides.length; updateCarousel(); });
-                prevButton.addEventListener('click', () => { currentIndex = (currentIndex - 1 + slides.length) % slides.length; updateCarousel(); });
-                updateCarousel(); 
-            }
+            // --- LÓGICA DE LA NUEVA GALERÍA ---
+            const mainImage = document.getElementById('main-gallery-image');
+            const thumbnails = document.querySelectorAll('.gallery-thumbnail');
             
+            thumbnails.forEach(thumb => {
+                thumb.addEventListener('click', function() {
+                    // Actualizar thumbnail activo
+                    document.querySelector('.gallery-thumbnail.active').classList.remove('active');
+                    this.classList.add('active');
+                    
+                    // Cambiar imagen principal
+                    const newSrc = this.querySelector('img').src;
+                    mainImage.style.opacity = 0;
+                    setTimeout(() => {
+                        mainImage.src = newSrc;
+                        mainImage.style.opacity = 1;
+                    }, 300); // Coincide con la transición de opacidad
+                });
+            });
+
             // --- ANIMACIÓN DE APARICIÓN DE LAS TARJETAS DE CARACTERÍSTICAS ---
             gsap.utils.toArray('.feature-card').forEach((card) => {
                 gsap.fromTo(card, 
