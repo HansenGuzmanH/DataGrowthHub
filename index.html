@@ -308,42 +308,6 @@
         }
 
         /* ----- ESTILOS INSERTADOS DEL PRIMER HTML ----- */
-        .chart-container {
-            background-color: transparent;
-            padding: 20px;
-            border-radius: 10px;
-            width: 95%; 
-            max-width: 1500px; 
-            box-sizing: border-box;
-            margin: 4rem auto 0 auto;
-        }
-        #alluvialChart_insertado {
-            background-color: transparent;
-            display: block;
-            margin: auto;
-        }
-        .sankey-link {
-            fill: none;
-            stroke: #EEEEEE; 
-            stroke-opacity: 0.8; 
-        }
-        .sankey-link:hover { stroke-opacity: 1; }
-        .animated-border-line { fill: none; stroke-width: 2.5px; stroke-linecap: round; }
-        .sankey-node rect.node-rect-main { stroke-width: 0.5px; shape-rendering: crispEdges; rx: 4; ry: 4; }
-        .liquid-fill-path { opacity: 1.0; }
-        .node-name-label {
-            font-size: 15px; 
-            fill: #f0f0f0; /* Cambiado a color de texto principal */
-            font-weight: bold; 
-            stroke-linecap: butt;
-            stroke-linejoin: miter;
-        }
-        .node-value-label { font-size: 13px; font-weight: bold; text-anchor: middle; pointer-events: none; fill: #FFFFFF; }
-        .link-label { font-size: 12px; fill: #ccc; text-anchor: middle; pointer-events: none; }
-        .chart-title-main { text-align: center; font-size: clamp(1.8rem, 5vw, 2.5em); margin-bottom: 25px; color: var(--color-text); }
-        .legend-item text { font-size: 16px; font-weight: bold; fill: #FFFFFF; dominant-baseline: middle; }
-
-        /* Estilos para el segundo componente (Timeline) */
         .process-inventory-h1 { /* Clase específica para evitar conflicto con h1 general */
             font-size: clamp(1.8rem, 5vw, 2.5em);
             line-height: 1.6rem;
@@ -435,6 +399,12 @@
         .nav-text { font-size: 0.9rem; font-weight: 600; transition: color 0.2s ease-in-out; margin-top: 0.1rem; }
         .nav-arrows { font-size: 1.3rem; font-weight: 600; line-height: 1; transition: color 0.2s ease-in-out; }
         
+        .timeline-call-to-action {
+            margin-top: -80px;
+            padding-bottom: 2rem;
+            text-align: center;
+        }
+
         /* ----- Estilos para Responsividad ----- */
         @media (max-width: 768px) {
             :root { --header-height: 60px; }
@@ -451,8 +421,6 @@
             .outro-section, .machine-learning-section { padding: 10vh 5%; }
             .outro-section h2, .machine-learning-section h2 { font-size: clamp(2rem, 10vw, 3.5rem); }
             .features-section { padding: 10vh 5%; }
-            .chart-title-main { font-size: 1.8em; margin-bottom: 15px; }
-            .legend-item text { font-size: 12px; }
             .main-content-wrapper { padding: 0 1rem 20px 1rem; }
             .gallery-main-image { height: 400px; }
             .gallery-thumbnails { grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); }
@@ -474,6 +442,7 @@
             .stats-title { font-size: 0.75rem; }
             .nav-text { font-size: 0.8rem; }
             .nav-arrows { font-size: 1.1rem; }
+            .timeline-call-to-action { margin-top: 2rem; }
         }
 
         @media (max-width: 480px) {
@@ -680,7 +649,7 @@
                     </div>
                 </div>
             </div>
-             <div class="subtitle-wrapper" style="margin-top: -80px; padding-bottom: 2rem; text-align: center;">
+             <div class="subtitle-wrapper timeline-call-to-action">
                   <p class="subtitle-text" style="max-width: 500px; margin: 0 auto;">
                       Conoce mas herramientas que ayudan a tu negocio a crecer con el análisis de datos
                   </p>
@@ -1088,7 +1057,7 @@
 
         if (timelineItems.length > 0) {
             if (runnerEmoji && (runnerEmoji.innerHTML.trim() === '' || runnerEmoji.innerHTML.trim() === '🏃')) {
-                runnerEmoji.innerHTML = '�'; 
+                runnerEmoji.innerHTML = '🚀'; 
             }
             setTimeout(() => {
                 requestAnimationFrame(updateActiveState);
