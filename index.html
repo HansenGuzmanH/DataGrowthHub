@@ -22,7 +22,7 @@
             --color-background: #222831; 
             --color-text: #f0f0f0;
             --color-primary: #14b8a6; /* Teal vibrante */
-            --color-secondary: #d946ef; /* Magenta/Púrpura neón */
+            --color-secondary: #FF2E63; /* Rosa neón */
             --font-title: 'Montserrat', sans-serif;
             --font-body: 'Inter', sans-serif;
             --menu-width: 50vw;
@@ -440,30 +440,38 @@
         .step-content-block ul li { margin-bottom: 0.5rem; }
         .step-content-block strong { color: var(--color-primary); }
 
+        .phase-title {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            margin-top: 4rem;
+            margin-bottom: 4rem;
+        }
         .phase-indicator {
-            display: inline-block; margin-right: 0.5rem; font-size: 1.8rem;
-            line-height: 1; vertical-align: middle;
+            display: inline-block; margin-right: 0.75rem; font-size: 1.5rem;
+            line-height: 1;
         }
 
         .step-row {
             display: flex;
             width: 100%;
-            max-width: 64rem; /* max-w-6xl */
-            margin-bottom: 2rem;
+            max-width: 72rem; /* max-w-7xl */
+            margin: 0 auto 2rem auto;
             position: relative;
             justify-content: center;
             align-items: flex-start;
             opacity: 0;
             transition: opacity 0.5s ease-in-out;
         }
-        .step-row .step-card-container { flex: 0 0 14rem; padding-right: 3rem; }
+        .step-row .step-card-container { flex: 0 0 12rem; padding-right: 2rem; }
         .step-row .step-card { width: 100%; cursor: pointer; border-radius: 0.5rem; padding: 1rem; text-align: center; }
         .step-row .step-card h4 { font-weight: 700; color: var(--color-text); }
         .step-row .step-card .text-4xl { font-size: 2.25rem; margin-bottom: 0.5rem; }
-        .step-row .connector { position: absolute; left: 14rem; top: 3.5rem; transform: translate(-50%, -50%); z-index: 1; }
-        .step-row .connector .line { width: 2rem; height: 2px; background-color: var(--color-border); }
+        .step-row .connector { position: absolute; left: 12rem; top: 3.5rem; transform: translate(-50%, -50%); z-index: 1; }
+        .step-row .connector .line { width: 4rem; height: 2px; background-color: var(--color-border); }
         .step-row .connector .dot { width: 0.75rem; height: 0.75rem; border-radius: 9999px; position: absolute; left: -0.375rem; top: -0.31rem; border: 2px solid white; }
-        .step-row .content-container { flex: 1 1 0; padding-left: 3rem; }
+        .step-row .content-container { flex: 1 1 0; padding-left: 4rem; }
         
         /* ----- Estilos para Responsividad ----- */
         @media (max-width: 768px) {
@@ -727,7 +735,7 @@
         </section>
 
         <section id="proceso-data-analisis" style="padding: 10vh 5%;">
-            <header class="text-center mb-10 md:mb-16">
+            <header class="text-center">
                 <h2 class="animated-gradient-text" style="font-size: clamp(3rem, 8vw, 6rem); margin-bottom: 2rem; text-align: center;">Proceso Data Análisis</h2>
                 <p class="text-lg text-gray-300 max-w-3xl mx-auto my-8 font-normal normal-case" style="font-family: var(--font-body); text-align: center;">Una guía visual para transformar los datos de su empresa en una ventaja competitiva. Explore cada paso para entender el proceso completo.</p>
             </header>
@@ -740,8 +748,9 @@
     
                     <!-- Phase 1 -->
                     <div class="phase-section mb-12">
-                        <h3 class="text-2xl font-bold text-center mt-16 mb-16" style="color: var(--color-primary); margin-top: 4rem; margin-bottom: 6rem;">
-                            <span class="phase-indicator" style="color: var(--color-primary);">&#x25CF;</span>Necesidades, visión y ganas de mejorar
+                        <h3 class="phase-title" style="color: var(--color-primary); margin-top: 4rem; margin-bottom: 6rem;">
+                            <span class="phase-indicator" style="color: var(--color-primary);">&#x25CF;</span>
+                            <span>Necesidades, visión y ganas de mejorar</span>
                         </h3>
                         <div class="flex flex-col items-center">
                             <!-- Step 1 Row -->
@@ -816,8 +825,9 @@
     
                     <!-- Phase 2 -->
                     <div class="phase-section">
-                        <h3 class="text-2xl font-bold text-center mt-16 mb-16" style="color: var(--color-secondary); margin-top: 4rem; margin-bottom: 6rem;">
-                            <span class="phase-indicator" style="color: var(--color-secondary);">&#x25B2;</span>Fase 2: Optimización y Predicción
+                        <h3 class="phase-title" style="color: var(--color-secondary); margin-top: 4rem; margin-bottom: 6rem;">
+                            <span class="phase-indicator" style="color: var(--color-secondary);">&#x25CF;</span>
+                            <span>Fase 2: Optimización y Predicción</span>
                         </h3>
                         <div class="flex flex-col items-center">
                             <!-- Step 5 Row -->
@@ -1236,7 +1246,7 @@
 
         if (timelineItems.length > 0) {
             if (runnerEmoji && (runnerEmoji.innerHTML.trim() === '' || runnerEmoji.innerHTML.trim() === '🏃')) {
-                runnerEmoji.innerHTML = '🚀'; 
+                runnerEmoji.innerHTML = '�'; 
             }
             setTimeout(() => {
                 requestAnimationFrame(updateActiveState);
