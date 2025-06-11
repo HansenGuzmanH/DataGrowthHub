@@ -305,7 +305,7 @@
             margin-bottom: 1rem;
         }
         .timeline-call-to-action .subtitle-text {
-             font-size: clamp(1.1rem, 2vw, 1.4rem);
+             font-size: clamp(1.4rem, 2.5vw, 1.8rem);
         }
         
         .main-content-wrapper {
@@ -494,15 +494,22 @@
         }
         .final-cta-icon {
             display: inline-block;
-            font-size: 6rem;
+            transition: transform 0.3s ease;
+        }
+        .final-cta-icon svg {
+            width: 6rem;
+            height: 6rem;
             color: #0077b5;
             animation: pulse-glow 2s infinite;
         }
+        .final-cta-icon:hover {
+            transform: scale(1.1);
+        }
 
         @keyframes pulse-glow {
-            0% { transform: scale(1); filter: drop-shadow(0 0 5px #0077b5); }
-            50% { transform: scale(1.1); filter: drop-shadow(0 0 20px #0077b5); }
-            100% { transform: scale(1); filter: drop-shadow(0 0 5px #0077b5); }
+            0% { filter: drop-shadow(0 0 5px #0077b5); }
+            50% { filter: drop-shadow(0 0 20px #00aaff); }
+            100% { filter: drop-shadow(0 0 5px #0077b5); }
         }
         
         /* ----- Estilos para Responsividad ----- */
@@ -675,7 +682,7 @@
                 </div>
             </div>
             
-            <div class="text-center my-8">
+            <div class="text-center my-4">
                 <p class="subtitle-text" style="max-width: 800px; margin: 2rem auto;">Otro grafico? por supuesto! interactúa con el, selecciona un numero y mira como se ve un inventario de procesos o productos resumido con BI</p>
             </div>
             <div class="inventory-section-layout">
@@ -765,7 +772,7 @@
                 </div>
                 <div class="inventory-cta-column">
                      <div class="subtitle-wrapper timeline-call-to-action">
-                          <p class="subtitle-text" style="max-width: 500px; margin: 0 auto; font-size: clamp(1.2rem, 2.2vw, 1.6rem);">
+                          <p class="subtitle-text" style="max-width: 500px; margin: 0 auto; font-size: clamp(1.4rem, 2.5vw, 1.8rem);">
                               Conoce mas herramientas que ayudan a tu negocio a crecer con el análisis de datos
                           </p>
                           <a href="#proceso-data-analisis" class="scroll-down-link-2" aria-label="Deslizar a Proceso Data Análisis">
@@ -776,7 +783,7 @@
             </div>
         </section>
 
-        <section id="proceso-data-analisis" style="padding: 10vh 5%;">
+        <section id="proceso-data-analisis" style="padding: 5vh 5% 10vh 5%;">
             <header class="text-center mb-10 md:mb-16">
                 <h2 class="animated-gradient-text" style="font-size: clamp(3rem, 8vw, 6rem); margin-bottom: 2rem; text-align: center;">Proceso Data Análisis</h2>
                 <p class="text-lg text-gray-300 max-w-3xl mx-auto my-8 font-normal normal-case" style="font-family: var(--font-body); text-align: center; margin-bottom: 4rem;">Una guía visual para transformar los datos de su empresa en una ventaja competitiva. Explore cada paso para entender el proceso completo.</p>
@@ -932,6 +939,8 @@
     (() => {
         let currentStep = 0;
         const timelineItems = document.querySelectorAll('.timeline-stage-item');
+        if (timelineItems.length === 0) return; 
+
         const runnerEmoji = document.getElementById('runner-emoji');
         const timelineContainer = document.querySelector('.timeline-container-custom');
         const statsPopup = document.getElementById('stats-popup');
@@ -944,8 +953,6 @@
         let scrollTimeoutId = null;
         let popupTimeoutId = null;
         let currentStats = { ytd: null, mtd: null }; 
-
-        if (timelineItems.length === 0) return; // No ejecutar si los elementos no existen
 
         const animationState = {
             tracer: { progress: 0, direction: 1, pathLength: 0, speed: 1, element: animatedTracerEl, guidePathElement: animationGuidePathEl, segmentLength: 15 }
@@ -1296,7 +1303,7 @@
 
         if (timelineItems.length > 0) {
             if (runnerEmoji && (runnerEmoji.innerHTML.trim() === '' || runnerEmoji.innerHTML.trim() === '🏃')) {
-                runnerEmoji.innerHTML = '�'; 
+                runnerEmoji.innerHTML = '🚀'; 
             }
             setTimeout(() => {
                 requestAnimationFrame(updateActiveState);
