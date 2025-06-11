@@ -293,19 +293,23 @@
         /* ----- ESTILOS INSERTADOS DEL TIMELINE ----- */
         .inventory-section-layout {
             display: flex;
-            align-items: center;
+            flex-direction: column; /* Changed to column for better stacking on larger screens */
+            align-items: center; /* Center items in column layout */
             gap: 2rem;
             margin-top: 1rem;
         }
-        .inventory-timeline-column { flex: 3; }
+        .inventory-timeline-column { flex: 1; width: 100%; } /* Adjusted flex and width */
         .inventory-cta-column { flex: 1; display: flex; flex-direction: column; justify-content: center; }
         .process-inventory-h1 {
             font-size: clamp(1.3rem, 3vw, 1.8em);
-            text-align: left;
+            text-align: left; /* Keep left alignment */
             margin-bottom: 1rem;
+            width: 100%; /* Ensure title takes full width */
+            padding-left: 1rem; /* Add padding to align with content */
         }
         .timeline-call-to-action .subtitle-text {
              font-size: clamp(1.4rem, 2.5vw, 1.8rem);
+             max-width: 800px; /* Increased max-width for more horizontal space */
         }
         
         .main-content-wrapper {
@@ -393,7 +397,7 @@
         
         /* ----- ESTILOS NUEVA SECCIÓN: Proceso Data Análisis ----- */
         #proceso-data-analisis {
-            padding: 5vh 5% 10vh 5%;
+            padding: 5vh 5% 10vh 5%; /* Ajustado el padding-top para subir la sección */
             background-color: var(--color-background);
         }
         #proceso-data-analisis .subtitle-text{
@@ -454,7 +458,7 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            margin-top: 4rem;
+            margin-top: 2rem; /* Adjusted margin-top to pull it up */
             margin-bottom: 4rem;
         }
         .phase-indicator {
@@ -525,15 +529,15 @@
         @keyframes pulse-glow-alt {
             0% {
                 transform: scale(1);
-                filter: drop-shadow(0 0 5px rgba(0, 119, 181, 0.7));
+                filter: drop-shadow(0 0 5px rgba(0, 119, 181, 0.4)); /* Sutil glow */
             }
             50% {
                 transform: scale(1.1);
-                filter: drop-shadow(0 0 20px rgba(0, 170, 255, 1)); /* More intense glow */
+                filter: drop-shadow(0 0 15px rgba(0, 170, 255, 0.8)); /* Más intenso pero sin cubrir */
             }
             100% {
                 transform: scale(1);
-                filter: drop-shadow(0 0 5px rgba(0, 119, 181, 0.7));
+                filter: drop-shadow(0 0 5px rgba(0, 119, 181, 0.4));
             }
         }
         
@@ -565,9 +569,13 @@
 
             /* Media queries para los gráficos insertados */
             .inventory-section-layout { flex-direction: column; }
-            .process-inventory-h1 { text-align: center; }
-            .timeline-call-to-action { text-align: center; margin-top: 2rem; }
-
+            .process-inventory-h1 { 
+                text-align: center; /* Center for mobile */
+                padding-left: 0; /* Remove left padding */
+            }
+            .timeline-call-to-action .subtitle-text {
+                max-width: 100%; /* Take full width on mobile */
+            }
             .timeline-container-custom {
                 padding-top: 120px; padding-bottom: 140px;
                 grid-template-columns: repeat(5, minmax(50px, auto)); 
@@ -681,7 +689,7 @@
         </ul>
         <div class="menu-footer-icon">
             <a href="https://www.linkedin.com/in/hansen-guzm%C3%A1n-hern%C3%A1ndez-b4185592/" target="_blank" rel="noopener noreferrer" class="linkedin-icon" aria-label="LinkedIn">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
             </a>
         </div>
     </div>
@@ -854,7 +862,7 @@
     
                     <!-- Phase 1 -->
                     <div class="phase-section mb-12">
-                        <h3 class="phase-title" style="color: var(--color-primary); margin-top: 4rem; margin-bottom: 4rem;">
+                        <h3 class="phase-title" style="color: var(--color-primary); margin-top: 2rem; margin-bottom: 4rem;">
                                 <span class="phase-indicator" style="color: var(--color-primary);">&#x25CF;</span>
                                 <span>Necesidades, visión y ganas de mejorar</span>
                         </h3>
@@ -931,7 +939,7 @@
     
                     <!-- Phase 2 -->
                     <div class="phase-section">
-                        <h3 class="phase-title" style="color: var(--color-secondary); margin-top: 4rem; margin-bottom: 4rem;">
+                        <h3 class="phase-title" style="color: var(--color-secondary); margin-top: 2rem; margin-bottom: 4rem;">
                                 <span class="phase-indicator" style="color: var(--color-secondary);">&#x25CF;</span>
                                 <span>Fase 2: Optimización y Predicción</span>
                         </h3>
@@ -1555,7 +1563,7 @@
 
                     // Event listeners para los botones de navegación del modal
                     modalPrevBtn.addEventListener('click', () => changeModalImage(-1));
-                    modalNextBtn.addEventListener('click', () => changeModalImage(1));
+                    modalNextBtn.addEventListener('click', () => changeDeteccionModalImage(1));
 
                     // Event listener para la navegación con teclado
                     document.addEventListener('keydown', (e) => {
@@ -1598,6 +1606,7 @@
             let cardHighlightInterval;
             let restartTimeout;
             let userInteracted = false;
+            let intersectionObserver; // Variable para el IntersectionObserver
 
             function setActiveStep(stepId) {
                 stepRows.forEach(row => {
@@ -1719,13 +1728,87 @@
                 });
             });
 
+            // IntersectionObserver para iniciar la animación cuando la sección es visible
+            const procesoDataAnalisisSection = document.getElementById('proceso-data-analisis');
+            if (procesoDataAnalisisSection) {
+                const observerOptions = {
+                    root: null, // viewport
+                    rootMargin: '0px',
+                    threshold: 0.1 // 10% de la sección visible para activar
+                };
+
+                intersectionObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting && !userInteracted) {
+                            startAnimationCycle();
+                        } else if (!entry.isIntersecting) {
+                            // Si la sección no está visible, detén las animaciones y permite que se reinicien
+                            clearInterval(revealInterval);
+                            clearTimeout(restartTimeout);
+                            clearInterval(cardHighlightInterval);
+                            userInteracted = false; // Reset user interaction to allow restart
+                            // Opcional: Ocultar las tarjetas para el efecto de "aparición"
+                            stepRows.forEach(row => {
+                                if (window.innerWidth > 768) { /* Solo si no es móvil */
+                                    row.style.opacity = '0';
+                                }
+                            });
+                        }
+                    });
+                }, observerOptions);
+
+                intersectionObserver.observe(procesoDataAnalisisSection);
+            }
+
+
             // Re-run animation cycle on resize to adapt to mobile/desktop
             window.addEventListener('resize', () => {
                 userInteracted = false; // Reset interaction on resize to restart animations
+                // Detener el observer antes de reevaluar
+                if (intersectionObserver) {
+                    intersectionObserver.disconnect();
+                }
+                // Volver a observar para aplicar la lógica correcta
+                if (procesoDataAnalisisSection) {
+                    intersectionObserver.observe(procesoDataAnalisisSection);
+                }
                 startAnimationCycle();
             });
 
-            startAnimationCycle();
+            // Handle navigation clicks to restart animation if scrolled to section
+            document.querySelectorAll('.menu-link, .scroll-down-link-2').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    const targetId = link.getAttribute('href');
+                    if (targetId === '#proceso-data-analisis') {
+                        userInteracted = false; // Reset user interaction
+                        clearInterval(revealInterval);
+                        clearTimeout(restartTimeout);
+                        clearInterval(cardHighlightInterval);
+                        // Force a re-check to start animation immediately if in view
+                        if (procesoDataAnalisisSection && intersectionObserver) {
+                             intersectionObserver.unobserve(procesoDataAnalisisSection); // Stop observing temporarily
+                             procesoDataAnalisisSection.style.opacity = '1'; // Ensure section is visible for new animation
+                             // Force content update and activate first step instantly
+                             stepRows.forEach(row => {
+                                const stepId = parseInt(row.dataset.step);
+                                const contentBlock = document.getElementById(`step-content-block-${stepId}`);
+                                const stepData = stepsData.find(s => s.id === stepId);
+                                if (contentBlock && stepData) contentBlock.innerHTML = stepData.content;
+                                if (row.dataset.step === '1') {
+                                    setActiveStep(1); // Activate first step immediately
+                                }
+                                if (window.innerWidth > 768) {
+                                     row.style.opacity = '0'; /* Reset opacity for animation if desktop */
+                                }
+                            });
+                            setTimeout(() => { // Small delay to ensure scroll and then start animation
+                                startAnimationCycle();
+                                intersectionObserver.observe(procesoDataAnalisisSection); // Re-observe
+                            }, 500); // Give some time for scroll to finish
+                        }
+                    }
+                });
+            });
         });
     </script>
 </body>
