@@ -294,7 +294,7 @@
         .inventory-section-layout {
             display: flex;
             flex-direction: column; /* Changed to column for better stacking on larger screens */
-            align-items: center; /* Center items in column layout */
+            align-items: flex-start; /* Changed to flex-start to align content to the left */
             gap: 2rem;
             margin-top: 1rem;
         }
@@ -837,7 +837,7 @@
                 </div>
                 <div class="inventory-cta-column">
                      <div class="subtitle-wrapper timeline-call-to-action">
-                          <p class="subtitle-text" style="max-width: 500px; margin: 0 auto; font-size: clamp(1.4rem, 2.5vw, 1.8rem);">
+                          <p class="subtitle-text" style="max-width: 800px; margin: 0 auto; font-size: clamp(1.4rem, 2.5vw, 1.8rem);">
                               Conoce mas herramientas que ayudan a tu negocio a crecer con el análisis de datos
                           </p>
                           <a href="#proceso-data-analisis" class="scroll-down-link-2" aria-label="Deslizar a Proceso Data Análisis">
@@ -871,7 +871,7 @@
                             <div class="step-row" data-step="1">
                                 <div class="step-card-container">
                                         <div class="step-card" data-step-id="1" style="border-color: var(--color-primary);">
-                                                <div class="text-4xl mb-2">&#x1F4AF;</div>
+                                                <div class="text-4xl mb-2">&#x1F3AF;</div><!-- Target emoji -->
                                                 <h4 class="font-bold">Definición de Necesidades</h4>
                                         </div>
                                 </div>
@@ -888,7 +888,7 @@
                             <div class="step-row" data-step="2">
                                 <div class="step-card-container">
                                         <div class="step-card" data-step-id="2" style="border-color: var(--color-primary);">
-                                                <div class="text-4xl mb-2">&#128269;</div>
+                                                <div class="text-4xl mb-2">&#x1F575;&#xFE0E;</div><!-- Detective emoji -->
                                                 <h4 class="font-bold">Identificación de Datos</h4>
                                         </div>
                                 </div>
@@ -905,7 +905,7 @@
                             <div class="step-row" data-step="3">
                                 <div class="step-card-container">
                                         <div class="step-card" data-step-id="3" style="border-color: var(--color-primary);">
-                                                <div class="text-4xl mb-2">&#128490;</div>
+                                                <div class="text-4xl mb-2">&#x1F6C1;</div><!-- Bathtub emoji -->
                                                 <h4 class="font-bold">Limpieza y Preparación</h4>
                                         </div>
                                 </div>
@@ -922,7 +922,7 @@
                             <div class="step-row" data-step="4">
                                 <div class="step-card-container">
                                         <div class="step-card" data-step-id="4" style="border-color: var(--color-primary);">
-                                                <div class="text-4xl mb-2">&#128202;</div>
+                                                <div class="text-4xl mb-2">&#x1F9EE;</div><!-- Abacus emoji -->
                                                 <h4 class="font-bold">Análisis y BI</h4>
                                         </div>
                                 </div>
@@ -965,7 +965,7 @@
                             <div class="step-row" data-step="6">
                                 <div class="step-card-container">
                                         <div class="step-card" data-step-id="6" style="border-color: var(--color-secondary);">
-                                                <div class="text-4xl mb-2">&#x21BB;</div>
+                                                <div class="text-4xl mb-2">&#129327;</div><!-- Exploding head emoji -->
                                                 <h4 class="font-bold">Aplicación y Mejora</h4>
                                         </div>
                                 </div>
@@ -1368,7 +1368,7 @@
 
         if (timelineItems.length > 0) {
             if (runnerEmoji && (runnerEmoji.innerHTML.trim() === '' || runnerEmoji.innerHTML.trim() === '🏃')) {
-                runnerEmoji.innerHTML = '🚀'; 
+                runnerEmoji.innerHTML = '�'; 
             }
             setTimeout(() => {
                 requestAnimationFrame(updateActiveState);
@@ -1563,7 +1563,7 @@
 
                     // Event listeners para los botones de navegación del modal
                     modalPrevBtn.addEventListener('click', () => changeModalImage(-1));
-                    modalNextBtn.addEventListener('click', () => changeDeteccionModalImage(1));
+                    modalNextBtn.addEventListener('click', () => changeModalImage(1)); /* Corrected function name */
 
                     // Event listener para la navegación con teclado
                     document.addEventListener('keydown', (e) => {
@@ -1642,8 +1642,6 @@
                 // Check if it's a mobile view
                 const isMobile = window.innerWidth <= 768;
 
-                if (userInteracted) return; 
-
                 // Clear any existing timers
                 clearInterval(revealInterval);
                 clearTimeout(restartTimeout);
@@ -1659,7 +1657,19 @@
                     row.querySelector('.step-card').classList.remove('active');
                 });
 
-                let currentStepIndex = 0;
+                // Display the first step immediately (if not mobile and not user-interacted)
+                if (!isMobile && !userInteracted && stepRows.length > 0) {
+                    const firstRow = stepRows[0];
+                    const firstStepId = parseInt(firstRow.dataset.step);
+                    const firstStepData = stepsData.find(s => s.id === firstStepId);
+                    
+                    firstRow.style.opacity = '1';
+                    const firstContentBlock = document.getElementById(`step-content-block-${firstStepId}`);
+                    firstContentBlock.innerHTML = firstStepData.content;
+                    setActiveStep(firstStepId);
+                }
+
+                let currentStepIndex = (isMobile || userInteracted) ? 0 : 1; // Start from 0 if mobile or interacted, else from 1
 
                 const animateStep = () => {
                     if (userInteracted) {
@@ -1687,21 +1697,20 @@
                     }
                 };
                 
-                // If mobile, show all at once and start secondary animation
-                if (isMobile) {
+                // If mobile or user interacted, show all at once and start secondary animation
+                if (isMobile || userInteracted) {
                     stepRows.forEach((row, index) => {
                         const stepId = parseInt(row.dataset.step);
                         const stepData = stepsData.find(s => s.id === stepId);
                         const contentBlock = document.getElementById(`step-content-block-${stepId}`);
                         contentBlock.innerHTML = stepData.content;
-                        // No opacity animation, just set to 1
                         row.style.opacity = '1'; 
                     });
                     startSecondaryCardAnimation();
                     restartTimeout = setTimeout(startAnimationCycle, 240000); // 4 minutes
                 } else {
-                    // For desktop, reveal one by one
-                    revealInterval = setInterval(animateStep, 3000); 
+                    // For desktop, reveal one by one starting from the second step
+                    revealInterval = setInterval(animateStep, 1500); /* Made animation faster */
                 }
             }
 
@@ -1787,7 +1796,6 @@
                         // Force a re-check to start animation immediately if in view
                         if (procesoDataAnalisisSection && intersectionObserver) {
                              intersectionObserver.unobserve(procesoDataAnalisisSection); // Stop observing temporarily
-                             procesoDataAnalisisSection.style.opacity = '1'; // Ensure section is visible for new animation
                              // Force content update and activate first step instantly
                              stepRows.forEach(row => {
                                 const stepId = parseInt(row.dataset.step);
