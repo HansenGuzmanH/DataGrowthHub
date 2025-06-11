@@ -221,14 +221,14 @@
             50% { transform: translateY(8px); opacity: 1; }
         }
         
-        .outro-section { padding: 15vh 5%; text-align: center; background-color: var(--color-background); position: relative; z-index: 2; }
+        .outro-section { padding: 15vh 5% 5vh; text-align: center; background-color: var(--color-background); position: relative; z-index: 2; }
         .outro-section h2 {
             text-align: center; font-size: clamp(3rem, 8vw, 6rem); margin-bottom: 5rem; 
         }
         
         .gallery-container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
         .gallery-header { max-width: 900px; margin: 0 auto 2rem auto; padding: 0 2rem; text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 3rem; }
-        .gallery-header p { font-family: var(--font-body); font-size: 1.1rem; color: #b0b0b0; line-height: 1.7; text-transform: none; }
+        .gallery-header p { font-family: var(--font-body); font-size: 1.1rem; color: #FFFFFF; line-height: 1.7; text-transform: none; }
         
         .gallery-main-image {
             width: 100%; height: 600px; margin-bottom: 1rem; background-color: #2a3038;
@@ -295,16 +295,18 @@
             display: flex;
             align-items: center;
             gap: 2rem;
-            margin-top: 5rem;
+            margin-top: 1rem;
         }
         .inventory-timeline-column { flex: 3; }
-        .inventory-cta-column { flex: 1; }
+        .inventory-cta-column { flex: 1; display: flex; flex-direction: column; justify-content: center; }
         .process-inventory-h1 {
-            font-size: clamp(1.5rem, 4vw, 2em);
+            font-size: clamp(1.3rem, 3vw, 1.8em);
             text-align: left;
             margin-bottom: 1rem;
         }
-        .timeline-call-to-action { text-align: left; }
+        .timeline-call-to-action .subtitle-text {
+             font-size: clamp(1.1rem, 2vw, 1.4rem);
+        }
         
         .main-content-wrapper {
             width: 100%; max-width: 100%;
@@ -388,9 +390,10 @@
         .nav-text { font-size: 0.9rem; font-weight: 600; transition: color 0.2s ease-in-out; margin-top: 0.1rem; }
         .nav-arrows { font-size: 1.3rem; font-weight: 600; line-height: 1; transition: color 0.2s ease-in-out; }
         
+        
         /* ----- ESTILOS NUEVA SECCIÓN: Proceso Data Análisis ----- */
         #proceso-data-analisis {
-            padding: 10vh 5%;
+            padding: 5vh 5% 10vh 5%;
             background-color: var(--color-background);
         }
         #proceso-data-analisis .subtitle-text{
@@ -474,6 +477,33 @@
         .step-row .connector .line { width: 4rem; height: 2px; background-color: var(--color-border); }
         .step-row .connector .dot { width: 0.75rem; height: 0.75rem; border-radius: 9999px; position: absolute; left: -0.375rem; top: -0.31rem; border: 2px solid white; }
         .step-row .content-container { flex: 1 1 0; padding-left: 4rem; }
+
+        .final-cta-section {
+            text-align: center;
+            padding: 15vh 5%;
+            background-color: var(--color-background);
+        }
+        .final-cta-text {
+            font-family: var(--font-body);
+            font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+            line-height: 1.8;
+            max-width: 600px;
+            margin: 0 auto 2.5rem auto;
+            color: #e0e0e0;
+            text-transform: none;
+        }
+        .final-cta-icon {
+            display: inline-block;
+            font-size: 6rem;
+            color: #0077b5;
+            animation: pulse-glow 2s infinite;
+        }
+
+        @keyframes pulse-glow {
+            0% { transform: scale(1); filter: drop-shadow(0 0 5px #0077b5); }
+            50% { transform: scale(1.1); filter: drop-shadow(0 0 20px #0077b5); }
+            100% { transform: scale(1); filter: drop-shadow(0 0 5px #0077b5); }
+        }
         
         /* ----- Estilos para Responsividad ----- */
         @media (max-width: 768px) {
@@ -517,7 +547,7 @@
             
             /* Media queries para Proceso Data Análisis */
             #proceso-data-analisis .roadmap-container > .relative { padding: 0; }
-            #proceso-data-analisis .step-row { flex-direction: column; align-items: center; max-width: 100%; margin-bottom: 1rem;}
+            #proceso-data-analisis .step-row { flex-direction: column; align-items: center; max-width: 100%; margin-bottom: 2rem;}
             #proceso-data-analisis .step-row .step-card-container { justify-content: center; padding: 0; margin-bottom: 1rem; }
             #proceso-data-analisis .step-row .content-container { padding: 0; width: 100%; }
             #proceso-data-analisis .step-row .connector { display: none; }
@@ -582,8 +612,8 @@
         <ul class="overlay-nav">
             <li><a href="#page-top" class="menu-link">Inicio</a></li>
             <li><a href="#evolucion" class="menu-link">Business intelligence</a></li>
-            <li><a href="#proceso-data-analisis" class="menu-link">Proceso Data Análisis</a></li>
             <li><a href="#galeria-bi" class="menu-link">GRÁFICOS</a></li>
+            <li><a href="#proceso-data-analisis" class="menu-link">Proceso Data Análisis</a></li>
         </ul>
         <div class="menu-footer-icon">
             <a href="https://www.linkedin.com/in/hansen-guzm%C3%A1n-hern%C3%A1ndez-b4185592/" target="_blank" rel="noopener noreferrer" class="linkedin-icon" aria-label="LinkedIn">
@@ -644,7 +674,10 @@
                     <div class="gallery-thumbnail"><img src="https://i.imgur.com/O9sepwB.png" alt="Dashboard de datos 8" onerror="this.onerror=null;this.src='https://placehold.co/120x80/222831/eeeeee?text=Img+8';"></div>
                 </div>
             </div>
-
+            
+            <div class="text-center my-8">
+                <p class="subtitle-text" style="max-width: 800px; margin: 2rem auto;">Otro grafico? por supuesto! interactúa con el, selecciona un numero y mira como se ve un inventario de procesos o productos resumido con BI</p>
+            </div>
             <div class="inventory-section-layout">
                 <div class="inventory-timeline-column">
                     <h1 class="process-inventory-h1">Procces Inventory</h1>
@@ -732,7 +765,7 @@
                 </div>
                 <div class="inventory-cta-column">
                      <div class="subtitle-wrapper timeline-call-to-action">
-                          <p class="subtitle-text" style="max-width: 500px; margin: 0 auto;">
+                          <p class="subtitle-text" style="max-width: 500px; margin: 0 auto; font-size: clamp(1.2rem, 2.2vw, 1.6rem);">
                               Conoce mas herramientas que ayudan a tu negocio a crecer con el análisis de datos
                           </p>
                           <a href="#proceso-data-analisis" class="scroll-down-link-2" aria-label="Deslizar a Proceso Data Análisis">
@@ -744,9 +777,9 @@
         </section>
 
         <section id="proceso-data-analisis" style="padding: 10vh 5%;">
-            <header class="text-center">
+            <header class="text-center mb-10 md:mb-16">
                 <h2 class="animated-gradient-text" style="font-size: clamp(3rem, 8vw, 6rem); margin-bottom: 2rem; text-align: center;">Proceso Data Análisis</h2>
-                <p class="text-lg text-gray-300 max-w-3xl mx-auto my-8 font-normal normal-case" style="font-family: var(--font-body); text-align: center;">Una guía visual para transformar los datos de su empresa en una ventaja competitiva. Explore cada paso para entender el proceso completo.</p>
+                <p class="text-lg text-gray-300 max-w-3xl mx-auto my-8 font-normal normal-case" style="font-family: var(--font-body); text-align: center; margin-bottom: 4rem;">Una guía visual para transformar los datos de su empresa en una ventaja competitiva. Explore cada paso para entender el proceso completo.</p>
             </header>
     
             <main>
@@ -876,6 +909,14 @@
                     </div>
                 </main>
             </div>
+            <footer class="final-cta-section">
+                <p class="final-cta-text">
+                    Si llegaste hasta aquí es por que de verdad quieres implementar Análisis de datos, si le das clic a este icono tan llamativo😅 y allí me encontrarás y te daré una mano 🤜🤛
+                </p>
+                <a href="https://www.linkedin.com/in/hansen-guzm%C3%A1n-hern%C3%A1ndez-b4185592/" target="_blank" rel="noopener noreferrer" class="final-cta-icon" aria-label="LinkedIn">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                </a>
+            </footer>
         </section>
     </main>
 
@@ -1255,7 +1296,7 @@
 
         if (timelineItems.length > 0) {
             if (runnerEmoji && (runnerEmoji.innerHTML.trim() === '' || runnerEmoji.innerHTML.trim() === '🏃')) {
-                runnerEmoji.innerHTML = '🚀'; 
+                runnerEmoji.innerHTML = '�'; 
             }
             setTimeout(() => {
                 requestAnimationFrame(updateActiveState);
