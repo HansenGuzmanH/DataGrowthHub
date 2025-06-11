@@ -5,10 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hansen Data Growth Hub | Análisis de Datos Cinematográfico</title>
     
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Montserrat:wght@900&display=swap" rel="stylesheet">
 
+    <!-- Librerías JS (en el head para asegurar la carga) -->
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="https://unpkg.com/d3-sankey@0.12.3/dist/d3-sankey.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
@@ -54,7 +56,7 @@
             border: 1px solid var(--color-border);
             height: var(--header-height);
             display: flex;
-            justify-content: space-between;
+            justify-content: space-between; /* Adjusted for better spacing */
             align-items: center;
             padding: 0 20px;
             z-index: 1000;
@@ -438,7 +440,11 @@
             height: 100%;
         }
         .step-content-block h3 { color: var(--color-text); font-size: clamp(1.2rem, 3vw, 1.5rem); margin-bottom: 1.5rem; }
-        .step-content-block p, .step-content-block ul { font-family: var(--font-body); text-transform: none; }
+        .step-content-block p, .step-content-block ul { 
+            font-family: var(--font-body); text-transform: none;
+            word-wrap: break-word; /* Ensures long words break and wrap */
+            overflow-wrap: break-word; /* Modern equivalent */
+        }
         .step-content-block ul { list-style-position: inside; padding-left: 1rem; }
         .step-content-block ul li { margin-bottom: 0.5rem; }
         .step-content-block strong { color: var(--color-primary); }
@@ -536,11 +542,17 @@
             :root { --header-height: 60px; }
             .knockout-text-layer { padding-top: calc(8vh + 30px); }
             .logo { font-size: 1.2rem; }
-            .header-controls { gap: 0.5rem; }
-            .linkedin-icon { display: flex; }
+            /* Adjusted header controls for mobile */
+            .header-controls { 
+                gap: 0.5rem; 
+                flex-shrink: 0; /* Prevents items from shrinking too much */
+            }
+            .linkedin-icon { display: flex; flex-shrink: 0; }
             .linkedin-icon svg { width: 28px; height: 28px; }
-            .header-icon { display: block; height: 40px; }
+            .header-icon { display: block; height: 40px; flex-shrink: 0; }
             .hamburger-icon { width: 28px; height: 22px; }
+            .menu-trigger { z-index: 1005; /* Ensure hamburger is on top */ }
+
             .title-container h1 { font-size: 20vw; }
             .growth-arrow { width: 25vw; height: 20vw; }
             #proceso-data-analisis, .outro-section { padding: 10vh 5%; }
@@ -581,13 +593,24 @@
                 opacity: 1; /* Desactiva la animación de aparición */
                 transition: transform 0.3s ease, box-shadow 0.3s ease; /* Solo permite la transición de adaptación */
             }
-            #proceso-data-analisis .step-row .step-card-container { justify-content: center; padding: 0; margin-bottom: 1rem; }
-            #proceso-data-analisis .step-row .content-container { padding: 0; width: 100%; }
+            /* Fix for step-card-container width on mobile */
+            #proceso-data-analisis .step-row .step-card-container { 
+                flex: 1 1 auto; /* Allow it to grow and shrink */
+                width: 100%; /* Take full width of its parent */
+                padding-right: 0; /* Remove right padding */
+                margin-bottom: 1rem; /* Re-add margin for spacing */
+            }
+            #proceso-data-analisis .step-row .content-container { padding: 0 1rem; /* Add horizontal padding for content */ width: 100%; }
             #proceso-data-analisis .step-row .connector { display: none; }
             #proceso-data-analisis .main-vertical-line { display: none; }
 
             .final-cta-section {
                 padding-top: 5vh; /* Ajuste para que se vea más arriba en móvil */
+            }
+
+            .tooltip-text {
+                width: 200px; /* Smaller width for mobile tooltips */
+                margin-left: -100px; /* Recenter tooltip */
             }
         }
 
@@ -610,6 +633,10 @@
             .navigation-controls-wrapper { top: 185px; }
             .nav-text { font-size: 0.75rem; }
             .nav-arrows { font-size: 1rem; }
+
+            .step-content-block {
+                padding: 1rem; /* Reduce padding on smallest screens */
+            }
         }
 
     </style>
@@ -654,7 +681,7 @@
         </ul>
         <div class="menu-footer-icon">
             <a href="https://www.linkedin.com/in/hansen-guzm%C3%A1n-hern%C3%A1ndez-b4185592/" target="_blank" rel="noopener noreferrer" class="linkedin-icon" aria-label="LinkedIn">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
             </a>
         </div>
     </div>
@@ -820,15 +847,19 @@
             </header>
     
             <main>
+                <!-- Roadmap Visualization Container -->
                 <div class="relative py-4 roadmap-container">
+                    <!-- Main vertical connecting line -->
                     <div class="main-vertical-line absolute left-1/2 w-0.5 bg-gray-700 h-full transform -translate-x-1/2 z-0"></div>
     
+                    <!-- Phase 1 -->
                     <div class="phase-section mb-12">
                         <h3 class="phase-title" style="color: var(--color-primary); margin-top: 4rem; margin-bottom: 4rem;">
                                 <span class="phase-indicator" style="color: var(--color-primary);">&#x25CF;</span>
                                 <span>Necesidades, visión y ganas de mejorar</span>
                         </h3>
                         <div class="flex flex-col items-center">
+                            <!-- Step 1 Row -->
                             <div class="step-row" data-step="1">
                                 <div class="step-card-container">
                                         <div class="step-card" data-step-id="1" style="border-color: var(--color-primary);">
@@ -845,6 +876,7 @@
                                 </div>
                             </div>
     
+                            <!-- Step 2 Row -->
                             <div class="step-row" data-step="2">
                                 <div class="step-card-container">
                                         <div class="step-card" data-step-id="2" style="border-color: var(--color-primary);">
@@ -861,6 +893,7 @@
                                 </div>
                             </div>
     
+                            <!-- Step 3 Row -->
                             <div class="step-row" data-step="3">
                                 <div class="step-card-container">
                                         <div class="step-card" data-step-id="3" style="border-color: var(--color-primary);">
@@ -877,6 +910,7 @@
                                 </div>
                             </div>
     
+                            <!-- Step 4 Row -->
                             <div class="step-row" data-step="4">
                                 <div class="step-card-container">
                                         <div class="step-card" data-step-id="4" style="border-color: var(--color-primary);">
@@ -895,12 +929,14 @@
                         </div>
                     </div>
     
+                    <!-- Phase 2 -->
                     <div class="phase-section">
                         <h3 class="phase-title" style="color: var(--color-secondary); margin-top: 4rem; margin-bottom: 4rem;">
                                 <span class="phase-indicator" style="color: var(--color-secondary);">&#x25CF;</span>
                                 <span>Fase 2: Optimización y Predicción</span>
                         </h3>
                         <div class="flex flex-col items-center">
+                            <!-- Step 5 Row -->
                             <div class="step-row" data-step="5">
                                 <div class="step-card-container">
                                         <div class="step-card" data-step-id="5" style="border-color: var(--color-secondary);">
@@ -917,6 +953,7 @@
                                 </div>
                             </div>
     
+                            <!-- Step 6 Row -->
                             <div class="step-row" data-step="6">
                                 <div class="step-card-container">
                                         <div class="step-card" data-step-id="6" style="border-color: var(--color-secondary);">
@@ -954,6 +991,7 @@
         <img class="modal-content" id="modal-image" alt="Imagen ampliada de la galería">
     </div>
     
+    <!-- SCRIPT DEL TIMELINE INSERTADO -->
     <script>
     (() => {
         let currentStep = 0;
@@ -1341,6 +1379,7 @@
     </script>
 
 
+    <!-- SCRIPT PRINCIPAL DE LA PÁGINA -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const lenis = new Lenis();
