@@ -5,12 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hansen Data Growth Hub | Análisis de Datos Cinematográfico</title>
     
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Montserrat:wght@900&display=swap" rel="stylesheet">
 
-    <!-- Librerías JS (en el head para asegurar la carga) -->
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="https://unpkg.com/d3-sankey@0.12.3/dist/d3-sankey.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
@@ -466,7 +464,7 @@
             position: relative;
             justify-content: center;
             align-items: stretch;
-            opacity: 0;
+            opacity: 0; /* Changed for fade-in animation on desktop */
             transition: opacity 0.5s ease-in-out;
         }
         .step-row .step-card-container { flex: 0 0 14rem; padding-right: 3rem; }
@@ -480,8 +478,10 @@
 
         .final-cta-section {
             text-align: center;
-            padding: 15vh 5%;
+            padding: 5vh 5% 10vh; /* Ajustado el padding para moverlo más arriba */
             background-color: var(--color-background);
+            position: relative;
+            z-index: 2;
         }
         .final-cta-text {
             font-family: var(--font-body);
@@ -500,16 +500,35 @@
             width: 6rem;
             height: 6rem;
             color: #0077b5;
-            animation: pulse-glow 2s infinite;
+            /* Eliminado animation: pulse-glow para usar linkedin-icon-large */
         }
         .final-cta-icon:hover {
             transform: scale(1.1);
         }
 
-        @keyframes pulse-glow {
-            0% { filter: drop-shadow(0 0 5px #0077b5); }
-            50% { filter: drop-shadow(0 0 20px #00aaff); }
-            100% { filter: drop-shadow(0 0 5px #0077b5); }
+        /* Nuevo estilo para el icono de LinkedIn grande y llamativo */
+        .linkedin-icon-large svg {
+            width: 6rem;
+            height: 6rem;
+            color: #0077b5; /* LinkedIn blue */
+            filter: drop-shadow(0 0 5px rgba(0, 119, 181, 0.7)); /* Initial glow */
+            animation: pulse-glow-alt 2s infinite cubic-bezier(0.4, 0, 0.6, 1); /* Custom pulse animation */
+        }
+
+        /* Animación mejorada para el icono de LinkedIn grande */
+        @keyframes pulse-glow-alt {
+            0% {
+                transform: scale(1);
+                filter: drop-shadow(0 0 5px rgba(0, 119, 181, 0.7));
+            }
+            50% {
+                transform: scale(1.1);
+                filter: drop-shadow(0 0 20px rgba(0, 170, 255, 1)); /* More intense glow */
+            }
+            100% {
+                transform: scale(1);
+                filter: drop-shadow(0 0 5px rgba(0, 119, 181, 0.7));
+            }
         }
         
         /* ----- Estilos para Responsividad ----- */
@@ -552,13 +571,24 @@
             .nav-text { font-size: 0.8rem; }
             .nav-arrows { font-size: 1.1rem; }
             
-            /* Media queries para Proceso Data Análisis */
+            /* Media queries para Proceso Data Análisis (desactiva animación de aparición) */
             #proceso-data-analisis .roadmap-container > .relative { padding: 0; }
-            #proceso-data-analisis .step-row { flex-direction: column; align-items: center; max-width: 100%; margin-bottom: 2rem;}
+            #proceso-data-analisis .step-row {
+                flex-direction: column;
+                align-items: center;
+                max-width: 100%;
+                margin-bottom: 2rem;
+                opacity: 1; /* Desactiva la animación de aparición */
+                transition: transform 0.3s ease, box-shadow 0.3s ease; /* Solo permite la transición de adaptación */
+            }
             #proceso-data-analisis .step-row .step-card-container { justify-content: center; padding: 0; margin-bottom: 1rem; }
             #proceso-data-analisis .step-row .content-container { padding: 0; width: 100%; }
             #proceso-data-analisis .step-row .connector { display: none; }
             #proceso-data-analisis .main-vertical-line { display: none; }
+
+            .final-cta-section {
+                padding-top: 5vh; /* Ajuste para que se vea más arriba en móvil */
+            }
         }
 
         @media (max-width: 480px) {
@@ -645,7 +675,7 @@
                     </div>
                     <div class="subtitle-wrapper">
                         <p class="subtitle-text">
-                          Desliza para conocer mas sobre el análisis de datos y un poco de mi trabajo
+                            Desliza para conocer mas sobre el análisis de datos y un poco de mi trabajo
                         </p>
                         <a href="#evolucion" class="scroll-down-link" aria-label="Deslizar a Business Intelligence">
                            <svg class="scroll-down-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M11,4H13V16L18.5,10.5L19.92,11.92L12,19.84L4.08,11.92L5.5,10.5L11,16V4Z"></path></svg>
@@ -703,7 +733,7 @@
                                 <path id="animation-guide-path" style="display:none;"></path> 
                                 <path id="animated-tracer" style="display:none;"></path> 
                             </svg>
-                
+                            
                             <div class="timeline-stage-item active" data-index="0">
                                 <div class="timeline-visual-elements">
                                     <div class="line-segment line-before"></div><div class="timeline-number-custom">101</div><div class="line-segment line-after"></div>
@@ -736,7 +766,7 @@
                             </div>
                             <div class="timeline-stage-item" data-index="6">
                                 <div class="timeline-visual-elements">
-                                    <div class="line-segment line-before"></div><div class="timeline-number-custom">700</div><div class="line-segment line-after"></div>
+                                    <div class="line-segment line-before"></div><div class="timeline-segment line-after"></div>
                                 </div><div class="timeline-category-custom">Stage #6</div>
                             </div>
                             <div class="timeline-stage-item" data-index="7">
@@ -776,7 +806,7 @@
                               Conoce mas herramientas que ayudan a tu negocio a crecer con el análisis de datos
                           </p>
                           <a href="#proceso-data-analisis" class="scroll-down-link-2" aria-label="Deslizar a Proceso Data Análisis">
-                             <svg class="scroll-down-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M11,4H13V16L18.5,10.5L19.92,11.92L12,19.84L4.08,11.92L5.5,10.5L11,16V4Z"></path></svg>
+                              <svg class="scroll-down-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M11,4H13V16L18.5,10.5L19.92,11.92L12,19.84L4.08,11.92L5.5,10.5L11,16V4Z"></path></svg>
                           </a>
                       </div>
                 </div>
@@ -790,140 +820,130 @@
             </header>
     
             <main>
-                <!-- Roadmap Visualization Container -->
                 <div class="relative py-4 roadmap-container">
-                    <!-- Main vertical connecting line -->
                     <div class="main-vertical-line absolute left-1/2 w-0.5 bg-gray-700 h-full transform -translate-x-1/2 z-0"></div>
     
-                    <!-- Phase 1 -->
                     <div class="phase-section mb-12">
                         <h3 class="phase-title" style="color: var(--color-primary); margin-top: 4rem; margin-bottom: 4rem;">
-                            <span class="phase-indicator" style="color: var(--color-primary);">&#x25CF;</span>
-                            <span>Necesidades, visión y ganas de mejorar</span>
+                                <span class="phase-indicator" style="color: var(--color-primary);">&#x25CF;</span>
+                                <span>Necesidades, visión y ganas de mejorar</span>
                         </h3>
                         <div class="flex flex-col items-center">
-                            <!-- Step 1 Row -->
                             <div class="step-row" data-step="1">
                                 <div class="step-card-container">
-                                    <div class="step-card" data-step-id="1" style="border-color: var(--color-primary);">
-                                        <div class="text-4xl mb-2">&#x1F4AF;</div>
-                                        <h4 class="font-bold">Definición de Necesidades</h4>
-                                    </div>
+                                        <div class="step-card" data-step-id="1" style="border-color: var(--color-primary);">
+                                                <div class="text-4xl mb-2">&#x1F4AF;</div>
+                                                <h4 class="font-bold">Definición de Necesidades</h4>
+                                        </div>
                                 </div>
                                 <div class="connector">
-                                    <div class="line"></div>
-                                    <div class="dot" style="background-color: var(--color-primary);"></div>
+                                        <div class="line"></div>
+                                        <div class="dot" style="background-color: var(--color-primary);"></div>
                                 </div>
                                 <div class="content-container">
-                                    <div class="step-content-block" id="step-content-block-1"></div>
+                                        <div class="step-content-block" id="step-content-block-1"></div>
                                 </div>
                             </div>
     
-                            <!-- Step 2 Row -->
                             <div class="step-row" data-step="2">
-                                 <div class="step-card-container">
-                                    <div class="step-card" data-step-id="2" style="border-color: var(--color-primary);">
-                                        <div class="text-4xl mb-2">&#128269;</div>
-                                        <h4 class="font-bold">Identificación de Datos</h4>
-                                    </div>
+                                <div class="step-card-container">
+                                        <div class="step-card" data-step-id="2" style="border-color: var(--color-primary);">
+                                                <div class="text-4xl mb-2">&#128269;</div>
+                                                <h4 class="font-bold">Identificación de Datos</h4>
+                                        </div>
                                 </div>
                                 <div class="connector">
-                                    <div class="line"></div>
-                                    <div class="dot" style="background-color: var(--color-primary);"></div>
+                                        <div class="line"></div>
+                                        <div class="dot" style="background-color: var(--color-primary);"></div>
                                 </div>
                                 <div class="content-container">
-                                    <div class="step-content-block" id="step-content-block-2"></div>
+                                        <div class="step-content-block" id="step-content-block-2"></div>
                                 </div>
                             </div>
     
-                            <!-- Step 3 Row -->
                             <div class="step-row" data-step="3">
-                                 <div class="step-card-container">
-                                    <div class="step-card" data-step-id="3" style="border-color: var(--color-primary);">
-                                        <div class="text-4xl mb-2">&#128490;</div>
-                                        <h4 class="font-bold">Limpieza y Preparación</h4>
-                                    </div>
+                                <div class="step-card-container">
+                                        <div class="step-card" data-step-id="3" style="border-color: var(--color-primary);">
+                                                <div class="text-4xl mb-2">&#128490;</div>
+                                                <h4 class="font-bold">Limpieza y Preparación</h4>
+                                        </div>
                                 </div>
                                 <div class="connector">
-                                    <div class="line"></div>
-                                    <div class="dot" style="background-color: var(--color-primary);"></div>
+                                        <div class="line"></div>
+                                        <div class="dot" style="background-color: var(--color-primary);"></div>
                                 </div>
                                 <div class="content-container">
-                                    <div class="step-content-block" id="step-content-block-3"></div>
+                                        <div class="step-content-block" id="step-content-block-3"></div>
                                 </div>
                             </div>
     
-                            <!-- Step 4 Row -->
                             <div class="step-row" data-step="4">
-                                 <div class="step-card-container">
-                                    <div class="step-card" data-step-id="4" style="border-color: var(--color-primary);">
-                                        <div class="text-4xl mb-2">&#128202;</div>
-                                        <h4 class="font-bold">Análisis y BI</h4>
-                                    </div>
+                                <div class="step-card-container">
+                                        <div class="step-card" data-step-id="4" style="border-color: var(--color-primary);">
+                                                <div class="text-4xl mb-2">&#128202;</div>
+                                                <h4 class="font-bold">Análisis y BI</h4>
+                                        </div>
                                 </div>
                                 <div class="connector">
-                                    <div class="line"></div>
-                                    <div class="dot" style="background-color: var(--color-primary);"></div>
+                                        <div class="line"></div>
+                                        <div class="dot" style="background-color: var(--color-primary);"></div>
                                 </div>
                                 <div class="content-container">
-                                    <div class="step-content-block" id="step-content-block-4"></div>
+                                        <div class="step-content-block" id="step-content-block-4"></div>
                                 </div>
                             </div>
                         </div>
                     </div>
     
-                    <!-- Phase 2 -->
                     <div class="phase-section">
                         <h3 class="phase-title" style="color: var(--color-secondary); margin-top: 4rem; margin-bottom: 4rem;">
-                            <span class="phase-indicator" style="color: var(--color-secondary);">&#x25CF;</span>
-                            <span>Fase 2: Optimización y Predicción</span>
+                                <span class="phase-indicator" style="color: var(--color-secondary);">&#x25CF;</span>
+                                <span>Fase 2: Optimización y Predicción</span>
                         </h3>
                         <div class="flex flex-col items-center">
-                            <!-- Step 5 Row -->
                             <div class="step-row" data-step="5">
                                 <div class="step-card-container">
-                                    <div class="step-card" data-step-id="5" style="border-color: var(--color-secondary);">
-                                        <div class="text-4xl mb-2">&#129504;</div>
-                                        <h4 class="font-bold">Machine Learning</h4>
-                                    </div>
+                                        <div class="step-card" data-step-id="5" style="border-color: var(--color-secondary);">
+                                                <div class="text-4xl mb-2">&#129504;</div>
+                                                <h4 class="font-bold">Machine Learning</h4>
+                                        </div>
                                 </div>
                                 <div class="connector">
-                                    <div class="line"></div>
-                                    <div class="dot" style="background-color: var(--color-secondary);"></div>
+                                        <div class="line"></div>
+                                        <div class="dot" style="background-color: var(--color-secondary);"></div>
                                 </div>
                                 <div class="content-container">
-                                    <div class="step-content-block" id="step-content-block-5"></div>
+                                        <div class="step-content-block" id="step-content-block-5"></div>
                                 </div>
                             </div>
     
-                            <!-- Step 6 Row -->
                             <div class="step-row" data-step="6">
                                 <div class="step-card-container">
-                                    <div class="step-card" data-step-id="6" style="border-color: var(--color-secondary);">
-                                        <div class="text-4xl mb-2">&#x21BB;</div>
-                                        <h4 class="font-bold">Aplicación y Mejora</h4>
-                                    </div>
+                                        <div class="step-card" data-step-id="6" style="border-color: var(--color-secondary);">
+                                                <div class="text-4xl mb-2">&#x21BB;</div>
+                                                <h4 class="font-bold">Aplicación y Mejora</h4>
+                                        </div>
                                 </div>
                                 <div class="connector">
-                                    <div class="line"></div>
-                                    <div class="dot" style="background-color: var(--color-secondary);"></div>
+                                        <div class="line"></div>
+                                        <div class="dot" style="background-color: var(--color-secondary);"></div>
                                 </div>
                                 <div class="content-container">
-                                    <div class="step-content-block" id="step-content-block-6"></div>
+                                        <div class="step-content-block" id="step-content-block-6"></div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </main>
+                <footer class="final-cta-section">
+                    <p class="final-cta-text">
+                        Si llegaste hasta aquí es por que de verdad quieres implementar Análisis de datos, si le das clic a este icono tan llamativo😅 allí me encontrarás y te daré una mano 🤜🤛
+                    </p>
+                    <a href="https://www.linkedin.com/in/hansen-guzm%C3%A1n-hern%C3%A1ndez-b4185592/" target="_blank" rel="noopener noreferrer" class="final-cta-icon linkedin-icon-large" aria-label="LinkedIn">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                    </a>
+                </footer>
             </div>
-            <footer class="final-cta-section">
-                <p class="final-cta-text">
-                    Si llegaste hasta aquí es por que de verdad quieres implementar Análisis de datos, si le das clic a este icono tan llamativo😅 y allí me encontrarás y te daré una mano 🤜🤛
-                </p>
-                <a href="https://www.linkedin.com/in/hansen-guzm%C3%A1n-hern%C3%A1ndez-b4185592/" target="_blank" rel="noopener noreferrer" class="final-cta-icon" aria-label="LinkedIn">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-                </a>
-            </footer>
         </section>
     </main>
 
@@ -934,7 +954,6 @@
         <img class="modal-content" id="modal-image" alt="Imagen ampliada de la galería">
     </div>
     
-    <!-- SCRIPT DEL TIMELINE INSERTADO -->
     <script>
     (() => {
         let currentStep = 0;
@@ -1011,9 +1030,9 @@
                     const r2EndX = (circle5Rect.left - containerRect.left + timelineContainer.scrollLeft) + (circle5Rect.width / 2);
                     d2 = `M ${r2StartX} ${r2StartY} L ${r2EndX} ${r2StartY}`;
                     dottedLineRow2PathEl.setAttribute('d', d2);
-                 } else {
-                      dottedLineRow2PathEl.setAttribute('d', '');
-                 }
+                   } else {
+                        dottedLineRow2PathEl.setAttribute('d', '');
+                   }
             } else {
                  dottedLineRow2PathEl.setAttribute('d', '');
             }
@@ -1247,10 +1266,10 @@
                 
                 requestAnimationFrame(() => { 
                     requestAnimationFrame(() => { 
-                         positionEmoji();
-                         updateDottedLines(); 
-                         updateBracketConnectorPath(); 
-                         updateAnimationGuidePath(); 
+                             positionEmoji(); 
+                             updateDottedLines(); 
+                             updateBracketConnectorPath(); 
+                             updateAnimationGuidePath(); 
                     });
                 });
             } else {
@@ -1289,11 +1308,11 @@
             scrollTimeoutId = setTimeout(() => {
                 if (timelineItems.length > 0) {
                      requestAnimationFrame(() => { 
-                         positionEmoji(); 
-                         updateDottedLines(); 
-                         updateBracketConnectorPath(); 
-                         updateAnimationGuidePath();
-                    });
+                             positionEmoji(); 
+                             updateDottedLines(); 
+                             updateBracketConnectorPath(); 
+                             updateAnimationGuidePath();
+                     });
                 }
             }, 100); 
         }
@@ -1322,7 +1341,6 @@
     </script>
 
 
-    <!-- SCRIPT PRINCIPAL DE LA PÁGINA -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const lenis = new Lenis();
@@ -1390,8 +1408,8 @@
                     }
                 });
                 tl_desktop.to(".knockout-text-layer", { scale: 15, ease: "none" }, 0)
-                  .from(".background-image", { scale: 1.2, ease: "none" }, 0)
-                  .to(".knockout-text-layer", { opacity: 0, ease: "power1.in" }, ">-0.4");
+                    .from(".background-image", { scale: 1.2, ease: "none" }, 0)
+                    .to(".knockout-text-layer", { opacity: 0, ease: "power1.in" }, ">-0.4");
             });
             
             const scrollDownLink = document.querySelector('.scroll-down-link');
@@ -1573,6 +1591,9 @@
             }
 
             function startAnimationCycle() {
+                // Check if it's a mobile view
+                const isMobile = window.innerWidth <= 768;
+
                 if (userInteracted) return; 
 
                 // Clear any existing timers
@@ -1580,9 +1601,11 @@
                 clearTimeout(restartTimeout);
                 clearInterval(cardHighlightInterval);
 
-                // Hide all steps initially
+                // Hide all steps initially if not mobile
                 stepRows.forEach(row => {
-                    row.style.opacity = '0';
+                    if (!isMobile) {
+                        row.style.opacity = '0';
+                    }
                     const contentBlock = document.getElementById(`step-content-block-${row.dataset.step}`);
                     contentBlock.innerHTML = '';
                     row.querySelector('.step-card').classList.remove('active');
@@ -1590,7 +1613,7 @@
 
                 let currentStepIndex = 0;
 
-                revealInterval = setInterval(() => {
+                const animateStep = () => {
                     if (userInteracted) {
                         clearInterval(revealInterval);
                         return;
@@ -1600,7 +1623,10 @@
                         const stepId = parseInt(row.dataset.step);
                         const stepData = stepsData.find(s => s.id === stepId);
                         
-                        row.style.opacity = '1';
+                        // Only animate opacity if not mobile
+                        if (!isMobile) {
+                            row.style.opacity = '1';
+                        }
                         const contentBlock = document.getElementById(`step-content-block-${stepId}`);
                         contentBlock.innerHTML = stepData.content;
                         setActiveStep(stepId);
@@ -1611,7 +1637,24 @@
                         startSecondaryCardAnimation();
                         restartTimeout = setTimeout(startAnimationCycle, 240000); // 4 minutes
                     }
-                }, 3000); 
+                };
+                
+                // If mobile, show all at once and start secondary animation
+                if (isMobile) {
+                    stepRows.forEach((row, index) => {
+                        const stepId = parseInt(row.dataset.step);
+                        const stepData = stepsData.find(s => s.id === stepId);
+                        const contentBlock = document.getElementById(`step-content-block-${stepId}`);
+                        contentBlock.innerHTML = stepData.content;
+                        // No opacity animation, just set to 1
+                        row.style.opacity = '1'; 
+                    });
+                    startSecondaryCardAnimation();
+                    restartTimeout = setTimeout(startAnimationCycle, 240000); // 4 minutes
+                } else {
+                    // For desktop, reveal one by one
+                    revealInterval = setInterval(animateStep, 3000); 
+                }
             }
 
             document.querySelectorAll('#proceso-data-analisis .step-card').forEach(card => {
@@ -1636,6 +1679,13 @@
                     setActiveStep(clickedStepId);
                 });
             });
+
+            // Re-run animation cycle on resize to adapt to mobile/desktop
+            window.addEventListener('resize', () => {
+                userInteracted = false; // Reset interaction on resize to restart animations
+                startAnimationCycle();
+            });
+
             startAnimationCycle();
         });
     </script>
