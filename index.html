@@ -64,9 +64,9 @@
         }
         
         .header-section { display: flex; align-items: center; }
-        .header-section.left { flex: 1 0 0; justify-content: flex-start; }
-        .header-section.center { flex: 2 0 0; justify-content: center; }
-        .header-section.right { flex: 1 0 0; justify-content: flex-end; }
+        .header-section.left { flex: 1 0 auto; justify-content: flex-start; }
+        .header-section.center { flex: 2 1 auto; justify-content: center; text-align: center; }
+        .header-section.right { flex: 1 0 auto; justify-content: flex-end; }
         
         .logo { 
             font-size: 1.6rem; 
@@ -432,15 +432,13 @@
         /* ----- Estilos para Responsividad ----- */
         @media (max-width: 768px) {
             :root { --header-height: 60px; }
-            .main-header { padding: 0 10px; }
-            .header-section.center { order: -1; flex: 1 1 100%; text-align: center; }
-            .logo { font-size: 1.4rem; }
             .ml-content-wrapper { flex-direction: column; gap: 2rem; }
             .knockout-text-layer { padding-top: calc(8vh + 30px); }
+            .logo { font-size: 1.2rem; }
             .header-controls { gap: 0.5rem; }
             .linkedin-icon { display: flex; }
             .linkedin-icon svg { width: 28px; height: 28px; }
-            .header-icon { display: none; }
+            .header-icon { display: block; height: 40px; }
             .hamburger-icon { width: 28px; height: 22px; }
             .title-container h1 { font-size: 20vw; }
             .growth-arrow { width: 25vw; height: 20vw; }
@@ -478,6 +476,7 @@
             .gallery-main-image { height: 250px; }
             .header-icon { height: 35px; width: auto; }
             .linkedin-icon svg { width: 24px; height: 24px; }
+            .logo { font-size: 1.1rem; }
             
             /* Media queries para los gráficos insertados */
             .timeline-visual-elements { width: 25px; } 
@@ -529,8 +528,8 @@
         <ul class="overlay-nav">
             <li><a href="#page-top" class="menu-link">Inicio</a></li>
             <li><a href="#evolucion" class="menu-link">Business intelligence</a></li>
-            <li><a href="#machine-learning" class="menu-link">Machine Learning</a></li>
             <li><a href="#galeria-bi" class="menu-link">GRÁFICOS</a></li>
+            <li><a href="#machine-learning" class="menu-link">Machine Learning</a></li>
         </ul>
         <div class="menu-footer-icon">
             <a href="https://www.linkedin.com/in/hansen-guzm%C3%A1n-hern%C3%A1ndez-b4185592/" target="_blank" rel="noopener noreferrer" class="linkedin-icon" aria-label="LinkedIn">
@@ -680,15 +679,14 @@
                     </div>
                 </div>
             </div>
-
-            <div class="subtitle-wrapper" style="margin-top: -80px; padding-bottom: 2rem; text-align: center;">
-                 <p class="subtitle-text" style="max-width: 500px; margin: 0 auto;">
-                     Conoce mas herramientas que ayudan a tu negocio a crecer con el análisis de datos
-                 </p>
-                 <a href="#machine-learning" class="scroll-down-link-2" aria-label="Deslizar a Machine Learning">
-                    <svg class="scroll-down-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M11,4H13V16L18.5,10.5L19.92,11.92L12,19.84L4.08,11.92L5.5,10.5L11,16V4Z"></path></svg>
-                 </a>
-             </div>
+             <div class="subtitle-wrapper" style="margin-top: -80px; padding-bottom: 2rem; text-align: center;">
+                  <p class="subtitle-text" style="max-width: 500px; margin: 0 auto;">
+                      Conoce mas herramientas que ayudan a tu negocio a crecer con el análisis de datos
+                  </p>
+                  <a href="#machine-learning" class="scroll-down-link-2" aria-label="Deslizar a Machine Learning">
+                     <svg class="scroll-down-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M11,4H13V16L18.5,10.5L19.92,11.92L12,19.84L4.08,11.92L5.5,10.5L11,16V4Z"></path></svg>
+                  </a>
+              </div>
             <!-- ===== FIN DEL CONTENIDO INSERTADO ===== -->
         </section>
 
