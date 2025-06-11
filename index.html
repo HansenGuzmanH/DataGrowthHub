@@ -229,9 +229,17 @@
             50% { transform: translateY(8px); opacity: 1; }
         }
         
-        .outro-section { padding: 15vh 5% 5vh; text-align: center; background-color: var(--color-background); position: relative; z-index: 2; }
+        .outro-section { 
+            padding: 15vh 5% 5vh; 
+            text-align: center; 
+            background-color: var(--color-background); 
+            position: relative; 
+            z-index: 2; 
+        }
         .outro-section h2 {
-            text-align: center; font-size: clamp(3rem, 8vw, 6rem); margin-bottom: 5rem; 
+            text-align: center; 
+            font-size: clamp(3rem, 8vw, 6rem); 
+            margin-bottom: 2rem; /* Reduced margin-bottom to bring text closer */
         }
         
         .gallery-container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
@@ -253,8 +261,13 @@
         .gallery-thumbnail img { width: 100%; height: 100%; object-fit: cover; }
         
         .bi-text-container {
-            font-family: var(--font-body); text-align: left; max-width: 1000px; margin: 0 auto 2rem auto; 
-            color: #e0e0e0; line-height: 1.8; padding: 0 2rem;
+            font-family: var(--font-body); 
+            text-align: left; 
+            max-width: 1200px; /* Increased max-width for more horizontal space */
+            margin: 0 auto 2rem auto; 
+            color: #e0e0e0; 
+            line-height: 1.8; 
+            padding: 0 2rem;
         }
         .bi-text-container p {
             font-family: var(--font-body); font-weight: 400; font-size: 1.15rem; color: #e0e0e0;
@@ -311,6 +324,11 @@
             margin: 0 auto 1.5rem auto; /* Adjusted bottom margin */
             color: #e0e0e0;
             text-transform: none;
+        }
+        .new-cta-placement p:first-of-type { /* Target the new "Los datos son el alma..." text */
+            font-weight: 600; /* Subtle bold */
+            font-style: italic; /* Italic */
+            margin-bottom: 0.5rem; /* Closer to the phrase before it */
         }
         .new-cta-placement .scroll-down-arrow {
             margin: 0 auto; /* Center the arrow */
@@ -383,8 +401,12 @@
             margin-bottom: 4rem;
         }
         .phase-indicator {
-            display: inline-block; margin-right: 0.75rem; font-size: 1.5rem;
+            display: inline-block; margin-right: 0.75rem; font-size: 1.8rem; /* Increased size for indicator */
             line-height: 1;
+        }
+        .phase-title span:last-child { /* Target the text part of the phase title */
+            font-size: clamp(1.2rem, 2.5vw, 1.6rem); /* Adjust text size for phase title */
+            font-weight: 700; /* Make text bold */
         }
 
         .step-row {
@@ -705,8 +727,8 @@
             
             <!-- New text and original "Conoce mas herramientas" text moved here -->
             <div class="text-center my-4 new-cta-placement">
-                <p class="subtitle-text" style="max-width: 800px; margin: 2rem auto 0.5rem auto;">
-                    Los datos son el alma de las decisiones inteligentes: quien los entiende, los analiza y los aprovecha, transforma su negocio en una máquina de crecimiento y éxito.
+                <p class="subtitle-text" style="max-width: 800px; margin: 2rem auto 0.5rem auto; font-weight: 600; font-style: italic;">
+                    "Los datos son el alma de las decisiones inteligentes: quien los entiende, los analiza y los aprovecha, transforma su negocio en una máquina de crecimiento y éxito."
                 </p>
                 <p class="subtitle-text" style="max-width: 800px; margin: 1.5rem auto;">
                     Conoce mas herramientas que ayudan a tu negocio a crecer con el análisis de datos
@@ -720,7 +742,7 @@
         <section id="proceso-data-analisis" style="padding: 5vh 5% 10vh 5%;">
             <header class="text-center mb-10 md:mb-16">
                 <h2 class="animated-gradient-text" style="font-size: clamp(3rem, 8vw, 6rem); margin-bottom: 2rem; text-align: center;">Proceso Data Análisis</h2>
-                <p class="text-lg text-gray-300 max-w-3xl mx-auto my-8 font-normal normal-case" style="font-family: var(--font-body); text-align: center; margin-bottom: 4rem;">Una guía visual para transformar los datos de su empresa en una ventaja competitiva. Explore cada paso para entender el proceso completo.</p>
+                <p class="text-lg text-gray-300 max-w-3xl mx-auto my-8 font-normal normal-case" style="font-family: var(--font-body); text-align: center; margin-bottom: 4rem; font-size: 1.25rem; font-weight: 500;">Una guía visual para transformar los datos de su empresa en una ventaja competitiva. Explore cada paso para entender el proceso completo.</p>
             </header>
     
             <main>
@@ -732,7 +754,7 @@
                     <!-- Phase 1 -->
                     <div class="phase-section mb-12">
                         <h3 class="phase-title" style="color: var(--color-primary); margin-top: 2rem; margin-bottom: 4rem;">
-                                <span class="phase-indicator" style="color: var(--color-primary);">&#x25CF;</span>
+                                <span class="phase-indicator" style="color: var(--color-primary);">&bullet;</span>
                                 <span>Necesidades, visión y ganas de mejorar</span>
                         </h3>
                         <div class="flex flex-col items-center">
@@ -809,7 +831,7 @@
                     <!-- Phase 2 -->
                     <div class="phase-section">
                         <h3 class="phase-title" style="color: var(--color-secondary); margin-top: 2rem; margin-bottom: 4rem;">
-                                <span class="phase-indicator" style="color: var(--color-secondary);">&#x25CF;</span>
+                                <span class="phase-indicator" style="color: var(--color-secondary);">&bullet;</span>
                                 <span>Fase 2: Optimización y Predicción</span>
                         </h3>
                         <div class="flex flex-col items-center">
@@ -853,7 +875,7 @@
                     <p class="final-cta-text">
                         Si llegaste hasta aquí es por que de verdad quieres implementar Análisis de datos, si le das clic a este icono tan llamativo😅 allí me encontrarás y te daré una mano 🤜🤛
                     </p>
-                    <a href="https://www.linkedin.com/in/hansen-guzm%C3%A1n-hern%C3%A1ndez-b4185592/" target="_blank" rel="noopener noreferrer" class="final-cta-link" aria-label="Conectar en LinkedIn">
+                    <a href="https://www.linkedin.com/in/hansen-guzm%C3%A1n-hern%C3%Aández-b4185592/" target="_blank" rel="noopener noreferrer" class="final-cta-link" aria-label="Conectar en LinkedIn">
                         <div class="linkedin-circle">
                             <span class="linkedin-text">in</span>
                         </div>
