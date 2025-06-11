@@ -148,7 +148,13 @@
         }
         .overlay-nav a:hover { color: var(--color-primary); }
         
-        .menu-footer-icon { padding: 2rem 0; align-self: center; text-align: center; width: 100%; }
+        .menu-footer-icon {
+            padding: 2rem 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
         .menu-footer-icon .linkedin-icon svg { width: 48px; height: 48px; }
 
         /* ----- Contenido Principal y Secciones ----- */
@@ -309,7 +315,7 @@
             width: 95%; 
             max-width: 1500px; 
             box-sizing: border-box;
-            margin: 4rem auto; /* Margen añadido para separar del carrusel */
+            margin: 4rem auto 0 auto;
         }
         #alluvialChart_insertado {
             background-color: transparent;
@@ -592,11 +598,6 @@
             </div>
 
             <!-- ===== INICIO DEL CONTENIDO INSERTADO ===== -->
-            <div class="chart-container">
-                <h1 class="chart-title-main">Actual Sales vs. Forecasted Sales</h1>
-                <svg id="alluvialChart_insertado"></svg>
-            </div>
-        
             <h1 class="process-inventory-h1">Procces Inventory</h1> 
             <div class="main-content-wrapper">
                 <div class="timeline-container-custom">
@@ -717,186 +718,6 @@
         <a class="modal-next">&#10095;</a>
         <img class="modal-content" id="modal-image" alt="Imagen ampliada de la galería">
     </div>
-    
-    <!-- SCRIPT DEL GRÁFICO INSERTADO -->
-    <script>
-        // --- Configuración del Gráfico SANKEY INSERTADO ---
-        (() => {
-            const svgElement = document.getElementById('alluvialChart_insertado');
-            if (!svgElement) return;
-
-            const drawChart = () => {
-                // Limpiar SVG anterior
-                d3.select(svgElement).selectAll("*").remove();
-
-                const isMobile = window.innerWidth <= 768;
-                
-                const margin = {
-                    top: 30, 
-                    right: isMobile ? 10 : 180, 
-                    bottom: isMobile ? 80 : 100, 
-                    left: isMobile ? 10 : 180
-                };
-                
-                const parentElement = svgElement.parentElement;
-                const baseWidth = parentElement.clientWidth;
-                const baseHeight = isMobile ? 400 : 550;
-
-                const width = baseWidth - margin.left - margin.right;
-                const height = baseHeight - margin.top - margin.bottom;
-
-                const nodeWidthConfig = { 
-                    wide: isMobile ? 20 : 65, 
-                    narrow: isMobile ? 20 : 60 
-                };
-
-                function formatCurrency(value) {
-                    if (isNaN(value)) return "";
-                    return `$${value.toLocaleString('es-ES')} MM`;
-                }
-
-                const legendData = [
-                    { name: "Actual Sales", color: "#00ADB5", columnId: 0, internalId: "VA" },
-                    { name: "Quarterly Forecast", color: "#126E82", columnId: 1, internalId: "PT" },
-                    { name: "Forecasted Sales", color: "#76b900", columnId: 2, internalId: "TVP" }
-                ];
-
-                const nodes = [];
-                const links = [];
-                const quarterNames = ["1Q", "2Q", "3Q", "4Q"]; 
-                const initialVentasActualesValue = 634; 
-
-                nodes.push({ name: "Ventas Actuales", id: "VA", column: 0 });
-                const ventasActualesNodeIndex = 0;
-
-                const quarterNodeIndices = [];
-                quarterNames.forEach((quarterName) => {
-                    nodes.push({ name: quarterName, id: quarterName, column: 1 });
-                    quarterNodeIndices.push(nodes.length - 1);
-                });
-
-                nodes.push({ name: "Total Pronosticado", id: "TVP", column: 2 });
-                const totalVentasPronosticadasNodeIndex = nodes.length - 1;
-
-                const ventasPorTrimestreBase = initialVentasActualesValue / quarterNames.length;
-
-                quarterNodeIndices.forEach((quarterNodeIndex) => {
-                    const currentQuarterName = nodes[quarterNodeIndex].name;
-                    const incrementoTrimestral = Math.floor(Math.random() * 60) + 15; 
-                    const valorTrimestreConIncremento = Math.round(ventasPorTrimestreBase + incrementoTrimestral);
-
-                    links.push({ source: ventasActualesNodeIndex, target: quarterNodeIndex, value: Math.round(ventasPorTrimestreBase), id: `link-va-${currentQuarterName}` });
-                    links.push({ source: quarterNodeIndex, target: totalVentasPronosticadasNodeIndex, value: valorTrimestreConIncremento, id: `link-${currentQuarterName}-tvp` });
-                });
-
-                const svg = d3.select(svgElement)
-                    .attr("width", baseWidth)
-                    .attr("height", baseHeight)
-                    .append("g")
-                    .attr("transform", `translate(${margin.left},${margin.top})`);
-
-                const sankey = d3.sankey()
-                    .nodeWidth(nodeWidthConfig.wide) 
-                    .nodePadding(isMobile ? 10 : 30)
-                    .nodeAlign(d3.sankeyJustify)
-                    .extent([[1, 1], [width - 1, height - 1]]);
-
-                const {nodes: graphNodes, links: graphLinks} = sankey({
-                    nodes: nodes.map(d => Object.assign({}, d)),
-                    links: links.map(d => Object.assign({}, d))
-                });
-
-                const linkGroup = svg.append("g").attr("class", "links-group");
-
-                const linkPaths = linkGroup.selectAll(".sankey-link").data(graphLinks).enter()
-                    .append("path")
-                    .attr("class", "sankey-link")
-                    .attr("d", d3.sankeyLinkHorizontal())
-                    .attr("stroke-width", d => Math.max(1.5, d.width));
-                
-                let maxInitialAnimationTime = 0;
-                linkPaths.each(function(d, i) { 
-                    const path = d3.select(this);
-                    const length = path.node().getTotalLength();
-                    const delay = i * 80;
-                    const duration = 1200;
-                    maxInitialAnimationTime = Math.max(maxInitialAnimationTime, delay + duration);
-
-                    path.attr("stroke-dasharray", length + " " + length)
-                        .attr("stroke-dashoffset", length)
-                        .transition().duration(duration).ease(d3.easeSinInOut)
-                        .attr("stroke-dashoffset", 0).delay(delay);
-                });
-
-                const node = svg.append("g").attr("class", "nodes").selectAll(".sankey-node").data(graphNodes).enter()
-                    .append("g")
-                    .attr("class", "sankey-node")
-                    .attr("transform", d => `translate(${d.x0},${d.y0})`);
-
-                node.append("rect")
-                    .attr("class", "node-rect-main")
-                    .attr("height", d => Math.max(1, d.y1 - d.y0))
-                    .attr("width", d => d.column === 1 ? nodeWidthConfig.narrow : (d.x1 - d.x0))
-                    .attr("x", d => d.column === 1 ? ((d.x1 - d.x0) - nodeWidthConfig.narrow) / 2 : 0)
-                    .attr("fill", d => (legendData.find(item => item.columnId === d.column) || {}).color || "#ccc")
-                    .attr("stroke", d => d3.color((legendData.find(item => item.columnId === d.column) || {}).color || "#ccc").darker(0.5));
-
-                if (!isMobile) {
-                    node.append("text")
-                        .attr("class", "node-name-label")
-                        .attr("x", d => (d.x0 < width / 2) ? (d.x1 - d.x0 + 8) : -8) 
-                        .attr("y", d => (d.y1 - d.y0) / 2)
-                        .attr("dy", "0.35em")
-                        .attr("text-anchor", d => (d.x0 < width / 2) ? "start" : "end")
-                        .text(d => d.column === 1 ? d.name : "");
-                }
-
-                node.append("text")
-                    .attr("class", "node-value-label")
-                    .style("font-size", isMobile ? "9px" : "13px")
-                    .attr("x", d => (d.column === 1 ? nodeWidthConfig.narrow : (d.x1 - d.x0)) / 2 + (d.column === 1 ? ((d.x1 - d.x0) - nodeWidthConfig.narrow) / 2 : 0))
-                    .attr("y", d => (d.y1 - d.y0) / 2)
-                    .attr("dy", "0.35em")
-                    .text(d => {
-                        const value = Math.max(d3.sum(d.sourceLinks, l => l.value), d3.sum(d.targetLinks, l => l.value));
-                        return value > 0 ? (isMobile ? `$${value}` : formatCurrency(value)) : "";
-                    })
-                    .style("opacity", d => (d.y1 - d.y0) > (isMobile ? 10 : 15) ? 1 : 0);
-
-                const legendGroup = svg.append("g")
-                    .attr("class", "legend")
-                    .attr("transform", `translate(0, ${height + 40})`);
-
-                const legendItem = legendGroup.selectAll(".legend-item").data(legendData).enter()
-                    .append("g").attr("class", "legend-item")
-                    .attr("transform", (d, i) => isMobile ? `translate(${i * (width / legendData.length)}, 0)` : `translate(${i * 210}, 0)`);
-                
-                if (isMobile) {
-                     legendGroup.attr("transform", `translate(${(width - legendData.length * 110) / 2}, ${height + margin.bottom / 1.5 })`);
-                     legendItem.attr("transform", (d, i) => `translate(${i * 110}, 0)`);
-                } else {
-                     legendGroup.attr("transform", `translate(${(width - legendData.length * 200) / 2 + 30 }, ${height + margin.bottom / 2 })`);
-                     legendItem.attr("transform", (d, i) => `translate(${i * 210}, 0)`);
-                }
-
-                legendItem.append("rect")
-                    .attr("x", 0).attr("y", -9).attr("width", 18).attr("height", 18)
-                    .style("fill", d => d.color).attr("rx", 3).attr("ry", 3);
-
-                legendItem.append("text")
-                    .attr("x", 24).attr("y", 0).text(d => d.name)
-                    .style("font-size", isMobile ? "11px" : "16px");
-
-            };
-
-            drawChart();
-            window.addEventListener('resize', () => {
-                let resizeTimer;
-                clearTimeout(resizeTimer);
-                resizeTimer = setTimeout(drawChart, 250);
-            });
-        })();
-    </script>
     
     <!-- SCRIPT DEL TIMELINE INSERTADO -->
     <script>
@@ -1267,7 +1088,7 @@
 
         if (timelineItems.length > 0) {
             if (runnerEmoji && (runnerEmoji.innerHTML.trim() === '' || runnerEmoji.innerHTML.trim() === '🏃')) {
-                runnerEmoji.innerHTML = '🚀'; 
+                runnerEmoji.innerHTML = '�'; 
             }
             setTimeout(() => {
                 requestAnimationFrame(updateActiveState);
