@@ -291,17 +291,23 @@
         }
 
         /* ----- ESTILOS INSERTADOS DEL TIMELINE ----- */
-        .process-inventory-h1 { /* Clase específica para evitar conflicto con h1 general */
-            font-size: clamp(1.8rem, 5vw, 2.5em);
-            line-height: 1.6rem;
-            font-weight: 700;
-            color: var(--color-text);
-            margin-bottom: 1rem;
-            text-align: center;
-            margin-top: 3rem;
+        .inventory-section-layout {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin-top: 5rem;
         }
+        .inventory-timeline-column { flex: 3; }
+        .inventory-cta-column { flex: 1; }
+        .process-inventory-h1 {
+            font-size: clamp(1.5rem, 4vw, 2em);
+            text-align: left;
+            margin-bottom: 1rem;
+        }
+        .timeline-call-to-action { text-align: left; }
+        
         .main-content-wrapper {
-            width: 100%; max-width: 100%; margin-left: auto; margin-right: auto;
+            width: 100%; max-width: 100%;
             overflow-x: auto; position: relative;
         }
         .timeline-container-custom {
@@ -382,11 +388,6 @@
         .nav-text { font-size: 0.9rem; font-weight: 600; transition: color 0.2s ease-in-out; margin-top: 0.1rem; }
         .nav-arrows { font-size: 1.3rem; font-weight: 600; line-height: 1; transition: color 0.2s ease-in-out; }
         
-        .timeline-call-to-action {
-            padding-bottom: 2rem;
-            text-align: center;
-        }
-        
         /* ----- ESTILOS NUEVA SECCIÓN: Proceso Data Análisis ----- */
         #proceso-data-analisis {
             padding: 10vh 5%;
@@ -430,11 +431,12 @@
             -webkit-backdrop-filter: blur(5px);
             border: 1px solid var(--color-border);
             color: var(--color-text);
-            padding: 1.5rem;
+            padding: 2rem;
             border-radius: 15px;
             min-height: 200px;
+            height: 100%;
         }
-        .step-content-block h3 { color: var(--color-text); font-size: clamp(1.2rem, 3vw, 1.5rem); }
+        .step-content-block h3 { color: var(--color-text); font-size: clamp(1.2rem, 3vw, 1.5rem); margin-bottom: 1.5rem; }
         .step-content-block p, .step-content-block ul { font-family: var(--font-body); text-transform: none; }
         .step-content-block ul { list-style-position: inside; padding-left: 1rem; }
         .step-content-block ul li { margin-bottom: 0.5rem; }
@@ -460,15 +462,15 @@
             margin: 0 auto 2rem auto;
             position: relative;
             justify-content: center;
-            align-items: flex-start;
+            align-items: stretch;
             opacity: 0;
             transition: opacity 0.5s ease-in-out;
         }
-        .step-row .step-card-container { flex: 0 0 12rem; padding-right: 2rem; }
+        .step-row .step-card-container { flex: 0 0 14rem; padding-right: 3rem; }
         .step-row .step-card { width: 100%; cursor: pointer; border-radius: 0.5rem; padding: 1rem; text-align: center; }
         .step-row .step-card h4 { font-weight: 700; color: var(--color-text); }
         .step-row .step-card .text-4xl { font-size: 2.25rem; margin-bottom: 0.5rem; }
-        .step-row .connector { position: absolute; left: 12rem; top: 3.5rem; transform: translate(-50%, -50%); z-index: 1; }
+        .step-row .connector { position: absolute; left: 14rem; top: 3.5rem; transform: translate(-50%, -50%); z-index: 1; }
         .step-row .connector .line { width: 4rem; height: 2px; background-color: var(--color-border); }
         .step-row .connector .dot { width: 0.75rem; height: 0.75rem; border-radius: 9999px; position: absolute; left: -0.375rem; top: -0.31rem; border: 2px solid white; }
         .step-row .content-container { flex: 1 1 0; padding-left: 4rem; }
@@ -494,6 +496,10 @@
             .bi-text-container p { font-size: 1rem; }
 
             /* Media queries para los gráficos insertados */
+            .inventory-section-layout { flex-direction: column; }
+            .process-inventory-h1 { text-align: center; }
+            .timeline-call-to-action { text-align: center; margin-top: 2rem; }
+
             .timeline-container-custom {
                 padding-top: 120px; padding-bottom: 140px;
                 grid-template-columns: repeat(5, minmax(50px, auto)); 
@@ -508,11 +514,10 @@
             .stats-title { font-size: 0.75rem; }
             .nav-text { font-size: 0.8rem; }
             .nav-arrows { font-size: 1.1rem; }
-            .timeline-call-to-action { margin-top: 2rem; }
-
+            
             /* Media queries para Proceso Data Análisis */
             #proceso-data-analisis .roadmap-container > .relative { padding: 0; }
-            #proceso-data-analisis .step-row { flex-direction: column; align-items: center; max-width: 100%;}
+            #proceso-data-analisis .step-row { flex-direction: column; align-items: center; max-width: 100%; margin-bottom: 1rem;}
             #proceso-data-analisis .step-row .step-card-container { justify-content: center; padding: 0; margin-bottom: 1rem; }
             #proceso-data-analisis .step-row .content-container { padding: 0; width: 100%; }
             #proceso-data-analisis .step-row .connector { display: none; }
@@ -640,98 +645,102 @@
                 </div>
             </div>
 
-            <!-- ===== INICIO DEL CONTENIDO INSERTADO ===== -->
-            <h1 class="process-inventory-h1">Procces Inventory</h1> 
-            <div class="main-content-wrapper">
-                <div class="timeline-container-custom">
-                    <div id="runner-emoji">🚀</div>
-                    <div id="stats-popup" class="stats-popup">
-                        <div class="stats-title">Stats YTD y MTD</div>
-                        <div class="stats-line"><span>YTD:</span><span class="stats-value" id="ytd-value"></span></div>
-                        <div class="stats-line"><span>MTD:</span><span class="stats-value" id="mtd-value"></span></div>
-                    </div>
-                    <svg id="connector-svg"> 
-                        <path id="dotted-line-row1" class="dotted-line" d=""></path>
-                        <path id="dotted-line-row2" class="dotted-line" d=""></path>
-                        <path id="bracket-connector-path" d=""></path> 
-                        <path id="animation-guide-path" style="display:none;"></path> 
-                        <path id="animated-tracer" style="display:none;"></path> 
-                    </svg>
-        
-                    <div class="timeline-stage-item active" data-index="0">
-                        <div class="timeline-visual-elements">
-                            <div class="line-segment line-before"></div><div class="timeline-number-custom">101</div><div class="line-segment line-after"></div>
-                        </div><div class="timeline-category-custom">Opened</div>
-                    </div>
-                    <div class="timeline-stage-item" data-index="1">
-                        <div class="timeline-visual-elements">
-                            <div class="line-segment line-before"></div><div class="timeline-number-custom">250</div><div class="line-segment line-after"></div>
-                        </div><div class="timeline-category-custom">Stage #1</div>
-                    </div>
-                    <div class="timeline-stage-item" data-index="2">
-                        <div class="timeline-visual-elements">
-                            <div class="line-segment line-before"></div><div class="timeline-number-custom">3</div><div class="line-segment line-after"></div>
-                        </div><div class="timeline-category-custom">Stage #2</div>
-                    </div>
-                    <div class="timeline-stage-item" data-index="3">
-                        <div class="timeline-visual-elements">
-                            <div class="line-segment line-before"></div><div class="timeline-number-custom">42</div><div class="line-segment line-after"></div>
-                        </div><div class="timeline-category-custom">Stage #3</div>
-                    </div>
-                    <div class="timeline-stage-item" data-index="4">
-                        <div class="timeline-visual-elements">
-                            <div class="line-segment line-before"></div><div class="timeline-number-custom">555</div><div class="line-segment line-after"></div>
-                        </div><div class="timeline-category-custom">Stage #4</div>
-                    </div>
-                    <div class="timeline-stage-item" data-index="5">
-                        <div class="timeline-visual-elements">
-                            <div class="line-segment line-before"></div><div class="timeline-number-custom">68</div><div class="line-segment line-after"></div>
-                        </div><div class="timeline-category-custom">Stage #5</div>
-                    </div>
-                    <div class="timeline-stage-item" data-index="6">
-                        <div class="timeline-visual-elements">
-                            <div class="line-segment line-before"></div><div class="timeline-number-custom">700</div><div class="line-segment line-after"></div>
-                        </div><div class="timeline-category-custom">Stage #6</div>
-                    </div>
-                    <div class="timeline-stage-item" data-index="7">
-                        <div class="timeline-visual-elements">
-                            <div class="line-segment line-before"></div><div class="timeline-number-custom">81</div><div class="line-segment line-after"></div>
-                        </div><div class="timeline-category-custom">Stage #7</div>
-                    </div>
-                    <div class="timeline-stage-item" data-index="8">
-                        <div class="timeline-visual-elements">
-                            <div class="line-segment line-before"></div><div class="timeline-number-custom">909</div><div class="line-segment line-after"></div>
-                        </div><div class="timeline-category-custom">Stage #8</div>
-                    </div>
-                    <div class="timeline-stage-item" data-index="9">
-                        <div class="timeline-visual-elements">
-                            <div class="line-segment line-before"></div><div class="timeline-number-custom">10</div><div class="line-segment line-after"></div>
-                        </div><div class="timeline-category-custom">Closed</div>
-                    </div>
-                    
-                    <div class="navigation-controls-wrapper">
-                        <div class="navigation-controls">
-                            <div class="nav-control-group" onclick="prevStep()">
-                                <span class="nav-arrows">&lt;&lt;</span>
-                                <span class="nav-text">Back</span>
+            <div class="inventory-section-layout">
+                <div class="inventory-timeline-column">
+                    <h1 class="process-inventory-h1">Procces Inventory</h1>
+                    <div class="main-content-wrapper">
+                        <div class="timeline-container-custom">
+                            <div id="runner-emoji">🚀</div>
+                            <div id="stats-popup" class="stats-popup">
+                                <div class="stats-title">Stats YTD y MTD</div>
+                                <div class="stats-line"><span>YTD:</span><span class="stats-value" id="ytd-value"></span></div>
+                                <div class="stats-line"><span>MTD:</span><span class="stats-value" id="mtd-value"></span></div>
                             </div>
-                            <div class="nav-control-group" onclick="nextStep()">
-                                <span class="nav-arrows">&gt;&gt;</span>
-                                <span class="nav-text">Forward</span>
+                            <svg id="connector-svg"> 
+                                <path id="dotted-line-row1" class="dotted-line" d=""></path>
+                                <path id="dotted-line-row2" class="dotted-line" d=""></path>
+                                <path id="bracket-connector-path" d=""></path> 
+                                <path id="animation-guide-path" style="display:none;"></path> 
+                                <path id="animated-tracer" style="display:none;"></path> 
+                            </svg>
+                
+                            <div class="timeline-stage-item active" data-index="0">
+                                <div class="timeline-visual-elements">
+                                    <div class="line-segment line-before"></div><div class="timeline-number-custom">101</div><div class="line-segment line-after"></div>
+                                </div><div class="timeline-category-custom">Opened</div>
+                            </div>
+                            <div class="timeline-stage-item" data-index="1">
+                                <div class="timeline-visual-elements">
+                                    <div class="line-segment line-before"></div><div class="timeline-number-custom">250</div><div class="line-segment line-after"></div>
+                                </div><div class="timeline-category-custom">Stage #1</div>
+                            </div>
+                            <div class="timeline-stage-item" data-index="2">
+                                <div class="timeline-visual-elements">
+                                    <div class="line-segment line-before"></div><div class="timeline-number-custom">3</div><div class="line-segment line-after"></div>
+                                </div><div class="timeline-category-custom">Stage #2</div>
+                            </div>
+                            <div class="timeline-stage-item" data-index="3">
+                                <div class="timeline-visual-elements">
+                                    <div class="line-segment line-before"></div><div class="timeline-number-custom">42</div><div class="line-segment line-after"></div>
+                                </div><div class="timeline-category-custom">Stage #3</div>
+                            </div>
+                            <div class="timeline-stage-item" data-index="4">
+                                <div class="timeline-visual-elements">
+                                    <div class="line-segment line-before"></div><div class="timeline-number-custom">555</div><div class="line-segment line-after"></div>
+                                </div><div class="timeline-category-custom">Stage #4</div>
+                            </div>
+                            <div class="timeline-stage-item" data-index="5">
+                                <div class="timeline-visual-elements">
+                                    <div class="line-segment line-before"></div><div class="timeline-number-custom">68</div><div class="line-segment line-after"></div>
+                                </div><div class="timeline-category-custom">Stage #5</div>
+                            </div>
+                            <div class="timeline-stage-item" data-index="6">
+                                <div class="timeline-visual-elements">
+                                    <div class="line-segment line-before"></div><div class="timeline-number-custom">700</div><div class="line-segment line-after"></div>
+                                </div><div class="timeline-category-custom">Stage #6</div>
+                            </div>
+                            <div class="timeline-stage-item" data-index="7">
+                                <div class="timeline-visual-elements">
+                                    <div class="line-segment line-before"></div><div class="timeline-number-custom">81</div><div class="line-segment line-after"></div>
+                                </div><div class="timeline-category-custom">Stage #7</div>
+                            </div>
+                            <div class="timeline-stage-item" data-index="8">
+                                <div class="timeline-visual-elements">
+                                    <div class="line-segment line-before"></div><div class="timeline-number-custom">909</div><div class="line-segment line-after"></div>
+                                </div><div class="timeline-category-custom">Stage #8</div>
+                            </div>
+                            <div class="timeline-stage-item" data-index="9">
+                                <div class="timeline-visual-elements">
+                                    <div class="line-segment line-before"></div><div class="timeline-number-custom">10</div><div class="line-segment line-after"></div>
+                                </div><div class="timeline-category-custom">Closed</div>
+                            </div>
+                            
+                            <div class="navigation-controls-wrapper">
+                                <div class="navigation-controls">
+                                    <div class="nav-control-group" onclick="prevStep()">
+                                        <span class="nav-arrows">&lt;&lt;</span>
+                                        <span class="nav-text">Back</span>
+                                    </div>
+                                    <div class="nav-control-group" onclick="nextStep()">
+                                        <span class="nav-arrows">&gt;&gt;</span>
+                                        <span class="nav-text">Forward</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <div class="inventory-cta-column">
+                     <div class="subtitle-wrapper timeline-call-to-action">
+                          <p class="subtitle-text" style="max-width: 500px; margin: 0 auto;">
+                              Conoce mas herramientas que ayudan a tu negocio a crecer con el análisis de datos
+                          </p>
+                          <a href="#proceso-data-analisis" class="scroll-down-link-2" aria-label="Deslizar a Proceso Data Análisis">
+                             <svg class="scroll-down-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M11,4H13V16L18.5,10.5L19.92,11.92L12,19.84L4.08,11.92L5.5,10.5L11,16V4Z"></path></svg>
+                          </a>
+                      </div>
+                </div>
             </div>
-             <div class="subtitle-wrapper timeline-call-to-action">
-                  <p class="subtitle-text" style="max-width: 500px; margin: 0 auto;">
-                      Conoce mas herramientas que ayudan a tu negocio a crecer con el análisis de datos
-                  </p>
-                  <a href="#proceso-data-analisis" class="scroll-down-link-2" aria-label="Deslizar a Proceso Data Análisis">
-                     <svg class="scroll-down-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M11,4H13V16L18.5,10.5L19.92,11.92L12,19.84L4.08,11.92L5.5,10.5L11,16V4Z"></path></svg>
-                  </a>
-              </div>
-            <!-- ===== FIN DEL CONTENIDO INSERTADO ===== -->
         </section>
 
         <section id="proceso-data-analisis" style="padding: 10vh 5%;">
@@ -748,7 +757,7 @@
     
                     <!-- Phase 1 -->
                     <div class="phase-section mb-12">
-                        <h3 class="phase-title" style="color: var(--color-primary); margin-top: 4rem; margin-bottom: 6rem;">
+                        <h3 class="phase-title" style="color: var(--color-primary); margin-top: 4rem; margin-bottom: 4rem;">
                             <span class="phase-indicator" style="color: var(--color-primary);">&#x25CF;</span>
                             <span>Necesidades, visión y ganas de mejorar</span>
                         </h3>
@@ -825,7 +834,7 @@
     
                     <!-- Phase 2 -->
                     <div class="phase-section">
-                        <h3 class="phase-title" style="color: var(--color-secondary); margin-top: 4rem; margin-bottom: 6rem;">
+                        <h3 class="phase-title" style="color: var(--color-secondary); margin-top: 4rem; margin-bottom: 4rem;">
                             <span class="phase-indicator" style="color: var(--color-secondary);">&#x25CF;</span>
                             <span>Fase 2: Optimización y Predicción</span>
                         </h3>
@@ -1246,7 +1255,7 @@
 
         if (timelineItems.length > 0) {
             if (runnerEmoji && (runnerEmoji.innerHTML.trim() === '' || runnerEmoji.innerHTML.trim() === '🏃')) {
-                runnerEmoji.innerHTML = '�'; 
+                runnerEmoji.innerHTML = '🚀'; 
             }
             setTimeout(() => {
                 requestAnimationFrame(updateActiveState);
@@ -1470,17 +1479,18 @@
 
             // Script para la nueva sección "Proceso Data Análisis"
             const stepsData = [
-                { id: 1, phase: 1, content: `<h3 class="text-xl font-bold mb-3">Paso 1: Definición de Necesidades y Objetivos</h3><p class="mb-4">Esta es la piedra angular. Antes de analizar cualquier dato, debemos tener absoluta claridad sobre qué preguntas de negocio queremos responder y qué metas buscamos alcanzar.</p><ul class="list-disc space-y-2"><li><strong>Identificar Necesidades:</strong> Entender los desafíos actuales y las decisiones clave.</li><li><strong>Establecer <span class="tooltip-container">KPIs<span class="tooltip-text">Un <strong>KPI</strong> (Key Performance Indicator) es una métrica medible para evaluar el éxito.</span></span>:</strong> Definir métricas específicas y medibles.</li><li><strong>Definir Objetivos Cuantificables:</strong> Traducir las necesidades en metas numéricas.</li></ul>`},
-                { id: 2, phase: 1, content: `<h3 class="text-xl font-bold mb-3">Paso 2: Identificación y Recopilación de Datos</h3><p class="mb-4">Con los objetivos definidos, el siguiente paso es actuar como detectives de datos: encontrar dónde reside la información valiosa y establecer mecanismos para recopilarla.</p><ul class="list-disc space-y-2"><li><strong>Fuentes Internas:</strong> Bases de datos (CRM, ERP), registros de ventas, etc.</li><li><strong>Fuentes Externas:</strong> Datos de mercado, redes sociales.</li><li><strong>Tipos de Datos:</strong> <span class="tooltip-container">Estructurados<span class="tooltip-text"><strong>Datos estructurados:</strong> Formato organizado, como tablas.</span></span> y <span class="tooltip-container">No Estructurados<span class="tooltip-text"><strong>Datos no estructurados:</strong> Sin formato predefinido, como emails o imágenes.</span></span>.</li></ul>`},
-                { id: 3, phase: 1, content: `<h3 class="text-xl font-bold mb-3">Paso 3: Limpieza y Preparación de Datos</h3><p class="mb-4">Los datos en su estado natural suelen estar incompletos o con errores. Decisiones basadas en datos "sucios" son peligrosas, por lo que este paso garantiza la fiabilidad.</p><ul class="list-disc space-y-2"><li><strong><span class="tooltip-container">Limpieza de Datos<span class="tooltip-text">Proceso de detectar y corregir registros incorrectos.</span></span>:</strong> Corregir errores, inconsistencias y duplicados.</li><li><strong>Transformación de Datos:</strong> Combinar fuentes y crear nuevas variables.</li></ul>`},
-                { id: 4, phase: 1, content: `<h3 class="text-xl font-bold mb-3">Paso 4: Análisis y Visualización con BI</h3><p class="mb-4">Con datos limpios, transformamos la información en conocimiento visual y accionable, respondiendo a la pregunta: "¿Qué está sucediendo en nuestro negocio?".</p><ul class="list-disc space-y-2"><li><strong>Análisis Exploratorio:</strong> Investigar los datos para descubrir patrones y tendencias.</li><li><strong>Generación de <span class="tooltip-container">Dashboards<span class="tooltip-text">Resumen visual y en tiempo real de los KPIs más importantes.</span></span> y <span class="tooltip-container">BI<span class="tooltip-text">Conjunto de estrategias y herramientas para el análisis de datos.</span></span>:</strong> Crear visualizaciones interactivas.</li></ul>`},
-                { id: 5, phase: 2, content: `<h3 class="text-xl font-bold mb-3">Paso 5: Implementación de Machine Learning</h3><p class="mb-4">Una vez que entendemos lo que ha pasado, podemos empezar a predecir lo que podría pasar, utilizando algoritmos para descubrir patrones complejos.</p><ul class="list-disc space-y-2"><li><strong>Desarrollo de Modelos:</strong> Usar <span class="tooltip-container">Machine Learning<span class="tooltip-text">Rama de la IA que permite a las máquinas aprender de los datos para hacer predicciones.</span></span> y <span class="tooltip-container">Deep Learning<span class="tooltip-text">Subcampo del ML que usa redes neuronales complejas.</span></span> para construir modelos predictivos.</li></ul>`},
-                { id: 6, phase: 2, content: `<h3 class="text-xl font-bold mb-3">Paso 6: Aplicación y Mejora Continua</h3><p class="mb-4">Un modelo no tiene valor si se queda en una presentación. El objetivo es integrar estos conocimientos en los procesos de negocio para generar un impacto real y medible. Este es un ciclo que nunca termina.</p><ul class="list-disc space-y-2"><li><strong>Inyección en el Proceso:</strong> Usar predicciones para optimizar logística y personalizar campañas.</li><li><strong>Monitoreo y Refinamiento:</strong> Reentrenar y mejorar los modelos constantemente.</li></ul>`}
+                { id: 1, phase: 1, content: `<h3 class="text-xl font-bold mb-4">Paso 1: Definición de Necesidades y Objetivos</h3><p class="mb-4">Esta es la piedra angular. Antes de analizar cualquier dato, debemos tener absoluta claridad sobre qué preguntas de negocio queremos responder y qué metas buscamos alcanzar.</p><ul class="list-disc space-y-2"><li><strong>Identificar Necesidades:</strong> Entender los desafíos actuales y las decisiones clave.</li><li><strong>Establecer <span class="tooltip-container">KPIs<span class="tooltip-text">Un <strong>KPI</strong> (Key Performance Indicator) es una métrica medible para evaluar el éxito.</span></span>:</strong> Definir métricas específicas y medibles.</li><li><strong>Definir Objetivos Cuantificables:</strong> Traducir las necesidades en metas numéricas.</li></ul>`},
+                { id: 2, phase: 1, content: `<h3 class="text-xl font-bold mb-4">Paso 2: Identificación y Recopilación de Datos</h3><p class="mb-4">Con los objetivos definidos, el siguiente paso es actuar como detectives de datos: encontrar dónde reside la información valiosa y establecer mecanismos para recopilarla.</p><ul class="list-disc space-y-2"><li><strong>Fuentes Internas:</strong> Bases de datos (CRM, ERP), registros de ventas, etc.</li><li><strong>Fuentes Externas:</strong> Datos de mercado, redes sociales.</li><li><strong>Tipos de Datos:</strong> <span class="tooltip-container">Estructurados<span class="tooltip-text"><strong>Datos estructurados:</strong> Formato organizado, como tablas.</span></span> y <span class="tooltip-container">No Estructurados<span class="tooltip-text"><strong>Datos no estructurados:</strong> Sin formato predefinido, como emails o imágenes.</span></span>.</li></ul>`},
+                { id: 3, phase: 1, content: `<h3 class="text-xl font-bold mb-4">Paso 3: Limpieza y Preparación de Datos</h3><p class="mb-4">Los datos en su estado natural suelen estar incompletos o con errores. Decisiones basadas en datos "sucios" son peligrosas, por lo que este paso garantiza la fiabilidad.</p><ul class="list-disc space-y-2"><li><strong><span class="tooltip-container">Limpieza de Datos<span class="tooltip-text">Proceso de detectar y corregir registros incorrectos.</span></span>:</strong> Corregir errores, inconsistencias y duplicados.</li><li><strong>Transformación de Datos:</strong> Combinar fuentes y crear nuevas variables.</li></ul>`},
+                { id: 4, phase: 1, content: `<h3 class="text-xl font-bold mb-4">Paso 4: Análisis y Visualización con BI</h3><p class="mb-4">Con datos limpios, transformamos la información en conocimiento visual y accionable, respondiendo a la pregunta: "¿Qué está sucediendo en nuestro negocio?".</p><ul class="list-disc space-y-2"><li><strong>Análisis Exploratorio:</strong> Investigar los datos para descubrir patrones y tendencias.</li><li><strong>Generación de <span class="tooltip-container">Dashboards<span class="tooltip-text">Resumen visual y en tiempo real de los KPIs más importantes.</span></span> y <span class="tooltip-container">BI<span class="tooltip-text">Conjunto de estrategias y herramientas para el análisis de datos.</span></span>:</strong> Crear visualizaciones interactivas.</li></ul>`},
+                { id: 5, phase: 2, content: `<h3 class="text-xl font-bold mb-4">Paso 5: Implementación de Machine Learning</h3><p class="mb-4">Una vez que entendemos lo que ha pasado, podemos empezar a predecir lo que podría pasar, utilizando algoritmos para descubrir patrones complejos.</p><ul class="list-disc space-y-2"><li><strong>Desarrollo de Modelos:</strong> Usar <span class="tooltip-container">Machine Learning<span class="tooltip-text">Rama de la IA que permite a las máquinas aprender de los datos para hacer predicciones.</span></span> y <span class="tooltip-container">Deep Learning<span class="tooltip-text">Subcampo del ML que usa redes neuronales complejas.</span></span> para construir modelos predictivos.</li></ul>`},
+                { id: 6, phase: 2, content: `<h3 class="text-xl font-bold mb-4">Paso 6: Aplicación y Mejora Continua</h3><p class="mb-4">Un modelo no tiene valor si se queda en una presentación. El objetivo es integrar estos conocimientos en los procesos de negocio para generar un impacto real y medible. Este es un ciclo que nunca termina.</p><ul class="list-disc space-y-2"><li><strong>Inyección en el Proceso:</strong> Usar predicciones para optimizar logística y personalizar campañas.</li><li><strong>Monitoreo y Refinamiento:</strong> Reentrenar y mejorar los modelos constantemente.</li></ul>`}
             ];
 
             const stepRows = document.querySelectorAll('#proceso-data-analisis .step-row');
             const totalSteps = stepRows.length;
             let revealInterval;
+            let cardHighlightInterval;
             let restartTimeout;
             let userInteracted = false;
 
@@ -1501,12 +1511,26 @@
                 });
             }
 
+            function startSecondaryCardAnimation() {
+                clearInterval(cardHighlightInterval);
+                let highlightIndex = 0;
+                cardHighlightInterval = setInterval(() => {
+                    if (userInteracted) {
+                        clearInterval(cardHighlightInterval);
+                        return;
+                    }
+                    setActiveStep(highlightIndex + 1);
+                    highlightIndex = (highlightIndex + 1) % totalSteps;
+                }, 3000);
+            }
+
             function startAnimationCycle() {
                 if (userInteracted) return; 
 
                 // Clear any existing timers
                 clearInterval(revealInterval);
                 clearTimeout(restartTimeout);
+                clearInterval(cardHighlightInterval);
 
                 // Hide all steps initially
                 stepRows.forEach(row => {
@@ -1536,7 +1560,7 @@
                         currentStepIndex++;
                     } else {
                         clearInterval(revealInterval);
-                        // After the last step, all content stays visible. Pause for 4 minutes.
+                        startSecondaryCardAnimation();
                         restartTimeout = setTimeout(startAnimationCycle, 240000); // 4 minutes
                     }
                 }, 3000); 
@@ -1547,8 +1571,9 @@
                     userInteracted = true;
                     clearInterval(revealInterval);
                     clearTimeout(restartTimeout);
+                    clearInterval(cardHighlightInterval);
 
-                    // Show all rows
+                    // Show all rows and content
                     stepRows.forEach(row => {
                         row.style.opacity = '1';
                         const stepId = parseInt(row.dataset.step);
