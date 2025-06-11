@@ -221,19 +221,10 @@
             50% { transform: translateY(8px); opacity: 1; }
         }
         
-        .machine-learning-section { padding: 5vh 5% 15vh 5%; background-color: var(--color-background); position: relative; z-index: 2; }
         .outro-section { padding: 15vh 5%; text-align: center; background-color: var(--color-background); position: relative; z-index: 2; }
-        .outro-section h2, .machine-learning-section h2 {
+        .outro-section h2 {
             text-align: center; font-size: clamp(3rem, 8vw, 6rem); margin-bottom: 5rem; 
         }
-        .ml-content-wrapper { display: flex; align-items: center; justify-content: center; gap: 3rem; width: 90%; max-width: 1200px; margin: 0 auto; }
-        .ml-image { flex: 0.8; max-width: 450px; }
-        .ml-image img { width: 100%; height: auto; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        .ml-text { flex: 2; text-align: left; font-family: var(--font-body); font-size: clamp(1.1rem, 1.5vw, 1.3rem); line-height: 1.8; color: #e0e0e0; }
-        .ml-text p { margin-bottom: 1em; }
-        .ml-text strong { color: var(--color-primary); font-weight: 700; }
-        .ml-text ol { padding-left: 25px; margin-bottom: 1em; }
-        .ml-text ol li { margin-bottom: 0.75em; }
         
         .gallery-container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
         .gallery-header { max-width: 900px; margin: 0 auto 2rem auto; padding: 0 2rem; text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 3rem; }
@@ -263,14 +254,6 @@
         }
         .bi-text-container p strong { color: var(--color-secondary); }
         
-        .features-section { padding: 15vh 5%; background-color: #1a1f26; }
-        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; max-width: 1800px; margin: 0 auto; }
-        .feature-card { position: relative; overflow: hidden; border-radius: 12px; aspect-ratio: 4 / 5; transform: translateY(50px); opacity: 0; box-shadow: 0 10px 30px rgba(0,0,0,0.4); }
-        .feature-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1); }
-        .feature-card:hover img { transform: scale(1.05); }
-        .feature-card h3 { position: absolute; bottom: 0; left: 0; width: 100%; padding: 1.5rem; font-size: clamp(1.2rem, 3vw, 1.8rem); text-align: left; color: white; background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%); z-index: 2; transition: color 0.3s ease; }
-        .feature-card:hover h3 { color: var(--color-primary); }
-
         /* Estilos para el Lightbox de la Galería */
         .image-modal-overlay {
             position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%;
@@ -307,7 +290,7 @@
             to { opacity: 1; }
         }
 
-        /* ----- ESTILOS INSERTADOS DEL PRIMER HTML ----- */
+        /* ----- ESTILOS INSERTADOS DEL TIMELINE ----- */
         .process-inventory-h1 { /* Clase específica para evitar conflicto con h1 general */
             font-size: clamp(1.8rem, 5vw, 2.5em);
             line-height: 1.6rem;
@@ -400,15 +383,91 @@
         .nav-arrows { font-size: 1.3rem; font-weight: 600; line-height: 1; transition: color 0.2s ease-in-out; }
         
         .timeline-call-to-action {
-            margin-top: -80px;
             padding-bottom: 2rem;
             text-align: center;
         }
+        
+        /* ----- ESTILOS NUEVA SECCIÓN: Proceso Data Análisis ----- */
+        #proceso-data-analisis {
+            padding: 10vh 5%;
+            background-color: var(--color-background);
+        }
+        #proceso-data-analisis .subtitle-text{
+            text-transform: none;
+            font-weight: 400;
+        }
+        .step-card {
+            transition: all 0.3s ease;
+            border-width: 2px;
+            border-style: solid;
+            background-color: rgba(42, 48, 56, 0.7);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+        }
+        .step-card.active {
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -4px rgba(0, 0, 0, 0.4);
+        }
+        .tooltip-container {
+            position: relative;
+            display: inline-block;
+            border-bottom: 2px dotted var(--color-primary);
+            cursor: help;
+        }
+        .tooltip-text {
+            visibility: hidden; width: 280px; background-color: #393E46;
+            color: #fff; text-align: left; border-radius: 6px; padding: 8px 12px;
+            position: absolute; z-index: 10; bottom: 125%; left: 50%;
+            margin-left: -140px; opacity: 0; transition: opacity 0.3s;
+            font-size: 0.875rem; line-height: 1.25rem; font-family: var(--font-body);
+            text-transform: none;
+        }
+        .tooltip-container:hover .tooltip-text { visibility: visible; opacity: 1; }
+        
+        .step-content-block {
+            background-color: rgba(42, 48, 56, 0.7);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid var(--color-border);
+            color: var(--color-text);
+            padding: 1.5rem;
+            border-radius: 15px;
+            min-height: 200px;
+        }
+        .step-content-block h3 { color: var(--color-text); font-size: clamp(1.2rem, 3vw, 1.5rem); }
+        .step-content-block p, .step-content-block ul { font-family: var(--font-body); text-transform: none; }
+        .step-content-block ul { list-style-position: inside; padding-left: 1rem; }
+        .step-content-block ul li { margin-bottom: 0.5rem; }
+        .step-content-block strong { color: var(--color-primary); }
 
+        .phase-indicator {
+            display: inline-block; margin-right: 0.5rem; font-size: 1.8rem;
+            line-height: 1; vertical-align: middle;
+        }
+
+        .step-row {
+            display: flex;
+            width: 100%;
+            max-width: 64rem; /* max-w-6xl */
+            margin-bottom: 2rem;
+            position: relative;
+            justify-content: center;
+            align-items: flex-start;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+        .step-row .step-card-container { flex: 0 0 14rem; padding-right: 3rem; }
+        .step-row .step-card { width: 100%; cursor: pointer; border-radius: 0.5rem; padding: 1rem; text-align: center; }
+        .step-row .step-card h4 { font-weight: 700; color: var(--color-text); }
+        .step-row .step-card .text-4xl { font-size: 2.25rem; margin-bottom: 0.5rem; }
+        .step-row .connector { position: absolute; left: 14rem; top: 3.5rem; transform: translate(-50%, -50%); z-index: 1; }
+        .step-row .connector .line { width: 2rem; height: 2px; background-color: var(--color-border); }
+        .step-row .connector .dot { width: 0.75rem; height: 0.75rem; border-radius: 9999px; position: absolute; left: -0.375rem; top: -0.31rem; border: 2px solid white; }
+        .step-row .content-container { flex: 1 1 0; padding-left: 3rem; }
+        
         /* ----- Estilos para Responsividad ----- */
         @media (max-width: 768px) {
             :root { --header-height: 60px; }
-            .ml-content-wrapper { flex-direction: column; gap: 2rem; }
             .knockout-text-layer { padding-top: calc(8vh + 30px); }
             .logo { font-size: 1.2rem; }
             .header-controls { gap: 0.5rem; }
@@ -418,9 +477,8 @@
             .hamburger-icon { width: 28px; height: 22px; }
             .title-container h1 { font-size: 20vw; }
             .growth-arrow { width: 25vw; height: 20vw; }
-            .outro-section, .machine-learning-section { padding: 10vh 5%; }
-            .outro-section h2, .machine-learning-section h2 { font-size: clamp(2rem, 10vw, 3.5rem); }
-            .features-section { padding: 10vh 5%; }
+            #proceso-data-analisis, .outro-section { padding: 10vh 5%; }
+            #proceso-data-analisis h2, .outro-section h2 { font-size: clamp(2rem, 10vw, 3.5rem); }
             .main-content-wrapper { padding: 0 1rem 20px 1rem; }
             .gallery-main-image { height: 400px; }
             .gallery-thumbnails { grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); }
@@ -443,6 +501,14 @@
             .nav-text { font-size: 0.8rem; }
             .nav-arrows { font-size: 1.1rem; }
             .timeline-call-to-action { margin-top: 2rem; }
+
+            /* Media queries para Proceso Data Análisis */
+            #proceso-data-analisis .roadmap-container > .relative { padding: 0; }
+            #proceso-data-analisis .step-row { flex-direction: column; align-items: center; max-width: 100%;}
+            #proceso-data-analisis .step-row .step-card-container { justify-content: center; padding: 0; margin-bottom: 1rem; }
+            #proceso-data-analisis .step-row .content-container { padding: 0; width: 100%; }
+            #proceso-data-analisis .step-row .connector { display: none; }
+            #proceso-data-analisis .main-vertical-line { display: none; }
         }
 
         @media (max-width: 480px) {
@@ -503,8 +569,8 @@
         <ul class="overlay-nav">
             <li><a href="#page-top" class="menu-link">Inicio</a></li>
             <li><a href="#evolucion" class="menu-link">Business intelligence</a></li>
+            <li><a href="#proceso-data-analisis" class="menu-link">Proceso Data Análisis</a></li>
             <li><a href="#galeria-bi" class="menu-link">GRÁFICOS</a></li>
-            <li><a href="#machine-learning" class="menu-link">Machine Learning</a></li>
         </ul>
         <div class="menu-footer-icon">
             <a href="https://www.linkedin.com/in/hansen-guzm%C3%A1n-hern%C3%A1ndez-b4185592/" target="_blank" rel="noopener noreferrer" class="linkedin-icon" aria-label="LinkedIn">
@@ -653,31 +719,144 @@
                   <p class="subtitle-text" style="max-width: 500px; margin: 0 auto;">
                       Conoce mas herramientas que ayudan a tu negocio a crecer con el análisis de datos
                   </p>
-                  <a href="#machine-learning" class="scroll-down-link-2" aria-label="Deslizar a Machine Learning">
+                  <a href="#proceso-data-analisis" class="scroll-down-link-2" aria-label="Deslizar a Proceso Data Análisis">
                      <svg class="scroll-down-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M11,4H13V16L18.5,10.5L19.92,11.92L12,19.84L4.08,11.92L5.5,10.5L11,16V4Z"></path></svg>
                   </a>
               </div>
             <!-- ===== FIN DEL CONTENIDO INSERTADO ===== -->
         </section>
 
-        <section id="machine-learning" class="machine-learning-section">
-            <h2 class="animated-gradient-text">Machine Learning</h2>
-             <div class="ml-content-wrapper">
-                 <div class="ml-image">
-                     <img src="https://i.imgur.com/E2LaKrp.png" alt="Ilustración de Machine Learning con nodos y conexiones cerebrales." onerror="this.onerror=null;this.src='https://placehold.co/450x450/222831/eeeeee?text=Imagen+ML';">
-                 </div>
-                 <div class="ml-text">
-                     <p>El&nbsp;<strong>Machine Learning</strong>&nbsp;convierte los datos históricos y los resultados pasados de tu empresa en una guía para el futuro.</p>
-                     <p>Lo hace en dos pasos:</p>
-                     <ol>
-                         <li>Aprende las reglas ocultas de cómo funciona realmente tu negocio.</li>
-                         <li>Usa esas reglas para predecir lo que pasará y ayudarte a tomar mejores decisiones hoy.</li>
-                     </ol>
-                     <p><strong>Ejemplo:</strong><br>
-                      Precios dinámicos en una tienda online.<br>
-                      El sistema analiza el historial de ventas y&nbsp;<strong>aprende</strong>&nbsp;que un producto se vende más caro y rápido los viernes por la noche. El próximo viernes, el sistema automáticamente&nbsp;<strong>actúa</strong>&nbsp;y sube el precio, maximizando la ganancia de forma inteligente.</p>
-                 </div>
-             </div>
+        <section id="proceso-data-analisis" style="padding: 10vh 5%;">
+            <header class="text-center mb-10 md:mb-16">
+                <h2 class="animated-gradient-text" style="font-size: clamp(3rem, 8vw, 6rem); margin-bottom: 2rem; text-align: center;">Proceso Data Análisis</h2>
+                <p class="text-lg text-gray-300 max-w-3xl mx-auto my-8 font-normal normal-case" style="font-family: var(--font-body); text-align: center;">Una guía visual para transformar los datos de su empresa en una ventaja competitiva. Explore cada paso para entender el proceso completo.</p>
+            </header>
+    
+            <main>
+                <!-- Roadmap Visualization Container -->
+                <div class="relative py-4 roadmap-container">
+                    <!-- Main vertical connecting line -->
+                    <div class="main-vertical-line absolute left-1/2 w-0.5 bg-gray-700 h-full transform -translate-x-1/2 z-0"></div>
+    
+                    <!-- Phase 1 -->
+                    <div class="phase-section mb-12">
+                        <h3 class="text-2xl font-bold text-center mt-16 mb-16" style="color: var(--color-primary); margin-top: 4rem; margin-bottom: 6rem;">
+                            <span class="phase-indicator" style="color: var(--color-primary);">&#x25CF;</span>Necesidades, visión y ganas de mejorar
+                        </h3>
+                        <div class="flex flex-col items-center">
+                            <!-- Step 1 Row -->
+                            <div class="step-row" data-step="1">
+                                <div class="step-card-container">
+                                    <div class="step-card" data-step-id="1" style="border-color: var(--color-primary);">
+                                        <div class="text-4xl mb-2">&#x1F4AF;</div>
+                                        <h4 class="font-bold">Definición de Necesidades</h4>
+                                    </div>
+                                </div>
+                                <div class="connector">
+                                    <div class="line"></div>
+                                    <div class="dot" style="background-color: var(--color-primary);"></div>
+                                </div>
+                                <div class="content-container">
+                                    <div class="step-content-block" id="step-content-block-1"></div>
+                                </div>
+                            </div>
+    
+                            <!-- Step 2 Row -->
+                            <div class="step-row" data-step="2">
+                                 <div class="step-card-container">
+                                    <div class="step-card" data-step-id="2" style="border-color: var(--color-primary);">
+                                        <div class="text-4xl mb-2">&#128269;</div>
+                                        <h4 class="font-bold">Identificación de Datos</h4>
+                                    </div>
+                                </div>
+                                <div class="connector">
+                                    <div class="line"></div>
+                                    <div class="dot" style="background-color: var(--color-primary);"></div>
+                                </div>
+                                <div class="content-container">
+                                    <div class="step-content-block" id="step-content-block-2"></div>
+                                </div>
+                            </div>
+    
+                            <!-- Step 3 Row -->
+                            <div class="step-row" data-step="3">
+                                 <div class="step-card-container">
+                                    <div class="step-card" data-step-id="3" style="border-color: var(--color-primary);">
+                                        <div class="text-4xl mb-2">&#128490;</div>
+                                        <h4 class="font-bold">Limpieza y Preparación</h4>
+                                    </div>
+                                </div>
+                                <div class="connector">
+                                    <div class="line"></div>
+                                    <div class="dot" style="background-color: var(--color-primary);"></div>
+                                </div>
+                                <div class="content-container">
+                                    <div class="step-content-block" id="step-content-block-3"></div>
+                                </div>
+                            </div>
+    
+                            <!-- Step 4 Row -->
+                            <div class="step-row" data-step="4">
+                                 <div class="step-card-container">
+                                    <div class="step-card" data-step-id="4" style="border-color: var(--color-primary);">
+                                        <div class="text-4xl mb-2">&#128202;</div>
+                                        <h4 class="font-bold">Análisis y BI</h4>
+                                    </div>
+                                </div>
+                                <div class="connector">
+                                    <div class="line"></div>
+                                    <div class="dot" style="background-color: var(--color-primary);"></div>
+                                </div>
+                                <div class="content-container">
+                                    <div class="step-content-block" id="step-content-block-4"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <!-- Phase 2 -->
+                    <div class="phase-section">
+                        <h3 class="text-2xl font-bold text-center mt-16 mb-16" style="color: var(--color-secondary); margin-top: 4rem; margin-bottom: 6rem;">
+                            <span class="phase-indicator" style="color: var(--color-secondary);">&#x25B2;</span>Fase 2: Optimización y Predicción
+                        </h3>
+                        <div class="flex flex-col items-center">
+                            <!-- Step 5 Row -->
+                            <div class="step-row" data-step="5">
+                                <div class="step-card-container">
+                                    <div class="step-card" data-step-id="5" style="border-color: var(--color-secondary);">
+                                        <div class="text-4xl mb-2">&#129504;</div>
+                                        <h4 class="font-bold">Machine Learning</h4>
+                                    </div>
+                                </div>
+                                <div class="connector">
+                                    <div class="line"></div>
+                                    <div class="dot" style="background-color: var(--color-secondary);"></div>
+                                </div>
+                                <div class="content-container">
+                                    <div class="step-content-block" id="step-content-block-5"></div>
+                                </div>
+                            </div>
+    
+                            <!-- Step 6 Row -->
+                            <div class="step-row" data-step="6">
+                                <div class="step-card-container">
+                                    <div class="step-card" data-step-id="6" style="border-color: var(--color-secondary);">
+                                        <div class="text-4xl mb-2">&#x21BB;</div>
+                                        <h4 class="font-bold">Aplicación y Mejora</h4>
+                                    </div>
+                                </div>
+                                <div class="connector">
+                                    <div class="line"></div>
+                                    <div class="dot" style="background-color: var(--color-secondary);"></div>
+                                </div>
+                                <div class="content-container">
+                                    <div class="step-content-block" id="step-content-block-6"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
         </section>
     </main>
 
@@ -1076,7 +1255,7 @@
     </script>
 
 
-    <!-- SCRIPT PRINCIPAL DE LA PÁGINA (HTML 2) -->
+    <!-- SCRIPT PRINCIPAL DE LA PÁGINA -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const lenis = new Lenis();
@@ -1160,7 +1339,7 @@
             if(scrollDownLink2) {
                 scrollDownLink2.addEventListener('click', (e) => {
                     e.preventDefault();
-                    lenis.scrollTo('#machine-learning', { offset: -20 });
+                    lenis.scrollTo('#proceso-data-analisis', { offset: -80 });
                 });
             }
             
@@ -1278,6 +1457,103 @@
                     }
                 }
             });
+
+            // Script para la nueva sección "Proceso Data Análisis"
+            const stepsData = [
+                { id: 1, phase: 1, content: `<h3 class="text-xl font-bold mb-3">Paso 1: Definición de Necesidades y Objetivos</h3><p class="mb-4">Esta es la piedra angular. Antes de analizar cualquier dato, debemos tener absoluta claridad sobre qué preguntas de negocio queremos responder y qué metas buscamos alcanzar.</p><ul class="list-disc space-y-2"><li><strong>Identificar Necesidades:</strong> Entender los desafíos actuales y las decisiones clave.</li><li><strong>Establecer <span class="tooltip-container">KPIs<span class="tooltip-text">Un <strong>KPI</strong> (Key Performance Indicator) es una métrica medible para evaluar el éxito.</span></span>:</strong> Definir métricas específicas y medibles.</li><li><strong>Definir Objetivos Cuantificables:</strong> Traducir las necesidades en metas numéricas.</li></ul>`},
+                { id: 2, phase: 1, content: `<h3 class="text-xl font-bold mb-3">Paso 2: Identificación y Recopilación de Datos</h3><p class="mb-4">Con los objetivos definidos, el siguiente paso es actuar como detectives de datos: encontrar dónde reside la información valiosa y establecer mecanismos para recopilarla.</p><ul class="list-disc space-y-2"><li><strong>Fuentes Internas:</strong> Bases de datos (CRM, ERP), registros de ventas, etc.</li><li><strong>Fuentes Externas:</strong> Datos de mercado, redes sociales.</li><li><strong>Tipos de Datos:</strong> <span class="tooltip-container">Estructurados<span class="tooltip-text"><strong>Datos estructurados:</strong> Formato organizado, como tablas.</span></span> y <span class="tooltip-container">No Estructurados<span class="tooltip-text"><strong>Datos no estructurados:</strong> Sin formato predefinido, como emails o imágenes.</span></span>.</li></ul>`},
+                { id: 3, phase: 1, content: `<h3 class="text-xl font-bold mb-3">Paso 3: Limpieza y Preparación de Datos</h3><p class="mb-4">Los datos en su estado natural suelen estar incompletos o con errores. Decisiones basadas en datos "sucios" son peligrosas, por lo que este paso garantiza la fiabilidad.</p><ul class="list-disc space-y-2"><li><strong><span class="tooltip-container">Limpieza de Datos<span class="tooltip-text">Proceso de detectar y corregir registros incorrectos.</span></span>:</strong> Corregir errores, inconsistencias y duplicados.</li><li><strong>Transformación de Datos:</strong> Combinar fuentes y crear nuevas variables.</li></ul>`},
+                { id: 4, phase: 1, content: `<h3 class="text-xl font-bold mb-3">Paso 4: Análisis y Visualización con BI</h3><p class="mb-4">Con datos limpios, transformamos la información en conocimiento visual y accionable, respondiendo a la pregunta: "¿Qué está sucediendo en nuestro negocio?".</p><ul class="list-disc space-y-2"><li><strong>Análisis Exploratorio:</strong> Investigar los datos para descubrir patrones y tendencias.</li><li><strong>Generación de <span class="tooltip-container">Dashboards<span class="tooltip-text">Resumen visual y en tiempo real de los KPIs más importantes.</span></span> y <span class="tooltip-container">BI<span class="tooltip-text">Conjunto de estrategias y herramientas para el análisis de datos.</span></span>:</strong> Crear visualizaciones interactivas.</li></ul>`},
+                { id: 5, phase: 2, content: `<h3 class="text-xl font-bold mb-3">Paso 5: Implementación de Machine Learning</h3><p class="mb-4">Una vez que entendemos lo que ha pasado, podemos empezar a predecir lo que podría pasar, utilizando algoritmos para descubrir patrones complejos.</p><ul class="list-disc space-y-2"><li><strong>Desarrollo de Modelos:</strong> Usar <span class="tooltip-container">Machine Learning<span class="tooltip-text">Rama de la IA que permite a las máquinas aprender de los datos para hacer predicciones.</span></span> y <span class="tooltip-container">Deep Learning<span class="tooltip-text">Subcampo del ML que usa redes neuronales complejas.</span></span> para construir modelos predictivos.</li></ul>`},
+                { id: 6, phase: 2, content: `<h3 class="text-xl font-bold mb-3">Paso 6: Aplicación y Mejora Continua</h3><p class="mb-4">Un modelo no tiene valor si se queda en una presentación. El objetivo es integrar estos conocimientos en los procesos de negocio para generar un impacto real y medible. Este es un ciclo que nunca termina.</p><ul class="list-disc space-y-2"><li><strong>Inyección en el Proceso:</strong> Usar predicciones para optimizar logística y personalizar campañas.</li><li><strong>Monitoreo y Refinamiento:</strong> Reentrenar y mejorar los modelos constantemente.</li></ul>`}
+            ];
+
+            const stepRows = document.querySelectorAll('#proceso-data-analisis .step-row');
+            const totalSteps = stepRows.length;
+            let revealInterval;
+            let restartTimeout;
+            let userInteracted = false;
+
+            function setActiveStep(stepId) {
+                stepRows.forEach(row => {
+                    const card = row.querySelector('.step-card');
+                    const currentStepId = parseInt(card.dataset.stepId);
+                    const stepData = stepsData.find(s => s.id === currentStepId);
+                    const activeBorderColor = stepData.phase === 1 ? 'var(--color-primary)' : 'var(--color-secondary)';
+                    
+                    if (currentStepId === stepId) {
+                        card.classList.add('active');
+                        card.style.borderColor = activeBorderColor;
+                    } else {
+                        card.classList.remove('active');
+                        card.style.borderColor = 'rgba(255, 255, 255, 0.1)';
+                    }
+                });
+            }
+
+            function startAnimationCycle() {
+                if (userInteracted) return; 
+
+                // Clear any existing timers
+                clearInterval(revealInterval);
+                clearTimeout(restartTimeout);
+
+                // Hide all steps initially
+                stepRows.forEach(row => {
+                    row.style.opacity = '0';
+                    const contentBlock = document.getElementById(`step-content-block-${row.dataset.step}`);
+                    contentBlock.innerHTML = '';
+                    row.querySelector('.step-card').classList.remove('active');
+                });
+
+                let currentStepIndex = 0;
+
+                revealInterval = setInterval(() => {
+                    if (userInteracted) {
+                        clearInterval(revealInterval);
+                        return;
+                    }
+                    if (currentStepIndex < totalSteps) {
+                        const row = stepRows[currentStepIndex];
+                        const stepId = parseInt(row.dataset.step);
+                        const stepData = stepsData.find(s => s.id === stepId);
+                        
+                        row.style.opacity = '1';
+                        const contentBlock = document.getElementById(`step-content-block-${stepId}`);
+                        contentBlock.innerHTML = stepData.content;
+                        setActiveStep(stepId);
+
+                        currentStepIndex++;
+                    } else {
+                        clearInterval(revealInterval);
+                        // After the last step, all content stays visible. Pause for 4 minutes.
+                        restartTimeout = setTimeout(startAnimationCycle, 240000); // 4 minutes
+                    }
+                }, 3000); 
+            }
+
+            document.querySelectorAll('#proceso-data-analisis .step-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    userInteracted = true;
+                    clearInterval(revealInterval);
+                    clearTimeout(restartTimeout);
+
+                    // Show all rows
+                    stepRows.forEach(row => {
+                        row.style.opacity = '1';
+                        const stepId = parseInt(row.dataset.step);
+                        const contentBlock = document.getElementById(`step-content-block-${stepId}`);
+                        if (!contentBlock.innerHTML) {
+                             const stepData = stepsData.find(s => s.id === stepId);
+                             contentBlock.innerHTML = stepData.content;
+                        }
+                    });
+
+                    const clickedStepId = parseInt(this.dataset.stepId);
+                    setActiveStep(clickedStepId);
+                });
+            });
+            startAnimationCycle();
         });
     </script>
 </body>
