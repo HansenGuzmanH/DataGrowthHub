@@ -290,111 +290,6 @@
             to { opacity: 1; }
         }
 
-        /* ----- ESTILOS INSERTADOS DEL TIMELINE ----- */
-        .inventory-section-layout {
-            display: flex;
-            flex-direction: column; /* Changed to column for better stacking on larger screens */
-            align-items: flex-start; /* Changed to flex-start to align content to the left */
-            gap: 2rem;
-            margin-top: 1rem;
-        }
-        .inventory-timeline-column { flex: 1; width: 100%; } /* Adjusted flex and width */
-        .inventory-cta-column { flex: 1; display: flex; flex-direction: column; justify-content: center; }
-        .process-inventory-h1 {
-            font-size: clamp(1.3rem, 3vw, 1.8em);
-            text-align: left; /* Keep left alignment */
-            margin-bottom: 1rem;
-            width: 100%; /* Ensure title takes full width */
-            padding-left: 1rem; /* Add padding to align with content */
-        }
-        .timeline-call-to-action .subtitle-text {
-             font-size: clamp(1.4rem, 2.5vw, 1.8rem);
-             max-width: 800px; /* Increased max-width for more horizontal space */
-        }
-        
-        .main-content-wrapper {
-            width: 100%; max-width: 100%;
-            overflow-x: auto; position: relative;
-        }
-        .timeline-container-custom {
-            display: grid;
-            grid-template-columns: repeat(5, minmax(65px, auto));
-            column-gap: 18px; grid-row-gap: 120px; position: relative;
-            padding-top: 160px; padding-bottom: 220px; margin: 0 auto;
-            justify-content: center;
-        }
-        #runner-emoji {
-            position: absolute; left: 0; top: 0; font-size: 1.8rem; z-index: 6;
-            transition: left 0.3s ease-out, top 0.3s ease-out; pointer-events: none;
-        }
-        .timeline-stage-item { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; padding: 5px 0; position: relative; }
-        .timeline-stage-item[data-index="0"] { grid-column: 1; grid-row: 1; }
-        .timeline-stage-item[data-index="1"] { grid-column: 2; grid-row: 1; }
-        .timeline-stage-item[data-index="2"] { grid-column: 3; grid-row: 1; }
-        .timeline-stage-item[data-index="3"] { grid-column: 4; grid-row: 1; }
-        .timeline-stage-item[data-index="4"] { grid-column: 5; grid-row: 1; }
-        .timeline-stage-item[data-index="5"] { grid-column: 5; grid-row: 2; } 
-        .timeline-stage-item[data-index="6"] { grid-column: 4; grid-row: 2; }
-        .timeline-stage-item[data-index="7"] { grid-column: 3; grid-row: 2; }
-        .timeline-stage-item[data-index="8"] { grid-column: 2; grid-row: 2; }
-        .timeline-stage-item[data-index="9"] { grid-column: 1; grid-row: 2; } 
-        .timeline-visual-elements { display: flex; align-items: center; width: 50px; position: relative; }
-        .line-segment { height: 2px; background-color: #76b900; flex-grow: 1; }
-        .timeline-stage-item[data-index="0"] .line-before,
-        .timeline-stage-item[data-index="4"] .line-after, 
-        .timeline-stage-item[data-index="5"] .line-before, 
-        .timeline-stage-item[data-index="9"] .line-after { visibility: hidden; }
-        #connector-svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; overflow: visible; }
-        .dotted-line { fill: none; stroke: #76b900; stroke-width: 2; stroke-dasharray: 5,5; }
-        #bracket-connector-path { fill: none; stroke: #76b900; stroke-width: 2; stroke-dasharray: 5,5; }
-        #animated-tracer { stroke: #4d7c00; stroke-width: 4; fill: none; stroke-linecap: round; }
-        .timeline-number-custom {
-            width: 3.2rem; height: 3.2rem;
-            background-image: linear-gradient(to bottom right, #1a2035, #101528);
-            border-radius: 9999px; display: flex; justify-content: center; align-items: center;
-            font-size: 1rem; font-weight: 600; color: #f0f0f0; flex-shrink: 0;
-            margin: 0; box-shadow: 0 1px 3px -1px rgba(0,0,0,0.1), 0 2px 3px 0 rgba(0,0,0,0.05);
-            position: relative; z-index: 1; transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-            cursor: pointer;
-        }
-        .timeline-number-custom:hover { transform: scale(1.1); box-shadow: 0 4px 8px -2px rgba(118,185,0,0.4), 0 3px 6px -2px rgba(118,185,0,0.3); }
-        .timeline-category-custom {
-            font-size: 0.8rem; color: #ffffff; font-weight: 600; line-height: 1.2;
-            margin-top: 0.4rem; text-align: center; width: auto; min-width: 40px;
-            white-space: nowrap; overflow: visible; 
-        }
-        .timeline-stage-item.active .timeline-number-custom {
-            background-image: linear-gradient(to bottom right, #8ae000, #76b900);
-            box-shadow: 0 3px 6px -1px rgba(118,185,0,0.4), 0 1px 4px -2px rgba(118,185,0,0.3);
-        }
-        .timeline-stage-item.active .timeline-number-custom:hover { transform: scale(1.15); }
-        .timeline-stage-item.active .timeline-category-custom { color: #76b900; font-weight: 700; }
-        .stats-popup {
-            position: absolute; background-color: #ffffff; border: 1px solid #e0e0e0;
-            border-radius: 8px; box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
-            padding: 10px 15px; z-index: 10; display: none; flex-direction: column;
-            align-items: stretch; opacity: 0;
-            transition: opacity 0.3s ease-in-out, top 0.3s ease-in-out, left 0.3s ease-in-out;
-            min-width: 140px; font-size: 0.75rem; color: #333;
-        }
-        .stats-title { font-weight: bold; font-size: 0.85rem; margin-bottom: 8px; color: #1a2035; text-align: center; border-bottom: 1px solid #f0f0f0; padding-bottom: 6px; } 
-        .stats-line { display: flex; justify-content: space-between; margin-bottom: 5px; align-items: center; }
-        .stats-line:last-child { margin-bottom: 0; }
-        .stats-line span:first-child { color: #555; font-weight: 500; }
-        .stats-value .sign { font-weight: bold; font-size: 1.1em; margin-right: 2px; color: #dc3545; }
-        .stats-value .sign.positive { color: #28a745; }
-        .stats-value .number { font-weight: 500; }
-        .arrow-indicator { display: inline-block; width: 0; height: 0; margin-left: 6px; vertical-align: middle; position: relative; top: -1px; }
-        .arrow-indicator.up { border-left: 5px solid transparent; border-right: 5px solid transparent; border-bottom: 8px solid #28a745; }
-        .arrow-indicator.down { border-left: 5px solid transparent; border-right: 5px solid transparent; border-top: 8px solid #dc3545; }
-        .navigation-controls-wrapper { position: absolute; top: 260px; left: 50%; transform: translateX(-50%); width: auto; margin-top: 0; z-index: 7; }
-        .navigation-controls { display: flex; justify-content: center; align-items: center; gap: 1rem; color: #FFFFFF; }
-        .nav-control-group { display: flex; flex-direction: column; align-items: center; cursor: pointer; padding: 0.3rem; }
-        .nav-control-group:hover .nav-text, .nav-control-group:hover .nav-arrows { color: #e0e0e0; }
-        .nav-text { font-size: 0.9rem; font-weight: 600; transition: color 0.2s ease-in-out; margin-top: 0.1rem; }
-        .nav-arrows { font-size: 1.3rem; font-weight: 600; line-height: 1; transition: color 0.2s ease-in-out; }
-        
-        
         /* ----- ESTILOS NUEVA SECCIÓN: Proceso Data Análisis ----- */
         #proceso-data-analisis {
             padding: 5vh 5% 10vh 5%; /* Ajustado el padding-top para subir la sección */
@@ -497,47 +392,55 @@
             font-family: var(--font-body);
             font-size: clamp(1.2rem, 2.5vw, 1.5rem);
             line-height: 1.8;
-            max-width: 600px;
+            max-width: 800px; /* Increased max-width for more horizontal space */
             margin: 0 auto 2.5rem auto;
             color: #e0e0e0;
             text-transform: none;
         }
-        .final-cta-icon {
+        .final-cta-link { /* New class for the redesigned LinkedIn icon container */
             display: inline-block;
             transition: transform 0.3s ease;
+            text-decoration: none; /* Remove underline from the link */
         }
-        .final-cta-icon svg {
-            width: 6rem;
-            height: 6rem;
-            color: #0077b5;
-            /* Eliminado animation: pulse-glow para usar linkedin-icon-large */
-        }
-        .final-cta-icon:hover {
-            transform: scale(1.1);
+        .final-cta-link:hover {
+            transform: scale(1.05);
         }
 
-        /* Nuevo estilo para el icono de LinkedIn grande y llamativo */
-        .linkedin-icon-large svg {
-            width: 6rem;
-            height: 6rem;
-            color: #0077b5; /* LinkedIn blue */
-            filter: drop-shadow(0 0 5px rgba(0, 119, 181, 0.7)); /* Initial glow */
-            animation: pulse-glow-alt 2s infinite cubic-bezier(0.4, 0, 0.6, 1); /* Custom pulse animation */
+        .linkedin-circle {
+            width: 100px; /* Adjust size */
+            height: 100px;
+            background: linear-gradient(45deg, #0077b5, #00a0dc); /* LinkedIn blue gradient */
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden; /* For glow effect */
+            box-shadow: 0 0 10px rgba(0, 119, 181, 0.6); /* Initial subtle shadow */
+            animation: new-pulse-glow 3s infinite ease-in-out;
         }
 
-        /* Animación mejorada para el icono de LinkedIn grande */
-        @keyframes pulse-glow-alt {
+        .linkedin-text {
+            font-family: 'Arial', sans-serif; /* A bold, clean font */
+            font-weight: bold;
+            font-size: 4rem; /* Size of 'in' */
+            color: white;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            z-index: 2; /* Ensure text is above any pseudo-elements for glow */
+        }
+
+        @keyframes new-pulse-glow {
             0% {
+                box-shadow: 0 0 10px rgba(0, 119, 181, 0.6), inset 0 0 5px rgba(255,255,255,0.2);
                 transform: scale(1);
-                filter: drop-shadow(0 0 5px rgba(0, 119, 181, 0.4)); /* Sutil glow */
             }
             50% {
-                transform: scale(1.1);
-                filter: drop-shadow(0 0 15px rgba(0, 170, 255, 0.8)); /* Más intenso pero sin cubrir */
+                box-shadow: 0 0 30px rgba(0, 170, 255, 1), inset 0 0 15px rgba(255,255,255,0.5); /* Stronger glow */
+                transform: scale(1.05);
             }
             100% {
+                box-shadow: 0 0 10px rgba(0, 119, 181, 0.6), inset 0 0 5px rgba(255,255,255,0.2);
                 transform: scale(1);
-                filter: drop-shadow(0 0 5px rgba(0, 119, 181, 0.4));
             }
         }
         
@@ -567,14 +470,20 @@
             .bi-text-container { padding: 0 1.5rem; }
             .bi-text-container p { font-size: 1rem; }
 
-            /* Media queries para los gráficos insertados */
+            /* New CTA placement for mobile */
+            .new-cta-placement {
+                padding: 2rem 1rem; /* Adjust padding for mobile */
+            }
+
+            /* Media queries para los gráficos insertados - REMOVED AS PER USER REQUEST */
+            /*
             .inventory-section-layout { flex-direction: column; }
             .process-inventory-h1 { 
-                text-align: center; /* Center for mobile */
-                padding-left: 0; /* Remove left padding */
+                text-align: center; 
+                padding-left: 0; 
             }
             .timeline-call-to-action .subtitle-text {
-                max-width: 100%; /* Take full width on mobile */
+                max-width: 100%; 
             }
             .timeline-container-custom {
                 padding-top: 120px; padding-bottom: 140px;
@@ -590,6 +499,7 @@
             .stats-title { font-size: 0.75rem; }
             .nav-text { font-size: 0.8rem; }
             .nav-arrows { font-size: 1.1rem; }
+            */
             
             /* Media queries para Proceso Data Análisis (desactiva animación de aparición) */
             #proceso-data-analisis .roadmap-container > .relative { padding: 0; }
@@ -620,6 +530,15 @@
                 width: 200px; /* Smaller width for mobile tooltips */
                 margin-left: -100px; /* Recenter tooltip */
             }
+
+            /* New LinkedIn icon responsiveness */
+            .linkedin-circle {
+                width: 80px;
+                height: 80px;
+            }
+            .linkedin-text {
+                font-size: 3rem;
+            }
         }
 
         @media (max-width: 480px) {
@@ -630,20 +549,17 @@
             .linkedin-icon svg { width: 24px; height: 24px; }
             .logo { font-size: 1.1rem; }
             
-            /* Media queries para los gráficos insertados */
-            .timeline-visual-elements { width: 25px; } 
-            .timeline-number-custom { width: 2.4rem; height: 2.4rem; font-size: 0.8rem;} 
-            .timeline-category-custom { font-size: 0.65rem; min-width: 25px; } 
-            .timeline-container-custom {
-                grid-template-columns: repeat(5, minmax(40px, auto)); 
-                column-gap: 8px; padding-top: 110px; padding-bottom: 120px;
-            }
-            .navigation-controls-wrapper { top: 185px; }
-            .nav-text { font-size: 0.75rem; }
-            .nav-arrows { font-size: 1rem; }
-
             .step-content-block {
                 padding: 1rem; /* Reduce padding on smallest screens */
+            }
+
+            /* New LinkedIn icon responsiveness */
+            .linkedin-circle {
+                width: 70px;
+                height: 70px;
+            }
+            .linkedin-text {
+                font-size: 2.5rem;
             }
         }
 
@@ -747,104 +663,12 @@
                 </div>
             </div>
             
-            <div class="text-center my-4">
-                <p class="subtitle-text" style="max-width: 800px; margin: 2rem auto;">Otro grafico? por supuesto! interactúa con el, selecciona un numero y mira como se ve un inventario de procesos o productos resumido con BI</p>
-            </div>
-            <div class="inventory-section-layout">
-                <div class="inventory-timeline-column">
-                    <h1 class="process-inventory-h1">Procces Inventory</h1>
-                    <div class="main-content-wrapper">
-                        <div class="timeline-container-custom">
-                            <div id="runner-emoji">🚀</div>
-                            <div id="stats-popup" class="stats-popup">
-                                <div class="stats-title">Stats YTD y MTD</div>
-                                <div class="stats-line"><span>YTD:</span><span class="stats-value" id="ytd-value"></span></div>
-                                <div class="stats-line"><span>MTD:</span><span class="stats-value" id="mtd-value"></span></div>
-                            </div>
-                            <svg id="connector-svg"> 
-                                <path id="dotted-line-row1" class="dotted-line" d=""></path>
-                                <path id="dotted-line-row2" class="dotted-line" d=""></path>
-                                <path id="bracket-connector-path" d=""></path> 
-                                <path id="animation-guide-path" style="display:none;"></path> 
-                                <path id="animated-tracer" style="display:none;"></path> 
-                            </svg>
-                            
-                            <div class="timeline-stage-item active" data-index="0">
-                                <div class="timeline-visual-elements">
-                                    <div class="line-segment line-before"></div><div class="timeline-number-custom">101</div><div class="line-segment line-after"></div>
-                                </div><div class="timeline-category-custom">Opened</div>
-                            </div>
-                            <div class="timeline-stage-item" data-index="1">
-                                <div class="timeline-visual-elements">
-                                    <div class="line-segment line-before"></div><div class="timeline-number-custom">250</div><div class="line-segment line-after"></div>
-                                </div><div class="timeline-category-custom">Stage #1</div>
-                            </div>
-                            <div class="timeline-stage-item" data-index="2">
-                                <div class="timeline-visual-elements">
-                                    <div class="line-segment line-before"></div><div class="timeline-number-custom">3</div><div class="line-segment line-after"></div>
-                                </div><div class="timeline-category-custom">Stage #2</div>
-                            </div>
-                            <div class="timeline-stage-item" data-index="3">
-                                <div class="timeline-visual-elements">
-                                    <div class="line-segment line-before"></div><div class="timeline-number-custom">42</div><div class="line-segment line-after"></div>
-                                </div><div class="timeline-category-custom">Stage #3</div>
-                            </div>
-                            <div class="timeline-stage-item" data-index="4">
-                                <div class="timeline-visual-elements">
-                                    <div class="line-segment line-before"></div><div class="timeline-number-custom">555</div><div class="line-segment line-after"></div>
-                                </div><div class="timeline-category-custom">Stage #4</div>
-                            </div>
-                            <div class="timeline-stage-item" data-index="5">
-                                <div class="timeline-visual-elements">
-                                    <div class="line-segment line-before"></div><div class="timeline-number-custom">68</div><div class="line-segment line-after"></div>
-                                </div><div class="timeline-category-custom">Stage #5</div>
-                            </div>
-                            <div class="timeline-stage-item" data-index="6">
-                                <div class="timeline-visual-elements">
-                                    <div class="line-segment line-before"></div><div class="timeline-segment line-after"></div>
-                                </div><div class="timeline-category-custom">Stage #6</div>
-                            </div>
-                            <div class="timeline-stage-item" data-index="7">
-                                <div class="timeline-visual-elements">
-                                    <div class="line-segment line-before"></div><div class="timeline-number-custom">81</div><div class="line-segment line-after"></div>
-                                </div><div class="timeline-category-custom">Stage #7</div>
-                            </div>
-                            <div class="timeline-stage-item" data-index="8">
-                                <div class="timeline-visual-elements">
-                                    <div class="line-segment line-before"></div><div class="timeline-number-custom">909</div><div class="line-segment line-after"></div>
-                                </div><div class="timeline-category-custom">Stage #8</div>
-                            </div>
-                            <div class="timeline-stage-item" data-index="9">
-                                <div class="timeline-visual-elements">
-                                    <div class="line-segment line-before"></div><div class="timeline-number-custom">10</div><div class="line-segment line-after"></div>
-                                </div><div class="timeline-category-custom">Closed</div>
-                            </div>
-                            
-                            <div class="navigation-controls-wrapper">
-                                <div class="navigation-controls">
-                                    <div class="nav-control-group" onclick="prevStep()">
-                                        <span class="nav-arrows">&lt;&lt;</span>
-                                        <span class="nav-text">Back</span>
-                                    </div>
-                                    <div class="nav-control-group" onclick="nextStep()">
-                                        <span class="nav-arrows">&gt;&gt;</span>
-                                        <span class="nav-text">Forward</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="inventory-cta-column">
-                     <div class="subtitle-wrapper timeline-call-to-action">
-                          <p class="subtitle-text" style="max-width: 800px; margin: 0 auto; font-size: clamp(1.4rem, 2.5vw, 1.8rem);">
-                              Conoce mas herramientas que ayudan a tu negocio a crecer con el análisis de datos
-                          </p>
-                          <a href="#proceso-data-analisis" class="scroll-down-link-2" aria-label="Deslizar a Proceso Data Análisis">
-                              <svg class="scroll-down-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M11,4H13V16L18.5,10.5L19.92,11.92L12,19.84L4.08,11.92L5.5,10.5L11,16V4Z"></path></svg>
-                          </a>
-                      </div>
-                </div>
+            <!-- Moved text and scroll-down link here -->
+            <div class="text-center my-4 new-cta-placement">
+                <p class="subtitle-text" style="max-width: 800px; margin: 2rem auto;">Conoce mas herramientas que ayudan a tu negocio a crecer con el análisis de datos</p>
+                <a href="#proceso-data-analisis" class="scroll-down-link-2" aria-label="Deslizar a Proceso Data Análisis">
+                    <svg class="scroll-down-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M11,4H13V16L18.5,10.5L19.92,11.92L12,19.84L4.08,11.92L5.5,10.5L11,16V4Z"></path></svg>
+                </a>
             </div>
         </section>
 
@@ -888,7 +712,7 @@
                             <div class="step-row" data-step="2">
                                 <div class="step-card-container">
                                         <div class="step-card" data-step-id="2" style="border-color: var(--color-primary);">
-                                                <div class="text-4xl mb-2">&#x1F575;&#xFE0E;</div><!-- Detective emoji -->
+                                                <div class="text-4xl mb-2">&#129300;</div><!-- Face with monocle emoji -->
                                                 <h4 class="font-bold">Identificación de Datos</h4>
                                         </div>
                                 </div>
@@ -984,8 +808,10 @@
                     <p class="final-cta-text">
                         Si llegaste hasta aquí es por que de verdad quieres implementar Análisis de datos, si le das clic a este icono tan llamativo😅 allí me encontrarás y te daré una mano 🤜🤛
                     </p>
-                    <a href="https://www.linkedin.com/in/hansen-guzm%C3%A1n-hern%C3%A1ndez-b4185592/" target="_blank" rel="noopener noreferrer" class="final-cta-icon linkedin-icon-large" aria-label="LinkedIn">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                    <a href="https://www.linkedin.com/in/hansen-guzm%C3%A1n-hern%C3%A1ndez-b4185592/" target="_blank" rel="noopener noreferrer" class="final-cta-link" aria-label="Conectar en LinkedIn">
+                        <div class="linkedin-circle">
+                            <span class="linkedin-text">in</span>
+                        </div>
                     </a>
                 </footer>
             </div>
@@ -999,7 +825,8 @@
         <img class="modal-content" id="modal-image" alt="Imagen ampliada de la galería">
     </div>
     
-    <!-- SCRIPT DEL TIMELINE INSERTADO -->
+    <!-- SCRIPT DEL TIMELINE INSERTADO - REMOVED AS PER USER REQUEST -->
+    <!--
     <script>
     (() => {
         let currentStep = 0;
@@ -1647,7 +1474,7 @@
                 clearTimeout(restartTimeout);
                 clearInterval(cardHighlightInterval);
 
-                // Hide all steps initially if not mobile
+                // Hide all steps initially if not mobile or if it's a restart
                 stepRows.forEach(row => {
                     if (!isMobile) {
                         row.style.opacity = '0';
@@ -1657,8 +1484,8 @@
                     row.querySelector('.step-card').classList.remove('active');
                 });
 
-                // Display the first step immediately (if not mobile and not user-interacted)
-                if (!isMobile && !userInteracted && stepRows.length > 0) {
+                // Display the first step immediately (if not mobile)
+                if (!isMobile && stepRows.length > 0) {
                     const firstRow = stepRows[0];
                     const firstStepId = parseInt(firstRow.dataset.step);
                     const firstStepData = stepsData.find(s => s.id === firstStepId);
@@ -1669,7 +1496,7 @@
                     setActiveStep(firstStepId);
                 }
 
-                let currentStepIndex = (isMobile || userInteracted) ? 0 : 1; // Start from 0 if mobile or interacted, else from 1
+                let currentStepIndex = (isMobile) ? 0 : 1; // Start from 0 if mobile, else from 1 (first step is already visible)
 
                 const animateStep = () => {
                     if (userInteracted) {
@@ -1697,8 +1524,8 @@
                     }
                 };
                 
-                // If mobile or user interacted, show all at once and start secondary animation
-                if (isMobile || userInteracted) {
+                // If mobile, show all at once and start secondary animation
+                if (isMobile) {
                     stepRows.forEach((row, index) => {
                         const stepId = parseInt(row.dataset.step);
                         const stepData = stepsData.find(s => s.id === stepId);
