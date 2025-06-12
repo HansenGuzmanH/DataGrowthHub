@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hansen Data Growth Hub | Análisis de Datos Cinematográfico</title>
+    <title>Hansen Guzmán | Data Growth Hub</title>
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -560,7 +560,8 @@
                 left: 0; 
                 transform: none; 
                 padding: 0 10px; /* Adjust padding for mobile */
-                border-radius: 0; /* Remove rounded corners on full-width mobile header */
+                /* MODIFICACIÓN: Eliminamos el 'border-radius: 0;' para que el encabezado sea redondeado en móvil */
+                border-radius: var(--corner-radius); /* Aplicamos el radio de la variable CSS */
                 top: 0; /* Stick to top on mobile */
             }
             body, html {
@@ -1323,8 +1324,8 @@
                         const stepId = parseInt(row.dataset.step);
                         const contentBlock = document.getElementById(`step-content-block-${stepId}`);
                         if (!contentBlock.innerHTML) {
-                             const stepData = stepsData.find(s => s.id === stepId);
-                             contentBlock.innerHTML = stepData.content;
+                            const stepData = stepsData.find(s => s.id === stepId);
+                            contentBlock.innerHTML = stepData.content;
                         }
                     });
 
@@ -1391,9 +1392,9 @@
                         clearInterval(cardHighlightInterval);
                         // Force a re-check to start animation immediately if in view
                         if (procesoDataAnalisisSection && intersectionObserver) {
-                             intersectionObserver.unobserve(procesoDataAnalisisSection); // Stop observing temporarily
-                             // Force content update and activate first step instantly
-                             stepRows.forEach(row => {
+                            intersectionObserver.unobserve(procesoDataAnalisisSection); // Stop observing temporarily
+                            // Force content update and activate first step instantly
+                            stepRows.forEach(row => {
                                 const stepId = parseInt(row.dataset.step);
                                 const contentBlock = document.getElementById(`step-content-block-${stepId}`);
                                 const stepData = stepsData.find(s => s.id === stepId);
@@ -1402,7 +1403,7 @@
                                     setActiveStep(1); // Activate first step immediately
                                 }
                                 if (window.innerWidth > 768) {
-                                     row.style.opacity = '0'; /* Reset opacity for animation if desktop */
+                                    row.style.opacity = '0'; /* Reset opacity for animation if desktop */
                                 }
                             });
                             setTimeout(() => { // Small delay to ensure scroll and then start animation
