@@ -58,15 +58,52 @@
             display: flex;
             justify-content: space-between; /* Adjusted for better spacing */
             align-items: center;
-            padding: 0 20px;
+            padding: 0 30px; /* Increased padding for overall header spacing */
             z-index: 1000;
             transition: top 0.3s ease, background-color 0.3s ease; 
+            overflow: hidden; /* Ensure anything overflowing the main-header is clipped */
+            position: relative; /* Needed for z-index context of children */
         }
         
+        /* MODIFICACIÓN: Nuevo estilo para el fondo gráfico del encabezado */
+        .header-graph-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Coloca el SVG detrás de los elementos del encabezado */
+            overflow: hidden; /* Asegura que el SVG no se desborde del fondo del encabezado */
+        }
+
+        .header-graph-background svg {
+            width: 120%; /* Make it slightly wider to allow for movement */
+            height: 100%;
+            transform: translateX(0);
+            animation: graph-scroll 15s linear infinite; /* Subtle continuous movement */
+        }
+
+        @keyframes graph-scroll {
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(-20%); } /* Move slightly left */
+        }
+
+        .header-graph-background path {
+            stroke: var(--color-secondary);
+            stroke-width: 2;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            stroke-opacity: 0.6; /* Adjust transparency here */
+        }
+
         .header-section { display: flex; align-items: center; }
-        .header-section.left { flex: 1 0 auto; justify-content: flex-start; }
-        .header-section.center { flex: 2 1 auto; justify-content: center; text-align: center; }
-        .header-section.right { flex: 1 0 auto; justify-content: flex-end; }
+        .header-section.left { flex: 0 0 auto; justify-content: flex-start; } 
+        .header-section.center { flex: 1 1 auto; justify-content: center; text-align: center; } 
+        .header-section.right { 
+            flex: 0 0 auto; /* Allow content to define size, but prevent shrinking/growing too much */
+            justify-content: flex-end; 
+        } 
         
         .logo { 
             font-size: 1.6rem; 
@@ -98,19 +135,19 @@
         .linkedin-icon svg { width: 32px; height: 32px; }
         
         .header-icon {
-            height: 55px; /* Increased height */
-            width: 55px; /* Set width to match height */
+            height: 55px; /* Altura fija para el contenedor del icono */
+            width: auto; /* Ancho automático para permitir que la imagen defina su ancho */
             border-radius: 0;
-            object-fit: contain;
             transition: transform 0.3s ease;
-            display: flex; /* Use flex to center the image if needed */
+            display: flex; /* Permite centrar la imagen dentro si es necesario */
             align-items: center;
             justify-content: center;
         }
         .header-icon img {
-            max-height: 100%; /* Ensure image fits within new dimensions */
-            max-width: 100%;
-            object-fit: contain;
+            height: 100%; /* La imagen ocupa el 100% de la altura de su contenedor */
+            width: auto; /* El ancho se ajusta automáticamente para mantener la proporción */
+            object-fit: contain; /* Mantiene la proporción de la imagen dentro del espacio disponible */
+            max-width: none; /* Asegura que no haya un max-width que la comprima globalmente */
         }
         .header-icon:hover { transform: scale(1.1); }
 
@@ -204,8 +241,29 @@
         .title-container { text-align: left; }
         .title-container .top-row { display: flex; align-items: flex-end; }
         .title-container h1 { font-size: 15vw; line-height: 0.9; color: white; }
-        .growth-arrow { width: 30vw; height: 20vw; margin-left: 2vw; opacity: 0.75; }
+        .growth-arrow { 
+            width: 30vw; 
+            height: 20vw; 
+            margin-left: 2vw; 
+            opacity: 0.75; 
+            overflow: visible; 
+        }
         .growth-arrow path { stroke: #FF2E63; stroke-width: 12; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+
+        /* MODIFICACIÓN: Estilo para el span que contiene el logo como "O" - tamaño y posición ajustados */
+        .growth-o-logo {
+            display: inline-block;
+            width: 0.8em; /* Agrandado un poco más */
+            height: 0.8em; /* Agrandado un poco más */
+            background-image: url('https://i.imgur.com/D7C6inO.png'); /* URL corregida */
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            vertical-align: middle; /* Alinea verticalmente con el texto */
+            margin: 0 0.05em; /* Pequeño ajuste de margen horizontal */
+            transform: translateY(-0.1em); /* Subido ligeramente */
+        }
+
         .subtitle-wrapper { margin-top: 3vh; text-align: center; width: 90%; max-width: 600px; color: rgba(255, 255, 255, 0.9); }
         .subtitle-text {
             font-family: var(--font-body); font-size: clamp(1rem, 2.5vw, 1.2rem);
@@ -275,7 +333,7 @@
             font-family: var(--font-body); font-weight: 400; font-size: 1.15rem; color: #e0e0e0;
             line-height: 1.9; margin-bottom: 1.5rem; text-transform: none;
         }
-        .bi-text-container p strong { color: var(--color-secondary); }
+        .bi-text-container p strong { color: var(--color-primary); }
         
         /* Estilos para el Lightbox de la Galería */
         .image-modal-overlay {
@@ -552,6 +610,45 @@
         }
         
         /* ----- Estilos para Responsividad ----- */
+        @media (min-width: 769px) { /* Media query for desktop */
+            .main-header {
+                /* Increased padding-right for main-header in desktop */
+                padding-right: 60px; 
+                /* Ensure anything overflowing the main-header is clipped */
+                overflow: hidden; 
+            }
+            .header-section.right {
+                /* Let content define initial width */
+                flex-basis: auto; 
+                max-width: none;
+                flex-shrink: 0; 
+                flex-grow: 0; 
+                /* Allow content to overflow this container for main-header to clip */
+                overflow: visible; 
+                justify-content: flex-end; /* Align content to the right */
+            }
+            .header-section.center {
+                flex-shrink: 1; 
+                flex-grow: 1; 
+            }
+            .header-icon {
+                height: 55px; /* Fixed height for the icon container */
+                /* Define a fixed width for the logo container on desktop */
+                width: 150px; 
+                display: flex; /* Ensure inner content is centered */
+                align-items: center;
+                justify-content: center;
+                /* Clipping is handled here if the logo is larger than the fixed width */
+                overflow: hidden; 
+            }
+            .header-icon img {
+                height: 100%; /* Image takes 100% of its container's height (.header-icon) */
+                width: auto; /* Width adjusts automatically to maintain aspect ratio */
+                object-fit: contain; /* Ensure image fits without distortion */
+                max-width: 100%; /* Ensure it doesn't overflow the icon container */
+            }
+        }
+
         @media (max-width: 768px) {
             :root { --header-height: 60px; }
             /* Header full width and top */
@@ -560,8 +657,8 @@
                 left: 0; 
                 transform: none; 
                 padding: 0 10px; /* Adjust padding for mobile */
-                border-radius: var(--corner-radius); /* Aplicamos el radio de la variable CSS */
-                top: 10px; /* MODIFICACIÓN: Bajamos el encabezado 10px en móvil */
+                border-radius: var(--corner-radius); /* Apply the CSS variable radius */
+                top: 10px; 
             }
             body, html {
                 overflow-x: hidden; /* Ensure no horizontal scroll is possible */
@@ -577,7 +674,7 @@
             .linkedin-icon svg { width: 28px; height: 28px; }
             .header-icon { 
                 height: 40px; 
-                width: 40px; 
+                width: 40px; /* Ensure width is equal to height at this resolution */
                 flex-shrink: 0; 
             }
             .header-icon img {
@@ -633,9 +730,6 @@
                 padding-right: 0; 
                 margin: 0 auto 1rem auto; 
             }
-            #proceso-data-analisis .step-row .step-card h4 {
-                font-size: clamp(0.75rem, 1.2vw, 0.9rem); 
-            }
             #proceso-data-analisis .step-row .content-container { 
                 padding: 0 1rem; 
                 width: 100%; 
@@ -673,7 +767,10 @@
             .overlay-nav a { font-size: clamp(1.5rem, 8vw, 2.2rem); }
             :root { --menu-width: 80vw; --menu-max-width: 320px; }
             .gallery-main-image { height: 250px; }
-            .header-icon { height: 35px; width: auto; }
+            .header-icon { 
+                height: 35px; 
+                width: 35px; /* Ensure width is equal to height at this resolution */
+            }
             .linkedin-icon svg { width: 24px; height: 24px; }
             .logo { font-size: 1.1rem; }
             
@@ -719,6 +816,17 @@
 
 <div class="page-wrapper">
     <header class="main-header">
+        <!-- MODIFICACIÓN: Nuevo elemento para el fondo gráfico del encabezado -->
+        <div class="header-graph-background">
+            <svg viewBox="0 0 100 70" preserveAspectRatio="none">
+                <rect x="5" y="30" width="10" height="40" fill="var(--color-secondary)" fill-opacity="0.2"/>
+                <rect x="20" y="10" width="10" height="60" fill="var(--color-secondary)" fill-opacity="0.3"/>
+                <rect x="35" y="40" width="10" height="30" fill="var(--color-secondary)" fill-opacity="0.25"/>
+                <rect x="50" y="0" width="10" height="70" fill="var(--color-secondary)" fill-opacity="0.35"/>
+                <rect x="65" y="20" width="10" height="50" fill="var(--color-secondary)" fill-opacity="0.3"/>
+                <rect x="80" y="5" width="10" height="65" fill="var(--color-secondary)" fill-opacity="0.4"/>
+            </svg>
+        </div>
         <div class="header-section left">
             <div class="header-controls">
                 <button class="menu-trigger" aria-label="Abrir menú">
@@ -737,9 +845,8 @@
             <a href="#page-top" class="logo animated-gradient-text">Data Growth Hub</a>
         </div>
         <div class="header-section right">
-           <a href="#page-top" class="top-link" aria-label="Ir al inicio de la página">
-               <img src="https://i.imgur.com/I9NzDmR.png" alt="Icono de Hansen" onerror="this.onerror=null;this.src='https://placehold.co/120x45/222831/eeeeee?text=Logo';">
-           </a>
+           <!-- Removed logo from here -->
+           <!-- MODIFICACIÓN: La sección derecha ahora está vacía ya que el logo se movió y el link de top ya no es necesario -->
         </div>
     </header>
 
@@ -769,10 +876,11 @@
                         <div class="top-row">
                             <h1>DATA</h1>
                             <svg class="growth-arrow" viewBox="0 0 120 100">
+                                <!-- MODIFICACIÓN: Logo detrás de la flecha eliminado -->
                                 <path d="M10 85 L 40 55 L 60 75 L 90 45 L 115 45 M105 35 L 115 45 L 105 55" />
                             </svg>
                         </div>
-                        <h1>GROWTH</h1>
+                        <h1>GR<span class="growth-o-logo"></span>WTH</h1>
                     </div>
                     <div class="subtitle-wrapper">
                         <p class="subtitle-text">
@@ -1034,10 +1142,13 @@
                 });
             });
 
-            document.querySelector('.top-link').addEventListener('click', (e) => {
-                e.preventDefault();
-                lenis.scrollTo(0, { duration: 1.5, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
-            });
+            const topLink = document.querySelector('.top-link');
+            if (topLink) { // Added null check here
+                topLink.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    lenis.scrollTo(0, { duration: 1.5, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
+                });
+            }
 
             const mm = gsap.matchMedia();
 
@@ -1120,7 +1231,7 @@
                 // Lógica del Lightbox/Modal
                 if (imageModal && modalImage && modalCloseBtn && modalPrevBtn && modalNextBtn) {
                     const openModal = () => {
-                        modalImage.src = mainImage.src; // Abre la imagen que está actualmente en el carrusel
+                        modalImage.src = mainImage.src; // Opens the image currently in the carousel
                         imageModal.style.display = 'flex';
                         lenis.stop();
                     };
@@ -1130,19 +1241,19 @@
                         lenis.start();
                     };
 
-                    // Función para cambiar de imagen dentro del modal
+                    // Function to change image within the modal
                     const changeModalImage = (direction) => {
                         currentIndex += direction;
-                        // Permite que la galería sea cíclica
+                        // Allows the gallery to be cyclic
                         if (currentIndex >= thumbnails.length) {
                             currentIndex = 0;
                         } else if (currentIndex < 0) {
                             currentIndex = thumbnails.length - 1;
                         }
-                        // Actualiza la imagen del modal y la del carrusel principal
+                        // Updates the modal image and the main carousel image
                         const newSrc = thumbnails[currentIndex].querySelector('img').src;
                         modalImage.src = newSrc;
-                        mainImage.src = newSrc; // Actualiza también la imagen principal
+                        mainImage.src = newSrc; // Also updates the main image
                         thumbnails.forEach(t => t.classList.remove('active'));
                         thumbnails[currentIndex].classList.add('active');
                     };
@@ -1150,18 +1261,18 @@
                     mainImageContainer.addEventListener('click', openModal);
                     modalCloseBtn.addEventListener('click', closeModal);
                     
-                    // Cierra el modal si se hace clic fuera de la imagen
+                    // Closes the modal if clicked outside the image
                     imageModal.addEventListener('click', (e) => {
                         if (e.target === imageModal) {
                             closeModal();
                         }
                     });
 
-                    // Event listeners para los botones de navegación del modal
+                    // Event listeners for modal navigation buttons
                     modalPrevBtn.addEventListener('click', () => changeModalImage(-1));
                     modalNextBtn.addEventListener('click', () => changeModalImage(1)); /* Corrected function name */
 
-                    // Event listener para la navegación con teclado
+                    // Event listener for keyboard navigation
                     document.addEventListener('keydown', (e) => {
                         if (imageModal.style.display === 'flex') {
                             if (e.key === 'ArrowLeft') {
@@ -1186,7 +1297,7 @@
                 }
             });
 
-            // Script para la nueva sección "Proceso Data Análisis"
+            // Script for the new "Data Analysis Process" section
             const stepsData = [
                 { id: 1, phase: 1, content: `<h3 class="text-xl font-bold mb-4">Paso 1: Definición de Necesidades y Objetivos</h3><p class="mb-4">Esta es la piedra angular. Antes de analizar cualquier dato, debemos tener absoluta claridad sobre qué preguntas de negocio queremos responder y qué metas buscamos alcanzar.</p><ul class="list-disc space-y-2"><li><strong>Identificar Necesidades:</strong> Entender los desafíos actuales y las decisiones clave.</li><li><strong>Establecer <span class="tooltip-container">KPIs<span class="tooltip-text">Un <strong>KPI</strong> (Key Performance Indicator) es una métrica medible para evaluar el éxito.</span></span>:</strong> Definir métricas específicas y medibles.</li><li><strong>Definir Objetivos Cuantificables:</strong> Traducir las necesidades en metas numéricas.</li></ul>`},
                 { id: 2, phase: 1, content: `<h3 class="text-xl font-bold mb-4">Paso 2: Identificar los Datos</h3><p class="mb-4">Con los objetivos definidos, el siguiente paso es actuar como detectives de datos: encontrar dónde reside la información valiosa y establecer mecanismos para recopilarla.</p><ul class="list-disc space-y-2"><li><strong>Fuentes Internas:</strong> Bases de datos (CRM, ERP), registros de ventas, etc.</li><li><strong>Fuentes Externas:</strong> Datos de mercado, redes sociales.</li><li><strong>Tipos de Datos:</strong> <span class="tooltip-container">Estructurados<span class="tooltip-text"><strong>Datos estructurados:</strong> Formato organizado, como tablas.</span></span> y <span class="tooltip-container">No Estructurados<span class="tooltip-text"><strong>Datos no estructurados:</strong> Sin formato predefinido, como emails o imágenes.</span></span>.</li></ul>`},
@@ -1202,7 +1313,7 @@
             let cardHighlightInterval;
             let restartTimeout;
             let userInteracted = false;
-            let intersectionObserver; // Variable para el IntersectionObserver
+            let intersectionObserver; // Variable for IntersectionObserver
 
             function setActiveStep(stepId) {
                 stepRows.forEach(row => {
@@ -1297,9 +1408,8 @@
                 if (isMobile) {
                     stepRows.forEach((row, index) => {
                         const stepId = parseInt(row.dataset.step);
-                        const stepData = stepsData.find(s => s.id === stepId);
                         const contentBlock = document.getElementById(`step-content-block-${stepId}`);
-                        contentBlock.innerHTML = stepData.content;
+                        contentBlock.innerHTML = stepsData.find(s => s.id === stepId).content;
                         row.style.opacity = '1'; 
                     });
                     startSecondaryCardAnimation();
@@ -1333,13 +1443,13 @@
                 });
             });
 
-            // IntersectionObserver para iniciar la animación cuando la sección es visible
+            // IntersectionObserver to start animation when section is visible
             const procesoDataAnalisisSection = document.getElementById('proceso-data-analisis');
             if (procesoDataAnalisisSection) {
                 const observerOptions = {
                     root: null, // viewport
                     rootMargin: '0px',
-                    threshold: 0.1 // 10% de la sección visible para activar
+                    threshold: 0.1 // 10% of the section visible to activate
                 };
 
                 intersectionObserver = new IntersectionObserver((entries, observer) => {
@@ -1347,14 +1457,14 @@
                         if (entry.isIntersecting && !userInteracted) {
                             startAnimationCycle();
                         } else if (!entry.isIntersecting) {
-                            // Si la sección no está visible, detén las animaciones y permite que se reinicien
+                            // If section is not visible, stop animations and allow them to restart
                             clearInterval(revealInterval);
                             clearTimeout(restartTimeout);
                             clearInterval(cardHighlightInterval);
                             userInteracted = false; // Reset user interaction to allow restart
-                            // Opcional: Ocultar las tarjetas para el efecto de "aparición"
+                            // Optional: Hide cards for "reveal" effect
                             stepRows.forEach(row => {
-                                if (window.innerWidth > 768) { /* Solo si no es móvil */
+                                if (window.innerWidth > 768) { /* Only if not mobile */
                                     row.style.opacity = '0';
                                 }
                             });
@@ -1369,11 +1479,11 @@
             // Re-run animation cycle on resize to adapt to mobile/desktop
             window.addEventListener('resize', () => {
                 userInteracted = false; // Reset interaction on resize to restart animations
-                // Detener el observer antes de reevaluar
+                // Stop observer before re-evaluating
                 if (intersectionObserver) {
                     intersectionObserver.disconnect();
                 }
-                // Volver a observar para aplicar la lógica correcta
+                // Re-observe to apply correct logic
                 if (procesoDataAnalisisSection) {
                     intersectionObserver.observe(procesoDataAnalisisSection);
                 }
@@ -1405,10 +1515,10 @@
                                     row.style.opacity = '0'; /* Reset opacity for animation if desktop */
                                 }
                             });
-                            setTimeout(() => { // Small delay to ensure scroll and then start animation
+                            setTimeout(() => { // Small delay to ensure scroll to finish, then start animation
                                 startAnimationCycle();
                                 intersectionObserver.observe(procesoDataAnalisisSection); // Re-observe
-                            }, 500); // Give some time for scroll to finish
+                            }, 500); 
                         }
                     }
                 });
