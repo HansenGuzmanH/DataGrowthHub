@@ -565,6 +565,9 @@
             
             /* Media queries para Proceso Data Análisis (desactiva animación de aparición) */
             #proceso-data-analisis .roadmap-container > .relative { padding: 0; }
+            .phase-title span:last-child { /* Adjust text size for phase title on mobile */
+                font-size: clamp(1rem, 2vw, 1.2rem); 
+            }
             #proceso-data-analisis .step-row {
                 flex-direction: column;
                 align-items: center;
@@ -576,9 +579,12 @@
             /* Fix for step-card-container width on mobile */
             #proceso-data-analisis .step-row .step-card-container { 
                 flex: 1 1 auto; /* Allow it to grow and shrink */
-                width: 100%; /* Take full width of its parent */
+                width: 70%; /* Reduced width for mobile cards */
                 padding-right: 0; /* Remove right padding */
                 margin-bottom: 1rem; /* Re-add margin for spacing */
+            }
+            #proceso-data-analisis .step-row .step-card h4 {
+                font-size: clamp(0.75rem, 1.2vw, 0.9rem); /* Further reduced font size for mobile card titles */
             }
             #proceso-data-analisis .step-row .content-container { padding: 0 1rem; /* Add horizontal padding for content */ width: 100%; }
             #proceso-data-analisis .step-row .connector { display: none; }
@@ -636,9 +642,27 @@
             }
         }
 
+        /* Mobile portrait specific adjustments */
+        @media (max-width: 768px) and (orientation: portrait) {
+            .knockout-text-layer {
+                justify-content: center; /* Center vertically in portrait */
+                padding-top: 0; /* Remove fixed padding to allow centering */
+            }
+            .subtitle-wrapper {
+                margin-top: 2vh; /* Adjust spacing to allow centering */
+            }
+            .title-container h1 {
+                font-size: 20vw; /* Keep large font for impact */
+            }
+            .growth-arrow {
+                width: 25vw;
+                height: 20vw;
+            }
+        }
+
     </style>
 </head>
-<body id="page-top">
+<body>
 
 <div class="page-wrapper">
     <header class="main-header">
@@ -791,7 +815,7 @@
                                 <div class="step-card-container">
                                         <div class="step-card" data-step-id="2" style="border-color: var(--color-primary);">
                                                 <div class="text-4xl mb-2">&#129300;</div><!-- Face with monocle emoji -->
-                                                <h4 class="font-bold">Identificación de Datos</h4>
+                                                <h4 class="font-bold">Identificar los Datos</h4>
                                         </div>
                                 </div>
                                 <div class="connector">
@@ -825,7 +849,7 @@
                                 <div class="step-card-container">
                                         <div class="step-card" data-step-id="4" style="border-color: var(--color-primary);">
                                                 <div class="text-4xl mb-2">&#x1F9EE;</div><!-- Abacus emoji -->
-                                                <h4 class="font-bold">Análisis y BI</h4>
+                                                <h4 class="font-bold">Análisis BI</h4>
                                         </div>
                                 </div>
                                 <div class="connector">
@@ -1113,9 +1137,9 @@
             // Script para la nueva sección "Proceso Data Análisis"
             const stepsData = [
                 { id: 1, phase: 1, content: `<h3 class="text-xl font-bold mb-4">Paso 1: Definición de Necesidades y Objetivos</h3><p class="mb-4">Esta es la piedra angular. Antes de analizar cualquier dato, debemos tener absoluta claridad sobre qué preguntas de negocio queremos responder y qué metas buscamos alcanzar.</p><ul class="list-disc space-y-2"><li><strong>Identificar Necesidades:</strong> Entender los desafíos actuales y las decisiones clave.</li><li><strong>Establecer <span class="tooltip-container">KPIs<span class="tooltip-text">Un <strong>KPI</strong> (Key Performance Indicator) es una métrica medible para evaluar el éxito.</span></span>:</strong> Definir métricas específicas y medibles.</li><li><strong>Definir Objetivos Cuantificables:</strong> Traducir las necesidades en metas numéricas.</li></ul>`},
-                { id: 2, phase: 1, content: `<h3 class="text-xl font-bold mb-4">Paso 2: Identificación y Recopilación de Datos</h3><p class="mb-4">Con los objetivos definidos, el siguiente paso es actuar como detectives de datos: encontrar dónde reside la información valiosa y establecer mecanismos para recopilarla.</p><ul class="list-disc space-y-2"><li><strong>Fuentes Internas:</strong> Bases de datos (CRM, ERP), registros de ventas, etc.</li><li><strong>Fuentes Externas:</strong> Datos de mercado, redes sociales.</li><li><strong>Tipos de Datos:</strong> <span class="tooltip-container">Estructurados<span class="tooltip-text"><strong>Datos estructurados:</strong> Formato organizado, como tablas.</span></span> y <span class="tooltip-container">No Estructurados<span class="tooltip-text"><strong>Datos no estructurados:</strong> Sin formato predefinido, como emails o imágenes.</span></span>.</li></ul>`},
+                { id: 2, phase: 1, content: `<h3 class="text-xl font-bold mb-4">Paso 2: Identificar los Datos</h3><p class="mb-4">Con los objetivos definidos, el siguiente paso es actuar como detectives de datos: encontrar dónde reside la información valiosa y establecer mecanismos para recopilarla.</p><ul class="list-disc space-y-2"><li><strong>Fuentes Internas:</strong> Bases de datos (CRM, ERP), registros de ventas, etc.</li><li><strong>Fuentes Externas:</strong> Datos de mercado, redes sociales.</li><li><strong>Tipos de Datos:</strong> <span class="tooltip-container">Estructurados<span class="tooltip-text"><strong>Datos estructurados:</strong> Formato organizado, como tablas.</span></span> y <span class="tooltip-container">No Estructurados<span class="tooltip-text"><strong>Datos no estructurados:</strong> Sin formato predefinido, como emails o imágenes.</span></span>.</li></ul>`},
                 { id: 3, phase: 1, content: `<h3 class="text-xl font-bold mb-4">Paso 3: Limpieza y Preparación de Datos</h3><p class="mb-4">Los datos en su estado natural suelen estar incompletos o con errores. Decisiones basadas en datos "sucios" son peligrosas, por lo que este paso garantiza la fiabilidad.</p><ul class="list-disc space-y-2"><li><strong><span class="tooltip-container">Limpieza de Datos<span class="tooltip-text">Proceso de detectar y corregir registros incorrectos.</span></span>:</strong> Corregir errores, inconsistencias y duplicados.</li><li><strong>Transformación de Datos:</strong> Combinar fuentes y crear nuevas variables.</li></ul>`},
-                { id: 4, phase: 1, content: `<h3 class="text-xl font-bold mb-4">Paso 4: Análisis y Visualización con BI</h3><p class="mb-4">Con datos limpios, transformamos la información en conocimiento visual y accionable, respondiendo a la pregunta: "¿Qué está sucediendo en nuestro negocio?".</p><ul class="list-disc space-y-2"><li><strong>Análisis Exploratorio:</strong> Investigar los datos para descubrir patrones y tendencias.</li><li><strong>Generación de <span class="tooltip-container">Dashboards<span class="tooltip-text">Resumen visual y en tiempo real de los KPIs más importantes.</span></span> y <span class="tooltip-container">BI<span class="tooltip-text">Conjunto de estrategias y herramientas para el análisis de datos.</span></span>:</strong> Crear visualizaciones interactivas.</li></ul>`},
+                { id: 4, phase: 1, content: `<h3 class="text-xl font-bold mb-4">Paso 4: Análisis BI</h3><p class="mb-4">Con datos limpios, transformamos la información en conocimiento visual y accionable, respondiendo a la pregunta: "¿Qué está sucediendo en nuestro negocio?".</p><ul class="list-disc space-y-2"><li><strong>Análisis Exploratorio:</strong> Investigar los datos para descubrir patrones y tendencias.</li><li><strong>Generación de <span class="tooltip-container">Dashboards<span class="tooltip-text">Resumen visual y en tiempo real de los KPIs más importantes.</span></span> y <span class="tooltip-container">BI<span class="tooltip-text">Conjunto de estrategias y herramientas para el análisis de datos.</span></span>:</strong> Crear visualizaciones interactivas.</li></ul>`},
                 { id: 5, phase: 2, content: `<h3 class="text-xl font-bold mb-4">Paso 5: Implementación de Machine Learning</h3><p class="mb-4">Una vez que entendemos lo que ha pasado, podemos empezar a predecir lo que podría pasar, utilizando algoritmos para descubrir patrones complejos.</p><ul class="list-disc space-y-2"><li><strong>Desarrollo de Modelos:</strong> Usar <span class="tooltip-container">Machine Learning<span class="tooltip-text">Rama de la IA que permite a las máquinas aprender de los datos para hacer predicciones.</span></span> y <span class="tooltip-container">Deep Learning<span class="tooltip-text">Subcampo del ML que usa redes neuronales complejas.</span></span> para construir modelos predictivos.</li></ul>`},
                 { id: 6, phase: 2, content: `<h3 class="text-xl font-bold mb-4">Paso 6: Aplicación y Mejora Continua</h3><p class="mb-4">Un modelo no tiene valor si se queda en una presentación. El objetivo es integrar estos conocimientos en los procesos de negocio para generar un impacto real y medible. Este es un ciclo que nunca termina.</p><ul class="list-disc space-y-2"><li><strong>Inyección en el Proceso:</strong> Usar predicciones para optimizar logística y personalizar campañas.</li><li><strong>Monitoreo y Refinamiento:</strong> Reentrenar y mejorar los modelos constantemente.</li></ul>`}
             ];
