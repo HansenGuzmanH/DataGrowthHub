@@ -421,8 +421,10 @@
             transition: opacity 0.5s ease-in-out;
         }
         .step-row .step-card-container { 
-            flex: 0 0 11rem; /* Reduced width of the card container */
-            padding-right: 2rem; /* Reduced padding right */
+            width: 10rem; /* Fixed width for consistent alignment */
+            flex-shrink: 0; 
+            flex-grow: 0; /* Prevents stretching */
+            padding-right: 1.5rem; /* Reduced padding right */
         }
         .step-row .step-card { 
             width: 100%; cursor: pointer; border-radius: 0.5rem; padding: 1rem; text-align: center; 
