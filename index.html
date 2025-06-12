@@ -27,7 +27,7 @@
             --font-body: 'Inter', sans-serif;
             --menu-width: 50vw;
             --menu-max-width: 600px;
-            --header-height: 70px; 
+            --header-height: 70px; /* Default height */
             --corner-radius: 15px;
             --color-border: rgba(255, 255, 255, 0.1); 
         }
@@ -39,30 +39,32 @@
             background-color: var(--color-background);
             color: var(--color-text);
             overflow-x: hidden;
+            /* New: Add padding-top to account for fixed header */
+            padding-top: var(--header-height);
         }
 
         /* ----- Header y Menú Lateral (ACTUALIZADO) ----- */
         .main-header {
-            position: fixed;
-            top: 15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 95%;
-            max-width: 1800px; 
-            border-radius: var(--corner-radius);
+            position: fixed; /* Keep fixed */
+            top: 0; /* Changed to 0 */
+            left: 0; /* Changed to 0 */
+            /* Removed transform: translateX(-50%); */
+            width: 100%; /* Changed to 100% */
+            /* Removed max-width: 1800px; (or set to none if needed for broader scope) */
+            border-radius: 0; /* Changed to 0 */
             background-color: rgba(26, 29, 35, 0.6);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px); 
             border: 1px solid var(--color-border);
             height: var(--header-height);
             display: flex;
-            justify-content: space-between; /* Adjusted for better spacing */
+            justify-content: space-between;
             align-items: center;
-            padding: 0 30px; /* Increased padding for overall header spacing */
+            padding: 0 30px;
             z-index: 1000;
             transition: top 0.3s ease, background-color 0.3s ease; 
-            overflow: hidden; /* Ensure anything overflowing the main-header is clipped */
-            position: relative; /* Needed for z-index context of children */
+            overflow: hidden;
+            position: relative;
         }
         
         /* MODIFICACIÓN: Nuevo estilo para el fondo gráfico del encabezado */
@@ -101,7 +103,7 @@
         .header-section.left { flex: 0 0 auto; justify-content: flex-start; } 
         .header-section.center { flex: 1 1 auto; justify-content: center; text-align: center; } 
         .header-section.right { 
-            flex: 0 0 auto; /* Allow content to define size, but prevent shrinking/growing too much */
+            flex: 0 0 auto;
             justify-content: flex-end; 
         } 
         
@@ -135,19 +137,19 @@
         .linkedin-icon svg { width: 32px; height: 32px; }
         
         .header-icon {
-            height: 55px; /* Altura fija para el contenedor del icono */
-            width: auto; /* Ancho automático para permitir que la imagen defina su ancho */
+            height: 55px;
+            width: auto;
             border-radius: 0;
             transition: transform 0.3s ease;
-            display: flex; /* Permite centrar la imagen dentro si es necesario */
+            display: flex;
             align-items: center;
             justify-content: center;
         }
         .header-icon img {
-            height: 100%; /* La imagen ocupa el 100% de la altura de su contenedor */
-            width: auto; /* El ancho se ajusta automáticamente para mantener la proporción */
-            object-fit: contain; /* Mantiene la proporción de la imagen dentro del espacio disponible */
-            max-width: none; /* Asegura que no haya un max-width que la comprima globalmente */
+            height: 100%;
+            width: auto;
+            object-fit: contain;
+            max-width: none;
         }
         .header-icon:hover { transform: scale(1.1); }
 
@@ -235,7 +237,8 @@
             background-color: black; mix-blend-mode: screen; 
             display: flex; flex-direction: column; justify-content: flex-start;
             align-items: center; 
-            padding-top: calc(var(--header-height) + 10px); /* Adjusted to bring "Data Growth" closer to header */
+            /* Adjusted padding-top to be relative to the top of the viewport instead of header height */
+            padding-top: 50px; 
         }
 
         .title-container { text-align: left; }
@@ -253,15 +256,15 @@
         /* MODIFICACIÓN: Estilo para el span que contiene el logo como "O" - tamaño y posición ajustados */
         .growth-o-logo {
             display: inline-block;
-            width: 0.8em; /* Agrandado un poco más */
-            height: 0.8em; /* Agrandado un poco más */
-            background-image: url('https://i.imgur.com/D7C6inO.png'); /* URL corregida */
+            width: 0.8em;
+            height: 0.8em;
+            background-image: url('https://i.imgur.com/D7C6inO.png');
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
-            vertical-align: middle; /* Alinea verticalmente con el texto */
-            margin: 0 0.05em; /* Pequeño ajuste de margen horizontal */
-            transform: translateY(-0.1em); /* Subido ligeramente */
+            vertical-align: middle;
+            margin: 0 0.05em;
+            transform: translateY(-0.1em);
         }
 
         .subtitle-wrapper { margin-top: 3vh; text-align: center; width: 90%; max-width: 600px; color: rgba(255, 255, 255, 0.9); }
@@ -293,13 +296,13 @@
             background-color: var(--color-background); 
             position: relative; 
             z-index: 2; 
-            max-width: 100vw; /* Ensure no horizontal scroll */
-            overflow-x: hidden; /* Hide any overflow */
+            max-width: 100vw;
+            overflow-x: hidden;
         }
         .outro-section h2 {
             text-align: center; 
             font-size: clamp(3rem, 8vw, 6rem); 
-            margin-bottom: 2rem; /* Reduced margin-bottom to bring text closer */
+            margin-bottom: 2rem;
         }
         
         .gallery-container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
@@ -352,7 +355,7 @@
             top: 50%;
             width: auto;
             padding: 16px;
-            margin-top: -50px; /* Centra verticalmente */
+            margin-top: -50px;
             color: white;
             font-weight: bold;
             font-size: 28px;
@@ -374,34 +377,34 @@
         /* --- New CTA placement after gallery --- */
         .new-cta-placement {
             text-align: center;
-            padding: 2rem 5%; /* Adjusted padding */
-            max-width: 100vw; /* Ensure no horizontal scroll */
-            overflow-x: hidden; /* Hide any overflow */
+            padding: 2rem 5%;
+            max-width: 100vw;
+            overflow-x: hidden;
         }
         .new-cta-placement p {
             font-family: var(--font-body);
             font-size: clamp(1.2rem, 2.5vw, 1.5rem);
             line-height: 1.8;
-            max-width: 800px; /* Increased max-width */
-            margin: 0 auto 1.5rem auto; /* Adjusted bottom margin */
+            max-width: 800px;
+            margin: 0 auto 1.5rem auto;
             color: #e0e0e0;
             text-transform: none;
         }
-        .new-cta-placement p:first-of-type { /* Target the new "Los datos son el alma..." text */
-            font-weight: 600; /* Subtle bold */
-            font-style: italic; /* Italic */
-            margin-bottom: 0.5rem; /* Closer to the phrase before it */
+        .new-cta-placement p:first-of-type {
+            font-weight: 600;
+            font-style: italic;
+            margin-bottom: 0.5rem;
         }
         .new-cta-placement .scroll-down-arrow {
-            margin: 0 auto; /* Center the arrow */
+            margin: 0 auto;
         }
 
         /* ----- ESTILOS NUEVA SECCIÓN: Proceso Data Análisis ----- */
         #proceso-data-analisis {
-            padding: 5vh 5% 10vh 5%; /* Adjusted the padding-top to lift the section */
+            padding: 5vh 5% 10vh 5%;
             background-color: var(--color-background);
-            max-width: 100vw; /* Ensure no horizontal scroll */
-            overflow-x: hidden; /* Hide any overflow */
+            max-width: 100vw;
+            overflow-x: hidden;
         }
         #proceso-data-analisis .subtitle-text{
             text-transform: none;
@@ -449,8 +452,8 @@
         .step-content-block h3 { color: var(--color-text); font-size: clamp(1.2rem, 3vw, 1.5rem); margin-bottom: 1.5rem; }
         .step-content-block p, .step-content-block ul { 
             font-family: var(--font-body); text-transform: none;
-            word-wrap: break-word; /* Ensures long words break and wrap */
-            overflow-wrap: break-word; /* Modern equivalent */
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
         .step-content-block ul { list-style-position: inside; padding-left: 1rem; }
         .step-content-block ul li { margin-bottom: 0.5rem; }
@@ -461,22 +464,22 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            margin-top: 2rem; /* Adjusted margin-top to pull it up */
+            margin-top: 2rem;
             margin-bottom: 4rem;
         }
         .phase-indicator {
-            display: inline-block; margin-right: 0.75rem; font-size: 1.8rem; /* Increased size for indicator */
+            display: inline-block; margin-right: 0.75rem; font-size: 1.8rem;
             line-height: 1;
         }
-        .phase-title span:last-child { /* Target the text part of the phase title */
-            font-size: clamp(1.2rem, 2.5vw, 1.6rem); /* Adjust text size for phase title */
-            font-weight: 700; /* Make text bold */
+        .phase-title span:last-child {
+            font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+            font-weight: 700;
         }
 
         .step-row {
             display: flex;
             width: 100%;
-            max-width: 72rem; /* max-w-7xl */
+            max-width: 72rem;
             margin: 0 auto 2rem auto;
             position: relative;
             justify-content: center;
@@ -485,10 +488,10 @@
             transition: opacity 0.5s ease-in-out;
         }
         .step-row .step-card-container { 
-            width: 12rem; /* Increased width to accommodate text */
+            width: 12rem;
             flex-shrink: 0; 
             flex-grow: 0; 
-            padding-right: 1rem; /* Adjusted padding right */
+            padding-right: 1rem;
         }
         .step-row .step-card { 
             width: 100%; 
@@ -496,11 +499,11 @@
             border-radius: 0.5rem; 
             padding: 1rem; 
             text-align: center; 
-            display: flex; /* Use flexbox for vertical centering */
+            display: flex;
             flex-direction: column;
-            justify-content: center; /* Center content vertically */
+            justify-content: center;
             align-items: center;
-            height: 100%; /* Ensure card takes full height of its container */
+            height: 100%;
         }
         .step-row .step-card h4 { 
             font-weight: 700; 
@@ -510,29 +513,29 @@
         .step-row .step-card .text-4xl { 
             font-size: 2.25rem; 
             margin-bottom: 0.5rem; 
-            line-height: 1; /* Adjust line height for emoji */
+            line-height: 1;
         }
         .step-row .connector { 
             position: absolute; 
-            left: calc(12rem + 0.5rem); /* Adjusted left to match new card width + half of padding-right */
-            top: 50%; /* Center vertically */
-            transform: translateY(-50%); /* Adjust for vertical centering */
+            left: calc(12rem + 0.5rem);
+            top: 50%;
+            transform: translateY(-50%);
             z-index: 1; 
         }
         .step-row .connector .line { width: 4rem; height: 2px; background-color: var(--color-border); }
         .step-row .connector .dot { 
             width: 0.75rem; height: 0.75rem; border-radius: 9999px; 
-            position: absolute; left: -0.375rem; top: 50%; transform: translateY(-50%); /* Centered dot */
+            position: absolute; left: -0.375rem; top: 50%; transform: translateY(-50%);
             border: 2px solid white; 
         }
         .step-row .content-container { 
             flex: 1 1 0; 
-            padding-left: 1.5rem; /* Reduced padding left to give more width to step-card-container */
+            padding-left: 1.5rem;
         }
 
         .final-cta-section {
             text-align: center;
-            padding: 5vh 5% 10vh; /* Ajustado el padding para moverlo más arriba */
+            padding: 5vh 5% 10vh;
             background-color: var(--color-background);
             position: relative;
             z-index: 2;
@@ -541,42 +544,42 @@
             font-family: var(--font-body);
             font-size: clamp(1.2rem, 2.5vw, 1.5rem);
             line-height: 1.8;
-            max-width: 800px; /* Increased max-width for more horizontal space */
+            max-width: 800px;
             margin: 0 auto 2.5rem auto;
             color: #e0e0e0;
             text-transform: none;
         }
-        .final-cta-link { /* New class for the redesigned LinkedIn icon container */
+        .final-cta-link {
             display: inline-block;
             transition: transform 0.3s ease;
-            text-decoration: none; /* Remove underline from the link */
+            text-decoration: none;
         }
         .final-cta-link:hover {
             transform: scale(1.05);
         }
 
         .linkedin-circle {
-            width: 100px; /* Adjust size */
+            width: 100px;
             height: 100px;
-            background: linear-gradient(45deg, #0077b5, #00a0dc); /* LinkedIn blue gradient */
+            background: linear-gradient(45deg, #0077b5, #00a0dc);
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
             position: relative;
-            overflow: hidden; /* For glow effect */
-            box-shadow: 0 0 10px rgba(0, 119, 181, 0.6); /* Initial subtle shadow */
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 119, 181, 0.6);
             animation: new-pulse-glow 3s infinite ease-in-out;
-            margin: 0 auto; /* Center the new LinkedIn icon */
+            margin: 0 auto;
         }
 
         .linkedin-text {
-            font-family: 'Arial', sans-serif; /* A bold, clean font */
+            font-family: 'Arial', sans-serif;
             font-weight: bold;
-            font-size: 4rem; /* Size of 'in' */
+            font-size: 4rem;
             color: white;
             text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-            z-index: 2; /* Ensure text is above any pseudo-elements for glow */
+            z-index: 2;
         }
 
         @keyframes new-pulse-glow {
@@ -585,7 +588,7 @@
                 transform: scale(1);
             }
             50% {
-                box-shadow: 0 0 30px rgba(0, 170, 255, 1), inset 0 0 15px rgba(255,255,255,0.5); /* Stronger glow */
+                box-shadow: 0 0 30px rgba(0, 170, 255, 1), inset 0 0 15px rgba(255,255,255,0.5);
                 transform: scale(1.05);
             }
             100% {
@@ -595,76 +598,72 @@
         }
 
         .linkedin-embed-container {
-            max-width: 504px; /* Max width of the iframe */
-            margin: 2rem auto; /* Center it and add some spacing */
-            width: 100%; /* Make it responsive */
+            max-width: 504px;
+            margin: 2rem auto;
+            width: 100%;
             overflow: hidden;
-            border-radius: 10px; /* Optional: rounded corners for the embed */
-            box-shadow: 0 5px 15px rgba(0,0,0,0.4); /* Add some shadow */
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
         }
         .linkedin-embed-container iframe {
-            display: block; /* Remove extra space below iframe */
+            display: block;
             width: 100%;
-            height: 752px; /* Fixed height as per user request */
+            height: 752px;
             border: none;
         }
         
         /* ----- Estilos para Responsividad ----- */
         @media (min-width: 769px) { /* Media query for desktop */
             .main-header {
-                /* Increased padding-right for main-header in desktop */
-                padding-right: 60px; 
-                /* Ensure anything overflowing the main-header is clipped */
-                overflow: hidden; 
+                padding-right: 60px;
+                overflow: hidden;
             }
             .header-section.right {
-                /* Let content define initial width */
-                flex-basis: auto; 
+                flex-basis: auto;
                 max-width: none;
-                flex-shrink: 0; 
-                flex-grow: 0; 
-                /* Allow content to overflow this container for main-header to clip */
-                overflow: visible; 
-                justify-content: flex-end; /* Align content to the right */
+                flex-shrink: 0;
+                flex-grow: 0;
+                overflow: visible;
+                justify-content: flex-end;
             }
             .header-section.center {
-                flex-shrink: 1; 
-                flex-grow: 1; 
+                flex-shrink: 1;
+                flex-grow: 1;
             }
             .header-icon {
-                height: 55px; /* Fixed height for the icon container */
-                /* Define a fixed width for the logo container on desktop */
-                width: 150px; 
-                display: flex; /* Ensure inner content is centered */
+                height: 55px;
+                width: 150px;
+                display: flex;
                 align-items: center;
                 justify-content: center;
-                /* Clipping is handled here if the logo is larger than the fixed width */
-                overflow: hidden; 
+                overflow: hidden;
             }
             .header-icon img {
-                height: 100%; /* Image takes 100% of its container's height (.header-icon) */
-                width: auto; /* Width adjusts automatically to maintain aspect ratio */
-                object-fit: contain; /* Ensure image fits without distortion */
-                max-width: 100%; /* Ensure it doesn't overflow the icon container */
+                height: 100%;
+                width: auto;
+                object-fit: contain;
+                max-width: 100%;
             }
         }
 
         @media (max-width: 768px) {
             :root { --header-height: 60px; }
-            /* Header full width and top */
+            /* Mobile specific header adjustments, overriding desktop fixed properties if needed */
             .main-header {
-                width: 100vw; 
-                left: 0; 
-                transform: none; 
-                padding: 0 10px; /* Adjust padding for mobile */
-                border-radius: var(--corner-radius); /* Apply the CSS variable radius */
-                top: 10px; 
-            }
-            body, html {
-                overflow-x: hidden; /* Ensure no horizontal scroll is possible */
+                padding: 0 10px;
             }
 
-            .knockout-text-layer { padding-top: calc(var(--header-height) + 10px); } 
+            /* New: Ensure the "GR[logo]WTH" part stays on one line */
+            .title-container h1:last-of-type {
+                white-space: nowrap;
+                /* Optional: Reduce font size slightly if it still overflows */
+                /* font-size: 18vw; */
+            }
+
+            .knockout-text-layer {
+                /* Adjusted padding-top for mobile as body padding is now covering fixed header */
+                padding-top: 50px; 
+            }
             .logo { font-size: 1.2rem; }
             .header-controls { 
                 gap: 0.5rem; 
@@ -674,7 +673,7 @@
             .linkedin-icon svg { width: 28px; height: 28px; }
             .header-icon { 
                 height: 40px; 
-                width: 40px; /* Ensure width is equal to height at this resolution */
+                width: 40px;
                 flex-shrink: 0; 
             }
             .header-icon img {
@@ -726,7 +725,7 @@
             /* Fix for step-card-container width on mobile */
             #proceso-data-analisis .step-row .step-card-container { 
                 flex: 1 1 auto; 
-                width: 80%; /* Increased width for mobile cards to give more space for text */
+                width: 80%;
                 padding-right: 0; 
                 margin: 0 auto 1rem auto; 
             }
@@ -769,7 +768,7 @@
             .gallery-main-image { height: 250px; }
             .header-icon { 
                 height: 35px; 
-                width: 35px; /* Ensure width is equal to height at this resolution */
+                width: 35px;
             }
             .linkedin-icon svg { width: 24px; height: 24px; }
             .logo { font-size: 1.1rem; }
@@ -845,8 +844,6 @@
             <a href="#page-top" class="logo animated-gradient-text">Data Growth Hub</a>
         </div>
         <div class="header-section right">
-           <!-- Removed logo from here -->
-           <!-- MODIFICACIÓN: La sección derecha ahora está vacía ya que el logo se movió y el link de top ya no es necesario -->
         </div>
     </header>
 
@@ -876,7 +873,6 @@
                         <div class="top-row">
                             <h1>DATA</h1>
                             <svg class="growth-arrow" viewBox="0 0 120 100">
-                                <!-- MODIFICACIÓN: Logo detrás de la flecha eliminado -->
                                 <path d="M10 85 L 40 55 L 60 75 L 90 45 L 115 45 M105 35 L 115 45 L 105 55" />
                             </svg>
                         </div>
@@ -940,13 +936,13 @@
                 <h2 class="animated-gradient-text" style="font-size: clamp(3rem, 8vw, 6rem); margin-bottom: 2rem; text-align: center;">Proceso Data Análisis</h2>
                 <p class="text-lg text-gray-300 max-w-3xl mx-auto my-8 font-normal normal-case" style="font-family: var(--font-body); text-align: center; margin-bottom: 4rem; font-size: 1.25rem; font-weight: 500;">Una guía visual para transformar los datos de su empresa en una ventaja competitiva. Explore cada paso para entender el proceso completo.</p>
             </header>
-    
+            
             <main>
                 <!-- Roadmap Visualization Container -->
                 <div class="relative py-4 roadmap-container">
                     <!-- Main vertical connecting line -->
                     <div class="main-vertical-line absolute left-1/2 w-0.5 bg-gray-700 h-full transform -translate-x-1/2 z-0"></div>
-    
+            
                     <!-- Phase 1 -->
                     <div class="phase-section mb-12">
                         <h3 class="phase-title" style="color: var(--color-primary); margin-top: 2rem; margin-bottom: 4rem;">
@@ -970,7 +966,7 @@
                                         <div class="step-content-block" id="step-content-block-1"></div>
                                 </div>
                             </div>
-    
+            
                             <!-- Step 2 Row -->
                             <div class="step-row" data-step="2">
                                 <div class="step-card-container">
@@ -987,7 +983,7 @@
                                         <div class="step-content-block" id="step-content-block-2"></div>
                                 </div>
                             </div>
-    
+            
                             <!-- Step 3 Row -->
                             <div class="step-row" data-step="3">
                                 <div class="step-card-container">
@@ -1004,7 +1000,7 @@
                                         <div class="step-content-block" id="step-content-block-3"></div>
                                 </div>
                             </div>
-    
+            
                             <!-- Step 4 Row -->
                             <div class="step-row" data-step="4">
                                 <div class="step-card-container">
@@ -1023,7 +1019,7 @@
                             </div>
                         </div>
                     </div>
-    
+            
                     <!-- Phase 2 -->
                     <div class="phase-section" style="margin-top: 4rem;">
                         <h3 class="phase-title" style="color: var(--color-secondary); margin-top: 2rem; margin-bottom: 4rem;">
@@ -1047,12 +1043,12 @@
                                         <div class="step-content-block" id="step-content-block-5"></div>
                                 </div>
                             </div>
-    
+            
                             <!-- Step 6 Row -->
                             <div class="step-row" data-step="6">
                                 <div class="step-card-container">
                                         <div class="step-card" data-step-id="6" style="border-color: var(--color-secondary);">
-                                                <div class="text-4xl mb-2">&#129327;</div><!-- Exploding head emoji -->
+                                                <div class="text-4xl mb-2">&#129327;</div>
                                                 <h4 class="font-bold">Aplicación y Mejora</h4>
                                         </div>
                                 </div>
@@ -1066,7 +1062,7 @@
                             </div>
                         </div>
                     </div>
-                </main>
+                </div>
                 <footer class="final-cta-section">
                     <p class="final-cta-text">
                         Si llegaste hasta aquí es por que de verdad quieres implementar Análisis de datos, si le das clic a este icono tan llamativo😅 allí me encontrarás y te daré una mano 🤜🤛
@@ -1081,7 +1077,7 @@
                         <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7333188748160983044" height="752" width="504" frameborder="0" allowfullscreen="" title="Publicación integrada"></iframe>
                     </div>
                 </footer>
-            </div>
+            </main>
         </section>
     </main>
 
@@ -1270,7 +1266,7 @@
 
                     // Event listeners for modal navigation buttons
                     modalPrevBtn.addEventListener('click', () => changeModalImage(-1));
-                    modalNextBtn.addEventListener('click', () => changeModalImage(1)); /* Corrected function name */
+                    modalNextBtn.addEventListener('click', () => changeModalImage(1));
 
                     // Event listener for keyboard navigation
                     document.addEventListener('keydown', (e) => {
@@ -1416,7 +1412,7 @@
                     restartTimeout = setTimeout(startAnimationCycle, 240000); // 4 minutes
                 } else {
                     // For desktop, reveal one by one starting from the second step
-                    revealInterval = setInterval(animateStep, 1500); /* Made animation faster */
+                    revealInterval = setInterval(animateStep, 1500);
                 }
             }
 
