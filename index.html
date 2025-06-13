@@ -39,24 +39,29 @@
             background-color: var(--color-background);
             color: var(--color-text);
             overflow-x: hidden;
-            /* New: Add padding-top to account for fixed header */
-            padding-top: var(--header-height);
+            /* CORRECCIÓN: Padding-top ajustado para la barra flotante */
+            padding-top: calc(var(--header-height) + 40px);
         }
 
-        /* ----- Header y Menú Lateral (ACTUALIZADO) ----- */
+        /* ----- Header y Menú Lateral (CORREGIDO) ----- */
         .main-header {
-            position: fixed; /* Keep fixed */
-            top: 0; /* Changed to 0 */
-            left: 0; /* Changed to 0 */
-            /* Removed transform: translateX(-50%); */
-            width: 100%; /* Changed to 100% */
-            /* Removed max-width: 1800px; (or set to none if needed for broader scope) */
-            border-radius: 0; /* Changed to 0 */
+            /* CORRECCIÓN 1: Convertido en una barra "flotante" en escritorio */
+            position: fixed; /* Mantenemos la posición fija para que sea visible siempre */
+            top: 20px; /* Margen superior para que se separe del borde */
+            left: 50%; /* Centrado horizontal */
+            transform: translateX(-50%); /* Ajuste fino para el centrado */
+            width: calc(100% - 40px); /* Ancho menor al 100% para ver los bordes */
+            max-width: 1800px; /* Un ancho máximo para pantallas muy grandes */
+            height: var(--header-height);
+            
+            /* CORRECCIÓN 2: Bordes redondeados aplicados */
+            border-radius: var(--corner-radius); 
+            
             background-color: rgba(26, 29, 35, 0.6);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px); 
             border: 1px solid var(--color-border);
-            height: var(--header-height);
+            
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -64,7 +69,7 @@
             z-index: 1000;
             transition: top 0.3s ease, background-color 0.3s ease; 
             overflow: hidden;
-            position: relative;
+            /* CORRECIÓN 3: Se eliminó la propiedad 'position: relative' que causaba conflicto */
         }
         
         /* MODIFICACIÓN: Nuevo estilo para el fondo gráfico del encabezado */
@@ -116,7 +121,7 @@
         }
         
         .animated-gradient-text {
-            background: linear-gradient(90deg, #EEEEEE, #00ADB5, #EEEEEE);
+            background: linear-gradient(90deg, #EEEEEE, #FC5185, #EEEEEE);
             background-size: 200% auto;
             color: #fff;
             background-clip: text;
@@ -237,7 +242,6 @@
             background-color: black; mix-blend-mode: screen; 
             display: flex; flex-direction: column; justify-content: flex-start;
             align-items: center; 
-            /* Adjusted padding-top to be relative to the top of the viewport instead of header height */
             padding-top: 50px; 
         }
 
@@ -252,8 +256,7 @@
             overflow: visible; 
         }
         .growth-arrow path { stroke: #FF2E63; stroke-width: 12; stroke-linecap: round; stroke-linejoin: round; fill: none; }
-
-        /* MODIFICACIÓN: Estilo para el span que contiene el logo como "O" - tamaño y posición ajustados */
+        
         .growth-o-logo {
             display: inline-block;
             width: 0.8em;
@@ -648,20 +651,28 @@
 
         @media (max-width: 768px) {
             :root { --header-height: 60px; }
-            /* Mobile specific header adjustments, overriding desktop fixed properties if needed */
+
+            /* CORRECCIÓN: Ajuste del body para la barra fija en móvil */
+            body {
+                padding-top: var(--header-height);
+            }
+            
+            /* CORRECCIÓN: Revertir la barra a pantalla completa en móviles */
             .main-header {
+                top: 0;
+                left: 0;
+                width: 100%;
+                max-width: 100%;
+                transform: none;
+                border-radius: 0;
                 padding: 0 10px;
             }
 
-            /* New: Ensure the "GR[logo]WTH" part stays on one line */
             .title-container h1:last-of-type {
                 white-space: nowrap;
-                /* Optional: Reduce font size slightly if it still overflows */
-                /* font-size: 18vw; */
             }
 
             .knockout-text-layer {
-                /* Adjusted padding-top for mobile as body padding is now covering fixed header */
                 padding-top: 50px; 
             }
             .logo { font-size: 1.2rem; }
@@ -700,7 +711,6 @@
             .bi-text-container { padding: 0 1.5rem; }
             .bi-text-container p { font-size: 1rem; }
 
-            /* New CTA placement for mobile */
             .new-cta-placement {
                 padding: 2rem 1rem; 
             }
@@ -709,7 +719,6 @@
                 font-size: 1.1rem; 
             }
             
-            /* Media queries para Proceso Data Análisis (desactiva animación de aparición) */
             #proceso-data-analisis .roadmap-container > .relative { padding: 0; }
             .phase-title span:last-child { 
                 font-size: clamp(1rem, 2vw, 1.2rem); 
@@ -722,7 +731,6 @@
                 opacity: 1; 
                 transition: transform 0.3s ease, box-shadow 0.3s ease; 
             }
-            /* Fix for step-card-container width on mobile */
             #proceso-data-analisis .step-row .step-card-container { 
                 flex: 1 1 auto; 
                 width: 80%;
@@ -735,17 +743,13 @@
             }
             #proceso-data-analisis .step-row .connector { display: none; }
             #proceso-data-analisis .main-vertical-line { display: none; }
-
             .final-cta-section {
                 padding-top: 5vh; 
             }
-
             .tooltip-text {
                 width: 200px; 
                 margin-left: -100px; 
             }
-
-            /* New LinkedIn icon responsiveness */
             .linkedin-circle {
                 width: 80px;
                 height: 80px;
@@ -753,7 +757,6 @@
             .linkedin-text {
                 font-size: 3rem;
             }
-
             .linkedin-embed-container {
                 max-width: 100%; 
             }
@@ -777,7 +780,6 @@
                 padding: 1rem; 
             }
 
-            /* New LinkedIn icon responsiveness */
             .linkedin-circle {
                 width: 70px;
                 height: 70px;
@@ -785,7 +787,6 @@
             .linkedin-text {
                 font-size: 2.5rem;
             }
-
             .linkedin-embed-container iframe {
                 height: 400px; 
             }
@@ -815,7 +816,6 @@
 
 <div class="page-wrapper">
     <header class="main-header">
-        <!-- MODIFICACIÓN: Nuevo elemento para el fondo gráfico del encabezado -->
         <div class="header-graph-background">
             <svg viewBox="0 0 100 70" preserveAspectRatio="none">
                 <rect x="5" y="30" width="10" height="40" fill="var(--color-secondary)" fill-opacity="0.2"/>
@@ -1342,15 +1342,12 @@
             }
 
             function startAnimationCycle() {
-                // Check if it's a mobile view
                 const isMobile = window.innerWidth <= 768;
 
-                // Clear any existing timers
                 clearInterval(revealInterval);
                 clearTimeout(restartTimeout);
                 clearInterval(cardHighlightInterval);
 
-                // Hide all steps initially if not mobile or if it's a restart
                 stepRows.forEach(row => {
                     if (!isMobile) {
                         row.style.opacity = '0';
@@ -1360,7 +1357,6 @@
                     row.querySelector('.step-card').classList.remove('active');
                 });
 
-                // Display the first step immediately (if not mobile)
                 if (!isMobile && stepRows.length > 0) {
                     const firstRow = stepRows[0];
                     const firstStepId = parseInt(firstRow.dataset.step);
@@ -1372,7 +1368,7 @@
                     setActiveStep(firstStepId);
                 }
 
-                let currentStepIndex = (isMobile) ? 0 : 1; // Start from 0 if mobile, else from 1 (first step is already visible)
+                let currentStepIndex = (isMobile) ? 0 : 1; 
 
                 const animateStep = () => {
                     if (userInteracted) {
@@ -1384,7 +1380,6 @@
                         const stepId = parseInt(row.dataset.step);
                         const stepData = stepsData.find(s => s.id === stepId);
                         
-                        // Only animate opacity if not mobile
                         if (!isMobile) {
                             row.style.opacity = '1';
                         }
@@ -1400,7 +1395,6 @@
                     }
                 };
                 
-                // If mobile, show all at once and start secondary animation
                 if (isMobile) {
                     stepRows.forEach((row, index) => {
                         const stepId = parseInt(row.dataset.step);
@@ -1411,7 +1405,6 @@
                     startSecondaryCardAnimation();
                     restartTimeout = setTimeout(startAnimationCycle, 240000); // 4 minutes
                 } else {
-                    // For desktop, reveal one by one starting from the second step
                     revealInterval = setInterval(animateStep, 1500);
                 }
             }
@@ -1423,7 +1416,6 @@
                     clearTimeout(restartTimeout);
                     clearInterval(cardHighlightInterval);
 
-                    // Show all rows and content
                     stepRows.forEach(row => {
                         row.style.opacity = '1';
                         const stepId = parseInt(row.dataset.step);
@@ -1439,13 +1431,12 @@
                 });
             });
 
-            // IntersectionObserver to start animation when section is visible
             const procesoDataAnalisisSection = document.getElementById('proceso-data-analisis');
             if (procesoDataAnalisisSection) {
                 const observerOptions = {
-                    root: null, // viewport
+                    root: null, 
                     rootMargin: '0px',
-                    threshold: 0.1 // 10% of the section visible to activate
+                    threshold: 0.1 
                 };
 
                 intersectionObserver = new IntersectionObserver((entries, observer) => {
@@ -1453,12 +1444,10 @@
                         if (entry.isIntersecting && !userInteracted) {
                             startAnimationCycle();
                         } else if (!entry.isIntersecting) {
-                            // If section is not visible, stop animations and allow them to restart
                             clearInterval(revealInterval);
                             clearTimeout(restartTimeout);
                             clearInterval(cardHighlightInterval);
-                            userInteracted = false; // Reset user interaction to allow restart
-                            // Optional: Hide cards for "reveal" effect
+                            userInteracted = false; 
                             stepRows.forEach(row => {
                                 if (window.innerWidth > 768) { /* Only if not mobile */
                                     row.style.opacity = '0';
@@ -1472,40 +1461,34 @@
             }
 
 
-            // Re-run animation cycle on resize to adapt to mobile/desktop
             window.addEventListener('resize', () => {
-                userInteracted = false; // Reset interaction on resize to restart animations
-                // Stop observer before re-evaluating
+                userInteracted = false; 
                 if (intersectionObserver) {
                     intersectionObserver.disconnect();
                 }
-                // Re-observe to apply correct logic
                 if (procesoDataAnalisisSection) {
                     intersectionObserver.observe(procesoDataAnalisisSection);
                 }
                 startAnimationCycle();
             });
 
-            // Handle navigation clicks to restart animation if scrolled to section
             document.querySelectorAll('.menu-link, .scroll-down-link-2').forEach(link => {
                 link.addEventListener('click', (e) => {
                     const targetId = link.getAttribute('href');
                     if (targetId === '#proceso-data-analisis') {
-                        userInteracted = false; // Reset user interaction
+                        userInteracted = false; 
                         clearInterval(revealInterval);
                         clearTimeout(restartTimeout);
                         clearInterval(cardHighlightInterval);
-                        // Force a re-check to start animation immediately if in view
                         if (procesoDataAnalisisSection && intersectionObserver) {
-                            intersectionObserver.unobserve(procesoDataAnalisisSection); // Stop observing temporarily
-                            // Force content update and activate first step instantly
+                            intersectionObserver.unobserve(procesoDataAnalisisSection); 
                             stepRows.forEach(row => {
                                 const stepId = parseInt(row.dataset.step);
                                 const contentBlock = document.getElementById(`step-content-block-${stepId}`);
                                 const stepData = stepsData.find(s => s.id === stepId);
                                 if (contentBlock && stepData) contentBlock.innerHTML = stepData.content;
                                 if (row.dataset.step === '1') {
-                                    setActiveStep(1); // Activate first step immediately
+                                    setActiveStep(1); 
                                 }
                                 if (window.innerWidth > 768) {
                                     row.style.opacity = '0'; /* Reset opacity for animation if desktop */
