@@ -5,12 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hansen | Data Growth Hub</title>
     
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Montserrat:wght@900&display=swap" rel="stylesheet">
 
-    <!-- Librerías JS (en el head para asegurar la carga) -->
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="https://unpkg.com/d3-sankey@0.12.3/dist/d3-sankey.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
@@ -105,7 +103,6 @@
         } 
         
         .logo { 
-            /* CORRECCIÓN: Tamaño de fuente aumentado */
             font-size: 1.8rem; 
             text-decoration: none; 
             font-weight: 900; 
@@ -113,9 +110,8 @@
             white-space: nowrap;
         }
         
-        /* CORRECCIÓN: Nuevo estilo para el gradiente del logo */
         .logo-gradient {
-            background: linear-gradient(90deg, #FFFFFF, #BDBDBD, #FFFFFF); /* Blanco -> Gris -> Blanco */
+            background: linear-gradient(90deg, #FFFFFF, #BDBDBD, #FFFFFF);
             background-size: 200% auto;
             color: #fff;
             background-clip: text;
@@ -124,7 +120,6 @@
             animation: gradient-flow 4s ease infinite;
         }
 
-        /* Estilo original para otros elementos */
         .animated-gradient-text {
             background: linear-gradient(90deg, #EEEEEE, #00ADB5, #EEEEEE);
             background-size: 200% auto;
@@ -652,17 +647,19 @@
                 object-fit: contain;
                 max-width: 100%;
             }
+            /* CORRECCIÓN: Se reduce el padding superior para subir el título en web */
+            .knockout-text-layer {
+                padding-top: 20px; 
+            }
         }
 
         @media (max-width: 768px) {
             :root { --header-height: 60px; }
 
-            /* CORRECCIÓN: Ajuste del body para la barra fija en móvil */
             body {
                 padding-top: var(--header-height);
             }
             
-            /* CORRECCIÓN: Revertir la barra a pantalla completa en móviles */
             .main-header {
                 top: 0;
                 left: 0;
@@ -846,7 +843,6 @@
             </div>
         </div>
         <div class="header-section center">
-            <!-- CORRECCIÓN: Se cambió la clase para usar el nuevo estilo -->
             <a href="#page-top" class="logo logo-gradient">Data Growth Hub</a>
         </div>
         <div class="header-section right">
@@ -923,7 +919,6 @@
                 </div>
             </div>
             
-            <!-- New text and original "Conoce mas herramientas" text moved here -->
             <div class="text-center my-4 new-cta-placement">
                 <p class="subtitle-text" style="max-width: 800px; margin: 2rem auto 0.5rem auto; font-weight: 600; font-style: italic;">
                     "Los datos son el alma de las decisiones inteligentes: quien los entiende, los analiza y los aprovecha, transforma su negocio en una máquina de crecimiento y éxito."
@@ -944,24 +939,19 @@
             </header>
             
             <main>
-                <!-- Roadmap Visualization Container -->
                 <div class="relative py-4 roadmap-container">
-                    <!-- Main vertical connecting line -->
                     <div class="main-vertical-line absolute left-1/2 w-0.5 bg-gray-700 h-full transform -translate-x-1/2 z-0"></div>
             
-                    <!-- Phase 1 -->
                     <div class="phase-section mb-12">
                         <h3 class="phase-title" style="color: var(--color-primary); margin-top: 2rem; margin-bottom: 4rem;">
                                 <span class="phase-indicator" style="color: var(--color-primary);">&bullet;</span>
                                 <span>Fase 1: Necesidades, visión y ganas de mejorar</span>
                         </h3>
                         <div class="flex flex-col items-center">
-                            <!-- Step 1 Row -->
                             <div class="step-row" data-step="1">
                                 <div class="step-card-container">
                                         <div class="step-card" data-step-id="1" style="border-color: var(--color-primary);">
-                                                <div class="text-4xl mb-2">&#x1F3AF;</div><!-- Target emoji -->
-                                                <h4 class="font-bold">Definición de Necesidades</h4>
+                                                <div class="text-4xl mb-2">&#x1F3AF;</div><h4 class="font-bold">Definición de Necesidades</h4>
                                         </div>
                                 </div>
                                 <div class="connector">
@@ -973,12 +963,10 @@
                                 </div>
                             </div>
             
-                            <!-- Step 2 Row -->
                             <div class="step-row" data-step="2">
                                 <div class="step-card-container">
                                         <div class="step-card" data-step-id="2" style="border-color: var(--color-primary);">
-                                                <div class="text-4xl mb-2">&#129300;</div><!-- Face with monocle emoji -->
-                                                <h4 class="font-bold">Identificar los Datos</h4>
+                                                <div class="text-4xl mb-2">&#129300;</div><h4 class="font-bold">Identificar los Datos</h4>
                                         </div>
                                 </div>
                                 <div class="connector">
@@ -990,12 +978,10 @@
                                 </div>
                             </div>
             
-                            <!-- Step 3 Row -->
                             <div class="step-row" data-step="3">
                                 <div class="step-card-container">
                                         <div class="step-card" data-step-id="3" style="border-color: var(--color-primary);">
-                                                <div class="text-4xl mb-2">&#x1F6C1;</div><!-- Bathtub emoji -->
-                                                <h4 class="font-bold">Limpieza y Preparación</h4>
+                                                <div class="text-4xl mb-2">&#x1F6C1;</div><h4 class="font-bold">Limpieza y Preparación</h4>
                                         </div>
                                 </div>
                                 <div class="connector">
@@ -1007,12 +993,10 @@
                                 </div>
                             </div>
             
-                            <!-- Step 4 Row -->
                             <div class="step-row" data-step="4">
                                 <div class="step-card-container">
                                         <div class="step-card" data-step-id="4" style="border-color: var(--color-primary);">
-                                                <div class="text-4xl mb-2">&#x1F9EE;</div><!-- Abacus emoji -->
-                                                <h4 class="font-bold">Análisis BI</h4>
+                                                <div class="text-4xl mb-2">&#x1F9EE;</div><h4 class="font-bold">Análisis BI</h4>
                                         </div>
                                 </div>
                                 <div class="connector">
@@ -1026,14 +1010,12 @@
                         </div>
                     </div>
             
-                    <!-- Phase 2 -->
                     <div class="phase-section" style="margin-top: 4rem;">
                         <h3 class="phase-title" style="color: var(--color-secondary); margin-top: 2rem; margin-bottom: 4rem;">
                                 <span class="phase-indicator" style="color: var(--color-secondary);">&bullet;</span>
                                 <span>Fase 2: Optimización y Predicción</span>
                         </h3>
                         <div class="flex flex-col items-center">
-                            <!-- Step 5 Row -->
                             <div class="step-row" data-step="5">
                                 <div class="step-card-container">
                                         <div class="step-card" data-step-id="5" style="border-color: var(--color-secondary);">
@@ -1050,7 +1032,6 @@
                                 </div>
                             </div>
             
-                            <!-- Step 6 Row -->
                             <div class="step-row" data-step="6">
                                 <div class="step-card-container">
                                         <div class="step-card" data-step-id="6" style="border-color: var(--color-secondary);">
@@ -1078,7 +1059,6 @@
                             <span class="linkedin-text">in</span>
                         </div>
                     </a>
-                    <!-- LinkedIn Embed Section -->
                     <div class="linkedin-embed-container">
                         <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7333188748160983044" height="752" width="504" frameborder="0" allowfullscreen="" title="Publicación integrada"></iframe>
                     </div>
@@ -1094,7 +1074,6 @@
         <img class="modal-content" id="modal-image" alt="Imagen ampliada de la galería">
     </div>
     
-    <!-- SCRIPT PRINCIPAL DE LA PÁGINA -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const lenis = new Lenis();
