@@ -5,10 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hansen | Data Growth Hub</title>
     
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Montserrat:wght@900&display=swap" rel="stylesheet">
 
+    <!-- Librerías JS (en el head para asegurar la carga) -->
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="https://unpkg.com/d3-sankey@0.12.3/dist/d3-sankey.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
@@ -37,7 +39,7 @@
             background-color: var(--color-background);
             color: var(--color-text);
             overflow-x: hidden;
-            padding-top: calc(var(--header-height) + 40px);
+            /* Se elimina el padding-top para que el contenido empiece arriba */
         }
 
         /* ----- Header y Menú Lateral ----- */
@@ -242,7 +244,7 @@
             background-color: black; mix-blend-mode: screen; 
             display: flex; flex-direction: column; justify-content: flex-start;
             align-items: center; 
-            padding-top: 50px; 
+            padding-top: 140px; 
         }
 
         .title-container { text-align: left; }
@@ -294,7 +296,7 @@
         }
         
         .outro-section { 
-            padding: 15vh 5% 5vh; 
+            padding: 10vh 5% 5vh; 
             text-align: center; 
             background-color: var(--color-background); 
             position: relative; 
@@ -647,9 +649,9 @@
                 object-fit: contain;
                 max-width: 100%;
             }
-            /* CORRECCIÓN: Se reduce el padding superior para subir el título en web */
             .knockout-text-layer {
-                padding-top: 20px; 
+                /* CORRECCIÓN: Se reduce el padding para subir el título aún más */
+                padding-top: 80px; 
             }
         }
 
@@ -675,7 +677,7 @@
             }
 
             .knockout-text-layer {
-                padding-top: 50px; 
+                padding-top: 80px; 
             }
             .logo { font-size: 1.2rem; }
             .header-controls { 
