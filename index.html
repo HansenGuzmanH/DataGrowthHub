@@ -39,29 +39,23 @@
             background-color: var(--color-background);
             color: var(--color-text);
             overflow-x: hidden;
-            /* CORRECCIÓN: Padding-top ajustado para la barra flotante */
             padding-top: calc(var(--header-height) + 40px);
         }
 
-        /* ----- Header y Menú Lateral (CORREGIDO) ----- */
+        /* ----- Header y Menú Lateral ----- */
         .main-header {
-            /* CORRECCIÓN 1: Convertido en una barra "flotante" en escritorio */
-            position: fixed; /* Mantenemos la posición fija para que sea visible siempre */
-            top: 20px; /* Margen superior para que se separe del borde */
-            left: 50%; /* Centrado horizontal */
-            transform: translateX(-50%); /* Ajuste fino para el centrado */
-            width: calc(100% - 40px); /* Ancho menor al 100% para ver los bordes */
-            max-width: 1800px; /* Un ancho máximo para pantallas muy grandes */
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 40px);
+            max-width: 1800px;
             height: var(--header-height);
-            
-            /* CORRECCIÓN 2: Bordes redondeados aplicados */
             border-radius: var(--corner-radius); 
-            
             background-color: rgba(26, 29, 35, 0.6);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px); 
             border: 1px solid var(--color-border);
-            
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -69,30 +63,28 @@
             z-index: 1000;
             transition: top 0.3s ease, background-color 0.3s ease; 
             overflow: hidden;
-            /* CORRECIÓN 3: Se eliminó la propiedad 'position: relative' que causaba conflicto */
         }
         
-        /* MODIFICACIÓN: Nuevo estilo para el fondo gráfico del encabezado */
         .header-graph-background {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1; /* Coloca el SVG detrás de los elementos del encabezado */
-            overflow: hidden; /* Asegura que el SVG no se desborde del fondo del encabezado */
+            z-index: -1;
+            overflow: hidden;
         }
 
         .header-graph-background svg {
-            width: 120%; /* Make it slightly wider to allow for movement */
+            width: 120%;
             height: 100%;
             transform: translateX(0);
-            animation: graph-scroll 15s linear infinite; /* Subtle continuous movement */
+            animation: graph-scroll 15s linear infinite;
         }
 
         @keyframes graph-scroll {
             0% { transform: translateX(0%); }
-            100% { transform: translateX(-20%); } /* Move slightly left */
+            100% { transform: translateX(-20%); }
         }
 
         .header-graph-background path {
@@ -101,7 +93,7 @@
             fill: none;
             stroke-linecap: round;
             stroke-linejoin: round;
-            stroke-opacity: 0.6; /* Adjust transparency here */
+            stroke-opacity: 0.6;
         }
 
         .header-section { display: flex; align-items: center; }
@@ -113,15 +105,28 @@
         } 
         
         .logo { 
-            font-size: 1.6rem; 
+            /* CORRECCIÓN: Tamaño de fuente aumentado */
+            font-size: 1.8rem; 
             text-decoration: none; 
             font-weight: 900; 
             font-family: var(--font-title);
             white-space: nowrap;
         }
         
+        /* CORRECCIÓN: Nuevo estilo para el gradiente del logo */
+        .logo-gradient {
+            background: linear-gradient(90deg, #FFFFFF, #BDBDBD, #FFFFFF); /* Blanco -> Gris -> Blanco */
+            background-size: 200% auto;
+            color: #fff;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradient-flow 4s ease infinite;
+        }
+
+        /* Estilo original para otros elementos */
         .animated-gradient-text {
-            background: linear-gradient(90deg, #EEEEEE, #FC5185, #EEEEEE);
+            background: linear-gradient(90deg, #EEEEEE, #00ADB5, #EEEEEE);
             background-size: 200% auto;
             color: #fff;
             background-clip: text;
@@ -835,13 +840,14 @@
                         <div class="line line-3"></div>
                     </div>
                 </button>
-                <a href="https://www.linkedin.com/in/hansen-guzm%C3%A1n-hern%C3%Aández-b4185592/" target="_blank" rel="noopener noreferrer" class="linkedin-icon" aria-label="LinkedIn">
+                <a href="https://www.linkedin.com/in/hansen-guzm%C3%A1n-hern%C3%A1ndez-b4185592/" target="_blank" rel="noopener noreferrer" class="linkedin-icon" aria-label="LinkedIn">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
                 </a>
             </div>
         </div>
         <div class="header-section center">
-            <a href="#page-top" class="logo animated-gradient-text">Data Growth Hub</a>
+            <!-- CORRECCIÓN: Se cambió la clase para usar el nuevo estilo -->
+            <a href="#page-top" class="logo logo-gradient">Data Growth Hub</a>
         </div>
         <div class="header-section right">
         </div>
@@ -858,7 +864,7 @@
             <li><a href="#proceso-data-analisis" class="menu-link">Proceso Data Análisis</a></li>
         </ul>
         <div class="menu-footer-icon">
-            <a href="https://www.linkedin.com/in/hansen-guzm%C3%A1n-hern%C3%Aández-b4185592/" target="_blank" rel="noopener noreferrer" class="linkedin-icon" aria-label="LinkedIn">
+            <a href="https://www.linkedin.com/in/hansen-guzm%C3%A1n-hern%C3%A1ndez-b4185592/" target="_blank" rel="noopener noreferrer" class="linkedin-icon" aria-label="LinkedIn">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
             </a>
         </div>
@@ -1067,7 +1073,7 @@
                     <p class="final-cta-text">
                         Si llegaste hasta aquí es por que de verdad quieres implementar Análisis de datos, si le das clic a este icono tan llamativo😅 allí me encontrarás y te daré una mano 🤜🤛
                     </p>
-                    <a href="https://www.linkedin.com/in/hansen-guzm%C3%A1n-hern%C3%Aández-b4185592/" target="_blank" rel="noopener noreferrer" class="final-cta-link" aria-label="Conectar en LinkedIn">
+                    <a href="https://www.linkedin.com/in/hansen-guzm%C3%A1n-hern%C3%A1ndez-b4185592/" target="_blank" rel="noopener noreferrer" class="final-cta-link" aria-label="Conectar en LinkedIn">
                         <div class="linkedin-circle">
                             <span class="linkedin-text">in</span>
                         </div>
