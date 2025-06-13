@@ -39,7 +39,6 @@
             background-color: var(--color-background);
             color: var(--color-text);
             overflow-x: hidden;
-            /* Se elimina el padding-top para que el contenido empiece arriba */
         }
 
         /* ----- Header y Menú Lateral ----- */
@@ -96,7 +95,7 @@
             stroke-opacity: 0.6;
         }
 
-        .header-section { display: flex; align-items: center; }
+        .header-section { display: flex; align-items: center; gap: 1rem;}
         .header-section.left { flex: 0 0 auto; justify-content: flex-start; } 
         .header-section.center { flex: 1 1 auto; justify-content: center; text-align: center; } 
         .header-section.right { 
@@ -343,7 +342,6 @@
         }
         .bi-text-container p strong { color: var(--color-primary); }
         
-        /* Estilos para el Lightbox de la Galería */
         .image-modal-overlay {
             position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%;
             background-color: rgba(0,0,0,0.9); display: none; justify-content: center; align-items: center;
@@ -353,7 +351,6 @@
         .modal-close-btn { position: absolute; top: 20px; right: 35px; color: #f1f1f1; font-size: 40px; font-weight: bold; cursor: pointer; transition: color 0.3s; }
         .modal-close-btn:hover { color: #bbb; }
 
-        /* Estilos para los botones de navegación del modal */
         .modal-prev, .modal-next {
             cursor: pointer;
             position: absolute;
@@ -379,7 +376,6 @@
             to { opacity: 1; }
         }
 
-        /* --- New CTA placement after gallery --- */
         .new-cta-placement {
             text-align: center;
             padding: 2rem 5%;
@@ -404,7 +400,6 @@
             margin: 0 auto;
         }
 
-        /* ----- ESTILOS NUEVA SECCIÓN: Proceso Data Análisis ----- */
         #proceso-data-analisis {
             padding: 5vh 5% 10vh 5%;
             background-color: var(--color-background);
@@ -489,7 +484,7 @@
             position: relative;
             justify-content: center;
             align-items: stretch;
-            opacity: 0; /* Changed for fade-in animation on desktop */
+            opacity: 0;
             transition: opacity 0.5s ease-in-out;
         }
         .step-row .step-card-container { 
@@ -617,10 +612,44 @@
             border: none;
         }
         
+        /* ----- Estilos del selector de idioma ----- */
+        .language-selector {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: white;
+        }
+        .lang-btn {
+            background: none;
+            border: none;
+            color: #aaa;
+            cursor: pointer;
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        .lang-btn:hover {
+            color: white;
+        }
+        .lang-btn.active {
+            color: var(--color-primary);
+        }
+        
+        .main-footer-bottom {
+            text-align: center;
+            padding: 2rem 1rem;
+            border-top: 1px solid var(--color-border);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+        
         /* ----- Estilos para Responsividad ----- */
         @media (min-width: 769px) { /* Media query for desktop */
             .main-header {
-                padding-right: 60px;
+                padding-right: 30px; /* Reducido para hacer espacio */
                 overflow: hidden;
             }
             .header-section.right {
@@ -650,7 +679,6 @@
                 max-width: 100%;
             }
             .knockout-text-layer {
-                /* CORRECCIÓN: Se reduce el padding para subir el título aún más */
                 padding-top: 80px; 
             }
         }
@@ -796,7 +824,6 @@
             }
         }
 
-        /* Mobile portrait specific adjustments */
         @media (max-width: 768px) and (orientation: portrait) {
             .knockout-text-layer {
                 justify-content: center; 
@@ -820,16 +847,6 @@
 
 <div class="page-wrapper">
     <header class="main-header">
-        <div class="header-graph-background">
-            <svg viewBox="0 0 100 70" preserveAspectRatio="none">
-                <rect x="5" y="30" width="10" height="40" fill="var(--color-secondary)" fill-opacity="0.2"/>
-                <rect x="20" y="10" width="10" height="60" fill="var(--color-secondary)" fill-opacity="0.3"/>
-                <rect x="35" y="40" width="10" height="30" fill="var(--color-secondary)" fill-opacity="0.25"/>
-                <rect x="50" y="0" width="10" height="70" fill="var(--color-secondary)" fill-opacity="0.35"/>
-                <rect x="65" y="20" width="10" height="50" fill="var(--color-secondary)" fill-opacity="0.3"/>
-                <rect x="80" y="5" width="10" height="65" fill="var(--color-secondary)" fill-opacity="0.4"/>
-            </svg>
-        </div>
         <div class="header-section left">
             <div class="header-controls">
                 <button class="menu-trigger" aria-label="Abrir menú">
@@ -848,6 +865,11 @@
             <a href="#page-top" class="logo logo-gradient">Data Growth Hub</a>
         </div>
         <div class="header-section right">
+            <div class="language-selector">
+                <button class="lang-btn" data-lang-switch="es">ES</button>
+                <span>|</span>
+                <button class="lang-btn" data-lang-switch="en">EN</button>
+            </div>
         </div>
     </header>
 
@@ -856,10 +878,10 @@
             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
         </button>
         <ul class="overlay-nav">
-            <li><a href="#page-top" class="menu-link">Inicio</a></li>
-            <li><a href="#evolucion" class="menu-link">Business intelligence</a></li>
-            <li><a href="#galeria-bi" class="menu-link">GRÁFICOS</a></li>
-            <li><a href="#proceso-data-analisis" class="menu-link">Proceso Data Análisis</a></li>
+            <li><a href="#page-top" class="menu-link" data-lang="nav-home">Inicio</a></li>
+            <li><a href="#evolucion" class="menu-link" data-lang="nav-bi">Business intelligence</a></li>
+            <li><a href="#galeria-bi" class="menu-link" data-lang="nav-charts">GRÁFICOS</a></li>
+            <li><a href="#proceso-data-analisis" class="menu-link" data-lang="nav-process">Proceso Data Análisis</a></li>
         </ul>
         <div class="menu-footer-icon">
             <a href="https://www.linkedin.com/in/hansen-guzm%C3%A1n-hern%C3%A1ndez-b4185592/" target="_blank" rel="noopener noreferrer" class="linkedin-icon" aria-label="LinkedIn">
@@ -883,7 +905,7 @@
                         <h1>GR<span class="growth-o-logo"></span>WTH</h1>
                     </div>
                     <div class="subtitle-wrapper">
-                        <p class="subtitle-text">
+                        <p class="subtitle-text" data-lang="hero-subtitle">
                             Desliza para conocer mas sobre el análisis de datos y un poco de mi trabajo
                         </p>
                         <a href="#evolucion" class="scroll-down-link" aria-label="Deslizar a Business Intelligence">
@@ -895,16 +917,16 @@
         </div>
 
         <section id="evolucion" class="outro-section">
-            <h2 class="animated-gradient-text">Business intelligence (BI)</h2>
+            <h2 class="animated-gradient-text" data-lang="bi-title">Business intelligence (BI)</h2>
             
             <div class="bi-text-container">
-                <p>Imagina que diriges tu empresa como si condujeras un coche. Business Intelligence (BI) sería el tablero de control. No es el motor que genera el movimiento, pero te proporciona toda la información vital; velocidad, combustible, estado del motor. Todo para tomar decisiones inteligentes al volante.</p>
-                <p>De la misma forma, el BI convierte los datos brutos de ventas, marketing y operaciones en informes claros que te muestran exactamente qué ha funcionado y por qué, permitiéndote dirigir tu negocio basándote en hechos concretos y no en  intuiciones.</p>
+                <p data-lang="bi-p1">Imagina que diriges tu empresa como si condujeras un coche. Business Intelligence (BI) sería el tablero de control. No es el motor que genera el movimiento, pero te proporciona toda la información vital; velocidad, combustible, estado del motor. Todo para tomar decisiones inteligentes al volante.</p>
+                <p data-lang="bi-p2">De la misma forma, el BI convierte los datos brutos de ventas, marketing y operaciones en informes claros que te muestran exactamente qué ha funcionado y por qué, permitiéndote dirigir tu negocio basándote en hechos concretos y no en  intuiciones.</p>
             </div>
 
             <div id="galeria-bi" class="gallery-container">
                 <div class="gallery-header">
-                    <p>Estas imágenes son una pequeña muestra de mi trabajo en Business Intelligence (BI), son datos de muestra pero muestran un poco de mi visión analítica y creativa.</p>
+                    <p data-lang="gallery-header">Estas imágenes son una pequeña muestra de mi trabajo en Business Intelligence (BI), son datos de muestra pero muestran un poco de mi visión analítica y creativa.</p>
                 </div>
                 <div class="gallery-main-image">
                     <img id="main-gallery-image" src="https://i.imgur.com/of09hLT.png" alt="Dashboard de datos principal">
@@ -922,10 +944,10 @@
             </div>
             
             <div class="text-center my-4 new-cta-placement">
-                <p class="subtitle-text" style="max-width: 800px; margin: 2rem auto 0.5rem auto; font-weight: 600; font-style: italic;">
+                <p class="subtitle-text" style="max-width: 800px; margin: 2rem auto 0.5rem auto; font-weight: 600; font-style: italic;" data-lang="cta-quote">
                     "Los datos son el alma de las decisiones inteligentes: quien los entiende, los analiza y los aprovecha, transforma su negocio en una máquina de crecimiento y éxito."
                 </p>
-                <p class="subtitle-text" style="max-width: 800px; margin: 1.5rem auto;">
+                <p class="subtitle-text" style="max-width: 800px; margin: 1.5rem auto;" data-lang="cta-text">
                     Conoce mas herramientas que ayudan a tu negocio a crecer con el análisis de datos
                 </p>
                 <a href="#proceso-data-analisis" class="scroll-down-link-2" aria-label="Deslizar a Proceso Data Análisis">
@@ -936,8 +958,8 @@
 
         <section id="proceso-data-analisis" style="padding: 5vh 5% 10vh 5%;">
             <header class="text-center mb-10 md:mb-16">
-                <h2 class="animated-gradient-text" style="font-size: clamp(3rem, 8vw, 6rem); margin-bottom: 2rem; text-align: center;">Proceso Data Análisis</h2>
-                <p class="text-lg text-gray-300 max-w-3xl mx-auto my-8 font-normal normal-case" style="font-family: var(--font-body); text-align: center; margin-bottom: 4rem; font-size: 1.25rem; font-weight: 500;">Una guía visual para transformar los datos de su empresa en una ventaja competitiva. Explore cada paso para entender el proceso completo.</p>
+                <h2 class="animated-gradient-text" style="font-size: clamp(3rem, 8vw, 6rem); margin-bottom: 2rem; text-align: center;" data-lang="process-title">Proceso Data Análisis</h2>
+                <p class="text-lg text-gray-300 max-w-3xl mx-auto my-8 font-normal normal-case" style="font-family: var(--font-body); text-align: center; margin-bottom: 4rem; font-size: 1.25rem; font-weight: 500;" data-lang="process-subtitle">Una guía visual para transformar los datos de su empresa en una ventaja competitiva. Explore cada paso para entender el proceso completo.</p>
             </header>
             
             <main>
@@ -947,13 +969,13 @@
                     <div class="phase-section mb-12">
                         <h3 class="phase-title" style="color: var(--color-primary); margin-top: 2rem; margin-bottom: 4rem;">
                                 <span class="phase-indicator" style="color: var(--color-primary);">&bullet;</span>
-                                <span>Fase 1: Necesidades, visión y ganas de mejorar</span>
+                                <span data-lang="phase1-title">Fase 1: Necesidades, visión y ganas de mejorar</span>
                         </h3>
                         <div class="flex flex-col items-center">
                             <div class="step-row" data-step="1">
                                 <div class="step-card-container">
                                         <div class="step-card" data-step-id="1" style="border-color: var(--color-primary);">
-                                                <div class="text-4xl mb-2">&#x1F3AF;</div><h4 class="font-bold">Definición de Necesidades</h4>
+                                                <div class="text-4xl mb-2">&#x1F3AF;</div><h4 class="font-bold" data-lang="step1-title">Definición de Necesidades</h4>
                                         </div>
                                 </div>
                                 <div class="connector">
@@ -968,7 +990,7 @@
                             <div class="step-row" data-step="2">
                                 <div class="step-card-container">
                                         <div class="step-card" data-step-id="2" style="border-color: var(--color-primary);">
-                                                <div class="text-4xl mb-2">&#129300;</div><h4 class="font-bold">Identificar los Datos</h4>
+                                                <div class="text-4xl mb-2">&#129300;</div><h4 class="font-bold" data-lang="step2-title">Identificar los Datos</h4>
                                         </div>
                                 </div>
                                 <div class="connector">
@@ -983,7 +1005,7 @@
                             <div class="step-row" data-step="3">
                                 <div class="step-card-container">
                                         <div class="step-card" data-step-id="3" style="border-color: var(--color-primary);">
-                                                <div class="text-4xl mb-2">&#x1F6C1;</div><h4 class="font-bold">Limpieza y Preparación</h4>
+                                                <div class="text-4xl mb-2">&#x1F6C1;</div><h4 class="font-bold" data-lang="step3-title">Limpieza y Preparación</h4>
                                         </div>
                                 </div>
                                 <div class="connector">
@@ -998,7 +1020,7 @@
                             <div class="step-row" data-step="4">
                                 <div class="step-card-container">
                                         <div class="step-card" data-step-id="4" style="border-color: var(--color-primary);">
-                                                <div class="text-4xl mb-2">&#x1F9EE;</div><h4 class="font-bold">Análisis BI</h4>
+                                                <div class="text-4xl mb-2">&#x1F9EE;</div><h4 class="font-bold" data-lang="step4-title">Análisis BI</h4>
                                         </div>
                                 </div>
                                 <div class="connector">
@@ -1015,14 +1037,14 @@
                     <div class="phase-section" style="margin-top: 4rem;">
                         <h3 class="phase-title" style="color: var(--color-secondary); margin-top: 2rem; margin-bottom: 4rem;">
                                 <span class="phase-indicator" style="color: var(--color-secondary);">&bullet;</span>
-                                <span>Fase 2: Optimización y Predicción</span>
+                                <span data-lang="phase2-title">Fase 2: Optimización y Predicción</span>
                         </h3>
                         <div class="flex flex-col items-center">
                             <div class="step-row" data-step="5">
                                 <div class="step-card-container">
                                         <div class="step-card" data-step-id="5" style="border-color: var(--color-secondary);">
                                                 <div class="text-4xl mb-2">&#129504;</div>
-                                                <h4 class="font-bold">Machine Learning</h4>
+                                                <h4 class="font-bold" data-lang="step5-title">Machine Learning</h4>
                                         </div>
                                 </div>
                                 <div class="connector">
@@ -1038,7 +1060,7 @@
                                 <div class="step-card-container">
                                         <div class="step-card" data-step-id="6" style="border-color: var(--color-secondary);">
                                                 <div class="text-4xl mb-2">&#129327;</div>
-                                                <h4 class="font-bold">Aplicación y Mejora</h4>
+                                                <h4 class="font-bold" data-lang="step6-title">Aplicación y Mejora</h4>
                                         </div>
                                 </div>
                                 <div class="connector">
@@ -1053,7 +1075,7 @@
                     </div>
                 </div>
                 <footer class="final-cta-section">
-                    <p class="final-cta-text">
+                    <p class="final-cta-text" data-lang="final-cta">
                         Si llegaste hasta aquí es por que de verdad quieres implementar Análisis de datos, si le das clic a este icono tan llamativo😅 allí me encontrarás y te daré una mano 🤜🤛
                     </p>
                     <a href="https://www.linkedin.com/in/hansen-guzm%C3%A1n-hern%C3%A1ndez-b4185592/" target="_blank" rel="noopener noreferrer" class="final-cta-link" aria-label="Conectar en LinkedIn">
@@ -1076,8 +1098,125 @@
         <img class="modal-content" id="modal-image" alt="Imagen ampliada de la galería">
     </div>
     
+    <footer class="main-footer-bottom">
+        <div class="language-selector">
+            <button class="lang-btn" data-lang-switch="es">Español</button>
+            <span>|</span>
+            <button class="lang-btn" data-lang-switch="en">English</button>
+        </div>
+        <p data-lang="footer-rights">&copy; 2024 Hansen Guzmán Hernández. Todos los derechos reservados.</p>
+    </footer>
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            
+            // --- LÓGICA DE TRADUCCIÓN ---
+            const translations = {
+                es: {
+                    'nav-home': 'Inicio',
+                    'nav-bi': 'Business intelligence',
+                    'nav-charts': 'GRÁFICOS',
+                    'nav-process': 'Proceso Data Análisis',
+                    'hero-subtitle': 'Desliza para conocer mas sobre el análisis de datos y un poco de mi trabajo',
+                    'bi-title': 'Business intelligence (BI)',
+                    'bi-p1': 'Imagina que diriges tu empresa como si condujeras un coche. Business Intelligence (BI) sería el tablero de control. No es el motor que genera el movimiento, pero te proporciona toda la información vital; velocidad, combustible, estado del motor. Todo para tomar decisiones inteligentes al volante.',
+                    'bi-p2': 'De la misma forma, el BI convierte los datos brutos de ventas, marketing y operaciones en informes claros que te muestran exactamente qué ha funcionado y por qué, permitiéndote dirigir tu negocio basándote en hechos concretos y no en  intuiciones.',
+                    'gallery-header': 'Estas imágenes son una pequeña muestra de mi trabajo en Business Intelligence (BI), son datos de muestra pero muestran un poco de mi visión analítica y creativa.',
+                    'cta-quote': '"Los datos son el alma de las decisiones inteligentes: quien los entiende, los analiza y los aprovecha, transforma su negocio en una máquina de crecimiento y éxito."',
+                    'cta-text': 'Conoce mas herramientas que ayudan a tu negocio a crecer con el análisis de datos',
+                    'process-title': 'Proceso Data Análisis',
+                    'process-subtitle': 'Una guía visual para transformar los datos de su empresa en una ventaja competitiva. Explore cada paso para entender el proceso completo.',
+                    'phase1-title': 'Fase 1: Necesidades, visión y ganas de mejorar',
+                    'step1-title': 'Definición de Necesidades',
+                    'step2-title': 'Identificar los Datos',
+                    'step3-title': 'Limpieza y Preparación',
+                    'step4-title': 'Análisis BI',
+                    'phase2-title': 'Fase 2: Optimización y Predicción',
+                    'step5-title': 'Machine Learning',
+                    'step6-title': 'Aplicación y Mejora',
+                    'final-cta': 'Si llegaste hasta aquí es por que de verdad quieres implementar Análisis de datos, si le das clic a este icono tan llamativo😅 allí me encontrarás y te daré una mano 🤜🤛',
+                    'footer-rights': '&copy; 2024 Hansen Guzmán Hernández. Todos los derechos reservados.',
+                    steps: [
+                        { id: 1, content: `<h3 class="text-xl font-bold mb-4">Paso 1: Definición de Necesidades y Objetivos</h3><p class="mb-4">Esta es la piedra angular. Antes de analizar cualquier dato, debemos tener absoluta claridad sobre qué preguntas de negocio queremos responder y qué metas buscamos alcanzar.</p><ul class="list-disc space-y-2"><li><strong>Identificar Necesidades:</strong> Entender los desafíos actuales y las decisiones clave.</li><li><strong>Establecer <span class="tooltip-container">KPIs<span class="tooltip-text">Un <strong>KPI</strong> (Key Performance Indicator) es una métrica medible para evaluar el éxito.</span></span>:</strong> Definir métricas específicas y medibles.</li><li><strong>Definir Objetivos Cuantificables:</strong> Traducir las necesidades en metas numéricas.</li></ul>`},
+                        { id: 2, content: `<h3 class="text-xl font-bold mb-4">Paso 2: Identificar los Datos</h3><p class="mb-4">Con los objetivos definidos, el siguiente paso es actuar como detectives de datos: encontrar dónde reside la información valiosa y establecer mecanismos para recopilarla.</p><ul class="list-disc space-y-2"><li><strong>Fuentes Internas:</strong> Bases de datos (CRM, ERP), registros de ventas, etc.</li><li><strong>Fuentes Externas:</strong> Datos de mercado, redes sociales.</li><li><strong>Tipos de Datos:</strong> <span class="tooltip-container">Estructurados<span class="tooltip-text"><strong>Datos estructurados:</strong> Formato organizado, como tablas.</span></span> y <span class="tooltip-container">No Estructurados<span class="tooltip-text"><strong>Datos no estructurados:</strong> Sin formato predefinido, como emails o imágenes.</span></span>.</li></ul>`},
+                        { id: 3, content: `<h3 class="text-xl font-bold mb-4">Paso 3: Limpieza y Preparación de Datos</h3><p class="mb-4">Los datos en su estado natural suelen estar incompletos o con errores. Decisiones basadas en datos "sucios" son peligrosas, por lo que este paso garantiza la fiabilidad.</p><ul class="list-disc space-y-2"><li><strong><span class="tooltip-container">Limpieza de Datos<span class="tooltip-text">Proceso de detectar y corregir registros incorrectos.</span></span>:</strong> Corregir errores, inconsistencias y duplicados.</li><li><strong>Transformación de Datos:</strong> Combinar fuentes y crear nuevas variables.</li></ul>`},
+                        { id: 4, content: `<h3 class="text-xl font-bold mb-4">Paso 4: Análisis BI</h3><p class="mb-4">Con datos limpios, transformamos la información en conocimiento visual y accionable, respondiendo a la pregunta: "¿Qué está sucediendo en nuestro negocio?".</p><ul class="list-disc space-y-2"><li><strong>Análisis Exploratorio:</strong> Investigar los datos para descubrir patrones y tendencias.</li><li><strong>Generación de <span class="tooltip-container">Dashboards<span class="tooltip-text">Resumen visual y en tiempo real de los KPIs más importantes.</span></span> y <span class="tooltip-container">BI<span class="tooltip-text">Conjunto de estrategias y herramientas para el análisis de datos.</span></span>:</strong> Crear visualizaciones interactivas.</li></ul>`},
+                        { id: 5, content: `<h3 class="text-xl font-bold mb-4">Paso 5: Implementación de Machine Learning</h3><p class="mb-4">Una vez que entendemos lo que ha pasado, podemos empezar a predecir lo que podría pasar, utilizando algoritmos para descubrir patrones complejos.</p><ul class="list-disc space-y-2"><li><strong>Desarrollo de Modelos:</strong> Usar <span class="tooltip-container">Machine Learning<span class="tooltip-text">Rama de la IA que permite a las máquinas aprender de los datos para hacer predicciones.</span></span> y <span class="tooltip-container">Deep Learning<span class="tooltip-text">Subcampo del ML que usa redes neuronales complejas.</span></span> para construir modelos predictivos.</li></ul>`},
+                        { id: 6, content: `<h3 class="text-xl font-bold mb-4">Paso 6: Aplicación y Mejora Continua</h3><p class="mb-4">Un modelo no tiene valor si se queda en una presentación. El objetivo es integrar estos conocimientos en los procesos de negocio para generar un impacto real y medible. Este es un ciclo que nunca termina.</p><ul class="list-disc space-y-2"><li><strong>Inyección en el Proceso:</strong> Usar predicciones para optimizar logística y personalizar campañas.</li><li><strong>Monitoreo y Refinamiento:</strong> Reentrenar y mejorar los modelos constantemente.</li></ul>`}
+                    ]
+                },
+                en: {
+                    'nav-home': 'Home',
+                    'nav-bi': 'Business Intelligence',
+                    'nav-charts': 'CHARTS',
+                    'nav-process': 'Data Analysis Process',
+                    'hero-subtitle': 'Scroll down to learn more about data analysis and see some of my work',
+                    'bi-title': 'Business Intelligence (BI)',
+                    'bi-p1': 'Imagine running your company like driving a car. Business Intelligence (BI) would be the dashboard. It\'s not the engine that generates movement, but it provides you with all the vital information: speed, fuel, engine status. Everything to make smart decisions behind the wheel.',
+                    'bi-p2': 'In the same way, BI converts raw sales, marketing, and operations data into clear reports that show you exactly what has worked and why, allowing you to run your business based on concrete facts and not just intuition.',
+                    'gallery-header': 'These images are a small sample of my work in Business Intelligence (BI). They use sample data but showcase some of my analytical and creative vision.',
+                    'cta-quote': '"Data is the soul of smart decisions: whoever understands, analyzes, and leverages it, transforms their business into a machine of growth and success."',
+                    'cta-text': 'Learn about more tools that help your business grow with data analysis',
+                    'process-title': 'Data Analysis Process',
+                    'process-subtitle': 'A visual guide to transforming your company\'s data into a competitive advantage. Explore each step to understand the full process.',
+                    'phase1-title': 'Phase 1: Needs, Vision, and Desire for Improvement',
+                    'step1-title': 'Defining Needs',
+                    'step2-title': 'Identifying Data',
+                    'step3-title': 'Cleaning and Preparation',
+                    'step4-title': 'BI Analysis',
+                    'phase2-title': 'Phase 2: Optimization and Prediction',
+                    'step5-title': 'Machine Learning',
+                    'step6-title': 'Application and Improvement',
+                    'final-cta': 'If you\'ve made it this far, you truly want to implement Data Analysis. Click on this eye-catching icon😅, you\'ll find me there, and I\'ll lend you a hand 🤜🤛',
+                    'footer-rights': '&copy; 2024 Hansen Guzmán Hernández. All rights reserved.',
+                    steps: [
+                        { id: 1, content: `<h3 class="text-xl font-bold mb-4">Step 1: Defining Needs and Objectives</h3><p class="mb-4">This is the cornerstone. Before analyzing any data, we must be absolutely clear about which business questions we want to answer and what goals we aim to achieve.</p><ul class="list-disc space-y-2"><li><strong>Identify Needs:</strong> Understand current challenges and key decisions.</li><li><strong>Establish <span class="tooltip-container">KPIs<span class="tooltip-text">A <strong>KPI</strong> (Key Performance Indicator) is a measurable value to evaluate success.</span></span>:</strong> Define specific and measurable metrics.</li><li><strong>Define Quantifiable Objectives:</strong> Translate needs into numerical goals.</li></ul>`},
+                        { id: 2, content: `<h3 class="text-xl font-bold mb-4">Step 2: Identifying Data Sources</h3><p class="mb-4">With the objectives defined, the next step is to act like data detectives: find where the valuable information resides and establish mechanisms to collect it.</p><ul class="list-disc space-y-2"><li><strong>Internal Sources:</strong> Databases (CRM, ERP), sales records, etc.</li><li><strong>External Sources:</strong> Market data, social media.</li><li><strong>Data Types:</strong> <span class="tooltip-container">Structured<span class="tooltip-text"><strong>Structured data:</strong> Organized format, like tables.</span></span> and <span class="tooltip-container">Unstructured<span class="tooltip-text"><strong>Unstructured data:</strong> No predefined format, like emails or images.</span></span>.</li></ul>`},
+                        { id: 3, content: `<h3 class="text-xl font-bold mb-4">Step 3: Data Cleaning and Preparation</h3><p class="mb-4">Data in its natural state is often incomplete or contains errors. Decisions based on "dirty" data are dangerous, so this step ensures reliability.</p><ul class="list-disc space-y-2"><li><strong><span class="tooltip-container">Data Cleansing<span class="tooltip-text">The process of detecting and correcting incorrect records.</span></span>:</strong> Correcting errors, inconsistencies, and duplicates.</li><li><strong>Data Transformation:</strong> Combining sources and creating new variables.</li></ul>`},
+                        { id: 4, content: `<h3 class="text-xl font-bold mb-4">Step 4: BI Analysis</h3><p class="mb-4">With clean data, we transform information into visual and actionable knowledge, answering the question: "What is happening in our business?".</p><ul class="list-disc space-y-2"><li><strong>Exploratory Analysis:</strong> Investigating data to discover patterns and trends.</li><li><strong>Generation of <span class="tooltip-container">Dashboards<span class="tooltip-text">A real-time visual summary of the most important KPIs.</span></span> and <span class="tooltip-container">BI<span class="tooltip-text">A set of strategies and tools for data analysis.</span></span>:</strong> Creating interactive visualizations.</li></ul>`},
+                        { id: 5, content: `<h3 class="text-xl font-bold mb-4">Step 5: Machine Learning Implementation</h3><p class="mb-4">Once we understand what has happened, we can begin to predict what might happen, using algorithms to uncover complex patterns.</p><ul class="list-disc space-y-2"><li><strong>Model Development:</strong> Using <span class="tooltip-container">Machine Learning<span class="tooltip-text">A branch of AI that allows machines to learn from data to make predictions.</span></span> and <span class="tooltip-container">Deep Learning<span class="tooltip-text">A subfield of ML that uses complex neural networks.</span></span> to build predictive models.</li></ul>`},
+                        { id: 6, content: `<h3 class="text-xl font-bold mb-4">Step 6: Application and Continuous Improvement</h3><p class="mb-4">A model is worthless if it stays in a presentation. The goal is to integrate these insights into business processes to generate a real and measurable impact. This is a never-ending cycle.</p><ul class="list-disc space-y-2"><li><strong>Process Integration:</strong> Using predictions to optimize logistics and personalize campaigns.</li><li><strong>Monitoring and Refinement:</strong> Constantly retraining and improving the models.</li></ul>`}
+                    ]
+                }
+            };
+            
+            let currentLang = 'es'; 
+
+            function changeLanguage(lang) {
+                if (!translations[lang]) return;
+                currentLang = lang;
+                
+                document.querySelectorAll('[data-lang]').forEach(el => {
+                    const key = el.getAttribute('data-lang');
+                    if (translations[lang][key]) {
+                        el.innerHTML = translations[lang][key];
+                    }
+                });
+                
+                translations[lang].steps.forEach(stepData => {
+                    const contentBlock = document.getElementById(`step-content-block-${stepData.id}`);
+                    if(contentBlock) {
+                        contentBlock.innerHTML = stepData.content;
+                    }
+                });
+
+                document.querySelectorAll('.lang-btn').forEach(btn => {
+                    btn.classList.toggle('active', btn.getAttribute('data-lang-switch') === lang);
+                });
+                
+                localStorage.setItem('language', lang);
+                document.documentElement.lang = lang;
+            }
+
+            document.querySelectorAll('[data-lang-switch]').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    changeLanguage(btn.getAttribute('data-lang-switch'));
+                });
+            });
+
+            // --- FIN LÓGICA DE TRADUCCIÓN ---
+
             const lenis = new Lenis();
             function raf(time) {
                 lenis.raf(time);
@@ -1126,7 +1265,7 @@
             });
 
             const topLink = document.querySelector('.top-link');
-            if (topLink) { // Added null check here
+            if (topLink) { 
                 topLink.addEventListener('click', (e) => {
                     e.preventDefault();
                     lenis.scrollTo(0, { duration: 1.5, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
@@ -1165,7 +1304,6 @@
                 });
             }
             
-            // --- LÓGICA DE LA GALERÍA CON NAVEGACIÓN EN MODAL ---
             const mainImageContainer = document.querySelector('.gallery-main-image');
             const mainImage = document.getElementById('main-gallery-image');
             const thumbnails = document.querySelectorAll('.gallery-thumbnail');
@@ -1211,10 +1349,9 @@
                 
                 startSlideshow();
 
-                // Lógica del Lightbox/Modal
                 if (imageModal && modalImage && modalCloseBtn && modalPrevBtn && modalNextBtn) {
                     const openModal = () => {
-                        modalImage.src = mainImage.src; // Opens the image currently in the carousel
+                        modalImage.src = mainImage.src;
                         imageModal.style.display = 'flex';
                         lenis.stop();
                     };
@@ -1224,19 +1361,16 @@
                         lenis.start();
                     };
 
-                    // Function to change image within the modal
                     const changeModalImage = (direction) => {
                         currentIndex += direction;
-                        // Allows the gallery to be cyclic
                         if (currentIndex >= thumbnails.length) {
                             currentIndex = 0;
                         } else if (currentIndex < 0) {
                             currentIndex = thumbnails.length - 1;
                         }
-                        // Updates the modal image and the main carousel image
                         const newSrc = thumbnails[currentIndex].querySelector('img').src;
                         modalImage.src = newSrc;
-                        mainImage.src = newSrc; // Also updates the main image
+                        mainImage.src = newSrc;
                         thumbnails.forEach(t => t.classList.remove('active'));
                         thumbnails[currentIndex].classList.add('active');
                     };
@@ -1244,27 +1378,20 @@
                     mainImageContainer.addEventListener('click', openModal);
                     modalCloseBtn.addEventListener('click', closeModal);
                     
-                    // Closes the modal if clicked outside the image
                     imageModal.addEventListener('click', (e) => {
                         if (e.target === imageModal) {
                             closeModal();
                         }
                     });
 
-                    // Event listeners for modal navigation buttons
                     modalPrevBtn.addEventListener('click', () => changeModalImage(-1));
                     modalNextBtn.addEventListener('click', () => changeModalImage(1));
 
-                    // Event listener for keyboard navigation
                     document.addEventListener('keydown', (e) => {
                         if (imageModal.style.display === 'flex') {
-                            if (e.key === 'ArrowLeft') {
-                                changeModalImage(-1);
-                            } else if (e.key === 'ArrowRight') {
-                                changeModalImage(1);
-                            } else if (e.key === 'Escape') {
-                                closeModal();
-                            }
+                            if (e.key === 'ArrowLeft') changeModalImage(-1);
+                            else if (e.key === 'ArrowRight') changeModalImage(1);
+                            else if (e.key === 'Escape') closeModal();
                         }
                     });
                 }
@@ -1280,29 +1407,19 @@
                 }
             });
 
-            // Script for the new "Data Analysis Process" section
-            const stepsData = [
-                { id: 1, phase: 1, content: `<h3 class="text-xl font-bold mb-4">Paso 1: Definición de Necesidades y Objetivos</h3><p class="mb-4">Esta es la piedra angular. Antes de analizar cualquier dato, debemos tener absoluta claridad sobre qué preguntas de negocio queremos responder y qué metas buscamos alcanzar.</p><ul class="list-disc space-y-2"><li><strong>Identificar Necesidades:</strong> Entender los desafíos actuales y las decisiones clave.</li><li><strong>Establecer <span class="tooltip-container">KPIs<span class="tooltip-text">Un <strong>KPI</strong> (Key Performance Indicator) es una métrica medible para evaluar el éxito.</span></span>:</strong> Definir métricas específicas y medibles.</li><li><strong>Definir Objetivos Cuantificables:</strong> Traducir las necesidades en metas numéricas.</li></ul>`},
-                { id: 2, phase: 1, content: `<h3 class="text-xl font-bold mb-4">Paso 2: Identificar los Datos</h3><p class="mb-4">Con los objetivos definidos, el siguiente paso es actuar como detectives de datos: encontrar dónde reside la información valiosa y establecer mecanismos para recopilarla.</p><ul class="list-disc space-y-2"><li><strong>Fuentes Internas:</strong> Bases de datos (CRM, ERP), registros de ventas, etc.</li><li><strong>Fuentes Externas:</strong> Datos de mercado, redes sociales.</li><li><strong>Tipos de Datos:</strong> <span class="tooltip-container">Estructurados<span class="tooltip-text"><strong>Datos estructurados:</strong> Formato organizado, como tablas.</span></span> y <span class="tooltip-container">No Estructurados<span class="tooltip-text"><strong>Datos no estructurados:</strong> Sin formato predefinido, como emails o imágenes.</span></span>.</li></ul>`},
-                { id: 3, phase: 1, content: `<h3 class="text-xl font-bold mb-4">Paso 3: Limpieza y Preparación de Datos</h3><p class="mb-4">Los datos en su estado natural suelen estar incompletos o con errores. Decisiones basadas en datos "sucios" son peligrosas, por lo que este paso garantiza la fiabilidad.</p><ul class="list-disc space-y-2"><li><strong><span class="tooltip-container">Limpieza de Datos<span class="tooltip-text">Proceso de detectar y corregir registros incorrectos.</span></span>:</strong> Corregir errores, inconsistencias y duplicados.</li><li><strong>Transformación de Datos:</strong> Combinar fuentes y crear nuevas variables.</li></ul>`},
-                { id: 4, phase: 1, content: `<h3 class="text-xl font-bold mb-4">Paso 4: Análisis BI</h3><p class="mb-4">Con datos limpios, transformamos la información en conocimiento visual y accionable, respondiendo a la pregunta: "¿Qué está sucediendo en nuestro negocio?".</p><ul class="list-disc space-y-2"><li><strong>Análisis Exploratorio:</strong> Investigar los datos para descubrir patrones y tendencias.</li><li><strong>Generación de <span class="tooltip-container">Dashboards<span class="tooltip-text">Resumen visual y en tiempo real de los KPIs más importantes.</span></span> y <span class="tooltip-container">BI<span class="tooltip-text">Conjunto de estrategias y herramientas para el análisis de datos.</span></span>:</strong> Crear visualizaciones interactivas.</li></ul>`},
-                { id: 5, phase: 2, content: `<h3 class="text-xl font-bold mb-4">Paso 5: Implementación de Machine Learning</h3><p class="mb-4">Una vez que entendemos lo que ha pasado, podemos empezar a predecir lo que podría pasar, utilizando algoritmos para descubrir patrones complejos.</p><ul class="list-disc space-y-2"><li><strong>Desarrollo de Modelos:</strong> Usar <span class="tooltip-container">Machine Learning<span class="tooltip-text">Rama de la IA que permite a las máquinas aprender de los datos para hacer predicciones.</span></span> y <span class="tooltip-container">Deep Learning<span class="tooltip-text">Subcampo del ML que usa redes neuronales complejas.</span></span> para construir modelos predictivos.</li></ul>`},
-                { id: 6, phase: 2, content: `<h3 class="text-xl font-bold mb-4">Paso 6: Aplicación y Mejora Continua</h3><p class="mb-4">Un modelo no tiene valor si se queda en una presentación. El objetivo es integrar estos conocimientos en los procesos de negocio para generar un impacto real y medible. Este es un ciclo que nunca termina.</p><ul class="list-disc space-y-2"><li><strong>Inyección en el Proceso:</strong> Usar predicciones para optimizar logística y personalizar campañas.</li><li><strong>Monitoreo y Refinamiento:</strong> Reentrenar y mejorar los modelos constantemente.</li></ul>`}
-            ];
-
             const stepRows = document.querySelectorAll('#proceso-data-analisis .step-row');
             const totalSteps = stepRows.length;
             let revealInterval;
             let cardHighlightInterval;
             let restartTimeout;
             let userInteracted = false;
-            let intersectionObserver; // Variable for IntersectionObserver
+            let intersectionObserver;
 
             function setActiveStep(stepId) {
                 stepRows.forEach(row => {
                     const card = row.querySelector('.step-card');
                     const currentStepId = parseInt(card.dataset.stepId);
-                    const stepData = stepsData.find(s => s.id === currentStepId);
+                    const stepData = translations[currentLang].steps.find(s => s.id === currentStepId);
                     const activeBorderColor = stepData.phase === 1 ? 'var(--color-primary)' : 'var(--color-secondary)';
                     
                     if (currentStepId === stepId) {
@@ -1336,83 +1453,56 @@
                 clearInterval(cardHighlightInterval);
 
                 stepRows.forEach(row => {
-                    if (!isMobile) {
-                        row.style.opacity = '0';
-                    }
-                    const contentBlock = document.getElementById(`step-content-block-${row.dataset.step}`);
-                    contentBlock.innerHTML = '';
+                    if (!isMobile) row.style.opacity = '0';
                     row.querySelector('.step-card').classList.remove('active');
+                });
+                
+                const stepDataForLang = translations[currentLang].steps;
+                stepDataForLang.forEach(stepData => {
+                    const contentBlock = document.getElementById(`step-content-block-${stepData.id}`);
+                    if(contentBlock) contentBlock.innerHTML = stepData.content;
                 });
 
                 if (!isMobile && stepRows.length > 0) {
-                    const firstRow = stepRows[0];
-                    const firstStepId = parseInt(firstRow.dataset.step);
-                    const firstStepData = stepsData.find(s => s.id === firstStepId);
-                    
-                    firstRow.style.opacity = '1';
-                    const firstContentBlock = document.getElementById(`step-content-block-${firstStepId}`);
-                    firstContentBlock.innerHTML = firstStepData.content;
-                    setActiveStep(firstStepId);
+                    stepRows[0].style.opacity = '1';
+                    setActiveStep(1);
                 }
 
-                let currentStepIndex = (isMobile) ? 0 : 1; 
+                let currentStepIndex = isMobile ? 0 : 1; 
 
                 const animateStep = () => {
-                    if (userInteracted) {
+                    if (userInteracted || currentStepIndex >= totalSteps) {
                         clearInterval(revealInterval);
+                        if (!userInteracted) {
+                            startSecondaryCardAnimation();
+                            restartTimeout = setTimeout(startAnimationCycle, 240000);
+                        }
                         return;
                     }
                     if (currentStepIndex < totalSteps) {
                         const row = stepRows[currentStepIndex];
-                        const stepId = parseInt(row.dataset.step);
-                        const stepData = stepsData.find(s => s.id === stepId);
-                        
-                        if (!isMobile) {
-                            row.style.opacity = '1';
-                        }
-                        const contentBlock = document.getElementById(`step-content-block-${stepId}`);
-                        contentBlock.innerHTML = stepData.content;
-                        setActiveStep(stepId);
-
+                        if (!isMobile) row.style.opacity = '1';
+                        setActiveStep(parseInt(row.dataset.step));
                         currentStepIndex++;
-                    } else {
-                        clearInterval(revealInterval);
-                        startSecondaryCardAnimation();
-                        restartTimeout = setTimeout(startAnimationCycle, 240000); // 4 minutes
                     }
                 };
                 
                 if (isMobile) {
-                    stepRows.forEach((row, index) => {
-                        const stepId = parseInt(row.dataset.step);
-                        const contentBlock = document.getElementById(`step-content-block-${stepId}`);
-                        contentBlock.innerHTML = stepsData.find(s => s.id === stepId).content;
-                        row.style.opacity = '1'; 
-                    });
+                    stepRows.forEach(row => row.style.opacity = '1');
                     startSecondaryCardAnimation();
-                    restartTimeout = setTimeout(startAnimationCycle, 240000); // 4 minutes
+                    restartTimeout = setTimeout(startAnimationCycle, 240000);
                 } else {
                     revealInterval = setInterval(animateStep, 1500);
                 }
             }
-
+            
             document.querySelectorAll('#proceso-data-analisis .step-card').forEach(card => {
                 card.addEventListener('click', function() {
                     userInteracted = true;
                     clearInterval(revealInterval);
                     clearTimeout(restartTimeout);
                     clearInterval(cardHighlightInterval);
-
-                    stepRows.forEach(row => {
-                        row.style.opacity = '1';
-                        const stepId = parseInt(row.dataset.step);
-                        const contentBlock = document.getElementById(`step-content-block-${stepId}`);
-                        if (!contentBlock.innerHTML) {
-                            const stepData = stepsData.find(s => s.id === stepId);
-                            contentBlock.innerHTML = stepData.content;
-                        }
-                    });
-
+                    stepRows.forEach(row => row.style.opacity = '1');
                     const clickedStepId = parseInt(this.dataset.stepId);
                     setActiveStep(clickedStepId);
                 });
@@ -1420,12 +1510,7 @@
 
             const procesoDataAnalisisSection = document.getElementById('proceso-data-analisis');
             if (procesoDataAnalisisSection) {
-                const observerOptions = {
-                    root: null, 
-                    rootMargin: '0px',
-                    threshold: 0.1 
-                };
-
+                const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
                 intersectionObserver = new IntersectionObserver((entries, observer) => {
                     entries.forEach(entry => {
                         if (entry.isIntersecting && !userInteracted) {
@@ -1436,59 +1521,23 @@
                             clearInterval(cardHighlightInterval);
                             userInteracted = false; 
                             stepRows.forEach(row => {
-                                if (window.innerWidth > 768) { /* Only if not mobile */
-                                    row.style.opacity = '0';
-                                }
+                                if (window.innerWidth > 768) row.style.opacity = '0';
                             });
                         }
                     });
                 }, observerOptions);
-
                 intersectionObserver.observe(procesoDataAnalisisSection);
             }
 
-
             window.addEventListener('resize', () => {
                 userInteracted = false; 
-                if (intersectionObserver) {
-                    intersectionObserver.disconnect();
-                }
-                if (procesoDataAnalisisSection) {
-                    intersectionObserver.observe(procesoDataAnalisisSection);
-                }
+                if (intersectionObserver) intersectionObserver.disconnect();
+                if (procesoDataAnalisisSection) intersectionObserver.observe(procesoDataAnalisisSection);
                 startAnimationCycle();
             });
-
-            document.querySelectorAll('.menu-link, .scroll-down-link-2').forEach(link => {
-                link.addEventListener('click', (e) => {
-                    const targetId = link.getAttribute('href');
-                    if (targetId === '#proceso-data-analisis') {
-                        userInteracted = false; 
-                        clearInterval(revealInterval);
-                        clearTimeout(restartTimeout);
-                        clearInterval(cardHighlightInterval);
-                        if (procesoDataAnalisisSection && intersectionObserver) {
-                            intersectionObserver.unobserve(procesoDataAnalisisSection); 
-                            stepRows.forEach(row => {
-                                const stepId = parseInt(row.dataset.step);
-                                const contentBlock = document.getElementById(`step-content-block-${stepId}`);
-                                const stepData = stepsData.find(s => s.id === stepId);
-                                if (contentBlock && stepData) contentBlock.innerHTML = stepData.content;
-                                if (row.dataset.step === '1') {
-                                    setActiveStep(1); 
-                                }
-                                if (window.innerWidth > 768) {
-                                    row.style.opacity = '0'; /* Reset opacity for animation if desktop */
-                                }
-                            });
-                            setTimeout(() => { // Small delay to ensure scroll to finish, then start animation
-                                startAnimationCycle();
-                                intersectionObserver.observe(procesoDataAnalisisSection); // Re-observe
-                            }, 500); 
-                        }
-                    }
-                });
-            });
+            
+            const savedLang = localStorage.getItem('language') || 'es';
+            changeLanguage(savedLang);
         });
     </script>
 </body>
