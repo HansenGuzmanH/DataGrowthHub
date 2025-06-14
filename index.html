@@ -645,6 +645,15 @@
             align-items: center;
             gap: 1rem;
         }
+
+        /* --- [INICIO] Estilos para visibilidad del icono de LinkedIn --- */
+        .mobile-linkedin {
+            display: none;
+        }
+        .desktop-linkedin {
+            display: flex; 
+        }
+        /* --- [FIN] Estilos para visibilidad del icono de LinkedIn --- */
         
         /* ----- Estilos para Responsividad ----- */
         @media (min-width: 769px) { /* Media query for desktop */
@@ -683,21 +692,24 @@
             }
         }
 
+        
         @media (max-width: 768px) {
             :root { --header-height: 60px; }
 
+            /* Se elimina el padding-top ya que la cabecera ahora es flotante */
             body {
-                padding-top: var(--header-height);
+                padding-top: 0;
             }
             
+            /* Cabecera flotante y redondeada en móvil */
             .main-header {
-                top: 0;
-                left: 0;
-                width: 100%;
+                top: 15px;
+                left: 50%;
+                width: calc(100% - 30px);
+                transform: translateX(-50%);
+                border-radius: var(--corner-radius);
+                padding: 0 15px;
                 max-width: 100%;
-                transform: none;
-                border-radius: 0;
-                padding: 0 10px;
             }
 
             .title-container h1:last-of-type {
@@ -726,6 +738,15 @@
             }
             .hamburger-icon { width: 28px; height: 22px; }
             .menu-trigger { z-index: 1005; }
+            
+            /* --- [INICIO] Control de visibilidad de LinkedIn en móvil --- */
+            .desktop-linkedin {
+                display: none;
+            }
+            .mobile-linkedin {
+                display: flex;
+            }
+            /* --- [FIN] Control de visibilidad de LinkedIn en móvil --- */
 
             .title-container h1 { font-size: 20vw; }
             .growth-arrow { width: 25vw; height: 20vw; }
@@ -797,6 +818,7 @@
             }
         }
 
+
         @media (max-width: 480px) {
             .overlay-nav a { font-size: clamp(1.5rem, 8vw, 2.2rem); }
             :root { --menu-width: 80vw; --menu-max-width: 320px; }
@@ -845,7 +867,8 @@
 </head>
 <body>
 
-<div class="page-wrapper">
+<!-- Se añade id="page-top" para que el ancla del logo funcione -->
+<div id="page-top" class="page-wrapper">
     <header class="main-header">
         <div class="header-section left">
             <div class="header-controls">
@@ -856,19 +879,25 @@
                         <div class="line line-3"></div>
                     </div>
                 </button>
-                <a href="https://www.linkedin.com/in/hansen-guzm%C3%A1n-hern%C3%A1ndez-b4185592/" target="_blank" rel="noopener noreferrer" class="linkedin-icon" aria-label="LinkedIn">
+                <a href="https://www.linkedin.com/in/hansen-guzm%C3%A1n-hern%C3%A1ndez-b4185592/" target="_blank" rel="noopener noreferrer" class="linkedin-icon desktop-linkedin" aria-label="LinkedIn">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
                 </a>
             </div>
         </div>
         <div class="header-section center">
-            <a href="#page-top" class="logo logo-gradient">Data Growth Hub</a>
+             <!-- Se añade la clase 'menu-link' para activar el scroll suave con JS -->
+            <a href="#page-top" class="logo logo-gradient menu-link">Data Growth Hub</a>
         </div>
         <div class="header-section right">
-            <div class="language-selector">
-                <button class="lang-btn" data-lang-switch="es">ES</button>
-                <span>|</span>
-                <button class="lang-btn" data-lang-switch="en">EN</button>
+            <div class="header-controls">
+                <div class="language-selector">
+                    <button class="lang-btn" data-lang-switch="es">ES</button>
+                    <span>|</span>
+                    <button class="lang-btn" data-lang-switch="en">EN</button>
+                </div>
+                <a href="https://www.linkedin.com/in/hansen-guzm%C3%A1n-hern%C3%A1ndez-b4185592/" target="_blank" rel="noopener noreferrer" class="linkedin-icon mobile-linkedin" aria-label="LinkedIn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                </a>
             </div>
         </div>
     </header>
@@ -1106,7 +1135,7 @@
         </div>
         <p data-lang="footer-rights">&copy; 2024 Hansen Guzmán Hernández. Todos los derechos reservados.</p>
     </footer>
-
+</div>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             
@@ -1253,6 +1282,7 @@
                     if (menuOverlay.classList.contains('is-open')) {
                         toggleMenu();
                     }
+                    // Retraso para dar tiempo a que el menú se cierre antes de desplazarse
                     setTimeout(() => { 
                         const targetId = link.getAttribute('href');
                         if (targetId === '#page-top') {
@@ -1260,17 +1290,9 @@
                         } else {
                             lenis.scrollTo(targetId, { offset: -80 });
                         }
-                    }, 600); 
+                    }, 300); // Un pequeño retraso para la animación de cierre
                 });
             });
-
-            const topLink = document.querySelector('.top-link');
-            if (topLink) { 
-                topLink.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    lenis.scrollTo(0, { duration: 1.5, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
-                });
-            }
 
             const mm = gsap.matchMedia();
 
