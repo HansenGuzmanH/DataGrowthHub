@@ -5,10 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hansen | Data Growth Hub</title>
     
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Montserrat:wght@900&display=swap" rel="stylesheet">
 
+    <!-- Librerías JS (en el head para asegurar la carga) -->
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="https://unpkg.com/d3-sankey@0.12.3/dist/d3-sankey.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
@@ -33,7 +35,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: auto; }
         body {
-            font-family: var(--font-title);
+            font-family: var(--font-body); /* Cambiado a Inter para el cuerpo */
             background-color: var(--color-background);
             color: var(--color-text);
             overflow-x: hidden;
@@ -447,15 +449,47 @@
             min-height: 200px;
             height: 100%;
         }
-        .step-content-block h3 { color: var(--color-text); font-size: clamp(1.2rem, 3vw, 1.5rem); margin-bottom: 1.5rem; }
-        .step-content-block p, .step-content-block ul { 
-            font-family: var(--font-body); text-transform: none;
+        .step-content-block h3 { color: var(--color-text); font-size: clamp(1.2rem, 3vw, 1.5rem); margin-bottom: 1.5rem; text-transform: none; font-weight: 700; }
+        .step-content-block p {
+            font-family: var(--font-body); 
+            text-transform: none;
             word-wrap: break-word;
             overflow-wrap: break-word;
+            margin-bottom: 1rem;
+            font-weight: 400;
         }
-        .step-content-block ul { list-style-position: inside; padding-left: 1rem; }
-        .step-content-block ul li { margin-bottom: 0.5rem; }
-        .step-content-block strong { color: var(--color-primary); }
+
+        .step-content-block ul {
+            list-style: none;
+            padding-left: 0;
+            font-weight: 400;
+        }
+
+        .step-content-block ul li {
+            position: relative;
+            padding-left: 1.2rem;
+            margin-bottom: 0.75rem;
+            text-align: left;
+        }
+
+        .step-content-block ul li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            top: 0.1em;
+            color: var(--color-primary);
+            font-weight: bold;
+        }
+        
+        .step-content-block ul li span {
+            display: inline;
+            font-weight: 400; /* ANULA LA NEGRITA HEREDADA */
+        }
+
+        .step-content-block strong { 
+            color: var(--color-primary); 
+            font-weight: 700; /* ASEGURA QUE SOLO STRONG SEA NEGRITA */
+        }
 
         .phase-title {
             display: flex;
@@ -865,6 +899,7 @@
 </head>
 <body>
 
+<!-- Se añade id="page-top" para que el ancla del logo funcione -->
 <div id="page-top" class="page-wrapper">
     <header class="main-header">
         <div class="header-section left">
@@ -882,7 +917,8 @@
             </div>
         </div>
         <div class="header-section center">
-             <a href="#page-top" class="logo logo-gradient menu-link">Data Growth Hub</a>
+             <!-- Se añade la clase 'menu-link' para activar el scroll suave con JS -->
+            <a href="#page-top" class="logo logo-gradient menu-link">Data Growth Hub</a>
         </div>
         <div class="header-section right">
             <div class="header-controls">
@@ -994,13 +1030,13 @@
                     <div class="phase-section mb-12">
                         <h3 class="phase-title" style="color: var(--color-primary); margin-top: 2rem; margin-bottom: 4rem;">
                                 <span class="phase-indicator" style="color: var(--color-primary);">&bullet;</span>
-                                <span data-lang="phase1-title">Fase 1: Necesidades, visión y ganas de mejorar</span>
+                                <span data-lang="phase1-title">FASE 1: ENTENDER Y PREPARAR (El Pasado y el Presente)</span>
                         </h3>
                         <div class="flex flex-col items-center">
                             <div class="step-row" data-step="1">
                                 <div class="step-card-container">
                                         <div class="step-card" data-step-id="1" style="border-color: var(--color-primary);">
-                                                <div class="text-4xl mb-2">&#x1F3AF;</div><h4 class="font-bold" data-lang="step1-title">Definición de Necesidades</h4>
+                                                <div class="text-4xl mb-2">&#x1F3AF;</div><h4 class="font-bold" data-lang="step1-title">Define tus Necesidades y Objetivos</h4>
                                         </div>
                                 </div>
                                 <div class="connector">
@@ -1015,7 +1051,7 @@
                             <div class="step-row" data-step="2">
                                 <div class="step-card-container">
                                         <div class="step-card" data-step-id="2" style="border-color: var(--color-primary);">
-                                                <div class="text-4xl mb-2">&#129300;</div><h4 class="font-bold" data-lang="step2-title">Identificar los Datos</h4>
+                                                <div class="text-4xl mb-2">&#129300;</div><h4 class="font-bold" data-lang="step2-title">Identifica tus Datos</h4>
                                         </div>
                                 </div>
                                 <div class="connector">
@@ -1030,7 +1066,7 @@
                             <div class="step-row" data-step="3">
                                 <div class="step-card-container">
                                         <div class="step-card" data-step-id="3" style="border-color: var(--color-primary);">
-                                                <div class="text-4xl mb-2">&#x1F6C1;</div><h4 class="font-bold" data-lang="step3-title">Limpieza y Preparación</h4>
+                                                <div class="text-4xl mb-2">&#x1F6C1;</div><h4 class="font-bold" data-lang="step3-title">Limpia y Prepara tus Datos</h4>
                                         </div>
                                 </div>
                                 <div class="connector">
@@ -1045,7 +1081,7 @@
                             <div class="step-row" data-step="4">
                                 <div class="step-card-container">
                                         <div class="step-card" data-step-id="4" style="border-color: var(--color-primary);">
-                                                <div class="text-4xl mb-2">&#x1F9EE;</div><h4 class="font-bold" data-lang="step4-title">Análisis BI</h4>
+                                                <div class="text-4xl mb-2">&#x1F9EE;</div><h4 class="font-bold" data-lang="step4-title">Analiza con Business Intelligence (BI)</h4>
                                         </div>
                                 </div>
                                 <div class="connector">
@@ -1062,14 +1098,14 @@
                     <div class="phase-section" style="margin-top: 4rem;">
                         <h3 class="phase-title" style="color: var(--color-secondary); margin-top: 2rem; margin-bottom: 4rem;">
                                 <span class="phase-indicator" style="color: var(--color-secondary);">&bullet;</span>
-                                <span data-lang="phase2-title">Fase 2: Optimización y Predicción</span>
+                                <span data-lang="phase2-title">FASE 2: OPTIMIZA Y PREDICE (El Futuro y la Mejora Continua)</span>
                         </h3>
                         <div class="flex flex-col items-center">
                             <div class="step-row" data-step="5">
                                 <div class="step-card-container">
                                         <div class="step-card" data-step-id="5" style="border-color: var(--color-secondary);">
                                                 <div class="text-4xl mb-2">&#129504;</div>
-                                                <h4 class="font-bold" data-lang="step5-title">Machine Learning</h4>
+                                                <h4 class="font-bold" data-lang="step5-title">Implementa Machine Learning</h4>
                                         </div>
                                 </div>
                                 <div class="connector">
@@ -1085,7 +1121,7 @@
                                 <div class="step-card-container">
                                         <div class="step-card" data-step-id="6" style="border-color: var(--color-secondary);">
                                                 <div class="text-4xl mb-2">&#129327;</div>
-                                                <h4 class="font-bold" data-lang="step6-title">Aplicación y Mejora</h4>
+                                                <h4 class="font-bold" data-lang="step6-title">Aplica y Mejora Continuamente</h4>
                                         </div>
                                 </div>
                                 <div class="connector">
@@ -1151,23 +1187,23 @@
                     'cta-text': 'Pero, ¿Cómo llegamos a esté resultado? Conoce mas herramientas que ayudan a tu negocio a crecer con el análisis de datos',
                     'process-title': 'Proceso del Análisis de Datos',
                     'process-subtitle': 'Una guía visual para transformar los datos de su empresa en una ventaja competitiva. Explore cada paso para entender el proceso completo.',
-                    'phase1-title': 'Fase 1: Necesidades, visión y ganas de mejorar',
-                    'step1-title': 'Definición de Necesidades',
-                    'step2-title': 'Identificar los Datos',
-                    'step3-title': 'Limpieza y Preparación',
-                    'step4-title': 'Análisis BI',
-                    'phase2-title': 'Fase 2: Optimización y Predicción',
-                    'step5-title': 'Machine Learning',
-                    'step6-title': 'Aplicación y Mejora',
+                    'phase1-title': 'FASE 1: ENTENDER Y PREPARAR (El Pasado y el Presente)',
+                    'step1-title': 'Define tus Necesidades y Objetivos',
+                    'step2-title': 'Identifica tus Datos',
+                    'step3-title': 'Limpia y Prepara tus Datos',
+                    'step4-title': 'Analiza con Business Intelligence (BI)',
+                    'phase2-title': 'FASE 2: OPTIMIZA Y PREDICE (El Futuro y la Mejora Continua)',
+                    'step5-title': 'Implementa Machine Learning',
+                    'step6-title': 'Aplica y Mejora Continuamente',
                     'final-cta': 'Si llegaste hasta aquí es por que de verdad quieres implementar Análisis de datos, si le das clic a este icono tan llamativo😅 allí me encontrarás y te daré una mano 🤜🤛',
                     'footer-rights': '&copy; 2024 Hansen Guzmán Hernández. Todos los derechos reservados.',
                     steps: [
-                        { id: 1, content: `<h3 class="text-xl font-bold mb-4">Paso 1: Definición de Necesidades y Objetivos</h3><p class="mb-4">Antes de analizar cualquier dato, debemos tener claridad sobre qué preguntas de negocio queremos responder y qué metas buscamos alcanzar como: Aumentar las ventas, Conocer el estado actual de minegocio, conocer los indicadores clave, pierdo clientes? cualquier duda que los datos te puedan responder.<br><br></p><ul class="list-disc space-y-2"><li><strong>Identificar Necesidades:</strong>&nbsp;Entender los desafíos actuales y las decisiones clave.</li><li><strong>Establecer <span class="tooltip-container">KPIs<span class="tooltip-text">Un <strong>KPI</strong> (Key Performance Indicator) es una métrica medible para evaluar el éxito.</span></span>:</strong>&nbsp;Definir métricas específicas y medibles.</li><li><strong>Definir Objetivos Cuantificables:</strong>&nbsp;Traducir las necesidades en metas numéricas.</li></ul>`},
-                        { id: 2, content: `<h3 class="text-xl font-bold mb-4">Paso 2: Identificar los Datos</h3><p class="mb-4">Con los objetivos definidos, el siguiente paso es actuar como detectives de datos: encontrar dónde reside la información valiosa y establecer mecanismos para recopilarla.<br><br></p><ul class="list-disc space-y-2"><li><strong>Fuentes Internas:</strong>&nbsp;Bases de datos (CRM, ERP), registros de ventas, etc.</li><li><strong>Fuentes Externas:</strong>&nbsp;Datos de mercado, redes sociales.</li><li><strong>Tipos de Datos:</strong>&nbsp;<span class="tooltip-container">Estructurados<span class="tooltip-text"><strong>Datos estructurados:</strong> Formato organizado, como tablas.</span></span> y <span class="tooltip-container">No Estructurados<span class="tooltip-text"><strong>Datos no estructurados:</strong> Sin formato predefinido, como emails o imágenes.</span></span>.</li></ul>`},
-                        { id: 3, content: `<h3 class="text-xl font-bold mb-4">Paso 3: Limpieza y Preparación de Datos</h3><p class="mb-4">Los datos en su estado natural suelen estar incompletos o con errores. Decisiones basadas en datos "sucios" son peligrosas, por lo que este paso garantiza la fiabilidad.<br><br></p><ul class="list-disc space-y-2"><li><strong><span class="tooltip-container">Limpieza de Datos<span class="tooltip-text">Proceso de detectar y corregir registros incorrectos.</span></span>:</strong>&nbsp;Corregir errores, inconsistencias y duplicados.</li><li><strong>Transformación de Datos:</strong>&nbsp;Combinar fuentes y crear nuevas variables.</li></ul>`},
-                        { id: 4, content: `<h3 class="text-xl font-bold mb-4">Paso 4: Análisis BI</h3><p class="mb-4">Con datos limpios, transformamos la información en conocimiento visual y accionable, respondiendo a la pregunta: "¿Qué está sucediendo en nuestro negocio?".<br><br></p><ul class="list-disc space-y-2"><li><strong>Análisis Exploratorio:</strong>&nbsp;Investigar los datos para descubrir patrones y tendencias.</li><li><strong>Generación de <span class="tooltip-container">Dashboards<span class="tooltip-text">Resumen visual y en tiempo real de los KPIs más importantes.</span></span> y <span class="tooltip-container">BI<span class="tooltip-text">Conjunto de estrategias y herramientas para el análisis de datos.</span></span>:</strong>&nbsp;Crear visualizaciones interactivas.</li></ul>`},
-                        { id: 5, content: `<h3 class="text-xl font-bold mb-4">Paso 5: Implementación de Machine Learning</h3><p class="mb-4">Una vez que entendemos lo que ha pasado, podemos empezar a predecir lo que podría pasar, utilizando algoritmos para descubrir patrones complejos.<br><br></p><ul class="list-disc space-y-2"><li><strong>Desarrollo de Modelos:</strong>&nbsp;Usar <span class="tooltip-container">Machine Learning<span class="tooltip-text">Rama de la IA que permite a las máquinas aprender de los datos para hacer predicciones.</span></span> y <span class="tooltip-container">Deep Learning<span class="tooltip-text">Subcampo del ML que usa redes neuronales complejas.</span></span> para construir modelos predictivos.</li></ul>`},
-                        { id: 6, content: `<h3 class="text-xl font-bold mb-4">Paso 6: Aplicación y Mejora Continua</h3><p class="mb-4">Un modelo no tiene valor si se queda en una presentación. El objetivo es integrar estos conocimientos en los procesos de negocio para generar un impacto real y medible. Este es un ciclo que nunca termina.<br><br></p><ul class="list-disc space-y-2"><li><strong>Inyección en el Proceso:</strong>&nbsp;Usar predicciones para optimizar logística y personalizar campañas.</li><li><strong>Monitoreo y Refinamiento:</strong>&nbsp;Reentrenar y mejorar los modelos constantemente.</li></ul>`}
+                        { id: 1, content: `<h3 class="text-xl font-bold mb-4">Paso 1: Define tus Necesidades y Objetivos</h3><p>Es el inicio. ¿Qué problema quieres resolver? ¿Qué pregunta quieres que los datos respondan?</p><ul><li><strong>Identifica necesidades clave:</strong>&nbsp;<span>¿Por qué perdemos clientes? ¿Cómo optimizar inventario?</span></li><li><strong>Establece KPIs:</strong>&nbsp;<span>Define métricas claras que midan tu éxito (ej., "aumentar ventas un 15%").</span></li><li><strong>Involucra a los expertos del negocio:</strong>&nbsp;<span>Colabora con los equipos que viven el día a día para definir el alcance y las metas.</span></li><li><strong>Herramientas:</strong>&nbsp;<span>Reuniones, Trello/Asana (para organizar objetivos).</span></li></ul>`},
+                        { id: 2, content: `<h3 class="text-xl font-bold mb-4">Paso 2: Identifica tus Datos</h3><p>Descubre dónde está la información que necesitas, tanto dentro como fuera de tu empresa.</p><ul><li><strong>Fuentes Internas:</strong>&nbsp;<span>Tus propias bases de datos (ventas, clientes).</span></li><li><strong>Fuentes Externas:</strong>&nbsp;<span>Información de mercado, redes sociales.</span></li><li><strong>Tipos de Datos:</strong>&nbsp;<span>¿Están en tablas (estructurados) o son textos/imágenes (no estructurados)?</span></li><li><strong>Considera la privacidad:</strong>&nbsp;<span>Asegúrate de manejar los datos de forma ética y legal (ej., GDPR).</span></li><li><strong>Herramientas:</strong>&nbsp;<span>SQL Server, APIs de redes sociales.</span></li></ul>`},
+                        { id: 3, content: `<h3 class="text-xl font-bold mb-4">Paso 3: Limpia y Prepara tus Datos</h3><p>Los datos suelen estar "sucios" (incompletos, con errores). Este paso los deja listos para el análisis.</p><ul><li><strong>Limpia errores:</strong>&nbsp;<span>Corrige inconsistencias, elimina duplicados, maneja datos faltantes.</span></li><li><strong>Transforma datos:</strong>&nbsp;<span>Ajusta formatos, une información de distintas fuentes.</span></li><li><strong>Crea nuevas características:</strong>&nbsp;<span>Genera información valiosa a partir de datos existentes (ej., "edad" a partir de fecha de nacimiento).</span></li><li><strong>Herramientas:</strong>&nbsp;<span>Python (Pandas), Excel, Tableau Prep.</span></li></ul>`},
+                        { id: 4, content: `<h3 class="text-xl font-bold mb-4">Paso 4: Analiza con Business Intelligence (BI)</h3><p>¡Es hora de que los datos te cuenten una historia! Descubre qué ha pasado y por qué.</p><ul><li><strong>Análisis Exploratorio:</strong>&nbsp;<span>Sumérgete en los datos para encontrar patrones, tendencias y puntos inusuales.</span></li><li><strong>Crea Dashboards interactivos:</strong>&nbsp;<span>Visualiza la información clave de forma clara y atractiva.</span></li><li><strong>Cuenta una historia con los datos:</strong>&nbsp;<span>Presenta los hallazgos de manera que los equipos de negocio puedan entender y actuar.</span></li><li><strong>Herramientas:</strong>&nbsp;<span>Power BI, Tableau, Looker Studio.</span></li></ul>`},
+                        { id: 5, content: `<h3 class="text-xl font-bold mb-4">Paso 5: Implementa Machine Learning</h3><p>Usa la inteligencia artificial para predecir el futuro y tomar decisiones proactivas.</p><ul><li><strong>Desarrolla modelos predictivos:</strong>&nbsp;<span>Construye sistemas que aprendan de los datos para hacer pronósticos (ej., qué clientes se irán).</span></li><li><strong>Entrena y prueba los modelos:</strong>&nbsp;<span>Asegúrate de que tus predicciones sean precisas y confiables.</span></li><li><strong>Entiende el "porqué":</strong>&nbsp;<span>Busca cómo explicar las decisiones del modelo para generar confianza (IA Explicable).</span></li><li><strong>Herramientas:</strong>&nbsp;<span>Python (Scikit-learn, TensorFlow), Google AI Platform.</span></li></ul>`},
+                        { id: 6, content: `<h3 class="text-xl font-bold mb-4">Paso 6: Aplica y Mejora Continuamente</h3><p>El análisis solo genera valor si se usa. Integra los insights en tus operaciones y mejora constantemente.</p><ul><li><strong>Integra las predicciones:</strong>&nbsp;<span>Utiliza los resultados en tus sistemas y procesos diarios (ej., recomendaciones automáticas, optimización de rutas).</span></li><li><strong>Monitorea y refina:</strong>&nbsp;<span>Observa cómo funcionan los modelos y dashboards en la práctica y ajústalos.</span></li><li><strong>Establece un bucle de retroalimentación:</strong>&nbsp;<span>Escucha a los usuarios de negocio para identificar nuevas necesidades y optimizaciones.</span></li></ul>`}
                     ]
                 },
                 en: {
@@ -1184,23 +1220,23 @@
                     'cta-text': 'So, how did we achieve this result? Learn about more tools that help your business grow through data analysis.',
                     'process-title': 'Data Analysis Process',
                     'process-subtitle': 'A visual guide to transforming your company\'s data into a competitive advantage. Explore each step to understand the full process.',
-                    'phase1-title': 'Phase 1: Needs, Vision, and Desire for Improvement',
-                    'step1-title': 'Defining Needs',
-                    'step2-title': 'Identifying Data',
-                    'step3-title': 'Cleaning and Preparation',
-                    'step4-title': 'BI Analysis',
-                    'phase2-title': 'Phase 2: Optimization and Prediction',
-                    'step5-title': 'Machine Learning',
-                    'step6-title': 'Application and Improvement',
+                    'phase1-title': 'PHASE 1: UNDERSTAND AND PREPARE (The Past and Present)',
+                    'step1-title': 'Define Your Needs and Objectives',
+                    'step2-title': 'Identify Your Data',
+                    'step3-title': 'Clean and Prepare Your Data',
+                    'step4-title': 'Analyze with Business Intelligence (BI)',
+                    'phase2-title': 'PHASE 2: OPTIMIZE AND PREDICT (The Future and Continuous Improvement)',
+                    'step5-title': 'Implement Machine Learning',
+                    'step6-title': 'Apply and Continuously Improve',
                     'final-cta': 'If you\'ve made it this far, you truly want to implement Data Analysis. Click on this eye-catching icon😅, you\'ll find me there, and I\'ll lend you a hand 🤜🤛',
                     'footer-rights': '&copy; 2024 Hansen Guzmán Hernández. All rights reserved.',
                     steps: [
-                        { id: 1, content: `<h3 class="text-xl font-bold mb-4">Step 1: Defining Needs and Objectives</h3><p class="mb-4">This is the cornerstone. Before analyzing any data, we must be absolutely clear about which business questions we want to answer and what goals we aim to achieve.<br><br></p><ul class="list-disc space-y-2"><li><strong>Identify Needs:</strong>&nbsp;Understand current challenges and key decisions.</li><li><strong>Establish <span class="tooltip-container">KPIs<span class="tooltip-text">A <strong>KPI</strong> (Key Performance Indicator) is a measurable value to evaluate success.</span></span>:</strong>&nbsp;Define specific and measurable metrics.</li><li><strong>Define Quantifiable Objectives:</strong>&nbsp;Translate needs into numerical goals.</li></ul>`},
-                        { id: 2, content: `<h3 class="text-xl font-bold mb-4">Step 2: Identifying Data Sources</h3><p class="mb-4">With the objectives defined, the next step is to act like data detectives: find where the valuable information resides and establish mechanisms to collect it.<br><br></p><ul class="list-disc space-y-2"><li><strong>Internal Sources:</strong>&nbsp;Databases (CRM, ERP), sales records, etc.</li><li><strong>External Sources:</strong>&nbsp;Market data, social media.</li><li><strong>Data Types:</strong>&nbsp;<span class="tooltip-container">Structured<span class="tooltip-text"><strong>Structured data:</strong> Organized format, like tables.</span></span> and <span class="tooltip-container">Unstructured<span class="tooltip-text"><strong>Unstructured data:</strong> No predefined format, like emails or images.</span></span>.</li></ul>`},
-                        { id: 3, content: `<h3 class="text-xl font-bold mb-4">Step 3: Data Cleaning and Preparation</h3><p class="mb-4">Data in its natural state is often incomplete or contains errors. Decisions based on "dirty" data are dangerous, so this step ensures reliability.<br><br></p><ul class="list-disc space-y-2"><li><strong><span class="tooltip-container">Data Cleansing<span class="tooltip-text">The process of detecting and correcting incorrect records.</span></span>:</strong>&nbsp;Correcting errors, inconsistencies, and duplicates.</li><li><strong>Data Transformation:</strong>&nbsp;Combining sources and creating new variables.</li></ul>`},
-                        { id: 4, content: `<h3 class="text-xl font-bold mb-4">Step 4: BI Analysis</h3><p class="mb-4">With clean data, we transform information into visual and actionable knowledge, answering the question: "What is happening in our business?".<br><br></p><ul class="list-disc space-y-2"><li><strong>Exploratory Analysis:</strong>&nbsp;Investigating data to discover patterns and trends.</li><li><strong>Generation of <span class="tooltip-container">Dashboards<span class="tooltip-text">A real-time visual summary of the most important KPIs.</span></span> and <span class="tooltip-container">BI<span class="tooltip-text">A set of strategies and tools for data analysis.</span></span>:</strong>&nbsp;Creating interactive visualizations.</li></ul>`},
-                        { id: 5, content: `<h3 class="text-xl font-bold mb-4">Step 5: Machine Learning Implementation</h3><p class="mb-4">Once we understand what has happened, we can begin to predict what might happen, using algorithms to uncover complex patterns.<br><br></p><ul class="list-disc space-y-2"><li><strong>Model Development:</strong>&nbsp;Using <span class="tooltip-container">Machine Learning<span class="tooltip-text">A branch of AI that allows machines to learn from data to make predictions.</span></span> and <span class="tooltip-container">Deep Learning<span class="tooltip-text">A subfield of ML that uses complex neural networks.</span></span> to build predictive models.</li></ul>`},
-                        { id: 6, content: `<h3 class="text-xl font-bold mb-4">Step 6: Application and Continuous Improvement</h3><p class="mb-4">A model is worthless if it stays in a presentation. The goal is to integrate these insights into business processes to generate a real and measurable impact. This is a never-ending cycle.<br><br></p><ul class="list-disc space-y-2"><li><strong>Process Integration:</strong>&nbsp;Using predictions to optimize logistics and personalize campaigns.</li><li><strong>Monitoring and Refinement:</strong>&nbsp;Constantly retraining and improving the models.</li></ul>`}
+                        { id: 1, content: `<h3 class="text-xl font-bold mb-4">Step 1: Define Your Needs and Objectives</h3><p>This is the beginning. What problem do you want to solve? What question do you want the data to answer?</p><ul><li><strong>Identify key needs:</strong>&nbsp;<span>Why are we losing customers? How can we optimize inventory?</span></li><li><strong>Establish KPIs:</strong>&nbsp;<span>Define clear metrics that measure your success (e.g., "increase sales by 15%").</span></li><li><strong>Involve business experts:</strong>&nbsp;<span>Collaborate with the teams that live the day-to-day to define the scope and goals.</span></li><li><strong>Tools:</strong>&nbsp;<span>Meetings, Trello/Asana (to organize objectives).</span></li></ul>`},
+                        { id: 2, content: `<h3 class="text-xl font-bold mb-4">Step 2: Identify Your Data</h3><p>Discover where the information you need is located, both inside and outside your company.</p><ul><li><strong>Internal Sources:</strong>&nbsp;<span>Your own databases (sales, customers).</span></li><li><strong>External Sources:</strong>&nbsp;<span>Market information, social media.</span></li><li><strong>Data Types:</strong>&nbsp;<span>Are they in tables (structured) or are they text/images (unstructured)?</span></li><li><strong>Consider privacy:</strong>&nbsp;<span>Ensure you handle data ethically and legally (e.g., GDPR).</span></li><li><strong>Tools:</strong>&nbsp;<span>SQL Server, social media APIs.</span></li></ul>`},
+                        { id: 3, content: `<h3 class="text-xl font-bold mb-4">Step 3: Clean and Prepare Your Data</h3><p>Data is often "dirty" (incomplete, with errors). This step gets it ready for analysis.</p><ul><li><strong>Clean errors:</strong>&nbsp;<span>Correct inconsistencies, remove duplicates, handle missing data.</span></li><li><strong>Transform data:</strong>&nbsp;<span>Adjust formats, merge information from different sources.</span></li><li><strong>Create new features:</strong>&nbsp;<span>Generate valuable information from existing data (e.g., "age" from date of birth).</span></li><li><strong>Tools:</strong>&nbsp;<span>Python (Pandas), Excel, Tableau Prep.</span></li></ul>`},
+                        { id: 4, content: `<h3 class="text-xl font-bold mb-4">Step 4: Analyze with Business Intelligence (BI)</h3><p>It's time for the data to tell you a story! Find out what happened and why.</p><ul><li><strong>Exploratory Analysis:</strong>&nbsp;<span>Dive into the data to find patterns, trends, and outliers.</span></li><li><strong>Create interactive Dashboards:</strong>&nbsp;<span>Visualize key information clearly and attractively.</span></li><li><strong>Tell a story with the data:</strong>&nbsp;<span>Present the findings so that business teams can understand and act.</span></li><li><strong>Tools:</strong>&nbsp;<span>Power BI, Tableau, Looker Studio.</span></li></ul>`},
+                        { id: 5, content: `<h3 class="text-xl font-bold mb-4">Step 5: Implement Machine Learning</h3><p>Use artificial intelligence to predict the future and make proactive decisions.</p><ul><li><strong>Develop predictive models:</strong>&nbsp;<span>Build systems that learn from data to make forecasts (e.g., which customers will churn).</span></li><li><strong>Train and test the models:</strong>&nbsp;<span>Ensure your predictions are accurate and reliable.</span></li><li><strong>Understand the "why":</strong>&nbsp;<span>Find ways to explain the model's decisions to build trust (Explainable AI).</span></li><li><strong>Tools:</strong>&nbsp;<span>Python (Scikit-learn, TensorFlow), Google AI Platform.</span></li></ul>`},
+                        { id: 6, content: `<h3 class="text-xl font-bold mb-4">Step 6: Apply and Continuously Improve</h3><p>Analysis only generates value if it is used. Integrate insights into your operations and improve constantly.</p><ul><li><strong>Integrate predictions:</strong>&nbsp;<span>Use the results in your daily systems and processes (e.g., automatic recommendations, route optimization).</span></li><li><strong>Monitor and refine:</strong>&nbsp;<span>Observe how the models and dashboards perform in practice and adjust them.</span></li><li><strong>Establish a feedback loop:</strong>&nbsp;<span>Listen to business users to identify new needs and optimizations.</span></li></ul>`}
                     ]
                 }
             };
